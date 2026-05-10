@@ -415,7 +415,7 @@ def api_start():
     for f in folders:
         _add_queue_item(f.name)
 
-    default_workers = 3 if os.environ.get("RENDER") else 20
+    default_workers = 20
     workers = int(request.json.get("workers", default_workers)) if request.is_json else default_workers
 
     # Run in background thread
