@@ -1,0 +1,39 @@
+{
+  "fields": {
+    "patient_name": "Andrew Wilson",
+    "dob": "09/21/1967",
+    "claim_number": "WC-2026-00002",
+    "auth_ref": "AUTH-2026-L2WSD8SW",
+    "appt_window": "5/6 ok",
+    "transportation": "home delivery only",
+    "language": "English",
+    "dme_item": "Axillary Crutches",
+    "hcpcs": "E0112",
+    "delivery_address": "890 Wilshire Blvd, Long Beach CA 90805",
+    "physician_name": "Dr. Anthony Reed, MD",
+    "physician_npi": "2134567891",
+    "insurance_carrier": "State Fund Insurance",
+    "adjuster_name": "Tom Bradley",
+    "adjuster_email": "t.bradley@statefundi.com.com",
+    "adjuster_phone": "(415) 555-0143",
+    "icd_code": "S93.401A",
+    "icd_description": "Sprain of deltoid ligament, right ankle",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, prescription, and clinical notes) consistently report ICD-10 code S93.401A \u2014 Sprain of deltoid ligament, right ankle. No conflict detected.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "LOW",
+    "priority_reason": "Ankle sprain is a non-acute, non-surgical musculoskeletal injury with standard mobility aid prescribed for partial weight bearing and short-term rehabilitation, representing low clinical risk.",
+    "notes": "1. Adjuster email appears malformed (double domain: 'statefundi.com.com') \u2014 verify correct email address before sending correspondence. Case manager Brian Kim email (b.kim@statefundi.com.com) has the same likely typo. 2. Prescriber attestation statement is duplicated verbatim on page 2 \u2014 may indicate a form generation error, does not affect validity. 3. Clinical notes date (04/12/2026) is approximately 6 weeks after the referral date (03/03/2026) and over a month after authorization effective date (03/06/2026) \u2014 confirm clinical notes date is accurate and equipment has not already been dispensed. 4. Equipment re-evaluation scheduled for approximately May 9, 1\u20133pm per treatment plan. 5. Patient height is 6'5\" and weight 160 lbs \u2014 verify standard crutch sizing is appropriate given tall/lean build."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Evelyn Watson",
+    "dob": "06/29/1971",
+    "claim_number": "WC-2026-084494",
+    "injury_date": "09/12/2026",
+    "policy_number": "PM-WC-2026-44382",
+    "auth_ref": "AUTH-970813",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Vietnamese",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "quantity": "1",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, clinical notes and prescription take authority over the referral form; S43.004A is selected as the correct code. Additionally, S43.004A is clinically more severe and better supported by the documented treatment (injection therapy, physical therapy, 12-month DME need).",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S40.011A",
+        "notes_code": "S43.004A",
+        "rx_code": "S43.004A",
+        "resolved_code": "S43.004A",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S43.004A (shoulder dislocation), which is clinically more consistent with the described treatment plan and overrides the referral form's S40.011A (shoulder contusion); however, a minor confirmation with the referring physician is recommended to rule out a documentation error on the referral form."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation (S43.004A) is an orthopedic injury requiring a supportive brace with ongoing conservative treatment; while an ICD conflict was present it was resolved with sufficient confidence, placing this case at medium priority.",
+    "notes": "1) ICD code on referral form (S40.011A - contusion) differs from clinical notes and prescription (S43.004A - dislocation); the latter is clinically authoritative and has been selected, but outreach to Dr. Sharma's office to correct the referral form is recommended. 2) Patient requires a Vietnamese interpreter for any delivery or patient-facing communication. 3) No preferred appointment window was specified \u2014 scheduling team should contact patient to arrange. 4) Clinical notes describe the patient height/weight as 6'4\"/199 lbs \u2014 sizing for the shoulder immobilizer should be confirmed before dispatch. 5) Functional assessment references 'safe ambulation' which is atypical language for a shoulder injury; this may indicate a templated note and should be flagged for clinical review.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Evelyn Watson**, under claim number **WC-2026-084494**.\n\nUpon reviewing the referral documentation, we have identified the following item that must be provided before we are able to move forward with processing and routing:\n\n- **Appointment Window (appt_window):** The preferred or authorized appointment availability window for the patient has not been included. This field is required to schedule and dispatch the appropriate DME services.\n\nPlease note that this missing item is currently placing a **hard block on routing**, meaning we are unable to proceed with fulfillment until it has been resolved.\n\nWe kindly ask that you provide the outstanding information **within 24 business hours** of receiving this notice to avoid any further delays in care for Ms. Watson. You may reply directly to this email or contact our intake team through your preferred channel.\n\nWe appreciate your prompt attention to this matter and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S40.011A",
+      "notes_code": "S43.004A",
+      "rx_code": "S43.004A",
+      "resolved_code": "S43.004A",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S43.004A (shoulder dislocation), which is clinically more consistent with the described treatment plan and overrides the referral form's S40.011A (shoulder contusion); however, a minor confirmation with the referring physician is recommended to rule out a documentation error on the referral form."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Scott Phillips",
+    "dob": "07/03/1979",
+    "claim_number": "WC-2026-084467",
+    "auth_ref": "AUTH-206851",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Knee Brace",
+    "hcpcs": "L1820",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "S83.005A",
+    "icd_description": "Unspecified tear of medial meniscus, right knee",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M23.201 (Derangement of medial meniscus, right knee), while the clinical notes (document 2) and prescription (document 3) both consistently list S83.005A (Unspecified tear of medial meniscus, right knee). Per resolution rules, the clinical notes and prescription take authority over the referral form. S83.005A has been selected as the correct code. The referral form may need to be updated to reflect the correct ICD-10 code.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Acute occupational knee injury with meniscal tear requiring orthopedic brace for safe ambulation; ICD conflict was resolved with high confidence from authoritative clinical documents, and no surgical or neurological complications are noted.",
+    "notes": "1) Physician NPI is missing across all three documents and should be obtained before processing. 2) ICD-10 code discrepancy between referral form (M23.201) and clinical/prescription documents (S83.005A) \u2014 referral form should be corrected. 3) The referral form diagnosis description ('Derangement of medial meniscus') aligns more closely with M23.201, while the clinical notes and prescription use the more specific acute injury code S83.005A, consistent with the recent injury date of 07/13/2026. 4) Patient self-transports; no transportation arrangement needed. 5) Prescription is valid through 10/21/2026 (90 days from 07/23/2026). 6) Expected duration of need is 12 months per clinical notes and prescription."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for the above-referenced claimant and claim, and I require your assistance in obtaining a missing item needed to complete processing.\n\n**Patient:** Scott Phillips\n**Claim Number:** WC-2026-084467\n\nIn order to move forward with this referral, please provide the following:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier is required to complete the referral documentation.\n\nTo avoid any delays in processing and equipment fulfillment for Mr. Phillips, please provide this information **within 24 business hours** of receiving this email.\n\nYou may reply directly to this email or contact our intake team at your earliest convenience. If you have any questions or need clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to resolving this quickly.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME\nIntake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Scott Phillips",
+    "dob": "07/03/1979",
+    "claim_number": "WC-2026-084467",
+    "injury_date": "07/13/2026",
+    "policy_number": "PM-WC-2026-44355",
+    "auth_ref": "AUTH-206851",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Knee Brace",
+    "hcpcs": "L1820",
+    "quantity": "1",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "S83.005A",
+    "icd_description": "Unspecified tear of medial meniscus, right knee",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M23.201 (Derangement of medial meniscus, right knee), while both the clinical notes (Document 2) and the prescription (Document 3) consistently use S83.005A (Unspecified tear of medial meniscus, right knee). Per resolution rules, the clinical notes and prescription take authority over the referral form; S83.005A is selected as the correct code.",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M23.201",
+        "notes_code": "S83.005A",
+        "rx_code": "S83.005A",
+        "resolved_code": "S83.005A",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on S83.005A, which supersedes the referral form's M23.201; S83.005A is the more acute, specific code consistent with the documented injury date and treatment context, though physician NPI is missing across all documents which slightly reduces full confidence."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is an orthopedic knee brace order for a medial meniscus tear with conservative management underway; clinically moderate severity with no post-surgical, neurological, or acute fracture indicators, and the ICD conflict was resolved with confidence above the escalation threshold.",
+    "notes": "1) Physician NPI is blank across all three documents \u2014 must be obtained before order fulfillment. 2) ICD-10 code conflict between referral form (M23.201) and clinical notes/prescription (S83.005A) \u2014 resolved in favor of S83.005A but referring provider should confirm. 3) Referral form diagnosis description ('Derangement of medial meniscus') aligns conceptually with M23.201, suggesting the form may have been completed with a different or older code; clinical documentation is more authoritative. 4) Patient BMI is elevated (5'2\", 192 lbs) \u2014 brace sizing should be confirmed to ensure appropriate fit. 5) Prescription is valid for 90 days from 07/23/2026, expiring approximately 10/21/2026.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Scott Phillips**, under workers' compensation claim **WC-2026-084467**.\n\nIn order to process and route this referral, we require the following information to complete our intake:\n\n- **Physician NPI** \u2013 The ordering/treating physician's National Provider Identifier (NPI) number\n\nPlease note that routing of this referral cannot proceed until the above item has been received. To avoid any delay in processing, we kindly ask that you provide this information **within 24 business hours** of receiving this email.\n\nYou may reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your cooperation.\n\nSincerely,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M23.201",
+      "notes_code": "S83.005A",
+      "rx_code": "S83.005A",
+      "resolved_code": "S83.005A",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on S83.005A, which supersedes the referral form's M23.201; S83.005A is the more acute, specific code consistent with the documented injury date and treatment context, though physician NPI is missing across all documents which slightly reduces full confidence."
+    }
+  ]
+}

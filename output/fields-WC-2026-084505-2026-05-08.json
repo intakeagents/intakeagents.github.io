@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Juan Jenkins",
+    "dob": "12/11/1973",
+    "claim_number": "WC-2026-084505",
+    "auth_ref": "AUTH-797660",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and prescription (Document 3) both consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution policy, the clinical notes and prescription take authority over the referral form. M47.816 has been selected as the correct code, as it is more specific, clinically supported, and consistent across two authoritative documents.",
+    "confidence": 92,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient requires a power mobility device (power wheelchair) for a neurologically-involved spinal condition (spondylosis with radiculopathy) following an acute workplace injury, and an ICD code conflict was identified across documents requiring clinical review.",
+    "notes": "1) NPI number is missing from all three documents for Dr. Marcus Johnson \u2014 should be obtained before processing. 2) The referral form lists the diagnosis as M54.5 (Low back pain), which is a less specific and likely placeholder code; the more clinically accurate M47.816 from the clinical notes and prescription should be used for billing and authorization. 3) James Archer is listed as both the insurance adjuster and the case manager. 4) Prescription is valid through 09/26/2026 (90 days from 06/28/2026). 5) Patient self-transports \u2014 no transportation coordination needed."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out on behalf of Coastal DME regarding a durable medical equipment referral for your insured, **Juan Jenkins**, under claim number **WC-2026-084505**.\n\nIn order to process this referral and move forward with fulfillment, we require the following information:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier is missing and is needed to complete the referral.\n\nTo avoid any delay in processing, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you,\n\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

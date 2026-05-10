@@ -1,0 +1,83 @@
+{
+  "fields": {
+    "patient_name": "Alice Coleman",
+    "dob": "04/18/1969",
+    "claim_number": "WC-2026-084504",
+    "injury_date": "07/11/2026",
+    "policy_number": "PM-WC-2026-44392",
+    "auth_ref": "AUTH-820184",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (Document 2) and prescription (Document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription are treated as authoritative over the referral form; E11.65 was selected as the correct code.",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is more specific and clinically detailed than the referral form's E11.9, so E11.65 is selected as authoritative with high confidence."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is a stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose monitoring; while an ICD conflict was present it was resolved with high confidence, placing this case at medium priority.",
+    "notes": "1. MEDICAL NECESSITY MISMATCH: The medical justification provided in both the clinical notes and prescription ('to support safe ambulation and prevent falls in home environment... unable to safely navigate living space without assistive device') is language typically associated with a mobility aid (e.g., walker, cane), not a Continuous Glucose Monitor. This justification does not clinically align with the ordered DME item and should be flagged for physician clarification. 2. SPECIALTY MISMATCH: The referring physician is from Desert Orthopedics, which is an orthopedic practice; prescribing a CGM for diabetes management from an orthopedic provider without mention of an endocrinologist or primary care physician is unusual and warrants review. 3. DIAGNOSIS UPGRADE: The diagnosis was upgraded from E11.9 (without complications) on the referral form to E11.65 (with hyperglycemia) on clinical notes and prescription, which may have authorization and billing implications \u2014 the adjuster Kevin Osei should be notified of the code change. 4. The referral was submitted on 07/22/2026, 11 days after the injury date of 07/11/2026, which is within normal processing timeframes.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is more specific and clinically detailed than the referral form's E11.9, so E11.65 is selected as authoritative with high confidence."
+    }
+  ]
+}

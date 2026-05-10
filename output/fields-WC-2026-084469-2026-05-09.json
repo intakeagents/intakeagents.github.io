@@ -1,0 +1,98 @@
+{
+  "fields": {
+    "patient_name": "Brian Parker",
+    "dob": "10/16/1986",
+    "claim_number": "WC-2026-084469",
+    "injury_date": "07/27/2026",
+    "policy_number": "PM-WC-2026-44357",
+    "auth_ref": "AUTH-993085",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "quantity": "1",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S82.001A ('Fracture of right patella'), which conflicts with both the clinical notes (Document 2) and the prescription (Document 3), which consistently use S82.892A ('Other fracture of left lower leg'). The clinical notes and prescription are treated as the authoritative clinical sources; S82.892A was selected as the correct code. Additionally, the laterality differs (right vs. left) and the anatomical site differs (patella vs. lower leg), making this a significant conflict requiring follow-up.",
+    "confidence": 72,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S82.001A",
+        "notes_code": "S82.892A",
+        "rx_code": "S82.892A",
+        "resolved_code": "S82.892A",
+        "confidence": 72,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both agree on S82.892A (other fracture of left lower leg), overriding the referral form's S82.001A (fracture of right patella), but the significant anatomical and laterality discrepancy warrants escalation to the referring physician for confirmation before processing."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Acute fracture injury (07/27/2026) with an unresolved ICD-10 code conflict involving differing anatomical sites and laterality, combined with escalation flag and low confidence, requires urgent clinical clarification before equipment can be appropriately dispensed.",
+    "notes": "1) Physician NPI is missing across all three documents \u2014 must be obtained before billing. 2) The referral form lists diagnosis S82.001A ('Fracture of right patella') while clinical notes and prescription both list S82.892A ('Other fracture of left lower leg') \u2014 this is a critical conflict involving both anatomy (patella vs. lower leg) and laterality (right vs. left) that must be confirmed with Dr. Lisa Park before fulfillment. 3) Clinical notes describe the condition as 'chronic' with indefinite duration, which is inconsistent with an acute fracture injury date of 07/27/2026 only weeks prior \u2014 this warrants clinical clarification. 4) The referral was submitted on 08/15/2026, the prescription is dated 08/15/2026, and the clinical visit was 08/13/2026 \u2014 timeline is consistent. 5) The HCPCS code L1906 is consistent across all documents.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: S82.001A vs S82.892A \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Brian Parker**, under workers' compensation claim **WC-2026-084469**.\n\nUpon reviewing the referral documentation, we have identified the following required items that are currently missing and needed to process this request:\n\n1. **Language** \u2013 The patient's preferred language for communication and documentation purposes.\n2. **Physician NPI** \u2013 The National Provider Identifier for the referring/treating physician.\n\nIn order to avoid any delays in processing Mr. Parker's DME referral, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our office if you have any questions or require clarification. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your time and cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME\nIntake & Authorization Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S82.001A",
+      "notes_code": "S82.892A",
+      "rx_code": "S82.892A",
+      "resolved_code": "S82.892A",
+      "confidence": 72,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both agree on S82.892A (other fracture of left lower leg), overriding the referral form's S82.001A (fracture of right patella), but the significant anatomical and laterality discrepancy warrants escalation to the referring physician for confirmation before processing."
+    }
+  ]
+}

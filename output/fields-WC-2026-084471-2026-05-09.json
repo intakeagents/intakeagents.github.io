@@ -1,0 +1,90 @@
+{
+  "fields": {
+    "patient_name": "Larry Edwards",
+    "dob": "06/23/1975",
+    "claim_number": "WC-2026-084471",
+    "injury_date": "11/23/2026",
+    "policy_number": "PM-WC-2026-44359",
+    "auth_ref": "AUTH-197573",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "quantity": "1",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and prescription (Document 3) both list M47.816 (Spondylosis with radiculopathy, lumbar region). The clinical notes and prescription are the authoritative clinical sources and are in agreement with each other, so M47.816 was selected as the correct code. M54.5 on the referral form appears to be an oversimplification or data entry error.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.816",
+        "rx_code": "M47.816",
+        "resolved_code": "M47.816",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) listed on the referral form, consistent with the policy of treating clinical notes and prescription as the authoritative sources."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The patient has a neurological spinal condition (spondylosis with radiculopathy) requiring a power mobility device, an ICD code conflict was identified across documents, and the clinical notes indicate significant risk of re-injury or clinical deterioration without the equipment.",
+    "notes": "1) ICD-10 code conflict: Referral form lists M54.5 (Low back pain) but clinical notes and prescription both specify M47.816 (Spondylosis with radiculopathy, lumbar region) \u2014 resolved in favor of M47.816. 2) The clinical notes reference a 'post-operative assessment' and 'wound healing,' which is inconsistent with the described treatment of injection therapy and physical therapy \u2014 no surgery is mentioned elsewhere, suggesting a possible copy-paste error or template issue in the clinical notes that may warrant clarification with the physician. 3) Patient height/weight of 6'2\" / 134 lbs is notably low BMI and may need to be verified for proper wheelchair sizing. 4) No preferred appointment window was specified; follow-up with adjuster or patient may be needed to schedule delivery.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI am reaching out regarding a DME referral for your patient **Larry Edwards** (Claim No. **WC-2026-084471**). In reviewing the referral submission, we have identified the following missing information that is required to move forward with processing:\n\n1. **Appointment Window** *(Hard Block \u2014 routing is currently on hold pending receipt)*\n2. **Preferred Language**\n\nPlease note that the absence of the appointment window is preventing us from routing this referral, and no further action can be taken until this information is received.\n\nWe kindly request that you provide the above details **within 24 business hours** of receiving this email. Delays in response may impact the timeliness of care for your patient.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter.\n\nSincerely,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.816",
+      "rx_code": "M47.816",
+      "resolved_code": "M47.816",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) listed on the referral form, consistent with the policy of treating clinical notes and prescription as the authoritative sources."
+    }
+  ]
+}

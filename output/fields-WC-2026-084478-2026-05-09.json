@@ -1,0 +1,101 @@
+{
+  "fields": {
+    "patient_name": "Janet Cook",
+    "dob": "12/28/1972",
+    "claim_number": "WC-2026-084478",
+    "injury_date": "09/08/2026",
+    "policy_number": "PM-WC-2026-44366",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (document 2) and prescription (document 3) consistently list S43.004A (Unspecified dislocation of right shoulder joint). The clinical notes also reference post-surgical rehabilitation, indicating a more severe diagnosis than a simple contusion. S43.004A was selected as the resolved code because it appears in both the physician-signed clinical notes and the prescription, and is clinically consistent with the documented treatment (post-surgical rehab, shoulder immobilizer for dislocation).",
+    "confidence": 92,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S40.011A",
+        "notes_code": "S43.004A",
+        "rx_code": "S43.004A",
+        "resolved_code": "S43.004A",
+        "confidence": 92,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both signed by Dr. Mendez consistently use S43.004A (dislocation), which is clinically supported by the post-surgical rehabilitation treatment noted, overriding the referral form's less severe S40.011A (contusion)."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Patient is post-surgical with a confirmed right shoulder dislocation (S43.004A), actively undergoing rehabilitation with significant functional limitations and elevated pain scores (8/10 with activity), making timely delivery of the shoulder immobilizer clinically urgent.",
+    "notes": "1) ICD code conflict detected and resolved: referral form used S40.011A (contusion) but clinical notes and prescription both use S43.004A (dislocation) \u2014 the more clinically accurate code given post-surgical status. 2) Authorization Ref # is missing from the referral form and should be obtained from adjuster Sarah Mitchell before or at time of delivery. 3) No preferred appointment window was specified \u2014 outreach to patient or adjuster recommended. 4) Referral was submitted on 09/17/2026, nine days after the injury date, which is consistent with the post-surgical timeline. 5) Prescription is valid through 12/16/2026 (90 days from 09/17/2026).",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Janet Cook**, under claim number **WC-2026-084478**. We are unable to complete processing and route this referral until the following outstanding items have been received:\n\n**Required \u2013 Routing on Hold Pending Resolution:**\n- **Authorization Reference Number (auth_ref):** The authorization reference number is required before we can proceed with scheduling.\n- **Appointment Window (appt_window):** Please provide the preferred or required appointment timeframe for the patient.\n\n**Also Needed to Complete the Referral:**\n- **Language Preference (language):** Please confirm the patient's preferred language so we can ensure appropriate communication and, if necessary, interpreter services.\n\nPlease note that the two items marked above are **hard blocks**, meaning referral routing is currently on hold and cannot move forward until they are resolved.\n\nWe kindly request a response within **24 business hours** to avoid any delays in care for Ms. Cook. If you have any questions or need clarification on any of the above, please do not hesitate to contact us directly.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S40.011A",
+      "notes_code": "S43.004A",
+      "rx_code": "S43.004A",
+      "resolved_code": "S43.004A",
+      "confidence": 92,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both signed by Dr. Mendez consistently use S43.004A (dislocation), which is clinically supported by the post-surgical rehabilitation treatment noted, overriding the referral form's less severe S40.011A (contusion)."
+    }
+  ]
+}

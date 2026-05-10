@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Gloria Cooper",
+    "dob": "01/30/1960",
+    "claim_number": "WC-2026-084484",
+    "auth_ref": "AUTH-299869",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (document 2) and the prescription (document 3) list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, the clinical notes and prescription are treated as the authoritative source, so S43.004A has been selected. The referral form diagnosis of contusion is clinically inconsistent with the treatment history (injection therapy, physical therapy, shoulder immobilizer for 12 months) which better supports a dislocation diagnosis.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation is a moderate orthopedic injury with ongoing conservative treatment; while an ICD conflict was present and resolved with good confidence, the condition does not meet HIGH priority thresholds such as fracture, post-surgical status, or neurological involvement.",
+    "notes": "1) ICD conflict detected and resolved \u2014 referral form must be updated to reflect S43.004A to match clinical notes and prescription. 2) Physician NPI is missing across all three documents; NPI should be obtained before billing submission. 3) The functional assessment references 'safe ambulation in home environment,' which is atypical language for a shoulder immobilizer and may indicate a boilerplate template was used \u2014 clinical notes should be reviewed for accuracy. 4) Authorization reference AUTH-299869 is confirmed via referral form. 5) Prescription is valid through 07/27/2026 (90 days from 04/28/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Gloria Cooper**, under claim number **WC-2026-084484**. In order to complete processing of this referral, we require the following information:\n\n1. **Language** \u2013 Patient's preferred spoken/written language\n2. **Physician NPI** \u2013 National Provider Identifier for the ordering physician\n\nTo avoid any delays in fulfillment, we kindly ask that you provide the above information within **24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our intake team if you have any questions or need clarification.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

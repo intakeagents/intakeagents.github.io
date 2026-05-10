@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Rose Cox",
+    "dob": "03/08/1985",
+    "claim_number": "WC-2026-084486",
+    "auth_ref": "",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S82.001A ('Fracture of right patella'), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S82.892A ('Other fracture of left lower leg'). Additionally, the referral form's diagnosis description ('Fracture of right patella') is clinically inconsistent with the prescribed equipment (Ankle Foot Orthosis, HCPCS L1906), which is indicated for lower leg/ankle pathology rather than a patellar fracture. S82.892A from the clinical notes and prescription is both internally consistent and clinically aligned with the ordered DME. Resolved in favor of S82.892A per clinical notes and prescription authority.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical acute fracture case with an ICD-10 conflict across documents requiring human verification to confirm the correct injury site and laterality before equipment is dispensed.",
+    "notes": "1) ICD conflict requires physician or adjuster confirmation: referral form cites a right patellar fracture (S82.001A) while clinical notes and prescription cite a left lower leg fracture (S82.892A) \u2014 these are entirely different anatomical sites and laterality. 2) Authorization Reference Number is blank; authorization should be obtained from adjuster Marcus Webb before fulfillment. 3) The diagnosis on the referral form is also clinically inconsistent with an Ankle Foot Orthosis, further supporting S82.892A as the correct code. 4) No transportation or interpreter needs documented. 5) Prescription is valid through 03/28/2027 (90 days from 12/28/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI hope this message finds you well. I am reaching out regarding an active DME referral for your insured, **Rose Cox**, under claim number **WC-2026-084486**. To move forward with processing this referral, we require the following information:\n\n1. **Authorization Reference Number** *(Hard Block \u2014 routing is currently on hold pending receipt)*\n2. **Transportation Arrangements** \u2014 please confirm whether transportation assistance is needed and, if so, the preferred method or provider\n3. **Language Preference** \u2014 please indicate the patient's preferred language for communications and documentation\n\nPlease note that the missing **authorization reference number** is preventing us from advancing this referral further. We kindly ask that all outstanding items be provided **within 24 business hours** of receiving this email to avoid any additional delays in care for Ms. Cox.\n\nIf you have any questions or need clarification on any of the above, please do not hesitate to contact our office directly.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

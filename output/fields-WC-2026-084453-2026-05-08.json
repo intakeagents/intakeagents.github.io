@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Edward Young",
+    "dob": "03/17/1984",
+    "claim_number": "WC-2026-084453",
+    "auth_ref": "AUTH-792094",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Hospital Bed",
+    "hcpcs": "E0250",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "M19.011",
+    "icd_description": "Primary osteoarthritis, right shoulder",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code M19.011 with the description 'Primary osteoarthritis, right shoulder.' No conflict was detected across any of the documents.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Chronic musculoskeletal condition (primary osteoarthritis, right shoulder) with a hospital bed ordered for mobility support represents a moderate clinical need without acute, post-surgical, or neurological urgency.",
+    "notes": "1) NPI number is missing across all three documents for Dr. Robert Williams \u2014 should be obtained for billing and credentialing purposes. 2) The diagnosis of primary osteoarthritis (M19.011) is a chronic joint condition; however, the injury date of 06/10/2026 and work-related claim (WC) suggest this may have been aggravated by a workplace incident, which could affect coverage determination. 3) Preferred appointment window was not specified \u2014 follow-up with patient or adjuster recommended to schedule delivery. 4) Medical justification language across clinical notes and prescription appears templated and generic; may warrant additional clinical detail if payer requests further medical necessity documentation. 5) Prescription is valid through 09/18/2026 (90 days from 06/20/2026). 6) Expected duration of need is 3 months."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Edward Young** (Claim: **WC-2026-084453**). In order to move forward with processing this referral, we require a few additional details from your office.\n\nThe following information is currently missing from the file:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing is on hold pending receipt of this item)*\n2. **Patient's Preferred Language**\n3. **Referring Physician NPI**\n\nPlease note that the appointment window is a hard block item, meaning the referral **cannot be routed or fulfilled** until this information is received. We kindly ask that all outstanding items be provided **within 24 business hours** of this notification to avoid any further delays in care for the patient.\n\nYou may respond directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your cooperation.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

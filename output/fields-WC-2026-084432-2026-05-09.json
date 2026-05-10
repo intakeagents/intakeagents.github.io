@@ -1,0 +1,99 @@
+{
+  "fields": {
+    "patient_name": "Maria Santos",
+    "dob": "07/22/1975",
+    "claim_number": "WC-2026-084432",
+    "injury_date": "10/09/2026",
+    "policy_number": "PM-WC-2026-44320",
+    "auth_ref": "AUTH-456778",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "quantity": "1",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), which is a more severe neurological diagnosis, while both the clinical notes (Document 2) and the prescription (Document 3) consistently use S13.4XXA (Sprain of ligaments of cervical spine). Per resolution protocol, clinical notes and prescription are treated as the authority over the referral form; S13.4XXA was selected as the correct code. However, the discrepancy is clinically significant \u2014 a spinal cord injury (S14.109A) versus a ligament sprain (S13.4XXA) are materially different diagnoses \u2014 and the post-surgical rehabilitation language in the clinical notes adds ambiguity, warranting escalation for physician confirmation.",
+    "confidence": 72,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S14.109A",
+        "notes_code": "S13.4XXA",
+        "rx_code": "S13.4XXA",
+        "resolved_code": "S13.4XXA",
+        "confidence": 72,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both agree on S13.4XXA, overriding the referral form's S14.109A, but the clinical severity gap between a spinal cord injury and a ligament sprain \u2014 combined with post-surgical rehabilitation language in the notes \u2014 warrants escalation to the prescribing physician for confirmation before processing."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The case involves a post-surgical cervical spine patient with an unresolved ICD-10 conflict between a potential spinal cord injury (S14.109A) and a ligament sprain (S13.4XXA), low confidence in the resolved code, and an escalation flag \u2014 all of which indicate elevated clinical risk and an urgent need for physician clarification before equipment fulfillment.",
+    "notes": "1) ESCALATION REQUIRED: The ICD-10 code on the referral form (S14.109A \u2014 spinal cord injury at C4) differs materially from the code on both the clinical notes and prescription (S13.4XXA \u2014 cervical ligament sprain). This is not a minor coding variant; these represent clinically distinct conditions with different treatment implications. Physician Dr. Carlos Mendez should be contacted at (949) 555-0244 to confirm the correct diagnosis before order fulfillment. 2) The clinical notes reference 'post-surgical rehabilitation,' which may suggest a more complex condition than a simple sprain and could support the S14.109A code on the referral form \u2014 this further supports escalation. 3) Marcus Webb is listed as both the insurance adjuster and the case manager on the referral submission footer. 4) The prescription is valid through approximately 01/14/2027 (90 days from 10/16/2026). 5) Patient height/weight (5'5\" / 238 lbs) documented in clinical notes \u2014 relevant for proper cervical collar sizing.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: S14.109A vs S13.4XXA \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Maria Santos**, under Workers' Compensation Claim **WC-2026-084432**. We are unable to complete processing of this referral until the following information has been provided:\n\n**Required Information:**\n\n1. **Appointment Window** *(Hard Block \u2014 Routing on Hold)*\nPreferred or required date/time window for the DME appointment. Please note that routing cannot proceed until this item is resolved.\n\n2. **Language Preference**\nPatient's primary language or need for interpreter services.\n\nTo avoid further delays in care for Ms. Santos, please respond with the above information **within 24 business hours** of receiving this message. If this referral is time-sensitive or you have any questions, do not hesitate to contact our intake team directly.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S14.109A",
+      "notes_code": "S13.4XXA",
+      "rx_code": "S13.4XXA",
+      "resolved_code": "S13.4XXA",
+      "confidence": 72,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both agree on S13.4XXA, overriding the referral form's S14.109A, but the clinical severity gap between a spinal cord injury and a ligament sprain \u2014 combined with post-surgical rehabilitation language in the notes \u2014 warrants escalation to the prescribing physician for confirmation before processing."
+    }
+  ]
+}

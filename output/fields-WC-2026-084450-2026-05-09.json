@@ -1,0 +1,79 @@
+{
+  "fields": {
+    "patient_name": "Dorothy Walker",
+    "dob": "01/25/1963",
+    "claim_number": "WC-2026-084450",
+    "injury_date": "01/01/2026",
+    "policy_number": "PM-WC-2026-44338",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "quantity": "1",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G47.33 (Obstructive sleep apnea). No conflict was detected across any documents.",
+    "confidence": 95,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "MED",
+    "priority_reason": "CPAP equipment for obstructive sleep apnea is a respiratory DME item for a chronic/post-surgical condition without acute neurological or high-acuity indicators, warranting medium priority; however, missing NPI, missing authorization reference, and a clinical note inconsistency (mobility impairment noted for a sleep apnea diagnosis) warrant review.",
+    "notes": "1. MISSING NPI: Physician NPI is blank across all three documents \u2014 must be obtained before billing or authorization can proceed. 2. MISSING AUTHORIZATION REF#: No prior authorization reference number has been issued by Travelers Workers Comp; authorization should be obtained before equipment is dispensed. 3. CLINICAL INCONSISTENCY: The clinical notes describe a 'work-related injury resulting in mobility impairment' and note 'surgical repair completed' and 'PT initiated,' which is inconsistent with the primary diagnosis of obstructive sleep apnea (G47.33). A CPAP machine is not a standard DME for mobility impairment or post-surgical rehabilitation \u2014 this may indicate the clinical notes are templated/generic or that additional diagnoses are not captured. Clinical staff or the referring physician should be contacted to clarify the nexus between the workers' comp injury and the OSA diagnosis. 4. WORKERS' COMP NEXUS: Payers may challenge medical necessity for a CPAP machine under a workers' comp claim \u2014 the causal relationship between the 01/01/2026 work injury and the OSA diagnosis should be documented explicitly. 5. Prescription is valid through approximately 04/13/2026 (90 days from 01/13/2026).",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Ms. Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Dorothy Walker**, under claim number **WC-2026-084450**. We are unable to complete processing of this referral due to several missing fields in the documentation received.\n\nPlease note that two of the items listed below are **hard blocks currently holding routing** on this referral and require immediate attention.\n\n**Outstanding Items Required for Processing:**\n\n1. \u26a0\ufe0f **Authorization Reference Number** *(Hard Block \u2013 Holding Routing)*\n2. \u26a0\ufe0f **Appointment Window** *(Hard Block \u2013 Holding Routing)*\n3. **Patient Preferred Language**\n4. **Referring Physician NPI**\n\nTo avoid further delays in care coordination for Ms. Walker, we kindly request that all outstanding information be provided **within 24 business hours** of receipt of this email. Please reply directly to this message or contact our intake team at your earliest convenience.\n\nIf you have any questions or require clarification on the items listed above, please do not hesitate to reach out. We appreciate your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

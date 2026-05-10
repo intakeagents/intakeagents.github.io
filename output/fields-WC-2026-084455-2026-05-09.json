@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Ronald King",
+    "dob": "07/13/1972",
+    "claim_number": "WC-2026-084455",
+    "injury_date": "04/09/2026",
+    "policy_number": "PM-WC-2026-44343",
+    "auth_ref": "AUTH-645175",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "Korean",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S82.001A ('Fracture of right patella'), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S82.892A ('Other fracture of left lower leg'). Additionally, the referral form describes a right-sided patellar fracture whereas the clinical and prescription documents indicate a left lower leg fracture \u2014 a laterality and anatomical site discrepancy. The clinical notes and prescription are considered the authoritative clinical sources, so S82.892A was selected as the resolved code. Escalation is warranted due to the significant anatomical discrepancy (right vs. left, patella vs. lower leg).",
+    "confidence": 72,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S82.001A",
+        "notes_code": "S82.892A",
+        "rx_code": "S82.892A",
+        "resolved_code": "S82.892A",
+        "confidence": 72,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both agree on S82.892A ('Other fracture of left lower leg'), overriding the referral form's S82.001A ('Fracture of right patella'), but the significant anatomical and laterality discrepancy (right patella vs. left lower leg) warrants clinical escalation for verification before processing."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Acute work-related fracture injury with an ICD code conflict involving laterality and anatomical site discrepancy (right patella vs. left lower leg) requiring immediate clinical verification, combined with active escalation flag and low confidence score.",
+    "notes": "1) Critical ICD conflict: Referral form lists S82.001A (fracture of right patella) while clinical notes and prescription both list S82.892A (other fracture of left lower leg) \u2014 this is not merely a code difference but a fundamental discrepancy in injury side (right vs. left) and anatomical location (patella vs. lower leg). Must be verified with Dr. Robert Williams or Desert Orthopedics before equipment is dispensed. 2) The HCPCS code L1906 (Ankle Foot Orthosis) is anatomically inconsistent with a patellar fracture (S82.001A from the referral form) but is more consistent with a lower leg fracture (S82.892A), lending further clinical plausibility to the notes/prescription diagnosis. 3) Patient height is 6'1' at 130 lbs \u2014 notably low BMI that may affect AFO fitting and should be flagged for the fitting technician. 4) Korean interpreter required \u2014 must be arranged prior to delivery appointment. 5) Transportation is confirmed as arranged. 6) Prescription is valid for 90 days from 04/16/2026 (expires 07/15/2026).",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: S82.001A vs S82.892A \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S82.001A",
+      "notes_code": "S82.892A",
+      "rx_code": "S82.892A",
+      "resolved_code": "S82.892A",
+      "confidence": 72,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both agree on S82.892A ('Other fracture of left lower leg'), overriding the referral form's S82.001A ('Fracture of right patella'), but the significant anatomical and laterality discrepancy (right patella vs. left lower leg) warrants clinical escalation for verification before processing."
+    }
+  ]
+}

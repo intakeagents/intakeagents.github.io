@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Peter Rivera",
+    "dob": "06/14/1989",
+    "claim_number": "WC-2026-084483",
+    "auth_ref": "AUTH-335615",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Armenian",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G35 with description Multiple sclerosis. No conflict found.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed neurological condition (Multiple sclerosis, G35) with documented mobility impairment and indefinite duration of need, classifying this as a high-priority case per neurological condition criteria.",
+    "notes": "Physician NPI is blank across all three documents and should be obtained before processing. The diagnosis of Multiple sclerosis (G35) is categorized as a work-related injury on the clinical notes, which is clinically atypical \u2014 MS is a chronic neurological condition and not typically caused by a workplace injury; this discrepancy between the chronic diagnosis and the workers' compensation claim context may warrant clinical review or adjuster follow-up. Patient interpreter requirement (Armenian) must be arranged prior to delivery scheduling. Prescription is valid through 08/23/2026 (90 days from 05/25/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Kevin,\n\nI hope this message finds you well. I'm reaching out regarding a pending DME referral for your insured, **Peter Rivera**, under claim **WC-2026-084483**.\n\nIn order to complete processing and move this referral forward, we are currently missing the following required information:\n\n- **Appointment Window** *(blocking routing \u2014 urgent)*\n- **Physician NPI**\n\nPlease note that the missing appointment window is currently placing a hard hold on routing for this referral, so we are unable to proceed until that item is received.\n\nWe kindly ask that you provide the above information **within 24 business hours** of this request to avoid any further delays in fulfilling the patient's equipment needs.\n\nIf you have any questions or need clarification, please don't hesitate to reach out directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

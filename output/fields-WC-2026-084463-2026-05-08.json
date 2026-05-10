@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Gary Mitchell",
+    "dob": "08/24/1955",
+    "claim_number": "WC-2026-084463",
+    "auth_ref": "AUTH-507746",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Forearm Crutches",
+    "hcpcs": "E0110",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S72.001A",
+    "icd_description": "Fracture of neck of right femur, initial encounter",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently report ICD-10 code S72.001A with the same description. No conflict was found.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient presents with an acute post-surgical femoral neck fracture (S72.001A) requiring immediate mobility support during active rehabilitation, classifying this as a high-priority case.",
+    "notes": "Physician NPI is missing across all three documents and should be obtained before final processing. Patient height is 6'3\" and weight is 137 lbs \u2014 weight appears notably low for height and may warrant verification to ensure appropriate crutch sizing. Prescription is valid for 90 days from 04/22/2026 (expires 07/21/2026). Expected duration of need is 6 months. Referral was submitted on 04/22/2026 by Case Manager Sarah Mitchell, who is also listed as the insurance adjuster."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Ms. Mitchell,\n\nI hope this message finds you well. I am reaching out regarding an active Durable Medical Equipment (DME) referral for your insured, **Gary Mitchell**, under Workers' Compensation claim **WC-2026-084463**.\n\nIn reviewing the referral documentation, we have identified several missing fields that are required to process this request. Please note that one item is currently placing a **hard block on routing**, preventing us from moving forward until it is resolved.\n\n**Outstanding Items Needed:**\n\n1. **Appointment Window** *(Hard Block \u2014 Routing on Hold)*\nThe preferred or required appointment availability window for the patient must be provided before this referral can be assigned and routed.\n\n2. **Patient Language Preference**\nPlease indicate the patient's preferred spoken language to ensure appropriate communication and scheduling accommodations.\n\n3. **Physician NPI**\nThe ordering physician's National Provider Identifier (NPI) is required to complete the referral record.\n\nIn order to avoid further delays in care for Mr. Mitchell, we respectfully request that the above information be provided **within 24 business hours** of receiving this message.\n\nPlease reply directly to this email or contact our intake team with the necessary details. If you have any questions or require clarification, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

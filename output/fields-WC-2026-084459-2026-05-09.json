@@ -1,0 +1,90 @@
+{
+  "fields": {
+    "patient_name": "Jason Adams",
+    "dob": "09/07/1986",
+    "claim_number": "WC-2026-084459",
+    "injury_date": "11/23/2026",
+    "policy_number": "PM-WC-2026-44347",
+    "auth_ref": "AUTH-329471",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Vietnamese",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "quantity": "1",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while the clinical notes (Document 2) and prescription (Document 3) both consistently list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution protocol, clinical notes and prescription take authority over the referral form. The resolved code is M51.16, as it is supported by two of three documents and reflects the more specific, clinically documented diagnosis.",
+    "confidence": 85,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.4",
+        "notes_code": "M51.16",
+        "rx_code": "M51.16",
+        "resolved_code": "M51.16",
+        "confidence": 85,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document M51.16 (Intervertebral disc degeneration, lumbar region), outweighing the referral form's M54.4 (Lumbago with sciatica); M51.16 is selected as the resolved code with high confidence, though physician confirmation is recommended to rule out a clerical error on the referral form."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "The patient has a lumbar intervertebral disc degeneration diagnosis with an ICD conflict that was resolved with moderate-high confidence, and the TENS unit is a non-urgent pain management device for a chronic musculoskeletal condition rather than an acute or post-surgical emergency.",
+    "notes": "1) ICD code conflict exists between referral form (M54.4) and clinical notes/prescription (M51.16) \u2014 physician confirmation recommended despite resolution. 2) The NPI for Dr. Carlos Mendez is missing across all three documents and should be obtained before billing. 3) The medical necessity justification references 'safe ambulation and prevent falls' and 'assistive device,' which is more consistent with a mobility aid than a TENS unit \u2014 this language mismatch may indicate a templating error and should be flagged for clinical review. 4) Vietnamese interpreter services should be arranged for the delivery appointment. 5) No preferred appointment window was specified; patient should be contacted to schedule.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for your patient, **Jason Adams** (Claim No. **WC-2026-084459**), which requires a few outstanding items before we are able to move forward with processing.\n\nUpon reviewing the referral, we have identified the following missing information:\n\n- **Appointment Window** *(appt_window)* \u2014 **\u26a0 Hard Block:** Routing is currently on hold and cannot proceed until this is received.\n- **Physician NPI** *(physician_npi)* \u2014 Required to complete the referral record.\n\nTo avoid further delays in care coordination for Mr. Adams, please provide the above information **within 24 business hours** of receiving this email. If routing remains on hold beyond that timeframe, additional escalation steps may be required per claims processing protocol.\n\nYou may reply directly to this email or contact our intake team through your preferred channel. Please reference claim number **WC-2026-084459** in all correspondence.\n\nWe appreciate your prompt attention to this matter and look forward to your response.\n\nSincerely,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.4",
+      "notes_code": "M51.16",
+      "rx_code": "M51.16",
+      "resolved_code": "M51.16",
+      "confidence": 85,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document M51.16 (Intervertebral disc degeneration, lumbar region), outweighing the referral form's M54.4 (Lumbago with sciatica); M51.16 is selected as the resolved code with high confidence, though physician confirmation is recommended to rule out a clerical error on the referral form."
+    }
+  ]
+}

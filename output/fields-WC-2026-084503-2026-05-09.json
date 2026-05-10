@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Carl Henderson",
+    "dob": "08/03/1985",
+    "claim_number": "WC-2026-084503",
+    "injury_date": "10/14/2026",
+    "policy_number": "PM-WC-2026-44391",
+    "auth_ref": "AUTH-855855",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "Korean",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and the prescription (Document 3) list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution protocol, clinical notes and prescription are treated as authoritative over the referral form, so M47.22 is selected. However, a secondary clinical concern exists: M47.22 is a cervical-region diagnosis, yet the prescribed DME is a Lumbar Orthosis (HCPCS L0625), creating a clinical mismatch that warrants escalation for physician clarification.",
+    "confidence": 55,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.22",
+        "rx_code": "M47.22",
+        "resolved_code": null,
+        "confidence": 55,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both agree on M47.22 over the referral form's M54.5, but M47.22 (cervical region) is clinically inconsistent with the prescribed Lumbar Orthosis, so this conflict is escalated for physician clarification rather than auto-resolved."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The confirmed diagnosis of anterior spinal artery compression syndrome (M47.22) is a serious neurological/vascular spinal condition, the case is post-surgical, there is a significant ICD code conflict with low confidence (55), and escalation is required due to a clinical mismatch between the cervical diagnosis and a lumbar orthosis prescription.",
+    "notes": "1) Critical clinical mismatch: The diagnosis on both the clinical notes and prescription is M47.22 (anterior spinal artery compression, cervical region), but the prescribed DME is a Lumbar Orthosis (L0625) \u2014 a lumbar/thoracic device. This anatomical inconsistency must be clarified with Dr. Robert Williams before fulfillment. 2) The referral form lists a different and less severe diagnosis (M54.5 \u2014 Low back pain), which may have been an administrative error or may reflect a secondary diagnosis not fully documented. 3) Patient height/weight is 5'3\" / 271 lbs \u2014 sizing considerations for the lumbar orthosis should be verified. 4) Post-surgical rehabilitation is noted; urgency of delivery should be confirmed with the physician given the neurological nature of the diagnosis. 5) Korean interpreter required for all patient-facing interactions. 6) Transportation has been arranged.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M54.5 vs M47.22 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.22",
+      "rx_code": "M47.22",
+      "resolved_code": null,
+      "confidence": 55,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both agree on M47.22 over the referral form's M54.5, but M47.22 (cervical region) is clinically inconsistent with the prescribed Lumbar Orthosis, so this conflict is escalated for physician clarification rather than auto-resolved."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "fields": {
+    "patient_name": "Raymond Morris",
+    "dob": "03/31/1984",
+    "claim_number": "WC-2026-084475",
+    "injury_date": "11/22/2026",
+    "policy_number": "PM-WC-2026-44363",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes and prescription consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia); the more specific and clinically authoritative code E11.65 from the clinical notes and prescription was selected as the resolved code.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "The clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the less specific E11.9 on the referral form; confidence is high given two-to-one document agreement and the clinical notes representing the treating physician's direct assessment."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is a stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose monitoring; while an ICD conflict was present it was resolved with high confidence, and the equipment is important for metabolic management but not acutely life-threatening.",
+    "notes": "1) Authorization Reference Number is missing from the referral form \u2014 follow-up with adjuster Kevin Osei at k.osei@amtrust.com or (216) 555-0189 required before processing. 2) The referring practice is South Bay Orthopedic Group, which is an orthopedic specialty; prescribing a CGM for diabetes management may warrant confirmation that the treating physician is coordinating with an endocrinologist or primary care provider. 3) Clinical notes mention 'post-operative assessment' and 'wound healing,' suggesting a surgical event may have occurred, but no surgical procedure is documented in any form \u2014 this may be a template artifact or an undisclosed procedure that should be clarified. 4) The medical justification provided ('return-to-baseline functional status' and 'reduce caregiver burden') is generic and may not satisfy payer-specific CGM medical necessity criteria \u2014 a more detailed justification tied to hyperglycemia management may be needed for authorization. 5) Referral was submitted 11/28/2026, six days after the injury date of 11/22/2026.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Kevin Osei,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured and am writing to request assistance in resolving an outstanding item needed to move forward.\n\n**Patient:** Raymond Morris\n**Claim Number:** WC-2026-084475\n\nUpon reviewing the referral, we have identified the following required field that must be obtained before processing can continue:\n\n- **Authorization Reference Number (auth_ref)** \u2014 This item is currently acting as a hard block and is preventing routing of the referral until it is resolved.\n\nTo avoid any delay in care for the patient, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message with the requested information, or feel free to contact our office if you have any questions or require clarification.\n\nWe appreciate your prompt attention to this matter and look forward to your response.\n\nBest regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "The clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the less specific E11.9 on the referral form; confidence is high given two-to-one document agreement and the clinical notes representing the treating physician's direct assessment."
+    }
+  ]
+}

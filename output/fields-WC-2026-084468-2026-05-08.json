@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Melissa Campbell",
+    "dob": "02/27/1961",
+    "claim_number": "WC-2026-084468",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S13.4XXA (Sprain of ligaments of cervical spine). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S13.4XXA has been selected as the correct code. The referral form code S14.109A also describes a significantly more severe neurological condition (spinal cord injury) that is not corroborated by the clinical narrative, which describes a post-surgical rehab protocol for a ligament sprain with appropriate progression \u2014 further supporting S13.4XXA as the accurate diagnosis.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Active ICD code conflict exists across documents with the discrepant referral form code (S14.109A) indicating a potentially serious spinal cord injury at C4 level, and the case involves post-surgical rehabilitation for a cervical spine injury warranting elevated clinical review.",
+    "notes": "1. Authorization Reference Number is blank \u2014 authorization from Hartford Financial Services should be obtained before delivery. 2. Transportation field is blank on the referral form \u2014 should be confirmed with patient or case manager. 3. The referral form ICD code S14.109A (C4 spinal cord injury) is clinically inconsistent with the treatment narrative of a ligament sprain progressing appropriately through rehab; however, the discrepancy should be flagged to Dr. Mendez and adjuster Diana Cruz for formal clarification and potential referral form correction. 4. Prescription is valid through 11/11/2026 (90 days from 08/13/2026). 5. Patient height/weight is 5'3\" / 240 lbs \u2014 standard cervical collar sizing should be verified for appropriate fit."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Melissa Campbell** (Claim: **WC-2026-084468**), which requires your attention before we are able to move forward with processing.\n\nUpon reviewing the referral, we have identified the following missing information:\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2014 routing is currently on hold pending receipt)*\n2. **Transportation Details**\n\nPlease note that the missing authorization reference number is preventing us from routing this referral any further. As such, we kindly ask that you provide all outstanding information **within 24 business hours** of receiving this message to avoid any delays in care for Ms. Campbell.\n\nYou may reply directly to this email with the required details. If you have any questions or need assistance, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to resolving this quickly.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

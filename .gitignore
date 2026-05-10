@@ -2,11 +2,7 @@
 .env
 *.key
 
-# Output — episode JSON with patient data
-output/
-
-# Large PDF packages (regeneratable)
-referrals/
+# Keep output/ and referrals/ — all synthetic demo data, no real patients
 
 # Python
 __pycache__/

@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Amanda Turner",
+    "dob": "12/14/1966",
+    "claim_number": "WC-2026-084466",
+    "auth_ref": "AUTH-904150",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "delivery_address": "892 Sunset Ridge Road, Pasadena, CA 91101",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents consistently list ICD-10 code G47.33 (Obstructive sleep apnea). No conflict was found across the referral form, clinical notes, or prescription.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Escalation is warranted due to a critical clinical documentation inconsistency: the diagnosis is G47.33 (Obstructive sleep apnea) and the equipment ordered is a CPAP Machine (E0601), but the medical necessity justification across all three documents incorrectly references ambulation, fall prevention, and assistive devices \u2014 language appropriate for a mobility aid, not a CPAP \u2014 suggesting possible template error or case mix-up that requires human review before fulfillment.",
+    "notes": "SIGNIFICANT DOCUMENTATION CONCERN: Despite consistent ICD-10 coding (G47.33 - Obstructive sleep apnea) and appropriate equipment (CPAP Machine, E0601) across all documents, the Medical Necessity and Functional Assessment language in both the clinical notes and prescription is entirely mismatched \u2014 describing mobility deficits, fall prevention, and ambulation support rather than sleep apnea treatment. This strongly suggests a copy-paste or template error. Additionally, the physician NPI is blank across all documents, which is a required field for billing and authorization. The referral should be flagged for human review and clarification from Dr. Lisa Park's office before delivery is scheduled. Case Manager / Adjuster Linda Torres should also be notified."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out on behalf of Coastal DME regarding a durable medical equipment referral for your patient Amanda Turner, associated with claim number **WC-2026-084466**.\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier is missing and is needed to validate and finalize the referral.\n\nTo avoid any delays in equipment fulfillment for Ms. Turner, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to working with you to ensure Ms. Turner receives timely care.\n\nThank you,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

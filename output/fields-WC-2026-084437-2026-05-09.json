@@ -1,0 +1,74 @@
+{
+  "fields": {
+    "patient_name": "Michael Thompson",
+    "dob": "06/25/1978",
+    "claim_number": "WC-2026-084437",
+    "injury_date": "11/14/2026",
+    "policy_number": "PM-WC-2026-44325",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "quantity": "1",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "No conflict found. All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G47.33 (Obstructive sleep apnea).",
+    "confidence": 95,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "MED",
+    "priority_reason": "CPAP equipment for obstructive sleep apnea is a respiratory DME need for a chronic condition; no acute surgical or neurological emergency is indicated, and no ICD conflict requires escalation.",
+    "notes": "1) Authorization Ref # is missing \u2014 adjuster should be contacted to obtain prior authorization before fulfilling the order. 2) The clinical notes functional assessment references 'pain and reduced mobility secondary to occupational injury' and 'assistive devices insufficient for safe home ambulation,' which is inconsistent with the CPAP/obstructive sleep apnea diagnosis \u2014 this language appears to be boilerplate or copy-paste error and does not match the equipment ordered; this discrepancy should be flagged with the referring physician. 3) Preferred appointment window is blank \u2014 patient or case manager should be contacted to schedule delivery. 4) Prescription is valid through 02/26/2027 (90 days from 11/28/2026). 5) Duration of need is listed as 3 months, which may require reassessment and reauthorization thereafter.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, Michael Thompson (Claim No. WC-2026-084437), which is currently on hold pending receipt of the following required information:\n\n- **Authorization/Reference Number (auth_ref):** The authorization or reference number associated with this claim is needed to proceed with processing.\n- **Appointment Window (appt_window):** The preferred or approved appointment window for the patient's DME delivery/setup must be provided before scheduling can be initiated.\n\nPlease note that both items above are classified as **hard blocks**, meaning routing and fulfillment cannot move forward until they have been received and confirmed.\n\nTo avoid any delay in care for Mr. Thompson, we kindly ask that you provide the above information **within 24 business hours** of receiving this message. You may reply directly to this email or contact our intake team at your earliest convenience.\n\nShould you have any questions or require clarification, please do not hesitate to reach out. We appreciate your prompt attention to this matter and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Catherine Rogers",
+    "dob": "07/16/1965",
+    "claim_number": "WC-2026-084476",
+    "auth_ref": "AUTH-899787",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "Tagalog",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently document ICD-10 code G12.21 (Amyotrophic lateral sclerosis). No conflict was found across any of the documents.",
+    "confidence": 98,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a progressive and severe neurological condition (ALS, G12.21) requiring mobility assistance; ALS is a high-acuity diagnosis with rapidly declining functional status, warranting urgent equipment provision.",
+    "notes": "1) Clinical notes reference a 'post-operative assessment' and 'wound healing within normal parameters,' which is clinically inconsistent with an ALS diagnosis \u2014 ALS is a progressive neurodegenerative disease and not typically associated with post-operative recovery; this may indicate a documentation error or template copy-paste issue and should be reviewed. 2) The referral lists the injury date as 07/10/2026, which is also atypical for ALS, a chronic progressive condition rather than an acute injury \u2014 the workers' compensation context should be verified for appropriateness. 3) Interpreter/language support in Tagalog should be arranged prior to delivery appointment. 4) Occupational therapy was recommended alongside DME provision per clinical notes \u2014 consider coordinating OT referral. 5) Prescription is valid through 10/24/2026 (90 days from 07/26/2026). 6) Expected duration of need is 6 months."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

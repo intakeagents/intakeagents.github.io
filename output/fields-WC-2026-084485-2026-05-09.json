@@ -1,0 +1,90 @@
+{
+  "fields": {
+    "patient_name": "Harold Richardson",
+    "dob": "09/22/1976",
+    "claim_number": "WC-2026-084485",
+    "injury_date": "08/18/2026",
+    "policy_number": "PM-WC-2026-44373",
+    "auth_ref": "AUTH-678727",
+    "appt_window": "",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (Document 2) and the prescription (Document 3) consistently use E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, clinical notes and prescription take authority over the referral form; E11.65 was selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "The clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the less specific E11.9 on the referral form; the more specific and clinically supported code was selected with high confidence."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "The patient has a chronic metabolic condition (Type 2 diabetes with hyperglycemia) requiring a Continuous Glucose Monitor for ongoing glucose management; ICD conflict was resolved with high confidence, no acute surgical or neurological emergency is present.",
+    "notes": "1) ICD code discrepancy between referral form (E11.9) and clinical notes/prescription (E11.65) \u2014 resolved in favor of E11.65 per protocol. 2) The referring physician is from Pacific Neurology Associates, which is atypical for a diabetes/CGM referral and may warrant verification that the correct specialist is managing the patient's diabetes care. 3) The functional assessment references a work-related injury with mobility impairment, but the DME ordered (CGM) is for diabetes management \u2014 the clinical link between the workers' comp injury and the CGM need is not clearly established in the documentation and may require adjuster or physician clarification. 4) Authorization reference AUTH-678727 is on file. Prescription is valid through 01/02/2027 (90 days from 09/04/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Harold Richardson**, under claim number **WC-2026-084485**.\n\nWhile reviewing this referral, we have identified the following missing information required to complete processing:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment availability window for the patient has not been provided. Please note that this item is currently preventing us from routing the referral, and processing cannot move forward until it is received.\n2. **Language Preference**: The patient's preferred language for communication has not been indicated.\n\nTo avoid further delays in care for Mr. Richardson, we kindly ask that you provide the above information **within 24 business hours** of receiving this message.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to resolving this quickly.\n\nThank you for your time and cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "The clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the less specific E11.9 on the referral form; the more specific and clinically supported code was selected with high confidence."
+    }
+  ]
+}

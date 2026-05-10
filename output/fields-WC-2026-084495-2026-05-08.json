@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Willie Brooks",
+    "dob": "10/17/1983",
+    "claim_number": "WC-2026-084495",
+    "auth_ref": "AUTH-662636",
+    "appt_window": "",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "delivery_address": "1247 Ocean View Blvd, Long Beach, CA 90802",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G12.21 with the description Amyotrophic lateral sclerosis. No conflict was detected across any of the documents.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed diagnosis of Amyotrophic lateral sclerosis (ALS), a progressive and fatal neurological condition, which classifies this as a high-priority case requiring urgent equipment fulfillment to support activities of daily living.",
+    "notes": "1) There is a potential clinical concern: ALS is a progressive neurological disease, yet only a standard manual wheelchair (E1161) has been ordered. As the condition progresses, a power wheelchair may be more appropriate and should be flagged for future reassessment. 2) The clinical notes mention 'injection therapy' and 'workplace injury' with pain levels of 5/10 at rest and 8/10 with activity, which are atypical presentations for an ALS diagnosis and may warrant clinical clarification. ALS is not typically caused by workplace injury, suggesting possible discordance between the injury event and the diagnosis. 3) The prescription was signed on 03/11/2026 and is valid for 90 days (until approximately 06/09/2026). 4) Preferred appointment window, transportation requirement, and interpreter/language fields are all blank \u2014 follow-up with adjuster Robert Campos may be needed to complete intake. 5) Policy Number: PM-WC-2026-44383. 6) Referral submitted: 03/11/2026 by Case Manager Robert Campos."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Willie Brooks** (Claim No. **WC-2026-084495**). We are unable to complete processing at this time due to several missing items in the referral documentation.\n\nPlease provide the following information at your earliest convenience:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment availability window for the patient. Please note that this item is currently preventing us from routing the referral, and processing cannot move forward until it is received.\n2. **Transportation**: Confirmation of whether the patient requires transportation assistance to accommodate the appointment, and if so, any relevant details.\n3. **Language**: The patient's preferred language for communication and service delivery.\n\nTo avoid further delays in care, we kindly request a response **within 24 business hours** of receiving this notice. If we do not receive the outstanding information within that timeframe, the referral may be subject to escalation per our standard intake protocols.\n\nPlease reply directly to this email or contact our intake team if you have any questions or require clarification.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

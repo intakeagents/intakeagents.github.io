@@ -1,0 +1,52 @@
+{
+  "fields": {
+    "patient_name": "Mark Taylor",
+    "dob": "11/22/1965",
+    "claim_number": "WC-2026-084445",
+    "auth_ref": "AUTH-299122",
+    "appt_window": "",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (Document 2) and the prescription (Document 3) list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, the clinical notes and prescription take authority over the referral form. Additionally, the clinical notes reference post-surgical rehabilitation, which is more consistent with a dislocation diagnosis (S43.004A) than a contusion (S40.011A). S43.004A has been selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical rehabilitation case with an ICD code conflict across documents and a diagnosis of right shoulder dislocation requiring immobilization, warranting human review to confirm the correct diagnosis code before fulfillment.",
+    "notes": "1) ICD conflict requires adjuster/physician confirmation before processing \u2014 referral form shows S40.011A (contusion) while clinical notes and prescription both show S43.004A (dislocation); the more severe and clinically supported code S43.004A has been selected. 2) Physician NPI is missing across all three documents and should be obtained before billing. 3) The injury date listed (12/24/2026) is future-dated relative to the referral submission date (12/11/2026) and clinical notes visit date (12/09/2026), which is a logical inconsistency that should be verified with the adjuster. 4) The medical justification language ('support safe ambulation and prevent falls') is atypical for a shoulder immobilizer and may raise scrutiny during insurance review \u2014 clarification from the physician may be beneficial. 5) Preferred appointment window, transportation, and language/interpreter fields are all blank."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation",
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for patient **Mark Taylor** under claim number **WC-2026-084445**. To proceed with processing this referral, we require the following information, which is currently missing from the file:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment availability window for the patient. Please note that routing cannot proceed until this item is received.\n2. **Transportation**: Confirmation of whether transportation assistance is needed for the patient, and if so, any relevant details.\n3. **Language**: The patient's preferred language for communication and service delivery.\n4. **Physician NPI**: The ordering physician's National Provider Identifier (NPI) number.\n\nPlease be advised that we require a response within **24 business hours** of receipt of this email. The appointment window item noted above is a hard block, meaning the referral cannot be routed or advanced until that information is provided. Delays in response may impact the patient's care timeline.\n\nKindly reply directly to this email with the requested details at your earliest convenience. Should you have any questions or require clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

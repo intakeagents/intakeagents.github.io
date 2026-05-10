@@ -1,0 +1,98 @@
+{
+  "fields": {
+    "patient_name": "Emma Price",
+    "dob": "03/13/1990",
+    "claim_number": "WC-2026-084498",
+    "injury_date": "04/28/2026",
+    "policy_number": "PM-WC-2026-44386",
+    "auth_ref": "AUTH-670913",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "quantity": "1",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and prescription (Document 3) consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution rules, clinical notes and prescription take authority over the referral form. M47.22 was selected as the correct code. Additionally, there is a clinical coherence concern: a lumbar orthosis (L0625) is prescribed for a cervical region diagnosis (M47.22), which is anatomically inconsistent and warrants clinical review.",
+    "confidence": 62,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.22",
+        "rx_code": "M47.22",
+        "resolved_code": "M47.22",
+        "confidence": 62,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both cite M47.22 over the referral form's M54.5, so M47.22 is selected per authority rules, but confidence is reduced due to the anatomical mismatch between a cervical diagnosis (M47.22) and a lumbar orthosis (L0625), which requires clinical clarification before fulfillment."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The confirmed diagnosis of anterior spinal artery compression syndrome (M47.22) is a serious neurological condition, an ICD conflict exists with escalation required, confidence is below 80, and there is an anatomical mismatch between the cervical diagnosis and lumbar orthosis that necessitates urgent clinical review.",
+    "notes": "1) CRITICAL MISMATCH: The prescribed equipment (Lumbar Orthosis, L0625, which supports the lumbar/lower back region) is anatomically inconsistent with the confirmed diagnosis of M47.22 (Anterior spinal artery compression syndromes, cervical region). This may indicate an ordering error, a missing secondary diagnosis, or a documentation discrepancy. Do not fulfill until clinician confirms correct equipment or correct diagnosis. 2) The referral form's diagnosis (M54.5 - Low back pain) may actually be more consistent with the lumbar orthosis order than M47.22, but it was overridden per authority rules. 3) Physician NPI is missing across all three documents. 4) Referral was submitted 05/12/2026, two days after the clinical visit date of 05/10/2026. 5) Escalate to clinical reviewer and contact Dr. Priya Sharma at (310) 555-0322 for clarification on both the correct ICD-10 code and the appropriate DME equipment.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M54.5 vs M47.22 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Emma Price**, under claim number **WC-2026-084498**.\n\nUpon reviewing the referral documentation, we have identified the following required fields that are currently incomplete and needed to process this request:\n\n1. **Language** \u2013 Patient's preferred language for communication and documentation purposes\n2. **Physician NPI** \u2013 National Provider Identifier for the ordering/referring physician\n\nPlease note that we are unable to move forward with routing this referral until the above information has been received.\n\nKindly provide the requested details **within 24 business hours** of this notice to avoid any delays in processing. You may reply directly to this email with the necessary information.\n\nIf you have any questions or need clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.22",
+      "rx_code": "M47.22",
+      "resolved_code": "M47.22",
+      "confidence": 62,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both cite M47.22 over the referral form's M54.5, so M47.22 is selected per authority rules, but confidence is reduced due to the anatomical mismatch between a cervical diagnosis (M47.22) and a lumbar orthosis (L0625), which requires clinical clarification before fulfillment."
+    }
+  ]
+}

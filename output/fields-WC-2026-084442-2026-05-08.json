@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Barbara Martinez",
+    "dob": "03/29/1961",
+    "claim_number": "WC-2026-084442",
+    "auth_ref": "AUTH-922733",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (document 2) and the prescription (document 3) consistently list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription are treated as authoritative over the referral form. E11.65 has been selected as the correct code.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose monitoring; ICD conflict was resolved with high confidence from clinical notes and prescription, and no acute surgical or neurological urgency is present.",
+    "notes": "1. The medical justification text in both the clinical notes and prescription ('to support safe ambulation and prevent falls in home environment... unable to safely navigate living space without assistive device') appears to be boilerplate language more appropriate for a mobility aid, not a Continuous Glucose Monitor \u2014 this mismatch between the device ordered and the stated justification should be flagged for clinical review. 2. The clinical notes reference a 'post-operative assessment' and 'wound healing,' which is inconsistent with the diagnosis of diabetes and a CGM order from an orthopedic group \u2014 this warrants verification. 3. Patient height/weight recorded as 6'3\" / 192 lbs in clinical notes \u2014 may warrant verification given the patient is female (Barbara). 4. The referring practice is South Bay Orthopedic Group, which is unusual for a diabetes-related DME order; endocrinology or primary care involvement should be confirmed."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Barbara Martinez**, under claim number **WC-2026-084442**.\n\nIn order to complete the processing of this referral, we require the following information:\n\n- **Preferred language** of the patient (i.e., the language Barbara Martinez speaks or requires for communication purposes)\n\nTo avoid any delays in care, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our intake team if you have any questions or need further clarification.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

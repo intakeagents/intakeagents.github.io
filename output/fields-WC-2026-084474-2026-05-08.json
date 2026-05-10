@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Kathleen Sanchez",
+    "dob": "11/07/1959",
+    "claim_number": "WC-2026-084474",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Knee Brace",
+    "hcpcs": "L1820",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S83.005A",
+    "icd_description": "Unspecified tear of medial meniscus, right knee",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M23.201 (Derangement of medial meniscus, right knee), while the clinical notes (Document 2) and the prescription (Document 3) both list S83.005A (Unspecified tear of medial meniscus, right knee). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S83.005A was selected as the correct code. Additionally, S83.005A is more clinically specific and consistent with the documented post-surgical rehabilitation treatment noted in the clinical notes, further supporting this resolution.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical rehabilitation has been initiated following an acute workplace injury (01/19/2026), indicating a recent surgical intervention that elevates clinical urgency, and there is an ICD-10 conflict across documents requiring attention.",
+    "notes": "1) ICD conflict resolved: referral form used M23.201 but clinical notes and prescription consistently use S83.005A \u2014 clinical authority documents were used for resolution. 2) Authorization Reference Number is missing and should be obtained from adjuster Linda Torres before fulfillment. 3) Patient height/weight noted as 6'3\" / 252 lbs \u2014 verify that the standard knee brace (L1820) ordered accommodates this patient's size and weight capacity. 4) Clinical notes describe the condition as 'chronic condition exacerbating following workplace incident' yet also note 'post-surgical rehabilitation protocol initiated,' which may warrant clarification on surgery date and type. 5) Preferred appointment window was not specified \u2014 coordination with patient required. 6) Prescription is valid through 04/28/2026 (90 days from 01/28/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Kathleen Sanchez**, under claim number **WC-2026-084474**. We are unable to route this referral for processing until the following information has been received and verified.\n\n**Required Information:**\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2013 routing on hold)*\n2. **Appointment Window (appt_window)** *(Hard Block \u2013 routing on hold)*\n3. **Preferred Language (language)**\n\nPlease note that items 1 and 2 are currently placing a hard block on this referral, preventing it from advancing in our system until resolved.\n\nTo avoid any delays in service for Ms. Sanchez, we kindly ask that you provide the outstanding information **within 24 business hours** of receiving this email. You may reply directly to this message or contact our intake team through your preferred method.\n\nThank you for your prompt attention to this matter. We look forward to your response and to moving forward with Ms. Sanchez's referral as quickly as possible.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

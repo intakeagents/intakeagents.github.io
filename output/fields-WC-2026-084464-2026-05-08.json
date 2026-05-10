@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Helen Perez",
+    "dob": "03/06/1971",
+    "claim_number": "WC-2026-084464",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "arranged",
+    "language": "",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "A conflict exists across documents. The referral form (1_referral_form.pdf) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (2_clinical_notes.pdf) and the prescription (3_prescription.pdf) consistently list ICD-10 code M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution rules, the clinical notes and prescription are treated as the authoritative sources over the referral form. M47.22 has been selected as the correct code. Additionally, there is a notable clinical concern: the prescribed equipment is a Lumbar Orthosis (a lumbar/lower back device), yet the diagnosis M47.22 refers to a cervical region condition. This equipment-diagnosis mismatch warrants clinical review.",
+    "confidence": 62,
+    "escalate": true,
+    "notes": "1) ICD-10 conflict resolved in favor of M47.22 per clinical notes and prescription authority over referral form, but confidence is reduced due to a significant clinical mismatch: a Lumbar Orthosis (L0625) is being prescribed for a cervical spine diagnosis (M47.22), which is clinically inconsistent and may indicate an error in either the diagnosis code or the equipment ordered. 2) The referral form lists diagnosis M54.5 (Low back pain), which would be more anatomically consistent with a Lumbar Orthosis \u2014 this may suggest the referral form diagnosis was correct and the clinical notes/prescription contain an error. 3) Authorization Reference Number is missing and should be obtained before processing. 4) Preferred appointment window is not specified. 5) The functional assessment mentions 'post-operative assessment' and 'wound healing,' but no surgical procedure is referenced elsewhere in the documents \u2014 this may indicate incomplete or mismatched documentation. 6) Escalation to a human reviewer is strongly recommended to resolve the equipment-diagnosis mismatch before fulfillment."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Helen Perez**, under workers' compensation claim **WC-2026-084464**. In reviewing the referral documentation, we have identified several missing items that are required before we can proceed with processing.\n\nPlease note that the following fields are outstanding:\n\n1. **Authorization Reference Number (auth_ref)** \u26a0\ufe0f *Hard Block \u2014 routing is on hold pending receipt*\n2. **Appointment Window (appt_window)** \u26a0\ufe0f *Hard Block \u2014 routing is on hold pending receipt*\n3. **Preferred Language (language)** \u2014 Required to ensure appropriate communication accommodations for the patient\n\nDue to the hard blocks on items 1 and 2, this referral cannot be routed or fulfilled until those items are resolved. We kindly ask that you provide all outstanding information **within 24 business hours** of receiving this email to avoid further delays in care for Ms. Perez.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

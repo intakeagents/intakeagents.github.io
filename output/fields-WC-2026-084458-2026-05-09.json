@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Carol Green",
+    "dob": "04/15/1974",
+    "claim_number": "WC-2026-084458",
+    "injury_date": "04/26/2026",
+    "policy_number": "PM-WC-2026-44346",
+    "auth_ref": "AUTH-148458",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "quantity": "1",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes and prescription consistently list S13.4XXA (Sprain of ligaments of cervical spine). Per resolution protocol, clinical notes and prescription take authority over the referral form; S13.4XXA was selected as the correct code.",
+    "confidence": 82,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S14.109A",
+        "notes_code": "S13.4XXA",
+        "rx_code": "S13.4XXA",
+        "resolved_code": "S13.4XXA",
+        "confidence": 82,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S13.4XXA (sprain of cervical ligaments), which outweighs the referral form's S14.109A (spinal cord injury at C4); however, the discrepancy between a ligament sprain and a spinal cord injury is clinically significant and warrants adjuster or physician verification before processing."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical cervical spine case with an ICD conflict involving a potential spinal cord injury code (S14.109A) on the referral form versus a cervical sprain (S13.4XXA) on clinical documents; the clinical severity of either diagnosis, combined with the unresolved diagnostic discrepancy, warrants HIGH priority handling.",
+    "notes": "1) The ICD conflict is clinically significant: S14.109A indicates an unspecified spinal cord injury at C4 level, while S13.4XXA indicates a cervical ligament sprain \u2014 these are materially different diagnoses. Physician or adjuster confirmation is strongly recommended before fulfillment. 2) Clinical notes reference 'surgical repair completed' and PT initiated, which is inconsistent with a simple ligament sprain and may lend some support to the more serious S14.109A code on the referral form. 3) The medical justification in both clinical notes and prescription references 'safe ambulation and fall prevention,' which is more typical of a mobility aid than a cervical collar \u2014 this may indicate boilerplate language was used. 4) Duration of need is listed as 'Indefinite \u2014 chronic condition,' which is unusual for a post-surgical cervical collar and may need review. 5) Transportation Required field on referral form is blank/not populated.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation claim referenced below, as we require additional information to complete the DME referral for your insured.\n\n**Patient:** Carol Green\n**Claim Number:** WC-2026-084458\n\nIn reviewing this referral, we have identified the following missing item that must be resolved before we can proceed:\n\n- **Transportation:** Please provide the applicable transportation details required to fulfill this DME order (e.g., delivery address, transportation authorization, or arranging transport as needed).\n\nTo avoid any delay in services for Ms. Green, we kindly ask that you provide the requested information **within 24 business hours** of receiving this email.\n\nPlease note there are no current hard blocks on this claim; however, routing will remain on hold pending receipt of the above information.\n\nIf you have any questions or need clarification, please do not hesitate to contact us directly.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S14.109A",
+      "notes_code": "S13.4XXA",
+      "rx_code": "S13.4XXA",
+      "resolved_code": "S13.4XXA",
+      "confidence": 82,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S13.4XXA (sprain of cervical ligaments), which outweighs the referral form's S14.109A (spinal cord injury at C4); however, the discrepancy between a ligament sprain and a spinal cord injury is clinically significant and warrants adjuster or physician verification before processing."
+    }
+  ]
+}

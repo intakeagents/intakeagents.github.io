@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Eric Roberts",
+    "dob": "05/20/1983",
+    "claim_number": "WC-2026-084465",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G12.21 \u2014 Amyotrophic lateral sclerosis. No conflict was found across documents.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed diagnosis of Amyotrophic lateral sclerosis (ALS), a progressive and life-limiting neurological condition that warrants high clinical urgency for timely DME provision.",
+    "notes": "1) Authorization Ref # is missing from the referral form \u2014 adjuster Diana Cruz should be contacted to obtain prior authorization before delivery. 2) Clinical justification references 'safe ambulation and prevent falls,' but ALS is a progressive neurodegenerative disease \u2014 a standard manual wheelchair (E1161) may be undersized or insufficient given disease progression; clinical team should confirm whether a power wheelchair or custom chair is more appropriate long-term. 3) Patient weight is 219 lbs at 5'1\" \u2014 the selected standard manual wheelchair (E1161) should be verified for appropriate weight capacity. 4) The injury date of 01/24/2026 and ALS diagnosis (G12.21) are clinically inconsistent, as ALS is not a traumatic workplace injury; this may indicate a workers' compensation claim complexity that warrants adjuster and legal review. 5) Prescription is valid through 05/11/2026 (90 days from 02/11/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Eric Roberts**, under claim number **WC-2026-084465**. We are unable to proceed with routing this referral until the following outstanding items have been resolved.\n\n**Required Information:**\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2013 routing is currently on hold pending receipt of this item)*\n2. **Patient's Preferred Language (language)**\n\nPlease note that the missing authorization reference number is preventing us from advancing this referral any further. We kindly ask that all outstanding information be provided **within 24 business hours** of receiving this notice to avoid further delays in processing.\n\nYou may reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your cooperation.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

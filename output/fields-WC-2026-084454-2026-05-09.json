@@ -1,0 +1,63 @@
+{
+  "fields": {
+    "patient_name": "Ruth Hernandez",
+    "dob": "05/28/1967",
+    "claim_number": "WC-2026-084454",
+    "injury_date": "01/04/2026",
+    "policy_number": "PM-WC-2026-44342",
+    "auth_ref": "AUTH-378361",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "",
+    "language": "Korean",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "quantity": "1",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G12.21 (Amyotrophic lateral sclerosis). No conflict was detected across any documents.",
+    "confidence": 97,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed diagnosis of Amyotrophic lateral sclerosis (ALS, G12.21), a progressive and severe neurological condition that warrants high-priority handling for mobility equipment fulfillment.",
+    "notes": "1. CLINICAL INCONSISTENCY \u2014 FLAGGED FOR REVIEW: The clinical notes describe treatment including 'surgical repair completed, post-operative protocol in progress, PT initiated,' and reference a workplace injury with pain levels 5/10\u20138/10 and restricted range of motion. These findings are inconsistent with a primary diagnosis of ALS (G12.21), which is a degenerative neuromuscular disease not caused by workplace injury and not typically treated with surgical repair. This inconsistency suggests possible template/copy-paste error in the clinical notes or a documentation mismatch between the true clinical picture and the stated diagnosis. Recommend clinical review and clarification from Dr. Priya Sharma before proceeding with order fulfillment. 2. EQUIPMENT SUITABILITY: Patient weight is 278 lbs at 5'5\". The ordered HCPCS E1161 (manual wheelchair, heavy duty) should be verified to confirm weight capacity compliance for a bariatric patient. Standard manual wheelchairs typically support up to 250 lbs; a heavy-duty or bariatric model may be required. 3. INTERPRETER NEEDED: Korean interpreter must be arranged for delivery appointment. 4. Prescription is valid through 04/15/2026 (90 days from 01/15/2026). 5. Referral submitted 01/15/2026 by Case Manager Sarah Mitchell.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Sarah,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Ruth Hernandez**, under claim **WC-2026-084454**.\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Transportation details** \u2013 Please provide applicable transportation arrangements or authorization associated with this referral.\n\nTo avoid any delays in service for Ms. Hernandez, we kindly ask that you respond within **24 business hours** of receiving this request.\n\nPlease feel free to contact our office with any questions or concerns. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

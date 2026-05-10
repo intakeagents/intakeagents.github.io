@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Frank Stewart",
+    "dob": "01/14/1982",
+    "claim_number": "WC-2026-084473",
+    "injury_date": "09/20/2026",
+    "policy_number": "PM-WC-2026-44361",
+    "auth_ref": "AUTH-410636",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "quantity": "1",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "physician_practice": "Valley Spine Institute",
+    "physician_phone": "(818) 555-0167",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Doc 1) lists ICD-10 code S82.001A (Fracture of right patella), while both the clinical notes (Doc 2) and prescription (Doc 3) consistently list S82.892A (Other fracture of left lower leg). Per resolution protocol, clinical notes and prescription take authority over the referral form; S82.892A was selected. Additionally, the referral form diagnosis description ('Fracture of right patella') conflicts with the laterality and anatomical site documented in the clinical notes and prescription ('left lower leg'), suggesting a data entry error on the referral form.",
+    "confidence": 85,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S82.001A",
+        "notes_code": "S82.892A",
+        "rx_code": "S82.892A",
+        "resolved_code": "S82.892A",
+        "confidence": 85,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S82.892A (Other fracture of left lower leg), which takes authority over the referral form's S82.001A (Fracture of right patella); confidence is 85 rather than higher because the anatomical discrepancy (right patella vs. left lower leg) is clinically significant and ideally warrants physician confirmation."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Acute post-operative fracture case with an ICD code conflict requiring potential physician verification, and the patient has documented inability to safely ambulate without the prescribed assistive device, indicating immediate clinical need.",
+    "notes": "1) The NPI field is blank across all three documents \u2014 this should be obtained before claim submission. 2) The referral form lists the diagnosis as 'Fracture of right patella' (S82.001A), but clinical notes and prescription both indicate 'Other fracture of left lower leg' (S82.892A); the laterality and anatomical site differ significantly and physician confirmation is strongly recommended despite the conflict being technically resolved. 3) HCPCS code L1906 is an ankle-foot orthosis typically indicated for lower leg/ankle pathology, which aligns with S82.892A (left lower leg fracture) and not with S82.001A (patella fracture), further supporting the clinical notes/prescription diagnosis. 4) Referral was submitted 10/03/2026, two days after the clinical visit (10/01/2026) and on the same date as the prescription \u2014 timeline is consistent. 5) Occupational therapy was recommended in the clinical notes and should be coordinated alongside DME delivery.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. My name is the Coastal DME Intake Agent, and I am reaching out regarding a durable medical equipment referral for your patient, Frank Stewart, under workers' compensation claim **WC-2026-084473**.\n\nIn order to process this referral and move forward with fulfillment, we require the following information to complete the file:\n\n- **Physician NPI** \u2013 The ordering physician's 10-digit National Provider Identifier\n\nPlease note that this request carries a **24-business-hour response deadline**. Timely receipt of the above information is necessary to avoid any delays in processing Mr. Stewart's referral.\n\nKindly reply directly to this email or contact our intake team with the requested details at your earliest convenience. If you have any questions or require clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S82.001A",
+      "notes_code": "S82.892A",
+      "rx_code": "S82.892A",
+      "resolved_code": "S82.892A",
+      "confidence": 85,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S82.892A (Other fracture of left lower leg), which takes authority over the referral form's S82.001A (Fracture of right patella); confidence is 85 rather than higher because the anatomical discrepancy (right patella vs. left lower leg) is clinically significant and ideally warrants physician confirmation."
+    }
+  ]
+}

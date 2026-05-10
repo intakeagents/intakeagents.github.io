@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Michael Thompson",
+    "dob": "06/25/1978",
+    "claim_number": "WC-2026-084437",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently document ICD-10 code G47.33 (Obstructive sleep apnea). No conflict detected across any documents.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "CPAP machine for obstructive sleep apnea is respiratory equipment for a chronic condition with no acute surgical or neurological emergency indicators, warranting a medium priority classification.",
+    "notes": "1) Authorization Reference Number is missing from the referral form \u2014 should be obtained from adjuster Jennifer Walsh before order fulfillment. 2) The functional assessment in the clinical notes references 'pain and reduced mobility secondary to occupational injury' and 'safe home ambulation,' which is inconsistent with the diagnosis of obstructive sleep apnea and the CPAP equipment ordered \u2014 this language appears to be templated/boilerplate and does not align with the actual diagnosis; recommend clinical review or clarification from Dr. Lisa Park. 3) No preferred appointment window was specified. 4) Authorization is not yet confirmed (Auth Ref # is blank); fulfillment should be held pending authorization. 5) Prescription is valid through 02/26/2027 (90 days from 11/28/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Michael Thompson** (Claim No. **WC-2026-084437**), which is currently on hold pending receipt of the following required information:\n\n1. **Authorization/Reference Number (auth_ref)** \u2013 The authorization or reference number associated with this claim is needed to validate and process the referral.\n2. **Appointment Window (appt_window)** \u2013 The preferred or required appointment timeframe for equipment delivery/setup must be provided before routing can proceed.\n\nPlease note that both items above represent **hard blocks**, meaning the referral cannot be advanced until each is resolved. To avoid any delay in care for your patient, we kindly ask that you respond with the above information **within 24 business hours** of receiving this email.\n\nIf you have any questions or need clarification, please do not hesitate to contact our intake team directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

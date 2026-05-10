@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Deborah Baker",
+    "dob": "06/19/1962",
+    "claim_number": "WC-2026-084460",
+    "injury_date": "10/11/2026",
+    "policy_number": "PM-WC-2026-44348",
+    "auth_ref": "AUTH-970914",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "quantity": "1",
+    "delivery_address": "892 Sunset Ridge Road, Pasadena, CA 91101",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S43.004A (Unspecified dislocation of right shoulder joint). Clinical notes and prescription are treated as the authoritative clinical sources; S43.004A was selected as the correct code. Additionally, S43.004A represents a more severe and clinically specific diagnosis, consistent with the treatment described (injection therapy, physical therapy, shoulder immobilizer for 6 months).",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S40.011A",
+        "notes_code": "S43.004A",
+        "rx_code": "S43.004A",
+        "resolved_code": "S43.004A",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S43.004A (dislocation), which is clinically supported by the treatment plan and overrides the less severe S40.011A (contusion) listed on the referral form; confidence is slightly reduced to 90 to flag the discrepancy for awareness."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Right shoulder dislocation is a moderate orthopedic injury requiring immobilization support; ICD conflict was resolved with high confidence and no escalation is required, placing this case at medium priority.",
+    "notes": "1) ICD-10 code conflict detected: referral form lists S40.011A (contusion) but clinical notes and prescription both list S43.004A (dislocation) \u2014 resolved in favor of S43.004A. 2) Physician NPI is missing across all three documents and should be obtained before processing. 3) Patient height/weight (6'4\" / 239 lbs) noted in clinical records \u2014 confirm appropriate sizing for shoulder immobilizer. 4) Referral submitted 10/25/2026, prescription signed 10/25/2026, clinical notes dated 10/23/2026 \u2014 timeline is consistent. 5) Prescription is valid for 90 days from 10/25/2026 (expires approximately 01/23/2027). 6) Expected duration of need is 6 months.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. My name is the Coastal DME Intake Agent, and I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Deborah Baker**, under workers' compensation claim **WC-2026-084460**.\n\nIn reviewing the referral documentation, we have identified the following item that must be provided before we are able to complete processing:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) is missing and is required to proceed with the referral.\n\nTo avoid any delays in care for Ms. Baker, we kindly ask that you supply the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to working with you to ensure a smooth process for your patient.\n\nThank you for your time and cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S40.011A",
+      "notes_code": "S43.004A",
+      "rx_code": "S43.004A",
+      "resolved_code": "S43.004A",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S43.004A (dislocation), which is clinically supported by the treatment plan and overrides the less severe S40.011A (contusion) listed on the referral form; confidence is slightly reduced to 90 to flag the discrepancy for awareness."
+    }
+  ]
+}

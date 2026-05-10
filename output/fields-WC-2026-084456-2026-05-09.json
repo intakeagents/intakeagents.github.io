@@ -1,0 +1,65 @@
+{
+  "fields": {
+    "patient_name": "Sharon Wright",
+    "dob": "10/01/1958",
+    "claim_number": "WC-2026-084456",
+    "injury_date": "06/13/2026",
+    "policy_number": "PM-WC-2026-44344",
+    "auth_ref": "AUTH-540869",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Nebulizer",
+    "hcpcs": "E0570",
+    "quantity": "1",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "J45.51",
+    "icd_description": "Severe persistent asthma with acute exacerbation",
+    "icd_conflict": false,
+    "icd_conflict_detail": "No conflict found. All three documents consistently report ICD-10 code J45.51 (Severe persistent asthma with acute exacerbation) across the referral form, clinical notes, and prescription.",
+    "confidence": 95,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "MED",
+    "priority_reason": "Respiratory equipment (nebulizer) for severe persistent asthma with acute exacerbation is clinically significant but represents a chronic/managed respiratory condition rather than an acute surgical emergency or neurological crisis; ICD codes are consistent across all documents with no escalation required.",
+    "notes": "1. The physician NPI field is blank across all three documents and should be obtained before processing. 2. There is a clinical inconsistency: the diagnosis is severe persistent asthma (J45.51, a pulmonary condition), yet the referring practice is Southern California Spine Center, a spine/orthopedic practice. This mismatch may warrant verification that the correct physician and practice are listed. 3. The clinical notes reference 'surgical repair completed' and 'post-operative protocol in progress' and 'PT initiated,' which are inconsistent with an asthma diagnosis and suggest possible template boilerplate or documentation error. 4. The referral was submitted on 06/24/2026, the prescription is dated 06/24/2026, and the clinical notes are dated 06/22/2026 \u2014 timeline is consistent. 5. The prescription is valid through 09/22/2026 (90 days from 06/24/2026). 6. Duration of need is indefinite due to chronic condition.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for your patient, **Sharon Wright**, under claim number **WC-2026-084456**.\n\nIn reviewing the referral documentation, we have identified the following required fields that are currently missing and needed to complete processing:\n\n1. **Language** \u2013 Patient's preferred language for communication\n2. **Physician NPI** \u2013 National Provider Identifier for the ordering physician\n\nTo avoid any delays in fulfilling this referral, we kindly ask that you provide the above information **within 24 business hours** of receiving this message.\n\nPlease reply directly to this email with the requested details. If you have any questions or need assistance, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We look forward to your timely response.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

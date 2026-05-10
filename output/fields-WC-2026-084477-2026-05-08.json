@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Dennis Reed",
+    "dob": "05/04/1978",
+    "claim_number": "WC-2026-084477",
+    "auth_ref": "AUTH-134225",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "delivery_address": "1247 Ocean View Blvd, Long Beach, CA 90802",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents consistently list ICD-10 code G47.33 (Obstructive sleep apnea). No conflict was found across the referral form, clinical notes, or prescription.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "CPAP machine for obstructive sleep apnea is respiratory equipment for a chronic condition, warranting medium priority; however, a significant documentation inconsistency exists where the medical justification language references ambulation and fall prevention, which is clinically inappropriate for a CPAP machine and warrants human review.",
+    "notes": "CRITICAL DOCUMENTATION INCONSISTENCY: The medical necessity justification across both the clinical notes and prescription states the CPAP machine is 'medically necessary to support safe ambulation and prevent falls in home environment' and that the 'patient is unable to safely navigate living space without assistive device.' This justification is clinically inappropriate and factually incorrect for a CPAP machine (HCPCS E0601), which is a respiratory device used to treat obstructive sleep apnea during sleep \u2014 not an ambulation or fall-prevention device. This boilerplate language appears to have been copied from a mobility aid template and applied incorrectly. This mismatch between the prescribed equipment and the stated medical justification could result in claim denial by the insurance carrier (ICW Group). It is strongly recommended that Dr. Lisa Park's office (Bay Area Physical Medicine, (415) 555-0188) be contacted to provide a corrected medical necessity statement specific to CPAP therapy for OSA (e.g., referencing AHI scores, sleep study results, daytime somnolence, or cardiovascular risk). Additionally, the relationship between the workplace injury date of 08/23/2026 and the OSA diagnosis (G47.33) is not clearly established in the documentation; a causal nexus note may be required by the workers' compensation carrier."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

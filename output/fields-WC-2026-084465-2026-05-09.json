@@ -1,0 +1,75 @@
+{
+  "fields": {
+    "patient_name": "Eric Roberts",
+    "dob": "05/20/1983",
+    "claim_number": "WC-2026-084465",
+    "injury_date": "01/24/2026",
+    "policy_number": "PM-WC-2026-44353",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "quantity": "1",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G12.21 (Amyotrophic lateral sclerosis). No conflict was detected across any documents.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed diagnosis of Amyotrophic lateral sclerosis (ALS), a progressive and severe neurological condition, which classifies this case as high clinical risk requiring urgent equipment fulfillment.",
+    "notes": "1) Authorization Ref # is missing from the referral form \u2014 adjuster Diana Cruz should be contacted at (860) 555-0143 or d.cruz@hartford.com to obtain prior authorization before delivery. 2) The clinical context raises a concern: ALS is a progressive neurodegenerative disease and not a typical workplace injury diagnosis; the injury date of 01/24/2026 and workers' comp claim framing may warrant clinical/adjuster clarification on whether the ALS diagnosis is injury-related or a pre-existing condition being managed under this claim. 3) Patient height/weight is 5'1\" / 219 lbs \u2014 confirm the standard manual wheelchair (E1161) weight capacity is sufficient; a bariatric or heavy-duty frame may be more appropriate depending on the specific chair selected. 4) The prescription is valid through 05/11/2026 (90 days from 02/11/2026). 5) No interpreter or language requirement noted.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Eric Roberts**, under claim number **WC-2026-084465**. We are unable to advance processing of this referral until the following outstanding items have been received:\n\n**Required \u2013 Hard Block (Routing on Hold):**\n- **Authorization Reference Number (auth_ref):** This item is preventing routing and must be resolved before the referral can move forward.\n\n**Also Required:**\n- **Preferred Language (language):** Please provide the patient's preferred language so we may ensure appropriate communication and documentation standards are met.\n\nTo avoid delays in care for Mr. Roberts, we kindly request that the above information be submitted **within 24 business hours** of receipt of this notice.\n\nPlease reply directly to this email or contact our intake team through your standard communication channel. If you have any questions or believe this information has already been submitted, please don't hesitate to reach out so we can resolve this promptly.\n\nThank you for your attention to this matter and your continued partnership.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

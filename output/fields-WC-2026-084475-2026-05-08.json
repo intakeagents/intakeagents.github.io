@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Raymond Morris",
+    "dob": "03/31/1984",
+    "claim_number": "WC-2026-084475",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (document 2) and the prescription (document 3) list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription take authority over the referral form. E11.65 was selected as the correct code, as it is the more clinically specific and severe diagnosis and is consistent across the two authoritative clinical documents.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "This is a stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose monitoring; while an ICD conflict was present and resolved with high confidence, there is no acute injury, post-surgical urgency, or high-risk DME involved, placing this at medium priority.",
+    "notes": "1) Authorization Ref # is missing from the referral form \u2014 adjuster Kevin Osei should be contacted at k.osei@amtrust.com or (216) 555-0189 to obtain prior authorization before fulfillment. 2) ICD conflict was identified and resolved (E11.9 on referral form vs. E11.65 on clinical notes and prescription); the referral form should be updated to reflect E11.65. 3) The referring practice is South Bay Orthopedic Group, which is an orthopedic practice \u2014 the CGM order for diabetes management may warrant verification that this physician is the appropriate prescriber or that an endocrinology consult supports the order. 4) Clinical notes reference a post-operative assessment and wound healing, though no surgical procedure is explicitly documented; this inconsistency may warrant clarification. 5) The medical necessity justification provided is generic and may not satisfy payer-specific criteria for CGM coverage under a workers' compensation claim \u2014 additional documentation may be required."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Kevin Osei,\n\nI hope this message finds you well. I am reaching out on behalf of Coastal DME regarding a durable medical equipment referral for the patient and claim referenced below, and we require your assistance to move forward with processing.\n\n**Patient:** Raymond Morris\n**Claim:** WC-2026-084475\n\nIn reviewing the referral documentation, we have identified the following missing item that is currently preventing us from routing this order:\n\n- **Authorization Reference Number (auth_ref)** \u2014 This is a hard block and routing cannot proceed until it is received.\n\nTo avoid any delay in the patient's care, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. If you have any questions or require additional information from our end, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

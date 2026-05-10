@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Brenda Ramirez",
+    "dob": "04/12/1962",
+    "claim_number": "WC-2026-084492",
+    "auth_ref": "AUTH-973294",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "delivery_address": "567 Maple Street Apt 4B, Compton, CA 90220",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution rules, the clinical notes and prescription take authority over the referral form. M51.16 has been selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "The ICD conflict was resolved with reasonable confidence using authoritative clinical documents, and the diagnosis of intervertebral disc degeneration is a chronic musculoskeletal condition being managed with TENS \u2014 a moderate-urgency DME item without acute surgical or neurological indicators.",
+    "notes": "1) NPI number is missing from all three documents and should be obtained from Dr. Lisa Park's practice before processing. 2) The referral form lists M54.4 but clinical notes and prescription both specify M51.16 \u2014 ICD conflict flagged and resolved. 3) The functional assessment references 'current assistive devices insufficient for safe home ambulation,' which may suggest additional DME needs beyond the TENS unit and warrants follow-up with the prescribing physician. 4) Referral was submitted 07/16/2026, one week after injury date of 07/09/2026. Prescription also dated 07/16/2026, valid through 10/14/2026."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Brenda Ramirez**, under claim number **WC-2026-084492**.\n\nWhile processing this referral, we have identified the following item that is required before we can proceed:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) is missing and must be provided to complete the referral.\n\nTo avoid any delays in care for Ms. Ramirez, we kindly request that this information be submitted within **24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team with the necessary information at your earliest convenience. Should you have any questions or need clarification, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

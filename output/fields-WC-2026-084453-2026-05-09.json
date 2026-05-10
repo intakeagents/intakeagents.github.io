@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Edward Young",
+    "dob": "03/17/1984",
+    "claim_number": "WC-2026-084453",
+    "injury_date": "06/10/2026",
+    "policy_number": "PM-WC-2026-44341",
+    "auth_ref": "AUTH-792094",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Hospital Bed",
+    "hcpcs": "E0250",
+    "quantity": "1",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "M19.011",
+    "icd_description": "Primary osteoarthritis, right shoulder",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form displays the ICD-10 code as 'M19.011' in the structured field but the raw extracted text shows 'M19.011' \u2014 all three documents are consistent on both code and description (Primary osteoarthritis, right shoulder). A soft conflict flag is raised because the physician NPI is blank across all documents, which reduces overall documentation confidence, though the ICD code itself is consistent.",
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M19.011",
+        "notes_code": "M19.011",
+        "rx_code": "M19.011",
+        "resolved_code": "M19.011",
+        "confidence": 95,
+        "escalate": false,
+        "reasoning": "All three documents agree on M19.011 (Primary osteoarthritis, right shoulder); minor rendering discrepancy in raw text was cosmetic only, and the code and description are fully consistent across referral form, clinical notes, and prescription."
+      }
+    ],
+    "confidence": 95,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Patient presents with a chronic musculoskeletal condition (primary osteoarthritis, right shoulder) requiring a hospital bed for ADL support; no acute fracture, post-surgical status, or neurological condition is indicated, placing this at medium clinical priority.",
+    "notes": "1) Physician NPI is blank across all three documents \u2014 this should be obtained before finalizing billing. 2) The medical justification language ('Essential for activities of daily living... alternatives have been considered and deemed insufficient') is identical across clinical notes and prescription, suggesting template language rather than individualized documentation \u2014 may warrant additional clinical specificity if payer requests further medical necessity review. 3) The diagnosis of primary osteoarthritis (right shoulder) as the basis for a hospital bed is clinically atypical; payer may scrutinize the medical necessity link between a shoulder diagnosis and a hospital bed \u2014 recommend proactive outreach to adjuster Robert Campos. 4) No preferred appointment window was specified \u2014 follow up with patient or case manager to schedule delivery. 5) Referral submitted 10 days after injury date; prescription signed same day as referral submission (06/20/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Edward Young**, under claim number **WC-2026-084453**.\n\nIn order to move forward with processing this referral, we require the following information, which is currently missing from the file:\n\n1. **Appointment Window** *(Hard Block \u2014 routing is on hold pending receipt)*\n2. **Preferred Language**\n3. **Rendering Physician NPI**\n\nPlease note that the missing appointment window has placed this referral in a held status and it cannot be routed until that information is received. We kindly ask that all outstanding items be provided **within 24 business hours** of this message to avoid any further delays in care.\n\nYou may reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to resolving it quickly on behalf of Mr. Young.\n\nThank you for your time and cooperation.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M19.011",
+      "notes_code": "M19.011",
+      "rx_code": "M19.011",
+      "resolved_code": "M19.011",
+      "confidence": 95,
+      "escalate": false,
+      "reasoning": "All three documents agree on M19.011 (Primary osteoarthritis, right shoulder); minor rendering discrepancy in raw text was cosmetic only, and the code and description are fully consistent across referral form, clinical notes, and prescription."
+    }
+  ]
+}

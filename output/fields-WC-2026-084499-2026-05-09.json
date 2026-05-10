@@ -1,0 +1,96 @@
+{
+  "fields": {
+    "patient_name": "Joe Bennett",
+    "dob": "07/20/1964",
+    "claim_number": "WC-2026-084499",
+    "injury_date": "01/26/2026",
+    "policy_number": "PM-WC-2026-44387",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, clinical notes and prescription take authority over the referral form; E11.65 was selected as the correct code.",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is a more specific and clinically supported code than E11.9 on the referral form, so E11.65 was selected with high confidence; however, the adjuster or physician should be notified to correct the referral form."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "The patient has a stable chronic condition (Type 2 diabetes mellitus with hyperglycemia) requiring a Continuous Glucose Monitor to support post-surgical recovery, with an ICD conflict that was resolved with sufficient confidence and does not require escalation.",
+    "notes": "1) The referral form's ICD-10 code (E11.9) conflicts with both the clinical notes and prescription (E11.65) \u2014 the referral form should be corrected to reflect E11.65. 2) The Authorization Ref # is blank; authorization from AmTrust Financial should be obtained before fulfillment. 3) There is a notable clinical mismatch: the referring practice is South Bay Orthopedic Group and the functional assessment references an occupational injury with mobility deficits, yet the DME ordered is a Continuous Glucose Monitor \u2014 this equipment is typically associated with diabetes management, not orthopedic rehabilitation. This potential clinical coherence issue may warrant a call to Dr. Sarah Chen's office to confirm the order is appropriate and correctly documented. 4) Referral was submitted 02/10/2026; prescription is valid through 05/10/2026.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Hi Kevin,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Joe Bennett**, under claim **WC-2026-084499**.\n\nWhile processing this referral, we have identified the following required information that is currently missing and preventing us from moving forward:\n\n- **Authorization Reference Number (auth_ref)** \u2014 *This item is a hard block and is holding routing on the referral.*\n\nIn order to avoid any delays in equipment fulfillment for your patient, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to resolving it quickly.\n\nThank you for your time and cooperation.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is a more specific and clinically supported code than E11.9 on the referral form, so E11.65 was selected with high confidence; however, the adjuster or physician should be notified to correct the referral form."
+    }
+  ]
+}

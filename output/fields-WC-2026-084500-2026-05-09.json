@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Shirley Wood",
+    "dob": "11/08/1977",
+    "claim_number": "WC-2026-084500",
+    "injury_date": "03/04/2026",
+    "policy_number": "PM-WC-2026-44388",
+    "auth_ref": "AUTH-475644",
+    "appt_window": "",
+    "transportation": "",
+    "language": "Spanish",
+    "dme_item": "Forearm Crutches",
+    "hcpcs": "E0110",
+    "quantity": "1",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "S72.001A",
+    "icd_description": "Fracture of neck of right femur, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists the ICD-10 code as 'S72.001A' but formats it with a period inconsistently as 'S72.001A', while the clinical notes and prescription both consistently record 'S72.001A'. A minor formatting discrepancy exists on the referral form where the code appears as 'S72.001A' in the equipment section \u2014 all three documents agree on the description 'Fracture of neck of right femur, initial encounter', confirming S72.001A as correct. Resolved by consensus across all documents with clinical notes and prescription as authority.",
+    "confidence": 97,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S72.001A",
+        "notes_code": "S72.001A",
+        "rx_code": "S72.001A",
+        "resolved_code": "S72.001A",
+        "confidence": 97,
+        "escalate": false,
+        "reasoning": "All three documents agree on S72.001A with identical descriptions; a minor formatting inconsistency on the referral form (period placement) was noted but does not constitute a true code conflict, and the correct code S72.001A is confirmed by clinical notes and prescription."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "This is an acute post-surgical case involving a femoral neck fracture (S72.001A) with surgical repair completed and physical therapy initiated, requiring immediate forearm crutch provision to support safe mobility and activities of daily living during the post-operative recovery period.",
+    "notes": "1) Physician NPI is missing across all three documents and should be obtained before processing. 2) Preferred appointment window and transportation requirement fields are blank on the referral form \u2014 follow-up with case manager Jennifer Walsh recommended. 3) Patient requires a Spanish-language interpreter for delivery and instruction. 4) Occupational therapy was recommended in the clinical notes in conjunction with DME provision \u2014 coordination may be needed. 5) Prescription is valid for 90 days from 03/11/2026 (expires 06/09/2026). 6) Expected duration of need is 3 months per both clinical notes and prescription.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Shirley Wood**, under claim number **WC-2026-084500**.\n\nIn reviewing the referral, we have identified several missing items that are required to move forward with processing. Please note that one of these items is currently placing a **hard block on routing**, meaning the referral cannot be advanced until it is resolved.\n\n**Outstanding Items Needed:**\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*\nThe preferred or available appointment window for the patient has not been provided. Scheduling cannot proceed until this information is received.\n\n2. **Transportation**\nPlease confirm whether transportation arrangements are needed for the patient and, if so, any relevant details.\n\n3. **Physician NPI**\nThe ordering physician's National Provider Identifier (NPI) is missing and is required to complete the referral.\n\nTo avoid any further delays in care for Ms. Wood, we kindly request that all outstanding information be submitted **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our intake team with any questions or concerns. We appreciate your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S72.001A",
+      "notes_code": "S72.001A",
+      "rx_code": "S72.001A",
+      "resolved_code": "S72.001A",
+      "confidence": 97,
+      "escalate": false,
+      "reasoning": "All three documents agree on S72.001A with identical descriptions; a minor formatting inconsistency on the referral form (period placement) was noted but does not constitute a true code conflict, and the correct code S72.001A is confirmed by clinical notes and prescription."
+    }
+  ]
+}

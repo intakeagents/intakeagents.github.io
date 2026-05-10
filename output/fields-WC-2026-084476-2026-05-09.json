@@ -1,0 +1,59 @@
+{
+  "fields": {
+    "patient_name": "Catherine Rogers",
+    "dob": "07/16/1965",
+    "claim_number": "WC-2026-084476",
+    "injury_date": "07/10/2026",
+    "policy_number": "PM-WC-2026-44364",
+    "auth_ref": "AUTH-899787",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "Tagalog",
+    "dme_item": "Manual Wheelchair",
+    "hcpcs": "E1161",
+    "quantity": "1",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "G12.21",
+    "icd_description": "Amyotrophic lateral sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents consistently document ICD-10 code G12.21 (Amyotrophic lateral sclerosis) with no discrepancy found across the referral form, clinical notes, or prescription.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed diagnosis of Amyotrophic lateral sclerosis (ALS), a progressive and life-threatening neurological condition, making timely provision of the manual wheelchair clinically urgent to maintain mobility and patient safety.",
+    "notes": "1. Clinical concern: The diagnosis is ALS (G12.21), a progressive neurodegenerative disease; however, the clinical notes reference a 'post-operative assessment' and 'wound healing within normal parameters,' which is inconsistent with an ALS diagnosis and may indicate a documentation error or template mismatch in the clinical notes \u2014 recommend clinical team review. 2. The treating physician is from Desert Orthopedics, which is not a typical specialty for ALS management; a neurologist referral or co-management may be appropriate. 3. Medical justification references 'safe ambulation,' but ALS patients typically have progressive paralysis \u2014 a manual wheelchair may become insufficient over time; power wheelchair needs should be assessed proactively. 4. A Tagalog interpreter must be arranged for delivery appointment. 5. Prescription signed 07/26/2026 is valid for 90 days (expires approximately 10/24/2026). 6. Occupational therapy has been recommended in conjunction with DME provision \u2014 confirm OT referral is active.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

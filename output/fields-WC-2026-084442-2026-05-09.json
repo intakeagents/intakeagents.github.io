@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Barbara Martinez",
+    "dob": "03/29/1961",
+    "claim_number": "WC-2026-084442",
+    "injury_date": "04/18/2026",
+    "policy_number": "PM-WC-2026-44330",
+    "auth_ref": "AUTH-922733",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, clinical notes and prescription take authority over the referral form; E11.65 was selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is more specific and clinically supported than the referral form's E11.9, so E11.65 is adopted as the authoritative code."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is a stable chronic condition (Type 2 diabetes mellitus with hyperglycemia) requiring a Continuous Glucose Monitor; while an ICD conflict was present it was resolved with high confidence, and there is no acute injury, post-surgical urgency, or power mobility need driving a HIGH designation.",
+    "notes": "1) ICD code conflict exists between referral form (E11.9) and clinical notes/prescription (E11.65) \u2014 resolved in favor of E11.65 per protocol. 2) The medical justification language ('support safe ambulation and prevent falls,' 'unable to safely navigate living space without assistive device') appears copied from a mobility/assistive device template and does not align with the clinical rationale for a Continuous Glucose Monitor \u2014 this inconsistency should be reviewed and corrected by the ordering physician. 3) The functional assessment references 'post-operative wound healing,' which is inconsistent with a diabetes management DME order from an orthopedic group; clinical context should be verified. 4) Patient height/weight (6'3\" / 192 lbs) recorded in clinical notes \u2014 no bariatric or size-specific equipment considerations apply to a CGM. 5) Prescription is valid through 07/26/2026 (90 days from 04/27/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for your insured, **Barbara Martinez**, under claim number **WC-2026-084442**.\n\nIn order to complete the processing of this referral, we require the following information:\n\n- **Preferred language** of the patient\n\nPlease note that we kindly request a response within **24 business hours** of receiving this email to avoid any delays in fulfilling the equipment needs for Ms. Martinez.\n\nIf you have any questions or need further clarification, please do not hesitate to contact me directly.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which is more specific and clinically supported than the referral form's E11.9, so E11.65 is adopted as the authoritative code."
+    }
+  ]
+}

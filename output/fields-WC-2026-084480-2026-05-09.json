@@ -1,0 +1,66 @@
+{
+  "fields": {
+    "patient_name": "Judith Bell",
+    "dob": "02/03/1980",
+    "claim_number": "WC-2026-084480",
+    "injury_date": "09/21/2026",
+    "policy_number": "PM-WC-2026-44368",
+    "auth_ref": "AUTH-713762",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "quantity": "1",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents consistently report ICD-10 code G47.33 (Obstructive sleep apnea). No conflict was found across the referral form, clinical notes, or prescription.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "MED",
+    "priority_reason": "CPAP equipment for obstructive sleep apnea is respiratory support equipment for a chronic/ongoing condition without acute surgical or neurological urgency, placing it at medium priority.",
+    "notes": "Although all ICD codes are consistent across documents, there is a clinical coherence concern: the attending physician is from a Spine Center, the treatment described is physical therapy and pain management for a 'mobility impairment,' yet the DME ordered is a CPAP machine for obstructive sleep apnea (G47.33). The medical justification language ('return-to-baseline functional status,' 'reduce caregiver burden') appears generic and does not clearly explain the relationship between the workers' comp injury (09/21/2026) and the obstructive sleep apnea diagnosis. This mismatch between the treating specialty, injury context, and equipment ordered may warrant clinical review or adjuster follow-up to confirm medical necessity and workers' comp coverage eligibility for this DME item.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Judith Bell**, under claim number **WC-2026-084480**.\n\nUpon reviewing the referral, we have identified the following required fields that are currently incomplete and needed to process this request:\n\n1. **Appointment Window** *(appt_window)* \u2014 **Note: This item is a hard block and is currently holding routing on this referral. Processing cannot proceed until this information is received.**\n2. **Preferred Language** *(language)*\n\nTo avoid any further delays in care for Ms. Bell, we kindly ask that you provide the missing information **within 24 business hours** of receiving this email. Please reply directly to this message with the requested details at your earliest convenience.\n\nIf you have any questions or require clarification, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

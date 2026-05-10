@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Albert Gray",
+    "dob": "08/06/1987",
+    "claim_number": "WC-2026-084491",
+    "auth_ref": "AUTH-579027",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while the clinical notes (Document 2) and the prescription (Document 3) both list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, clinical notes and prescription take authority over the referral form. S43.004A has been selected as the correct code. The referral form diagnosis of 'contusion' is clinically inconsistent with the treatment described (injection therapy, physical therapy, immobilizer for 6 months), further supporting S43.004A as correct.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation is a moderate orthopedic injury requiring an immobilizer brace; while an ICD conflict was present it was resolved with high confidence, and the condition does not meet HIGH priority thresholds such as fracture, post-surgical status, or neurological involvement.",
+    "notes": "1) ICD code conflict detected and resolved \u2014 referral form must be corrected to reflect S43.004A before submission to payer. 2) Medical justification in clinical notes and prescription references 'safe ambulation and prevent falls,' which is atypical language for a shoulder immobilizer and may raise medical necessity scrutiny; consider requesting clarification from Dr. Mendez. 3) Authorization Ref AUTH-579027 is on file via Travelers Workers Comp \u2014 confirm auth covers updated ICD code S43.004A prior to dispensing. 4) Policy number PM-WC-2026-44379 should be referenced on billing. 5) Prescription valid through 09/26/2026."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

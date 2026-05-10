@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Alice Coleman",
+    "dob": "04/18/1969",
+    "claim_number": "WC-2026-084504",
+    "auth_ref": "AUTH-820184",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (document 2) and the prescription (document 3) consistently list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription are treated as the authoritative sources. E11.65 has been selected as the correct code, as it also reflects a more clinically specific and severe presentation consistent with the treatment context.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose management; ICD conflict was resolved with high confidence using authoritative clinical documents, and no acute or post-surgical urgency is present.",
+    "notes": "1. There is a significant mismatch between the equipment ordered (Continuous Glucose Monitor) and the medical justification provided in both the clinical notes and prescription, which describes safe ambulation and fall prevention \u2014 language typically associated with a mobility aid, not a CGM. This suggests possible copy-paste or template error in the medical necessity documentation and should be reviewed. 2. The referring physician is from Desert Orthopedics, which is an orthopedic practice; prescribing a CGM for diabetes management is outside typical orthopedic scope and may raise payer scrutiny. 3. The referral was submitted on 07/22/2026, 11 days after the injury date of 07/11/2026. 4. Duration of need is listed as indefinite for a chronic condition."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

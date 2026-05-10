@@ -1,0 +1,59 @@
+{
+  "fields": {
+    "patient_name": "Christopher Lee",
+    "dob": "08/11/1987",
+    "claim_number": "WC-2026-084441",
+    "injury_date": "01/19/2026",
+    "policy_number": "PM-WC-2026-44329",
+    "auth_ref": "AUTH-330914",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "quantity": "1",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "No conflict detected. ICD-10 code G35 (Multiple sclerosis) is consistently documented across all three documents: the referral form, clinical notes, and prescription.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed neurological diagnosis of Multiple sclerosis (G35), which is a progressive neurological condition that automatically warrants HIGH priority per clinical risk classification guidelines.",
+    "notes": "1. CLINICAL INCONSISTENCY FLAG: The clinical notes describe 'post-surgical rehabilitation protocol' and a 'workplace injury' with pain levels and restricted range of motion \u2014 this is inconsistent with a primary diagnosis of Multiple sclerosis (G35), which is a chronic neurological condition, not a surgical or trauma-related condition. This warrants clinical review to confirm whether the diagnosis, treatment notes, or both are accurate for this claim. 2. WEIGHT CONCERN: Patient weighs 280 lbs at 5'7\" (BMI ~43.8). Standard commode chairs (E0163) typically have a weight capacity of 250-300 lbs. A heavy-duty or bariatric commode (E0165 or E0167) may be more appropriate and should be confirmed with the prescribing physician before fulfillment. 3. The referral and prescription were both submitted/signed on 02/06/2026; clinical notes are dated 02/04/2026, which is consistent with normal workflow. 4. Prescription is valid through 05/07/2026 (90 days from 02/06/2026). 5. Duration of need is 3 months per both clinical notes and prescription.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Daniel Johnson",
+    "dob": "10/14/1979",
+    "claim_number": "WC-2026-084443",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Forearm Crutches",
+    "hcpcs": "E0110",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "S72.001A",
+    "icd_description": "Fracture of neck of right femur, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "A minor typographic inconsistency exists: the referral form lists 'S72.001A' while the clinical notes and prescription list 'S72.001A' \u2014 however, the referral form's diagnosis code field displays 'S72.001A' which on close review is consistent across all three documents. No true clinical conflict exists; all documents agree on S72.001A with the same description. Conflict flagged due to the referral form rendering 'S72.001A' vs the body text showing 'S72.001A' \u2014 resolved as S72.001A per clinical notes and prescription authority.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Acute femoral neck fracture (initial encounter) is a serious orthopedic injury with significant fall and re-injury risk, and the physician has documented that without the requested equipment the patient faces significant risk of re-injury or clinical deterioration.",
+    "notes": "Authorization reference number is missing and must be obtained from adjuster Diana Cruz before fulfillment. Physician NPI is blank on all three documents and should be obtained from Desert Orthopedics at (760) 555-0211. The clinical notes describe the expected duration as 'indefinite \u2014 chronic condition,' which may conflict with the acute ICD-10 encounter modifier 'A' (initial encounter) \u2014 this warrants clinical review as the diagnosis may need to be updated to a subsequent encounter code at a future visit. Referral submitted 08/08/2026; prescription valid through 11/06/2026. Quantity ordered is 1 pair of forearm crutches. Patient BMI noted as elevated (5'3\", 193 lbs) \u2014 verify crutch weight capacity at time of equipment selection."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured and am writing to request your assistance in providing several items required to move this referral forward.\n\n**Patient:** Daniel Johnson\n**Claim Number:** WC-2026-084443\n\nUpon reviewing the referral documentation, we have identified the following missing information:\n\n1. **Authorization Reference Number (auth_ref)** *(Required to release routing \u2014 this item is currently placing the referral on hold)*\n2. **Ordering Physician NPI (physician_npi)**\n\nPlease note that the missing authorization reference number is a hard block and will prevent us from routing this referral until it has been received. We kindly ask that all outstanding information be provided **within 24 business hours** of receiving this notice to avoid any further delays in processing.\n\nYou may respond directly to this email or contact our intake team through your preferred channel. If you have any questions or require clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

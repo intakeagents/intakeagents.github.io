@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Susan Brown",
+    "dob": "02/16/1969",
+    "claim_number": "WC-2026-084446",
+    "auth_ref": "AUTH-723939",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Mandarin",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S82.001A (Fracture of right patella), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S82.892A (Other fracture of left lower leg). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S82.892A was selected as the correct code. Additionally, the referral form diagnosis description 'Fracture of right patella' is anatomically inconsistent with an Ankle Foot Orthosis, further supporting S82.892A as the clinically appropriate code.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Acute lower leg fracture with functional impairment requiring orthotic support for safe ambulation; ICD conflict was resolved with reasonable confidence, but human review of the referral form discrepancy is advisable.",
+    "notes": "1) ICD conflict exists between referral form and clinical/prescription documents \u2014 human review recommended to confirm correct diagnosis and update referral form. 2) Referral form diagnosis description 'Fracture of right patella' is also inconsistent with HCPCS L1906 (Ankle Foot Orthosis), which further supports the clinical notes and prescription as the authoritative source. 3) Mandarin interpreter required at time of delivery. 4) Occupational therapy was recommended by the physician in conjunction with DME provision \u2014 care coordination may be warranted. 5) Prescription is valid for 90 days from 01/25/2026 (expires 04/25/2026). 6) Expected duration of need is 6 months."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for your insured, **Susan Brown**, under claim number **WC-2026-084446**.\n\nIn reviewing the referral, I have identified the following outstanding item that must be resolved before we are able to route and process this order:\n\n- **Appointment Window (appt_window):** The preferred or required delivery/appointment window has not been provided. This is a required field and is currently placing a hard block on routing for this referral.\n\nTo avoid any delays in care for Ms. Brown, please provide the missing information **within 24 business hours** of receipt of this email. You may reply directly to this message with the necessary details.\n\nIf you have any questions or require clarification, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

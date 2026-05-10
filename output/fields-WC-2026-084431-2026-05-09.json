@@ -1,0 +1,194 @@
+{
+  "fields": {
+    "patient_name": "James Holloway",
+    "dob": "03/14/1968",
+    "claim_number": "WC-2026-084431",
+    "injury_date": "03/14/2026",
+    "policy_number": "PM-WC-2026-44319",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Rollator Walker \u2014 Standard 4-Wheel",
+    "hcpcs": "E0143",
+    "quantity": "1",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S83.209A",
+    "icd_description": "Tear of unspecified meniscus, right knee, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The primary diagnosis code differs across all three documents: the referral form uses M23.611 (Spontaneous disruption of anterior cruciate ligament, right knee), while both the clinical notes and prescription use S83.209A (Tear of unspecified meniscus, right knee, initial encounter). Additionally, the clinical notes reference a surgical procedure of ACL Reconstruction, creating a clinical inconsistency between the procedure performed and the meniscus tear diagnosis code. The secondary pain code also conflicts: the referral form lists G89.11 (Acute pain due to trauma) while the clinical notes and prescription use G89.18 (Other acute postprocedural pain). The knee stiffness laterality also conflicts: clinical notes cite M25.362 (left knee stiffness) while the referral form and prescription cite M25.361 (right knee stiffness). S83.209A was selected as the primary code per clinical notes and prescription authority, but the ACL vs. meniscus discrepancy warrants escalation.",
+    "confidence": 62,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M23.611",
+        "notes_code": "S83.209A",
+        "rx_code": "S83.209A",
+        "resolved_code": null,
+        "confidence": 62,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription agree on S83.209A, overriding the referral form's M23.611, but the clinical notes simultaneously document ACL Reconstruction surgery \u2014 not a meniscus procedure \u2014 creating an unresolvable clinical inconsistency that requires physician clarification before dispatch."
+      },
+      {
+        "conflict_id": 2,
+        "label": "Pain Classification",
+        "form_code": "G89.11",
+        "notes_code": "G89.18",
+        "rx_code": "G89.18",
+        "resolved_code": "G89.18",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "G89.18 (Other acute postprocedural pain) is appropriate given the documented post-surgical context and is supported by both clinical notes and prescription, superseding the referral form's G89.11 (Acute pain due to trauma)."
+      },
+      {
+        "conflict_id": 3,
+        "label": "Knee Stiffness Laterality",
+        "form_code": "M25.361",
+        "notes_code": "M25.362",
+        "rx_code": "M25.361",
+        "resolved_code": null,
+        "confidence": 60,
+        "escalate": true,
+        "reasoning": "The referral form and prescription both cite M25.361 (right knee stiffness), which is clinically consistent with the documented right knee injury and surgery, but the clinical notes cite M25.362 (left knee stiffness), a likely documentation error that nonetheless creates a laterality conflict requiring physician confirmation."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical ACL reconstruction case with unsafe ambulation documented at pain level 9/10 on weight-bearing, multiple ICD code conflicts with confidence below 80 requiring escalation, and an unresolved equipment weight-capacity safety concern for a 285 lb patient on a standard rollator.",
+    "notes": "1. WEIGHT CAPACITY ALERT: Patient weighs 285 lbs, which approaches or exceeds the standard rollator (E0143) weight limit (typically 250\u2013300 lbs depending on manufacturer). Clinical notes explicitly flag this and recommend confirming a bariatric rollator (400 lb capacity) with the case manager before dispatch. A bariatric rollator may require a different HCPCS code and separate authorization. 2. AUTHORIZATION MISSING: No authorization reference number has been provided on the referral form. Authorization from Pacific Mutual Workers Comp must be obtained prior to delivery. 3. ICD CODE CONFLICT \u2014 ESCALATE: Primary diagnosis code conflicts across documents (M23.611 on referral form vs. S83.209A on clinical notes and prescription), and the documented surgical procedure (ACL Reconstruction) is inconsistent with the meniscus tear diagnosis code (S83.209A) in the notes and prescription. Physician clarification is required. 4. KNEE STIFFNESS LATERALITY \u2014 ESCALATE: Clinical notes document left knee stiffness (M25.362) while referral form and prescription document right knee stiffness (M25.361); likely a documentation error but must be confirmed. 5. Preferred appointment window and transportation fields are blank \u2014 follow up with adjuster Linda Torres at (714) 555-0182 or l.torres@pacificmutual.com.",
+    "kg_validation": {
+      "status": "REJECTED",
+      "rules_checked": 24,
+      "rules_fired": 7,
+      "confirmations": 3,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-002",
+          "source": "ICD-10-CM Guidelines \u00a7I.C.19.a \u2014 Initial vs Subsequent Encounter",
+          "action": "confirm",
+          "message": "S83.209A is the correct post-surgical ACL encounter code per ICD-10-CM \u00a7I.C.19.a.",
+          "confidence": 100,
+          "deterministic": true
+        },
+        {
+          "rule_id": "DME-ICD-003",
+          "source": "ICD-10-CM Guidelines \u00a7I.C.6.b \u2014 Pain, Postprocedural",
+          "action": "reject",
+          "message": "G89.11 rejected \u2014 G89.11 (acute pain due to trauma) is incorrect post-procedure. Pain following surgery is classified G89.18 (other acute postprocedural pain) per \u00a7I.C.6.b.",
+          "confidence": 100,
+          "deterministic": true,
+          "replacement_suggestion": "G89.18"
+        },
+        {
+          "rule_id": "DME-ICD-004",
+          "source": "ICD-10-CM Guidelines \u00a7I.C.6.b.1 \u2014 Postprocedural Pain Not Associated with Specific Postoperative Complication",
+          "action": "confirm",
+          "message": "G89.18 confirmed as correct acute postprocedural pain code per \u00a7I.C.6.b.1.",
+          "confidence": 100,
+          "deterministic": true
+        },
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M23.611 vs S83.209A, M25.361 vs M25.362 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        },
+        {
+          "rule_id": "DME-ICD-007",
+          "source": "CMS LCD L33803 \u2014 Walkers, Standard and Heavy Duty",
+          "action": "confirm",
+          "message": "S83.209A qualifies as a covered diagnosis for E0143 per CMS LCD L33803.",
+          "confidence": 100,
+          "deterministic": true
+        },
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        },
+        {
+          "rule_id": "DME-ICD-023",
+          "source": "CMS HCPCS Level II \u2014 E0143 vs E0149 Differentiation",
+          "action": "flag",
+          "message": "Patient weight 285 lbs \u2014 Patient weight 285 lbs \u2014 within 15 lbs of E0143 standard capacity (300 lbs). Confirm bariatric specification with prescribing physician before dispatch to avoid wrong-equipment delivery.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **James Holloway**, under workers' compensation claim **WC-2026-084431**.\n\nIn reviewing the referral, we have identified the following missing information required to process this request:\n\n- **Authorization Reference Number** *(auth_ref)* \u2014 **Hard block; routing is on hold pending receipt**\n- **Appointment Window** *(appt_window)* \u2014 **Hard block; routing is on hold pending receipt**\n- **Transportation Arrangements** *(transportation)* \u2014 Required to complete the referral record\n\nPlease note that the two items marked as hard blocks are preventing us from moving this referral forward. We are unable to schedule or route services until both are received.\n\nTo avoid delays in care for Mr. Holloway, we kindly request that all outstanding information be provided **within 24 business hours** of this communication. If you have any questions or require clarification on any of the items listed above, please do not hesitate to contact our office directly.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME\nIntake & Referral Services",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M23.611",
+      "notes_code": "S83.209A",
+      "rx_code": "S83.209A",
+      "resolved_code": null,
+      "confidence": 62,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription agree on S83.209A, overriding the referral form's M23.611, but the clinical notes simultaneously document ACL Reconstruction surgery \u2014 not a meniscus procedure \u2014 creating an unresolvable clinical inconsistency that requires physician clarification before dispatch."
+    },
+    {
+      "conflict_id": 2,
+      "label": "Pain Classification",
+      "form_code": "G89.11",
+      "notes_code": "G89.18",
+      "rx_code": "G89.18",
+      "resolved_code": "G89.18",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "G89.18 (Other acute postprocedural pain) is appropriate given the documented post-surgical context and is supported by both clinical notes and prescription, superseding the referral form's G89.11 (Acute pain due to trauma)."
+    },
+    {
+      "conflict_id": 3,
+      "label": "Knee Stiffness Laterality",
+      "form_code": "M25.361",
+      "notes_code": "M25.362",
+      "rx_code": "M25.361",
+      "resolved_code": null,
+      "confidence": 60,
+      "escalate": true,
+      "reasoning": "The referral form and prescription both cite M25.361 (right knee stiffness), which is clinically consistent with the documented right knee injury and surgery, but the clinical notes cite M25.362 (left knee stiffness), a likely documentation error that nonetheless creates a laterality conflict requiring physician confirmation."
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "fields": {
+    "patient_name": "Roy James",
+    "dob": "12/01/1978",
+    "claim_number": "WC-2026-084493",
+    "injury_date": "11/21/2026",
+    "policy_number": "PM-WC-2026-44381",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "quantity": "1",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and prescription (Document 3) consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution rules, clinical notes and prescription take authority over the referral form; M47.22 was selected. However, a significant clinical concern remains: M47.22 is a cervical diagnosis, yet the equipment ordered is a Lumbar Orthosis (L0625), creating a diagnosis-equipment mismatch that requires clinical clarification.",
+    "confidence": 55,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.22",
+        "rx_code": "M47.22",
+        "resolved_code": null,
+        "confidence": 55,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both cite M47.22 (cervical condition), overriding the referral form's M54.5 (low back pain), but the prescribed equipment (Lumbar Orthosis) is anatomically inconsistent with a cervical diagnosis, so the conflict is escalated for physician clarification rather than fully resolved."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The case involves a neurological diagnosis (anterior spinal artery compression syndrome, M47.22), an ICD conflict with low confidence (55) requiring escalation, and a critical diagnosis-equipment mismatch between a cervical condition and a lumbar orthosis that poses potential patient safety risk.",
+    "notes": "1. CRITICAL: Diagnosis-equipment mismatch \u2014 ICD-10 M47.22 describes a cervical region condition, but the ordered DME is a Lumbar Orthosis (L0625). This must be clarified with Dr. Mendez before fulfillment. 2. The referral form diagnosis (M54.5 - Low back pain) would clinically align better with a lumbar orthosis, raising the possibility that M54.5 is the correct code and M47.22 was entered in error on the clinical notes and prescription. 3. Authorization Reference Number is missing \u2014 payer authorization should be obtained before dispensing. 4. Physician NPI is blank across all three documents and must be obtained for billing. 5. Preferred appointment window was not specified. 6. Referral was submitted 7 days after injury date, which is within normal range.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 2,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M54.5 vs M47.22 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        },
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Ms. Mitchell,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for your insured, **Roy James**, under claim number **WC-2026-084493**. We are unable to complete processing of this referral until the following outstanding items have been received:\n\n**Required to Release Routing (Hard Blocks):**\n- **Authorization Reference Number (auth_ref)** \u2013 Required prior to scheduling\n- **Appointment Window (appt_window)** \u2013 Required to confirm scheduling availability\n\n**Additional Missing Information:**\n- **Ordering Physician NPI (physician_npi)** \u2013 Required to finalize the referral record\n\nPlease note that the two items marked above as hard blocks are currently preventing us from routing this order. We kindly request that all outstanding information be submitted within **24 business hours** of receipt of this message to avoid further delays in care for your insured.\n\nYou may respond directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your reply.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.22",
+      "rx_code": "M47.22",
+      "resolved_code": null,
+      "confidence": 55,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both cite M47.22 (cervical condition), overriding the referral form's M54.5 (low back pain), but the prescribed equipment (Lumbar Orthosis) is anatomically inconsistent with a cervical diagnosis, so the conflict is escalated for physician clarification rather than fully resolved."
+    }
+  ]
+}

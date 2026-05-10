@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Robert Chen",
+    "dob": "11/05/1982",
+    "claim_number": "WC-2026-084433",
+    "auth_ref": "AUTH-182627",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "blank",
+    "language": "English",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and prescription (Document 3) both list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M47.816 is also the more specific and clinically appropriate code given the physician's documented diagnosis. M54.5 on the referral form appears to be an error or placeholder.",
+    "confidence": 92,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient requires a power mobility device (Power Wheelchair, K0823) for a neurologically significant diagnosis (spondylosis with radiculopathy) with documented functional impairment, risk of re-injury, and an ICD code conflict across documents requiring clinical review.",
+    "notes": "1) ICD conflict detected and resolved: referral form used M54.5 (Low back pain) while clinical notes and prescription consistently use M47.816 (Spondylosis with radiculopathy, lumbar region) \u2014 the latter is adopted as authoritative. 2) Transportation field on the referral form is present as a label but has no value entered \u2014 confirmation of transportation arrangements should be verified. 3) Expected duration of need is 3 months per both clinical notes and prescription, which may require a re-evaluation and renewal prior to expiration. 4) Prescription is valid for 90 days from 02/10/2026, expiring approximately 05/11/2026. 5) Patient weight (226 lbs) should be verified against the selected power wheelchair's weight capacity specifications for K0823 compliance."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

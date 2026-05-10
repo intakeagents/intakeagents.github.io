@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Jeffrey Nelson",
+    "dob": "11/30/1977",
+    "claim_number": "WC-2026-084461",
+    "auth_ref": "AUTH-452161",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (document 2) and the prescription (document 3) list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription take authority over the referral form. The correct code is E11.65, as it is the more clinically specific and was documented by the treating physician at the point of care.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "The patient has a post-surgical rehabilitation context with a chronic metabolic condition (Type 2 diabetes with hyperglycemia) requiring a CGM to manage glycemic stability during recovery; the ICD conflict was resolved with high confidence, and the equipment, while medically necessary, is not an acute mobility or life-sustaining device.",
+    "notes": "1) ICD code conflict detected and resolved \u2014 referral form used E11.9 but clinical notes and prescription both specify E11.65; recommend correcting the referral form for billing accuracy. 2) The functional assessment references a workplace injury with post-surgical rehabilitation, but the DME ordered (CGM) addresses the diabetes diagnosis rather than the physical injury directly \u2014 this clinical rationale may require additional documentation for workers' comp payer justification. 3) Prescription is valid for 90 days from 03/06/2026 (expires 06/04/2026). 4) Policy number on file: PM-WC-2026-44349."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Sarah,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Jeffrey Nelson**, under claim number **WC-2026-084461**.\n\nIn reviewing the referral documentation, we have identified the following item that is required before we can proceed:\n\n- **Preferred language** of the patient\n\nTo avoid any delays in processing this referral, we kindly ask that you provide the missing information **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our office if you have any questions or need clarification.\n\nThank you for your prompt attention to this matter. We look forward to your response.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

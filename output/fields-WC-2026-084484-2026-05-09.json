@@ -1,0 +1,89 @@
+{
+  "fields": {
+    "patient_name": "Gloria Cooper",
+    "dob": "01/30/1960",
+    "claim_number": "WC-2026-084484",
+    "injury_date": "04/15/2026",
+    "policy_number": "PM-WC-2026-44372",
+    "auth_ref": "AUTH-299869",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "quantity": "1",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while the clinical notes (Document 2) and prescription (Document 3) both list S43.004A (Unspecified dislocation of right shoulder joint). As the clinical notes and prescription are the authoritative clinical sources and are in agreement with each other, S43.004A was selected as the correct code. The referral form code S40.011A appears to be an error or outdated entry.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S40.011A",
+        "notes_code": "S43.004A",
+        "rx_code": "S43.004A",
+        "resolved_code": "S43.004A",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on S43.004A (dislocation), which supersedes the referral form's S40.011A (contusion); dislocation is also the more clinically severe and specific diagnosis, supporting the resolution with high confidence."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation is a significant orthopedic injury requiring immobilization, but the case is in conservative treatment phase with physical therapy ongoing, placing it at medium priority; the ICD conflict was resolved with high confidence and does not require escalation.",
+    "notes": "1) Physician NPI is blank across all three documents \u2014 this should be obtained before processing as it is required for billing. 2) The referral form diagnosis (S40.011A, contusion) is clinically inconsistent with the clinical notes and prescription diagnosis (S43.004A, dislocation); the discrepancy should be flagged to the referring provider for confirmation even though confidence in S43.004A is high. 3) The functional assessment in the clinical notes references 'safe ambulation in home environment,' which is unusual language for a shoulder immobilizer order and may be boilerplate text \u2014 worth noting for documentation quality review. 4) Prescription is valid through 07/27/2026 (90 days from 04/28/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Gloria Cooper**, under workers' compensation claim **WC-2026-084484**.\n\nIn reviewing the referral documentation, we have identified the following items that are required in order to complete processing:\n\n1. **Language** \u2013 The patient's preferred/primary language is missing and is needed for care coordination purposes.\n2. **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) has not been included and is required for authorization and billing.\n\nWe kindly ask that you provide the above information **within 24 business hours** of receiving this email so that we may move forward without delay in fulfilling the patient's equipment needs.\n\nPlease feel free to reply directly to this message or contact our intake team if you have any questions or need clarification on the items listed above.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S40.011A",
+      "notes_code": "S43.004A",
+      "rx_code": "S43.004A",
+      "resolved_code": "S43.004A",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on S43.004A (dislocation), which supersedes the referral form's S40.011A (contusion); dislocation is also the more clinically severe and specific diagnosis, supporting the resolution with high confidence."
+    }
+  ]
+}

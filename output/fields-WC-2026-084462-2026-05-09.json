@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Anna Carter",
+    "dob": "01/11/1988",
+    "claim_number": "WC-2026-084462",
+    "injury_date": "08/14/2026",
+    "policy_number": "PM-WC-2026-44350",
+    "auth_ref": "AUTH-508396",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "quantity": "1",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution protocol, the clinical notes and prescription take authority over the referral form; M51.16 was selected as the correct code.",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.4",
+        "notes_code": "M51.16",
+        "rx_code": "M51.16",
+        "resolved_code": "M51.16",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document M51.16 (Intervertebral disc degeneration, lumbar region), which takes authority over the referral form's M54.4 (Lumbago with sciatica), and the specificity of the imaging-supported disc degeneration diagnosis further supports M51.16 as the correct code."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is a chronic musculoskeletal/degenerative disc condition with an ICD conflict that was resolved with high confidence (88), involving a TENS unit \u2014 a moderate non-urgent pain management aid \u2014 with no acute surgical, neurological, or fracture indicators present.",
+    "notes": "1) ICD-10 conflict between referral form (M54.4) and clinical notes/prescription (M51.16) \u2014 resolved in favor of M51.16 with 88% confidence; no escalation required but the referring physician's office should be notified to correct the referral form. 2) The functional assessment in clinical notes references 'current assistive devices insufficient for safe home ambulation' and 'equipment upgrade medically necessary,' language more typical of mobility aid justification than TENS \u2014 this may warrant a callback to the provider to confirm no additional DME is intended. 3) Transportation field is blank on the referral form \u2014 no transportation arrangement confirmed. 4) Prescription is valid through 11/19/2026 (90 days from 08/21/2026). 5) Expected duration of need is 3 months per both clinical notes and prescription.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Anna Carter**, under claim number **WC-2026-084462**. To move forward with processing this referral, we require the following outstanding information:\n\n- **Transportation arrangements/authorization** \u2013 Please provide the applicable transportation details needed to complete the referral.\n\nKindly note that there are no current hard blocks preventing routing at this time; however, we are unable to finalize the referral until the above item has been received.\n\nWe kindly ask that you respond within **24 business hours** of receiving this email to avoid any delays in care coordination for Ms. Carter. Please reply directly to this message or contact our intake team at your earliest convenience.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.4",
+      "notes_code": "M51.16",
+      "rx_code": "M51.16",
+      "resolved_code": "M51.16",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document M51.16 (Intervertebral disc degeneration, lumbar region), which takes authority over the referral form's M54.4 (Lumbago with sciatica), and the specificity of the imaging-supported disc degeneration diagnosis further supports M51.16 as the correct code."
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Roy James",
+    "dob": "12/01/1978",
+    "claim_number": "WC-2026-084493",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (document 2) and prescription (document 3) both consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M47.22 has been selected as the correct code. The referral form's M54.5 entry may represent an administrative error or placeholder and should be corrected.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "The confirmed diagnosis of M47.22 (anterior spinal artery compression syndrome, cervical region) is a serious neurological/spinal condition warranting HIGH priority, compounded by an ICD code conflict between documents that requires clinical verification before dispensing.",
+    "notes": "1) ICD conflict requires outreach to Dr. Mendez's office to confirm correct diagnosis code before processing \u2014 referral form M54.5 (low back pain) is inconsistent with the clinical notes and prescription diagnosis of M47.22 (cervical spinal artery compression), which are clinically distinct conditions. 2) Authorization Reference Number is missing \u2014 adjuster Sarah Mitchell should be contacted at (312) 555-0177 or s.mitchell@travelers.com to obtain prior authorization before dispensing. 3) Physician NPI is missing from all three documents \u2014 must be obtained for billing. 4) A lumbar orthosis (L0625) ordered for a cervical diagnosis (M47.22) is clinically inconsistent and should be flagged for physician clarification \u2014 the equipment may need to be revised or the diagnosis corrected. 5) Preferred appointment window was not specified by the patient."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Ms. Mitchell,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation claim referenced below, for which we require several outstanding items before we are able to complete the DME referral.\n\n**Patient:** Roy James\n**Claim Number:** WC-2026-084493\n\nUpon review of the referral, we have identified the following missing information:\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2014 routing is on hold pending receipt)*\n2. **Appointment Window (appt_window)** *(Hard Block \u2014 routing is on hold pending receipt)*\n3. **Prescribing Physician NPI (physician_npi)**\n\nPlease note that items 1 and 2 are hard blocks, meaning we are **unable to route or schedule this referral** until they are received. To avoid any delay in services for Mr. James, we respectfully request that all outstanding information be provided **within 24 business hours** of this correspondence.\n\nYou may reply directly to this email or contact our intake team through your preferred method. Should you have any questions or require clarification on the items listed above, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

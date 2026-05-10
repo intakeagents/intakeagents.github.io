@@ -1,0 +1,109 @@
+{
+  "fields": {
+    "patient_name": "Pamela Kelly",
+    "dob": "01/05/1967",
+    "claim_number": "WC-2026-084496",
+    "injury_date": "10/08/2026",
+    "policy_number": "PM-WC-2026-44384",
+    "auth_ref": "",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "quantity": "1",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution protocol, the clinical notes and prescription take authority over the referral form; M47.22 was selected as the correct code. Additionally, there is a clinical coherence concern: a lumbar orthosis (L0625) is being prescribed for a cervical region diagnosis (M47.22), which may itself warrant clarification.",
+    "confidence": 62,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.22",
+        "rx_code": "M47.22",
+        "resolved_code": "M47.22",
+        "confidence": 62,
+        "escalate": true,
+        "reasoning": "Clinical notes and prescription both agree on M47.22 over the referral form's M54.5, but confidence is reduced because a lumbar orthosis (L0625) is clinically misaligned with a cervical region diagnosis (M47.22), suggesting possible documentation error across all forms that requires physician clarification before fulfillment."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The case involves a post-surgical neurological diagnosis (anterior spinal artery compression syndrome, cervical region), an ICD conflict with low confidence requiring escalation, and a clinical mismatch between the prescribed lumbar orthosis and the cervical diagnosis, all of which demand urgent review before equipment can be safely dispensed.",
+    "notes": "1) Authorization Ref # is missing from the referral form \u2014 adjuster Diana Cruz should be contacted at d.cruz@hartford.com or (860) 555-0143 to obtain prior authorization before fulfillment. 2) There is a significant clinical coherence issue: the prescribed equipment is a Lumbar Orthosis (L0625, targeting the lumbar spine), but the diagnosis on both the clinical notes and prescription is M47.22 (anterior spinal artery compression syndromes, CERVICAL region). This mismatch may indicate a documentation error on the prescription/notes, or the referral form's M54.5 (low back pain) may actually be the correct supporting diagnosis. Physician confirmation is strongly recommended. 3) The referral form lists the patient visit diagnosis as M54.5 (low back pain), which would be more anatomically consistent with a lumbar orthosis than M47.22. 4) No interpreter or transportation requirements noted. 5) Patient height/weight recorded as 6'2\" / 207 lbs \u2014 relevant for orthosis sizing. 6) Referral submitted 10/16/2026; prescription signed 10/16/2026; clinical notes dated 10/14/2026.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 2,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M54.5 vs M47.22 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        },
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.22",
+      "rx_code": "M47.22",
+      "resolved_code": "M47.22",
+      "confidence": 62,
+      "escalate": true,
+      "reasoning": "Clinical notes and prescription both agree on M47.22 over the referral form's M54.5, but confidence is reduced because a lumbar orthosis (L0625) is clinically misaligned with a cervical region diagnosis (M47.22), suggesting possible documentation error across all forms that requires physician clarification before fulfillment."
+    }
+  ]
+}

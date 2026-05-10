@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Nancy Clark",
+    "dob": "09/12/1957",
+    "claim_number": "WC-2026-084448",
+    "auth_ref": "AUTH-172132",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "English",
+    "dme_item": "Rollator Walker",
+    "hcpcs": "E0143",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "S83.209A",
+    "icd_description": "Tear of meniscus, right knee, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M79.3 (Myalgia), while the clinical notes (Document 2) and the prescription (Document 3) both list S83.209A (Tear of meniscus, right knee, initial encounter). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S83.209A is also clinically consistent with the documented post-surgical rehabilitation treatment and the injury description, making it the correct code.",
+    "confidence": 92,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "This is an acute post-surgical case involving a meniscal tear with an active rehabilitation protocol, which classifies it as HIGH priority due to the clinical acuity and the ICD code conflict between documents.",
+    "notes": "1) ICD-10 code conflict identified and resolved: referral form listed M79.3 (Myalgia), which is inconsistent with the clinical picture; clinical notes and prescription both confirm S83.209A and should be used. 2) The referral form diagnosis description 'Myalgia' does not align with the clinical notes or the treatment narrative (post-surgical rehab for meniscal tear) \u2014 the referring office should be notified to correct the referral form. 3) Patient height/weight documented as 5'4\" / 219 lbs \u2014 verify that the standard rollator walker (E0143) weight capacity is appropriate; standard rollators typically support up to 250-300 lbs, which appears sufficient. 4) Prescription is valid for 90 days from 04/28/2026 (expires approximately 07/27/2026). 5) Referral submitted by Kevin Osei, who is listed as both the insurance adjuster and case manager."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "fields": {
+    "patient_name": "Melissa Campbell",
+    "dob": "02/27/1961",
+    "claim_number": "WC-2026-084468",
+    "injury_date": "07/27/2026",
+    "policy_number": "PM-WC-2026-44356",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "quantity": "1",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S13.4XXA (Sprain of ligaments of cervical spine). Per resolution rules, the clinical notes and prescription take authority over the referral form; S13.4XXA was selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S14.109A",
+        "notes_code": "S13.4XXA",
+        "rx_code": "S13.4XXA",
+        "resolved_code": "S13.4XXA",
+        "confidence": 85,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S13.4XXA (cervical ligament sprain), which takes authority over the referral form's S14.109A (C4 spinal cord injury); however, the discrepancy is clinically significant enough to flag for adjuster awareness, though confidence is sufficient to avoid full escalation."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The ICD conflict between a cervical spinal cord injury (S14.109A) and a cervical ligament sprain (S13.4XXA) represents a clinically significant discrepancy \u2014 one indicating potential neurological involvement \u2014 and the referral notes post-surgical rehabilitation, warranting HIGH priority review and prompt equipment delivery.",
+    "notes": "1) Authorization Ref # is missing from the referral form \u2014 authorization should be obtained from adjuster Diana Cruz before fulfillment. 2) The referral form lists a more severe diagnosis (S14.109A \u2014 C4 spinal cord injury) than the clinical notes and prescription (S13.4XXA \u2014 cervical ligament sprain); this discrepancy should be communicated to the adjuster even though S13.4XXA was resolved as correct. 3) Clinical notes reference post-surgical rehabilitation, but the prescription and referral do not explicitly confirm surgery \u2014 clarification may be warranted. 4) Transportation field is blank on the referral form. 5) Prescription is valid through 11/11/2026 (90 days from 08/13/2026).",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Melissa Campbell**, under claim number **WC-2026-084468**. We are unable to move forward with processing this referral until the following outstanding items have been received:\n\n**Required \u2013 Hard Block (Routing on Hold):**\n- **Authorization Reference Number (auth_ref):** This item is currently preventing us from routing the referral. Processing cannot proceed until this information is provided.\n\n**Also Needed to Complete the Referral:**\n- **Transportation Details:** Please provide applicable transportation arrangements or confirmation related to this referral.\n\nWe kindly ask that you respond with the above information **within 24 business hours** to avoid further delays in care for Ms. Campbell. If you have any questions or need clarification, please do not hesitate to contact us directly.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S14.109A",
+      "notes_code": "S13.4XXA",
+      "rx_code": "S13.4XXA",
+      "resolved_code": "S13.4XXA",
+      "confidence": 85,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S13.4XXA (cervical ligament sprain), which takes authority over the referral form's S14.109A (C4 spinal cord injury); however, the discrepancy is clinically significant enough to flag for adjuster awareness, though confidence is sufficient to avoid full escalation."
+    }
+  ]
+}

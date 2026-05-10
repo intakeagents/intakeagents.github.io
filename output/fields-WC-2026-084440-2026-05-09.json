@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Karen Patel",
+    "dob": "05/03/1964",
+    "claim_number": "WC-2026-084440",
+    "injury_date": "05/17/2026",
+    "policy_number": "PM-WC-2026-44328",
+    "auth_ref": "AUTH-665492",
+    "appt_window": "",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "quantity": "1",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). Clinical notes and prescription are the authoritative clinical sources and are in agreement, so M47.816 was selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.816",
+        "rx_code": "M47.816",
+        "resolved_code": "M47.816",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) listed on the referral form; the more clinically detailed and consistent code was selected with high confidence."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "This case involves a power wheelchair (K0823) for a post-operative patient with lumbar spondylosis and radiculopathy, combined with an ICD code conflict between documents that required resolution, warranting HIGH priority for prompt clinical and administrative review.",
+    "notes": "1) Physician NPI is missing across all three documents and must be obtained before claim submission. 2) The referral form uses a less specific diagnosis code (M54.5 - Low back pain) compared to the clinically documented M47.816; the referral form should be corrected to reflect M47.816. 3) Clinical notes reference a post-operative assessment and wound healing, but no surgical procedure or operation date is documented \u2014 clarification may be needed. 4) The functional assessment notes the patient is 6'1\" / 184 lbs, which should be verified against the K0823 wheelchair weight capacity specifications. 5) Occupational therapy was recommended in conjunction with DME provision \u2014 confirm OT referral has been initiated. 6) No preferred appointment window was specified; outreach to patient or adjuster recommended to schedule delivery.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Kevin,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for your insured, **Karen Patel**, under workers' compensation claim **WC-2026-084440**.\n\nUpon reviewing the referral, we have identified the following missing information that is required to move forward with processing:\n\n- **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment window has not been provided. Please note that routing cannot proceed until this information is received.\n- **Language**: The patient's preferred spoken language is missing and is needed to ensure appropriate provider matching and communication.\n- **Physician NPI**: The ordering/referring physician's National Provider Identifier (NPI) has not been included.\n\nPlease be advised that we require a response within **24 business hours** of this notice. Delays beyond that window may impact the patient's care timeline and could require escalation on our end.\n\nKindly reply to this email with the requested details at your earliest convenience. If you have any questions or need clarification, please don't hesitate to reach out directly.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.816",
+      "rx_code": "M47.816",
+      "resolved_code": "M47.816",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) listed on the referral form; the more clinically detailed and consistent code was selected with high confidence."
+    }
+  ]
+}

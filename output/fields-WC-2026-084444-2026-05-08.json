@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Lisa Anderson",
+    "dob": "07/07/1973",
+    "claim_number": "WC-2026-084444",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "",
+    "dme_item": "Hospital Bed",
+    "hcpcs": "E0250",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "M19.011",
+    "icd_description": "Primary osteoarthritis, right shoulder",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code M19.011 with the description 'Primary osteoarthritis, right shoulder.' Note: the referral form displays the code as 'M19.011' while also showing 'M19.011' in the raw text \u2014 no actual conflict exists across documents.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "This is a chronic musculoskeletal condition (primary osteoarthritis, right shoulder) with no acute surgical, neurological, or fracture indicators, and the requested equipment is a hospital bed for ongoing recovery support, placing this case in the moderate priority tier.",
+    "notes": "1) Authorization Ref # is blank \u2014 authorization from Travelers Workers Comp should be obtained before delivery. 2) Physician NPI is missing on all three documents; this should be obtained from Dr. Robert Williams / Desert Orthopedics before billing. 3) The diagnosis of primary osteoarthritis of the right shoulder (M19.011) has a questionable clinical alignment with a hospital bed (E0250) \u2014 osteoarthritis of the shoulder does not typically necessitate a hospital bed; medical necessity justification may require additional scrutiny or peer review. 4) Duration of need is listed as 'Indefinite \u2014 chronic condition,' which may require additional documentation for workers' comp approval. 5) Injury date is 11/18/2026, clinical notes are dated 11/23/2026, and referral/prescription are dated 11/25/2026 \u2014 timeline is consistent. 6) Prescription is valid through 02/23/2027."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Lisa Anderson**, under workers' compensation claim **WC-2026-084444**.\n\nWhile processing this referral, we have identified the following missing items that are required to move forward:\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2014 routing is on hold pending receipt)*\n2. **Patient's Preferred Language (language)**\n3. **Referring Physician NPI (physician_npi)**\n\nPlease note that the authorization reference number is a hard block item, meaning we are **unable to route or process this referral** until it has been received. We kindly ask that all outstanding information be provided **within 24 business hours** of this notice to avoid further delays in care for Ms. Anderson.\n\nYou may respond directly to this email or contact our intake team through your preferred communication channel. We are happy to assist if you have any questions or need clarification on the requested items.\n\nThank you for your prompt attention to this matter. We look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

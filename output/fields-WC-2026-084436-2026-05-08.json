@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Patricia Nguyen",
+    "dob": "02/14/1966",
+    "claim_number": "WC-2026-084436",
+    "auth_ref": "AUTH-665158",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while the clinical notes (Document 2) and prescription (Document 3) both list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution rules, the clinical notes and prescription take authority over the referral form. S43.004A has been selected as the correct code, as it is supported by two documents and reflects the more specific and clinically detailed diagnosis documented by the treating physician.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation with ongoing physical therapy and injection treatment is a moderate orthopedic condition requiring an immobilizer; while an ICD conflict was present it was resolved with high confidence, and the equipment type and diagnosis severity place this at medium priority.",
+    "notes": "1) Physician NPI is blank across all three documents \u2014 should be obtained before claim submission. 2) ICD-10 code conflict between referral form (S40.011A - contusion) and clinical/prescription documents (S43.004A - dislocation) suggests the referral form may have been completed with an incorrect or outdated code; payer should be notified of the corrected diagnosis code. 3) Functional assessment language referencing 'safe home ambulation' and 'assistive devices' is inconsistent with a shoulder immobilizer order and may be boilerplate text \u2014 worth flagging if payer requests medical necessity review. 4) Patient height/weight (5'7\" / 273 lbs) documented in clinical notes; verify appropriate sizing for shoulder immobilizer. 5) Referral submitted 03/18/2026, nine days after injury date of 03/09/2026."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Patricia Nguyen**, under workers' compensation claim **WC-2026-084436**.\n\nIn order to process and complete this referral in a timely manner, we require the following information:\n\n1. **Language** \u2013 Patient's preferred spoken/written language for communication and documentation purposes\n2. **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) number\n\nPlease note there are no current hard blocks preventing routing; however, we are unable to finalize this referral until the above items are received.\n\nKindly provide the requested information **within 24 business hours** of receiving this email to avoid any delays in equipment processing and delivery for your insured.\n\nIf you have any questions or need clarification, please do not hesitate to contact me directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

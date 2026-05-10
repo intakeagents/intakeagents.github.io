@@ -1,0 +1,11 @@
+{
+  "run_date": "2026-05-07T19:46:28.958905",
+  "model": "claude-sonnet-4-6",
+  "total_referrals": 1000,
+  "workers": 20,
+  "wall_time_sec": 806.9,
+  "wall_time_min": 13.45,
+  "avg_per_referral_sec": 0.81,
+  "projection_10k_20w_min": 134.5,
+  "projection_10k_50w_min": 53.8
+}

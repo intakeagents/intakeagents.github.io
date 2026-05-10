@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Walter Murphy",
+    "dob": "04/21/1957",
+    "claim_number": "WC-2026-084481",
+    "auth_ref": "AUTH-192337",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while both the clinical notes (document 2) and the prescription (document 3) list ICD-10 code M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution protocol, the clinical notes and prescription are treated as the authoritative sources over the referral form. M51.16 has been selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Chronic lumbar intervertebral disc degeneration with ongoing conservative treatment; TENS unit is moderate-urgency supportive/pain management equipment for a non-acute musculoskeletal condition, though the ICD conflict has been resolved with good confidence.",
+    "notes": "1) ICD-10 conflict detected and resolved \u2014 referral form must be updated to reflect M51.16 instead of M54.4. 2) The medical justification language ('support safe ambulation and prevent falls') is inconsistent with the prescribed equipment (TENS unit is a pain management device, not a mobility/ambulation aid); this language appears to have been copied in error and may warrant clinical clarification. 3) Referral submitted 06/07/2026; prescription signed 06/07/2026; prescription valid through 09/05/2026. 4) No interpreter or transportation requirements noted."
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for the below-captioned patient and claim, which requires your attention to move forward.\n\n**Patient:** Walter Murphy\n**Claim:** WC-2026-084481\n\nUpon reviewing the referral, our intake team has identified the following missing information that must be provided before processing can be completed:\n\n1. **Transportation** \u2013 Please confirm whether transportation arrangements are required for this patient, and if so, provide the relevant details.\n2. **Language** \u2013 Please specify the patient's preferred language to ensure appropriate communication and documentation accommodations are in place.\n\nTo avoid any delays in the patient's care, we kindly request a response within **24 business hours** of receiving this email. Please reply directly to this message with the required information at your earliest convenience.\n\nIf you have any questions or require clarification, do not hesitate to reach out. We appreciate your prompt attention to this matter.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

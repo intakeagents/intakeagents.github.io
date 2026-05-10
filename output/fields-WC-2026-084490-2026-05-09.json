@@ -1,0 +1,99 @@
+{
+  "fields": {
+    "patient_name": "Mildred Peterson",
+    "dob": "02/19/1956",
+    "claim_number": "WC-2026-084490",
+    "injury_date": "08/19/2026",
+    "policy_number": "PM-WC-2026-44378",
+    "auth_ref": "AUTH-768891",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "Hospital Bed",
+    "hcpcs": "E0250",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "M19.011",
+    "icd_description": "Primary osteoarthritis, right shoulder",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists the ICD-10 code as 'M19.011' while the clinical notes and prescription also list 'M19.011'; however, the referral form displays the code without the leading decimal formatting used on the other documents (M19.011 vs M19.011). More critically, the medical justification across all documents describes the need for a hospital bed to 'support safe ambulation and prevent falls,' which is inconsistent with a right shoulder osteoarthritis diagnosis (M19.011) \u2014 a shoulder condition would not typically necessitate a hospital bed for ambulation support. This clinical mismatch raises concern that either the diagnosis code or the DME item may be erroneous. All three documents consistently show M19.011, so no code-level conflict exists between documents, but the clinical logic conflict is flagged. M19.011 is accepted as the recorded code across all sources pending physician clarification.",
+    "confidence": 72,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis vs. DME Medical Justification",
+        "form_code": "M19.011",
+        "notes_code": "M19.011",
+        "rx_code": "M19.011",
+        "resolved_code": null,
+        "confidence": 72,
+        "escalate": true,
+        "reasoning": "All three documents consistently cite M19.011 (primary osteoarthritis, right shoulder), but the medical justification across all documents \u2014 citing inability to ambulate safely and fall prevention \u2014 is clinically inconsistent with a shoulder diagnosis as the sole basis for a hospital bed, warranting escalation to the referring physician to confirm the correct diagnosis and DME rationale."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Chronic musculoskeletal condition (shoulder osteoarthritis) with a hospital bed order, but clinical-logical mismatch between diagnosis and DME justification triggers escalation, elevating this above LOW despite the stable chronic nature of the diagnosis.",
+    "notes": "1. Physician NPI is missing from all three documents \u2014 must be obtained before processing. 2. The medical justification ('support safe ambulation and prevent falls') is clinically inconsistent with the recorded diagnosis of right shoulder osteoarthritis; a hospital bed for ambulation/fall prevention would more typically align with a lower extremity or neurological diagnosis. Physician should be contacted to confirm the correct ICD-10 code and/or verify the DME order is appropriate for this diagnosis. 3. Preferred appointment window was not provided. 4. The referral was submitted on 08/28/2026 and the prescription is valid for 90 days (expires approximately 11/26/2026). 5. Patient weight is 248 lbs \u2014 standard hospital bed weight capacity should be verified before dispatch.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M19.011 vs M19.011 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Mildred Peterson**, under claim number **WC-2026-084490**.\n\nIn reviewing the referral, we have identified the following missing information required to complete processing:\n\n1. **Appointment Window** *(appt_window)* \u2014 **\u26a0 Hard Block:** Please note that routing on this referral is currently on hold and cannot proceed until this information is received.\n2. **Physician NPI** *(physician_npi)*\n\nTo avoid further delays in care for Ms. Peterson, we kindly ask that you provide the above information **within 24 business hours** of receiving this notice.\n\nPlease reply directly to this email or contact our intake team with the requested details. If you have any questions or concerns, do not hesitate to reach out \u2014 we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis vs. DME Medical Justification",
+      "form_code": "M19.011",
+      "notes_code": "M19.011",
+      "rx_code": "M19.011",
+      "resolved_code": null,
+      "confidence": 72,
+      "escalate": true,
+      "reasoning": "All three documents consistently cite M19.011 (primary osteoarthritis, right shoulder), but the medical justification across all documents \u2014 citing inability to ambulate safely and fall prevention \u2014 is clinically inconsistent with a shoulder diagnosis as the sole basis for a hospital bed, warranting escalation to the referring physician to confirm the correct diagnosis and DME rationale."
+    }
+  ]
+}

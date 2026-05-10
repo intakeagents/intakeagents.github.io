@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Jason Adams",
+    "dob": "09/07/1986",
+    "claim_number": "WC-2026-084459",
+    "auth_ref": "AUTH-329471",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Vietnamese",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while the clinical notes (Document 2) and prescription (Document 3) both list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M51.16 was selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Chronic lumbar disc degeneration with partial treatment response warrants medium priority; TENS is a non-urgent pain management device for a musculoskeletal condition, though the ICD conflict was resolved with reasonable confidence.",
+    "notes": "1) Physician NPI is missing across all three documents and should be obtained before processing. 2) The medical justification language in both the clinical notes and prescription references 'safe ambulation' and 'assistive device,' which is inconsistent with a TENS unit \u2014 this boilerplate language may have been copied incorrectly and should be verified with the prescribing physician. 3) No preferred appointment window was specified. 4) Vietnamese interpreter required for delivery/patient education. 5) Policy Number: PM-WC-2026-44347."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI am reaching out regarding a DME referral for your patient, **Jason Adams** (Claim No. **WC-2026-084459**). We are unable to complete processing of this referral due to the following missing information:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The required appointment window has not been provided. Please note that routing cannot proceed until this item is resolved.\n2. **Physician NPI**: The ordering physician's NPI number is needed to finalize the referral documentation.\n\nTo avoid further delays in care for Mr. Adams, we respectfully request that the above information be submitted within **24 business hours** of receipt of this message.\n\nPlease reply directly to this email or contact our intake team with the necessary details. If you have any questions or require clarification, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

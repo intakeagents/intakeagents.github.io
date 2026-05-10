@@ -1,0 +1,39 @@
+{
+  "fields": {
+    "patient_name": "Ronald King",
+    "dob": "07/13/1972",
+    "claim_number": "WC-2026-084455",
+    "auth_ref": "AUTH-645175",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "Korean",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code S82.001A with description 'Fracture of right patella', while both the clinical notes (document 2) and the prescription (document 3) consistently list ICD-10 code S82.892A with description 'Other fracture of left lower leg'. Additionally, the referral form's diagnosis (right patella fracture) is anatomically inconsistent with the prescribed DME (Ankle Foot Orthosis), which further supports the clinical notes and prescription as more clinically accurate. Per resolution rules, the clinical notes and prescription take authority over the referral form. Resolved to S82.892A.",
+    "confidence": 82,
+    "escalate": false,
+    "notes": "1. Significant ICD-10 conflict exists between the referral form and the clinical/prescription documents \u2014 not only the code but also the laterality and anatomical site differ (right patella vs. left lower leg). The referral form should be corrected. 2. The diagnosis on the referral form (S82.001A \u2014 fracture of right patella) is clinically inconsistent with the ordered DME (Ankle Foot Orthosis, HCPCS L1906), which supports the lower leg fracture diagnosis in the clinical notes and prescription. 3. Patient weight of 130 lbs at 6'1\" height appears unusually low and may warrant clinical review. 4. A Korean interpreter is required for delivery appointment. 5. Referral submitted 04/16/2026; prescription signed same day and is valid for 90 days (expires 07/15/2026). 6. Despite confidence being above 80, human review of the referral form ICD code discrepancy is strongly recommended to ensure corrected documentation is sent to the insurance carrier."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

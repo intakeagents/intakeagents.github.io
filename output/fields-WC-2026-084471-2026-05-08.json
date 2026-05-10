@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Larry Edwards",
+    "dob": "06/23/1975",
+    "claim_number": "WC-2026-084471",
+    "auth_ref": "AUTH-197573",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "delivery_address": "445 Pacific Coast Highway, Redondo Beach, CA 90277",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution rules, the clinical notes and prescription take authority over the referral form. M47.816 is also the more specific and clinically detailed diagnosis, corroborated by the physician's signed documents dated 12/07/2026 and 12/09/2026.",
+    "confidence": 92,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "The confirmed diagnosis of spondylosis with radiculopathy is a neurological spinal condition involving nerve root involvement, the ordered equipment is a power mobility device (K0823), and there is an ICD code conflict between documents that warrants clinical review.",
+    "notes": "1) ICD code mismatch between referral form (M54.5) and clinical/prescription documents (M47.816) should be flagged for adjuster Marcus Webb and physician Dr. Mendez to ensure the authorization (AUTH-197573) was issued against the correct diagnosis code. 2) The functional assessment references a 'post-operative' wound healing note, but no surgical procedure is documented elsewhere \u2014 this inconsistency should be clarified with the treating physician. 3) Patient weight of 134 lbs for a 6'2\" individual is notably low and may warrant verification to ensure appropriate wheelchair sizing and fit. 4) Preferred appointment window was not specified; outreach to patient or adjuster is recommended to schedule delivery."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Marcus,\n\nI hope this message finds you well. I'm reaching out regarding the workers' compensation DME referral for **Larry Edwards (Claim: WC-2026-084471)** and need your assistance in resolving a few outstanding items before we can move forward.\n\n**Action Required \u2014 Please Respond Within 24 Business Hours**\n\nIn order to complete processing of this referral, we require the following information:\n\n1. **Appointment Window** *(Hard Block \u2014 Routing is currently on hold pending this information)*\nLarry's preferred or available appointment window has not been provided. Please supply the dates and/or times during which Larry is available for scheduling.\n\n2. **Language Preference**\nLarry's preferred spoken/written language has not been indicated. Please confirm the language required to ensure appropriate communication and any necessary interpreter arrangements.\n\nPlease note that the missing **appointment window** is currently preventing us from routing this referral. Until this information is received, we are unable to proceed with scheduling or equipment coordination.\n\nKindly reply with the above details **within 24 business hours** to avoid any further delays in Larry's care. If you have any questions or need clarification, please don't hesitate to reach out directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

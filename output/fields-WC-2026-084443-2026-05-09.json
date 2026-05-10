@@ -1,0 +1,99 @@
+{
+  "fields": {
+    "patient_name": "Daniel Johnson",
+    "dob": "10/14/1979",
+    "claim_number": "WC-2026-084443",
+    "injury_date": "07/24/2026",
+    "policy_number": "PM-WC-2026-44331",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Forearm Crutches",
+    "hcpcs": "E0110",
+    "quantity": "1",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "S72.001A",
+    "icd_description": "Fracture of neck of right femur, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "Minor typographic discrepancy in ICD code formatting between the referral form ('S72.001A') and clinical notes/prescription ('S72.001A'); all documents agree on the same diagnosis description. Clinical notes and prescription confirmed as authoritative, resolving to S72.001A.",
+    "confidence": 95,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "S72.001A",
+        "notes_code": "S72.001A",
+        "rx_code": "S72.001A",
+        "resolved_code": "S72.001A",
+        "confidence": 95,
+        "escalate": false,
+        "reasoning": "All three documents consistently reference S72.001A with the same diagnosis description; minor formatting variation noted on the referral form but all sources align on the same code and clinical notes/prescription confirm S72.001A as correct."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Acute femoral neck fracture (initial encounter) is a serious orthopedic injury with high fall and re-injury risk; the physician explicitly notes the patient is at significant risk of re-injury or clinical deterioration without the prescribed forearm crutches, warranting urgent equipment fulfillment.",
+    "notes": "1) Authorization Reference Number is missing from the referral form \u2014 adjuster Diana Cruz should be contacted at (860) 555-0143 or d.cruz@hartford.com to obtain prior authorization before fulfillment. 2) Physician NPI is blank on all three documents; NPI should be verified and obtained from Desert Orthopedics before billing. 3) Clinical notes describe expected duration as 'Indefinite \u2014 chronic condition', which is atypical for an initial encounter fracture diagnosis and may warrant clarification with the physician. 4) Patient BMI appears elevated (5'3\" / 193 lbs \u2014 BMI ~34); verify that the selected forearm crutch model supports the patient's weight capacity. 5) Referral submitted 08/08/2026, 15 days post-injury; confirm whether urgent delivery is required. 6) Prescription is valid through 11/06/2026 (90 days from 08/08/2026).",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Daniel Johnson**, under claim number **WC-2026-084443**.\n\nUpon reviewing the referral documentation, we have identified the following items that are required to move forward with processing:\n\n- **Authorization Reference Number (auth_ref)** *(Hard Block \u2013 routing is on hold pending receipt)*\n- **Prescribing Physician NPI (physician_npi)**\n\nPlease note that the missing authorization reference number is currently preventing us from routing this referral. We are unable to proceed until this information is received.\n\nTo avoid any delay in care for your patient, we kindly ask that you provide the outstanding information **within 24 business hours** of receiving this message. You may reply directly to this email with the required details.\n\nIf you have any questions or need assistance, please do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "S72.001A",
+      "notes_code": "S72.001A",
+      "rx_code": "S72.001A",
+      "resolved_code": "S72.001A",
+      "confidence": 95,
+      "escalate": false,
+      "reasoning": "All three documents consistently reference S72.001A with the same diagnosis description; minor formatting variation noted on the referral form but all sources align on the same code and clinical notes/prescription confirm S72.001A as correct."
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "fields": {
+    "patient_name": "Helen Perez",
+    "dob": "03/06/1971",
+    "claim_number": "WC-2026-084464",
+    "injury_date": "08/06/2026",
+    "policy_number": "PM-WC-2026-44352",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "physician_practice": "Desert Orthopedics",
+    "physician_phone": "(760) 555-0211",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution rules, the clinical notes and prescription take authority over the referral form; however, a significant clinical concern remains: a lumbar orthosis (L0625) is being prescribed for a cervical region diagnosis (M47.22), which is anatomically inconsistent. This mismatch across equipment and diagnosis warrants escalation for physician clarification.",
+    "confidence": 55,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.22",
+        "rx_code": "M47.22",
+        "resolved_code": null,
+        "confidence": 55,
+        "escalate": true,
+        "reasoning": "While clinical notes and prescription both agree on M47.22 over the referral form's M54.5, the prescribed equipment (lumbar orthosis) is anatomically inconsistent with a cervical region diagnosis, creating a secondary clinical conflict that cannot be resolved without physician clarification."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Escalation is required due to a low-confidence ICD code conflict combined with a clinically significant anatomical mismatch between the cervical region diagnosis (M47.22) and the lumbar orthosis prescribed, and the underlying neurological diagnosis (anterior spinal artery compression) carries inherent clinical severity.",
+    "notes": "1) CRITICAL CLINICAL MISMATCH: The prescribed DME (Lumbar Orthosis, HCPCS L0625) targets the lumbar spine, but the diagnosis agreed upon by clinical notes and prescription is M47.22 \u2014 a cervical region condition. This anatomical inconsistency must be clarified with Dr. Robert Williams before fulfillment. 2) The referral form's diagnosis (M54.5 \u2014 Low back pain) may actually be more anatomically consistent with the lumbar orthosis ordered, raising the question of whether M54.5 was intentional. 3) The functional assessment references 'post-operative' wound healing, yet no surgical procedure is documented elsewhere \u2014 this inconsistency should be noted. 4) Authorization Reference Number is missing and should be obtained from adjuster Linda Torres before proceeding. 5) No preferred appointment window was provided. 6) Prescription is valid through 11/11/2026 (90 days from 08/13/2026).",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 2,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: M54.5 vs M47.22 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        },
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Helen Perez**, under claim number **WC-2026-084464**. In reviewing the referral, we have identified several missing fields that are required to move forward with processing.\n\nPlease note that two of the items below are designated as **hard blocks**, meaning routing and scheduling cannot proceed until they are received.\n\n**Outstanding Items Required:**\n\n1. **Authorization Reference Number** *(Hard Block \u2014 holds routing)*\n2. **Appointment Window** *(Hard Block \u2014 holds routing)*\n3. **Patient Preferred Language**\n\nTo avoid delays in care for Ms. Perez, we respectfully request that the above information be provided **within 24 business hours** of receipt of this message.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. If you have any questions or require clarification on the items listed, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.22",
+      "rx_code": "M47.22",
+      "resolved_code": null,
+      "confidence": 55,
+      "escalate": true,
+      "reasoning": "While clinical notes and prescription both agree on M47.22 over the referral form's M54.5, the prescribed equipment (lumbar orthosis) is anatomically inconsistent with a cervical region diagnosis, creating a secondary clinical conflict that cannot be resolved without physician clarification."
+    }
+  ]
+}

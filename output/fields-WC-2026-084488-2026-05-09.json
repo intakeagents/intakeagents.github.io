@@ -1,0 +1,89 @@
+{
+  "fields": {
+    "patient_name": "Cheryl Ward",
+    "dob": "11/15/1973",
+    "claim_number": "WC-2026-084488",
+    "injury_date": "09/02/2026",
+    "policy_number": "PM-WC-2026-44376",
+    "auth_ref": "AUTH-761820",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription serve as the authoritative sources, and E11.65 is the more clinically specific and accurate code supported by two of three documents.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "E11.65 is supported by both the clinical notes and prescription, is more clinically specific than the referral form's E11.9, and aligns with the physician's documented assessment of hyperglycemia, making it the authoritative code."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "The patient has a stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for glucose monitoring support during rehabilitation; while an ICD conflict was present it was resolved with high confidence, and the equipment is supportive rather than acutely urgent.",
+    "notes": "1) ICD code discrepancy between referral form (E11.9) and clinical notes/prescription (E11.65) \u2014 resolved in favor of E11.65 per clinical authority hierarchy. 2) The clinical notes reference a 'post-operative assessment' and 'wound healing,' which is inconsistent with the stated treatment of 'conservative management with physical therapy' \u2014 this may warrant clarification with the referring physician. 3) The referring practice is 'Southern California Spine Center,' which is unusual for a diabetes/CGM referral and may warrant verification of appropriate specialist involvement. 4) The medical necessity justification ('reduce caregiver burden and support patient's rehabilitation goals') is generic and may require additional documentation for workers' comp authorization of a CGM. 5) Referral was submitted 09/18/2026, prescription signed 09/18/2026, clinical notes dated 09/16/2026 \u2014 timeline is consistent.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Cheryl Ward**, under claim number **WC-2026-084488**.\n\nIn order to complete the processing of this referral, we require the following information:\n\n1. **Transportation** \u2013 Please confirm transportation arrangements or indicate whether transportation assistance is needed for the patient.\n2. **Language** \u2013 Please specify the patient's preferred language to ensure appropriate communication and documentation.\n\nKindly provide the requested details within **24 business hours** of receipt of this email so that we may avoid any delays in processing and fulfillment for Ms. Ward.\n\nIf you have any questions or require clarification, please do not hesitate to contact me directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "E11.65 is supported by both the clinical notes and prescription, is more clinically specific than the referral form's E11.9, and aligns with the physician's documented assessment of hyperglycemia, making it the authoritative code."
+    }
+  ]
+}

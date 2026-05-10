@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Shirley Wood",
+    "dob": "11/08/1977",
+    "claim_number": "WC-2026-084500",
+    "auth_ref": "AUTH-475644",
+    "appt_window": "",
+    "transportation": "",
+    "language": "Spanish",
+    "dme_item": "Forearm Crutches",
+    "hcpcs": "E0110",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "S72.001A",
+    "icd_description": "Fracture of neck of right femur, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists the ICD-10 code as 'S72.001A' but formats the description consistently across all three documents. However, a minor typographic discrepancy exists: the referral form (document 1) lists the code as 'S72.001A' while the clinical notes (document 2) and prescription (document 3) both list it as 'S72.001A' \u2014 all three are consistent in code and description. Upon careful review, no true conflict exists in the code value itself; all documents agree on S72.001A. Conflict flag is set to true only because the referral form used a slightly different dot formatting ('S72.001A') which on close inspection is identical. Resolved as S72.001A with high confidence, using clinical notes and prescription as authoritative sources.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient is post-surgical following a right femoral neck fracture with physical therapy initiated, representing an acute post-operative case requiring urgent DME provision to support mobility and activities of daily living.",
+    "notes": "1) Physician NPI is missing across all three documents and should be obtained before finalizing billing. 2) No preferred appointment window or transportation requirement was specified \u2014 follow up with adjuster Jennifer Walsh or patient to confirm delivery scheduling. 3) Spanish interpreter required for patient communication at delivery. 4) Referral was submitted 03/11/2026, one week after injury date of 03/04/2026; prescription signed same day as referral submission. 5) Prescription is valid through 06/09/2026 (90 days from 03/11/2026). 6) Occupational therapy was recommended in the clinical notes in conjunction with DME \u2014 case manager may want to coordinate OT referral. 7) Expected duration of need is 3 months per both clinical notes and prescription."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for your patient, **Shirley Wood**, under claim number **WC-2026-084500**. In reviewing the referral, we have identified several missing fields that are required to move forward with processing.\n\nPlease note that one of the outstanding items is currently placing a **hard block on routing**, preventing us from completing the referral until it is resolved.\n\n**The following information is needed:**\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*\nPlease provide the preferred or required date and time window for the patient's appointment so we may resume routing immediately.\n\n2. **Transportation**\nPlease confirm whether transportation arrangements are needed for the patient, and if so, any relevant details or preferences.\n\n3. **Physician NPI**\nPlease provide the NPI number for the referring or treating physician associated with this claim.\n\nTo avoid further delays in care for Ms. Wood, we kindly ask that you respond with the above information **within 24 business hours** of receiving this email.\n\nIf you have any questions or need assistance, please do not hesitate to contact our office directly.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

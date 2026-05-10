@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Teresa Ross",
+    "dob": "05/26/1958",
+    "claim_number": "WC-2026-084502",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently report ICD-10 code G35 (Multiple sclerosis). No conflict was found across documents.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Multiple sclerosis is a serious progressive neurological condition that places this case in the HIGH priority tier, and the patient reports difficulty with activities of daily living with clinical notes indicating significant risk of deterioration without the requested equipment.",
+    "notes": "1) Authorization reference number is missing \u2014 adjuster Linda Torres should be contacted at (714) 555-0182 or l.torres@pacificmutual.com to obtain prior authorization before fulfillment. 2) Physician NPI is blank on all three documents; NPI must be obtained from Dr. Sarah Chen's office at (310) 555-0244 for billing compliance. 3) The clinical notes reference a 'post-operative assessment' and 'wound healing,' which is inconsistent with a diagnosis of Multiple sclerosis (G35) \u2014 this language may be templated boilerplate and should be flagged for clinical review. 4) The diagnosis of Multiple sclerosis (G35) under a Workers' Compensation claim (injury date 08/23/2026) is clinically atypical, as MS is not a work-related injury; this may warrant verification with the adjuster or treating physician to confirm the claim basis. 5) Prescription is valid through 12/08/2026 (90 days from 09/09/2026). 6) Expected duration of need is 12 months."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Teresa Ross**, under claim number **WC-2026-084502**. We are unable to complete processing of this referral until the following outstanding items have been received:\n\n**Required \u2014 Hard Block (Routing on Hold):**\n- **Authorization Reference Number (auth_ref):** This item is currently preventing the referral from being routed forward. Processing cannot continue until this is resolved.\n\n**Also Required to Complete the Referral:**\n- **Prescribing Physician NPI (physician_npi):** Please provide the 10-digit National Provider Identifier for the ordering physician.\n\nTo avoid any delays in care for Ms. Ross, we kindly ask that you provide the above information **within 24 business hours** of receiving this message. Please reply directly to this email or contact our intake team through your preferred channel.\n\nIf you have any questions or believe this information has already been submitted, please don't hesitate to reach out so we can locate it on our end.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

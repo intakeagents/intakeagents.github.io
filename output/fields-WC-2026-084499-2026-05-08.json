@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Joe Bennett",
+    "dob": "07/20/1964",
+    "claim_number": "WC-2026-084499",
+    "auth_ref": "",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (document 2) and prescription (document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution rules, the clinical notes and prescription take authority over the referral form. E11.65 was selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "The ICD conflict was resolved with high confidence using authoritative clinical documents, and the case involves a stable chronic diabetic condition requiring a CGM for monitoring during post-surgical rehabilitation, representing moderate clinical risk without acute emergency indicators.",
+    "notes": "1. Authorization Ref # is blank on the referral form \u2014 may need to obtain prior authorization from AmTrust Financial before fulfillment. 2. The functional assessment references 'pain and reduced mobility secondary to occupational injury' and mentions insufficiency of current assistive devices for ambulation, which is incongruent with the DME ordered (CGM) \u2014 this mismatch between the functional narrative and the equipment ordered may warrant clinical clarification. 3. The prescribing practice is South Bay Orthopedic Group, which is an orthopedic practice; prescribing a CGM for diabetes management from an orthopedic provider may raise medical necessity or payer scrutiny concerns. 4. Referral submitted 02/10/2026, prescription signed 02/10/2026; clinical notes dated 02/08/2026. 5. Duration of need is 6 months per both clinical notes and prescription."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Kevin,\n\nI hope this message finds you well. I am reaching out regarding a workers' compensation DME referral for your insured that requires your prompt attention to proceed.\n\n**Patient:** Joe Bennett\n**Claim Number:** WC-2026-084499\n\nIn reviewing this referral, we have identified the following required item that is currently missing and is preventing us from routing this order:\n\n- **Authorization Reference Number (auth_ref)** \u2014 This field is required to complete the referral and is currently holding routing until received.\n\nTo avoid delays in care for your insured, we kindly ask that you provide the above information **within 24 business hours** of receiving this email. Please reply directly to this message with the requested details.\n\nIf you have any questions or need clarification, do not hesitate to reach out. We appreciate your timely assistance and look forward to resolving this promptly.\n\nThank you,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

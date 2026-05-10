@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Harold Richardson",
+    "dob": "09/22/1976",
+    "claim_number": "WC-2026-084485",
+    "auth_ref": "AUTH-678727",
+    "appt_window": "",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (Document 2) and prescription (Document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription take authority over the referral form. E11.65 was selected as the correct code, as it is more clinically specific, consistent across two authoritative documents, and signed by the prescribing physician.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "While an ICD conflict was present and resolved with high confidence, the underlying condition is a stable chronic diagnosis (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose management, placing this in the medium priority category without acute surgical or neurological urgency.",
+    "notes": "1) ICD conflict resolved: E11.9 on referral form superseded by E11.65 on clinical notes and prescription \u2014 recommend correcting referral form for billing accuracy. 2) Referring physician is from Pacific Neurology Associates, which is atypical for a diabetes/CGM referral; may warrant verification that Dr. Sharma is the appropriate managing provider for this DME. 3) The functional assessment mentions 'work-related injury resulting in mobility impairment,' but the DME ordered (CGM) is for diabetes management \u2014 the nexus between the workers' comp injury and the CGM medical necessity should be confirmed with the adjuster. 4) No preferred appointment window specified. 5) Prescription is valid through 01/02/2027 (90 days from 09/04/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Harold Richardson**, under claim number **WC-2026-084485**.\n\nIn reviewing this referral, we have identified the following missing information that is required to move forward with processing:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment window has not been provided. Please note that this item is currently preventing routing and must be resolved before we can proceed.\n2. **Language**: The patient's preferred language has not been indicated and is needed to ensure appropriate communication and service coordination.\n\nTo avoid any further delays in care for Mr. Richardson, we kindly ask that you provide the above information **within 24 business hours** of receiving this message.\n\nPlease reply directly to this email or contact our intake team through your preferred channel. If you have any questions or need clarification, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

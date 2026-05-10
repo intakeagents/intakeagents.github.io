@@ -1,0 +1,66 @@
+{
+  "fields": {
+    "patient_name": "Peter Rivera",
+    "dob": "06/14/1989",
+    "claim_number": "WC-2026-084483",
+    "injury_date": "05/18/2026",
+    "policy_number": "PM-WC-2026-44371",
+    "auth_ref": "AUTH-335615",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Armenian",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "quantity": "1",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently document ICD-10 code G35 (Multiple sclerosis). No conflict was detected across any of the documents.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed neurological condition (Multiple sclerosis, G35) with documented mobility impairment, indefinite duration of need, and physician-noted significant risk of clinical deterioration without the prescribed equipment.",
+    "notes": "1) Physician NPI is missing across all three documents (referral form, clinical notes, and prescription) \u2014 should be obtained before processing. 2) The diagnosis is Multiple sclerosis (G35), a chronic neurological condition, yet this is filed as a workers' compensation claim (WC-2026-084483) with an injury date of 05/18/2026 \u2014 this is a potential clinical/administrative inconsistency, as MS is not a work-related injury; this may warrant clarification with the adjuster Kevin Osei. 3) No preferred appointment window was provided. 4) Armenian interpreter may be required for delivery coordination. 5) Prescription is valid through 08/23/2026 (90 days from 05/25/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Kevin,\n\nI hope this message finds you well. I'm reaching out regarding a pending DME referral for your patient **Peter Rivera** (Claim: **WC-2026-084483**) that requires your attention before we can move forward.\n\nUpon reviewing the referral, we've identified the following missing information that must be provided to complete processing:\n\n- **Appointment Window** *(Hard Block \u2013 routing is currently on hold pending this item)*\n- **Physician NPI**\n\nPlease note that the missing appointment window is preventing us from routing this referral entirely, so we ask that you prioritize this item in your response.\n\n**We kindly request that the above information be provided within 24 business hours** of receiving this email to avoid any further delays in care for the patient.\n\nYou can reply directly to this email or contact our intake team with the necessary details. If you have any questions or need assistance, please don't hesitate to reach out.\n\nThank you for your prompt attention to this matter \u2014 we appreciate your partnership in ensuring a smooth process for Peter Rivera.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

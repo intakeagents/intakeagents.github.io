@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Carol Green",
+    "dob": "04/15/1974",
+    "claim_number": "WC-2026-084458",
+    "auth_ref": "AUTH-148458",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S13.4XXA (Sprain of ligaments of cervical spine). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S13.4XXA has been selected as the correct code. The referral form code S14.109A indicates a spinal cord injury, which is a more severe diagnosis and may have been entered in error on the referral form.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Post-surgical case with an unresolved ICD code conflict between a cervical spinal cord injury (S14.109A) and a cervical ligament sprain (S13.4XXA) \u2014 the discrepancy in diagnosis severity warrants clinical review to confirm the correct code and ensure appropriate equipment is ordered.",
+    "notes": "1. ICD CONFLICT: Referral form lists S14.109A (cervical spinal cord injury at C4) but clinical notes and prescription both document S13.4XXA (cervical ligament sprain) \u2014 a clinically significant difference that should be verified with Dr. Sarah Chen before fulfillment. 2. MEDICAL JUSTIFICATION MISMATCH: The medical justification language ('support safe ambulation and prevent falls') is more consistent with a mobility aid than a cervical collar, suggesting possible boilerplate or copy-paste language. 3. TREATMENT STATUS: Clinical notes indicate surgical repair has been completed and PT has been initiated as of 05/06/2026. 4. DURATION OF NEED: Listed as indefinite/chronic condition, which is unusual for a post-surgical cervical collar \u2014 may warrant review. 5. Transportation field on referral form is blank/not specified. 6. Prescription is valid through 08/06/2026 (90 days from 05/08/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding the workers' compensation DME referral for your insured, **Carol Green**, under claim number **WC-2026-084458**.\n\nIn order to complete the processing of this referral, we require the following information:\n\n- **Transportation:** Please provide transportation details/authorization associated with this referral.\n\nKindly note that this referral is currently **pending and cannot be routed** until the above information is received. To avoid any delays in care for Ms. Green, we respectfully request a response **within 24 business hours** of receiving this email.\n\nPlease feel free to contact us directly if you have any questions or require clarification. We appreciate your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

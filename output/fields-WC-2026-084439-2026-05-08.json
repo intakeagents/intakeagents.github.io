@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Thomas Washington",
+    "dob": "12/17/1970",
+    "claim_number": "WC-2026-084439",
+    "auth_ref": "AUTH-217301",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "arranged",
+    "language": "English",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "2345678901",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (document 2) and prescription (document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription are treated as authoritative over the referral form. E11.65 has been selected as the correct code, as it is more clinically specific and consistent across two of the three documents.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Stable chronic diabetic condition with active hyperglycemia requiring CGM monitoring; no acute injury or post-surgical urgency directly tied to the DME request, and ICD conflict was resolved with high confidence.",
+    "notes": "1) ICD code discrepancy detected and resolved \u2014 referral form should be updated to reflect E11.65. 2) The functional assessment references post-operative wound healing, which is inconsistent with a conservative management treatment plan and a diabetes-related DME order \u2014 this clinical narrative mismatch may warrant review. 3) Patient height/weight (6'3\" / 134 lbs) indicates a very low BMI (~16.8), which may be clinically significant and worth flagging to the managing physician. 4) The medical justification language is generic and not specifically tailored to CGM use, which could pose issues during payer review. 5) Practice listed is Valley Spine Institute, which is an unusual specialty for managing a CGM order \u2014 payer may scrutinize medical necessity."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

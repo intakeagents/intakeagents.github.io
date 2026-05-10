@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Robert Chen",
+    "dob": "11/05/1982",
+    "claim_number": "WC-2026-084433",
+    "injury_date": "01/24/2026",
+    "policy_number": "PM-WC-2026-44321",
+    "auth_ref": "AUTH-182627",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "quantity": "1",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (document 2) and the prescription (document 3) consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). The more specific and clinically authoritative code M47.816 from the clinical notes and prescription was selected as the correct code, as it reflects the confirmed diagnosis documented by the treating physician.",
+    "confidence": 92,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.816",
+        "rx_code": "M47.816",
+        "resolved_code": "M47.816",
+        "confidence": 92,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) on the referral form; the treating physician's signed documents are considered authoritative."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The patient has a neurologically significant diagnosis (spondylosis with lumbar radiculopathy) requiring a power wheelchair, with the physician noting significant risk of re-injury or clinical deterioration without the equipment, and an ICD code conflict exists between documents.",
+    "notes": "1) ICD-10 code discrepancy detected: referral form uses M54.5 (Low back pain) while clinical notes and prescription use the more specific M47.816 (Spondylosis with radiculopathy, lumbar region) \u2014 recommend updating the referral form to reflect the correct code. 2) Transportation Required field on the referral form is blank/not specified \u2014 confirm with case manager Diana Cruz whether patient transportation arrangements are needed for delivery. 3) The referral was submitted on 02/10/2026, the same date as the prescription signing, and the prescription is valid for 90 days (expires 05/10/2026). 4) Patient weight is 226 lbs \u2014 verify that the selected power wheelchair model (K0823) meets appropriate weight capacity specifications. 5) Expected duration of need is 3 months per both clinical notes and prescription.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Diana Cruz,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured and am writing to request your assistance in providing outstanding information needed to move this referral forward.\n\n**Patient:** Robert Chen\n**Claim Number:** WC-2026-084433\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Transportation:** Please provide the applicable transportation details associated with this claim (e.g., authorized transport method, vendor, or related documentation).\n\nKindly note that this request carries a **24-business-hour response deadline**. Timely receipt of the above information will allow us to proceed with fulfillment without further delay.\n\nPlease reply directly to this email or contact our office at your earliest convenience. If you have any questions or require clarification, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.816",
+      "rx_code": "M47.816",
+      "resolved_code": "M47.816",
+      "confidence": 92,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the less specific M54.5 (Low back pain) on the referral form; the treating physician's signed documents are considered authoritative."
+    }
+  ]
+}

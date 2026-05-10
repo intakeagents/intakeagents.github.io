@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Karen Patel",
+    "dob": "05/03/1964",
+    "claim_number": "WC-2026-084440",
+    "auth_ref": "AUTH-665492",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and the prescription (Document 3) both list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M47.816 is also the more specific and clinically supported diagnosis given the physician's documented assessment of spondylosis with radiculopathy. M54.5 was therefore rejected in favor of M47.816.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "This case involves a power wheelchair order for a neurologically significant diagnosis (spondylosis with radiculopathy), an ICD code conflict across documents, and a post-operative functional impairment noted in clinical notes, all of which warrant high-priority review.",
+    "notes": "1. Physician NPI is missing across all three documents and must be obtained before processing. 2. The referral form lists the diagnosis as M54.5 (Low back pain), which conflicts with the more specific M47.816 documented in both the clinical notes and prescription \u2014 resolved in favor of M47.816. 3. The functional assessment references a post-operative status, but no surgical procedure is explicitly documented; clarification may be needed. 4. The clinical notes describe the patient height as 6'1\" / 184 lbs, which should be verified for proper power wheelchair sizing under HCPCS K0823. 5. Occupational therapy was recommended in conjunction with DME provision; coordination with OT may be required. 6. Prescription is valid through 09/03/2026 (90 days from 06/05/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Kevin,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for your patient, **Karen Patel**, under claim number **WC-2026-084440**. We are unable to complete processing of this referral until the following outstanding items have been received:\n\n**Required Information:**\n\n1. **Appointment Window** *(Hard Block \u2014 Routing on Hold)*: The preferred or required appointment availability window for the patient. Please note that this item is currently preventing us from routing the referral, and processing cannot proceed until it is provided.\n2. **Language Preference**: The patient's preferred spoken language for communication and appointment coordination.\n3. **Physician NPI**: The ordering/referring physician's National Provider Identifier (NPI) number.\n\nPlease provide the above information **within 24 business hours** of receiving this email to avoid further delays in care coordination for Ms. Patel. You may reply directly to this message or contact our intake team at your earliest convenience.\n\nWe appreciate your prompt attention to this matter and look forward to your response.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

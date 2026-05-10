@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Steven Hall",
+    "dob": "08/19/1976",
+    "claim_number": "WC-2026-084451",
+    "auth_ref": "AUTH-423232",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M54.5 (Low back pain), while both the clinical notes (document 2) and the prescription (document 3) consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution rules, the clinical notes and prescription take authority over the referral form. M47.816 is also the more specific and clinically detailed diagnosis, consistent with the physician's documented assessment. M54.5 from the referral form has been overridden.",
+    "confidence": 92,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient requires a power wheelchair (K0823) for a neurologically significant diagnosis (spondylosis with radiculopathy) with documented significant functional limitations, high activity pain levels (8/10), and an ICD code conflict requiring clinical review.",
+    "notes": "1) ICD code discrepancy detected and resolved: referral form used a less specific code (M54.5) compared to the clinically authoritative M47.816 found in both the clinical notes and prescription. 2) Transportation Required field on the referral form is blank \u2014 should be confirmed with adjuster or patient. 3) Diagnosis description on the referral form ('Low back pain') does not match the more specific clinical diagnosis ('Spondylosis with radiculopathy, lumbar region') \u2014 may indicate a data entry error at referral submission. 4) Prescription is valid for 90 days from 09/18/2026, expiring approximately 12/17/2026. 5) Expected duration of need is 6 months. 6) Policy number on file: PM-WC-2026-44339."
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured and am writing to request your assistance in providing outstanding information needed to move forward with processing.\n\n**Patient:** Steven Hall\n**Claim Number:** WC-2026-084451\n\nIn order to complete this referral and avoid any delays in the patient's care, we require the following information:\n\n- **Transportation:** Please provide applicable transportation details or authorization associated with this claim.\n\nTo prevent a hold on routing for this referral, we kindly ask that you respond within **24 business hours** of receiving this email. Timely receipt of the above will allow us to proceed without interruption.\n\nIf you have any questions or need clarification regarding this request, please do not hesitate to contact our office directly. We appreciate your prompt attention to this matter and look forward to your response.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

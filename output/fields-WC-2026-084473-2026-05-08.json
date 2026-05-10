@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Frank Stewart",
+    "dob": "01/14/1982",
+    "claim_number": "WC-2026-084473",
+    "auth_ref": "AUTH-410636",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "English",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S82.001A with description 'Fracture of right patella', while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S82.892A with description 'Other fracture of left lower leg'. Per resolution protocol, the clinical notes and prescription are treated as the authoritative sources. S82.892A has been selected as the correct code. Additionally, the referral form diagnosis (right patella fracture) is anatomically inconsistent with the ordered equipment (Ankle Foot Orthosis), further supporting S82.892A as the clinically appropriate diagnosis. The referral form also lists it as a 'Fracture of right' structure while the clinical documents indicate 'left lower leg', representing a laterality and anatomical site conflict.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Acute post-operative fracture case with ICD-10 code conflict across documents, anatomical and laterality discrepancy requiring clinical verification before equipment is dispensed, and patient has confirmed functional impairment affecting safe ambulation.",
+    "notes": "1. ICD conflict requires adjuster or physician confirmation before dispensing \u2014 referral form lists S82.001A (fracture of right patella) but clinical notes and prescription both document S82.892A (other fracture of left lower leg); these differ in anatomical site, laterality, and fracture type. 2. Physician NPI is blank across all three documents \u2014 must be obtained before claim submission. 3. The referral was submitted on 10/03/2026, the same date as the prescription, but two days after the clinical notes (10/01/2026). 4. Occupational therapy was recommended in the clinical notes in conjunction with DME provision \u2014 case manager should confirm OT referral is in progress. 5. Authorization Ref AUTH-410636 is on file with ICW Group adjuster Jennifer Walsh, who is also listed as the Case Manager on the referral submission footer."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. My name is the Coastal DME Intake Agent, and I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Frank Stewart**, under claim number **WC-2026-084473**.\n\nWhile processing this referral, we have identified the following required item that must be provided before we can move forward:\n\n- **Physician NPI** \u2013 The prescribing physician's National Provider Identifier is missing and is required to complete the referral.\n\nIn order to avoid any delays in processing and to ensure timely equipment coordination for Mr. Stewart, we kindly ask that you supply the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. If you have any questions or need assistance, we are happy to help.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to hearing from you soon.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

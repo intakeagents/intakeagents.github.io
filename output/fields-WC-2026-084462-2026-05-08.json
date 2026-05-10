@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Anna Carter",
+    "dob": "01/11/1988",
+    "claim_number": "WC-2026-084462",
+    "auth_ref": "AUTH-508396",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.4 (Lumbago with sciatica), while both the clinical notes (Document 2) and the prescription (Document 3) list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M51.16 has been selected as the correct code. The referral form ICD code should be corrected to M51.16.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Patient presents with a chronic lumbar disc degeneration diagnosis with partial relief from injection therapy and ongoing physical therapy; TENS is a moderate-urgency supportive pain management device appropriate for a MED priority classification.",
+    "notes": "1) ICD-10 conflict identified and resolved \u2014 referral form should be updated to reflect M51.16. 2) The functional assessment in the clinical notes references 'current assistive devices insufficient for safe home ambulation' and an 'equipment upgrade,' which is generic boilerplate language that does not precisely align with TENS equipment \u2014 this may warrant clarification with the physician. 3) The medical justification language ('reduce caregiver burden') is also atypical for a TENS unit and may be templated; consider confirming clinical appropriateness with Dr. Mendez. 4) Prescription is valid until 11/19/2026 (90 days from 08/21/2026). 5) No transportation required noted on the referral form (field left blank)."
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Jennifer,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Anna Carter**, under claim number **WC-2026-084462**. In order to move forward with processing this referral, we require the following additional information:\n\n- **Transportation arrangements** \u2013 Please provide details regarding the transportation needs associated with this referral.\n\nKindly note that there are no current hard blocks on this claim; however, we are unable to complete routing until the above item has been received.\n\nWe kindly ask that you respond within **24 business hours** of receiving this email to avoid any delays in processing. If you have any questions or need clarification, please don't hesitate to reach out directly.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to hearing from you soon.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

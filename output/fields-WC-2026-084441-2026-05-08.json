@@ -1,0 +1,41 @@
+{
+  "fields": {
+    "patient_name": "Christopher Lee",
+    "dob": "08/11/1987",
+    "claim_number": "WC-2026-084441",
+    "auth_ref": "AUTH-330914",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "delivery_address": "3341 Harbor Light Lane, San Pedro, CA 90731",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently report ICD-10 code G35 (Multiple sclerosis). No conflict detected.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed neurological diagnosis of Multiple sclerosis (G35), which is classified as a high-priority neurological condition per intake guidelines, and presents with significant functional limitations including inability to safely navigate the home environment without assistive equipment.",
+    "notes": "1) There is a clinical documentation inconsistency: the clinical notes reference 'post-surgical rehabilitation protocol initiated' and a workplace injury date of 01/19/2026, which is atypical for a primary MS diagnosis \u2014 this warrants clarification as to whether the commode chair is being prescribed for MS-related functional decline or a concurrent workplace injury. 2) Patient weight is 280 lbs at 5'7'; verify that the standard commode chair (E0163) ordered meets the weight capacity requirement for this patient, as heavy-duty or bariatric variants may be needed. 3) Prescription is valid for 90 days from 02/06/2026, expiring approximately 05/07/2026. 4) Referral was submitted on 02/06/2026 by Case Manager Kevin Osei."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

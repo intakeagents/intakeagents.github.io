@@ -1,0 +1,109 @@
+{
+  "fields": {
+    "patient_name": "Sandra Rivera",
+    "dob": "01/08/1983",
+    "claim_number": "WC-2026-084438",
+    "injury_date": "05/14/2026",
+    "policy_number": "PM-WC-2026-44326",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "Korean",
+    "dme_item": "Nebulizer",
+    "hcpcs": "E0570",
+    "quantity": "1",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "physician_practice": "Southern California Spine Center",
+    "physician_phone": "(949) 555-0244",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "J45.51",
+    "icd_description": "Severe persistent asthma with acute exacerbation",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The ICD-10 code J45.51 (Severe persistent asthma with acute exacerbation) is consistent across all three documents; however, a significant clinical mismatch exists: the medical justification language in the clinical notes and prescription describes the nebulizer as necessary to 'support safe ambulation and prevent falls in home environment' \u2014 language that is clinically appropriate for a mobility/ambulation aid (e.g., a walker or cane), not a nebulizer. This boilerplate mismatch strongly suggests the clinical notes and prescription were generated using an incorrect template. The diagnosis code J45.51 (asthma) is the correct justification for a nebulizer (E0570), so the code is retained, but the medical necessity narrative is flagged as erroneous and inconsistent with the ordered equipment.",
+    "confidence": 72,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Medical Necessity Narrative vs. Equipment Ordered",
+        "form_code": "J45.51",
+        "notes_code": "J45.51",
+        "rx_code": "J45.51",
+        "resolved_code": "J45.51",
+        "confidence": 72,
+        "escalate": true,
+        "reasoning": "While J45.51 is consistent across all documents, the medical necessity language in both the clinical notes and prescription describes ambulation/fall-prevention needs (consistent with a mobility aid) rather than respiratory treatment, indicating a template error that requires clinical clarification before processing despite the ICD code matching the ordered equipment (nebulizer)."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Escalation is required due to a critical mismatch between the medical necessity narrative (describing a mobility aid) and the equipment ordered (nebulizer for severe persistent asthma with acute exacerbation), combined with a missing physician NPI, missing authorization reference number, and confidence below 80, all of which require immediate clinical and administrative review.",
+    "notes": "1) CRITICAL: Medical necessity justification in both clinical notes and prescription reads 'Medically necessary to support safe ambulation and prevent falls in home environment. Patient unable to safely navigate living space without assistive device.' \u2014 this is ambulation/mobility language and is clinically incongruent with a nebulizer order for asthma. Likely a copy-paste or template error. Physician must provide corrected medical necessity statement before claim can proceed. 2) Physician NPI is missing on all three documents \u2014 required for billing and must be obtained. 3) Authorization Reference Number is blank \u2014 authorization from Zenith National Insurance should be obtained prior to delivery. 4) Patient height/weight (6'2\" / 130 lbs) recorded in clinical notes appears physiologically unusual and may warrant verification. 5) The functional assessment in the clinical notes ('pain and reduced mobility secondary to occupational injury') is inconsistent with the primary diagnosis of severe persistent asthma \u2014 suggests possible template reuse across cases. 6) The referral was submitted on 05/23/2026, nine days after the injury date of 05/14/2026, which is within normal range but should be noted.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 2,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: J45.51 vs J45.51 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        },
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Mr. Campos,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Sandra Rivera**, under claim number **WC-2026-084438**. We are unable to complete processing of this referral until the following information has been received:\n\n**Required \u2014 Immediate Action (Routing on Hold):**\n- **Authorization Reference Number (auth_ref):** This item is currently blocking routing of the referral and must be resolved before we can proceed.\n\n**Additional Missing Information:**\n- **Transportation details:** Please provide applicable transportation arrangements or confirm whether transportation services will be required in connection with this referral.\n- **Prescribing Physician NPI (physician_npi):** The National Provider Identifier for the ordering physician is needed to complete the referral record.\n\nPlease be advised that a response is required **within 24 business hours** of receipt of this email. Delays in providing the above information \u2014 particularly the authorization reference number \u2014 will continue to hold routing and may impact timely equipment delivery for Ms. Rivera.\n\nKindly reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and are happy to assist with any questions.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Medical Necessity Narrative vs. Equipment Ordered",
+      "form_code": "J45.51",
+      "notes_code": "J45.51",
+      "rx_code": "J45.51",
+      "resolved_code": "J45.51",
+      "confidence": 72,
+      "escalate": true,
+      "reasoning": "While J45.51 is consistent across all documents, the medical necessity language in both the clinical notes and prescription describes ambulation/fall-prevention needs (consistent with a mobility aid) rather than respiratory treatment, indicating a template error that requires clinical clarification before processing despite the ICD code matching the ordered equipment (nebulizer)."
+    }
+  ]
+}

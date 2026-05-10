@@ -1,0 +1,43 @@
+{
+  "fields": {
+    "patient_name": "Timothy Scott",
+    "dob": "02/22/1981",
+    "claim_number": "WC-2026-084457",
+    "auth_ref": "AUTH-808446",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "delivery_address": "567 Maple Street Apt 4B, Compton, CA 90220",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes (Document 2) and the prescription (Document 3) consistently use S13.4XXA (Sprain of ligaments of cervical spine). Per resolution rules, the clinical notes and prescription take authority over the referral form. S13.4XXA has been selected as the correct code. The referral form code S14.109A should be flagged for correction with the referring physician and adjuster, as a spinal cord injury diagnosis (S14.109A) is clinically and billing-significantly different from a ligament sprain (S13.4XXA).",
+    "confidence": 72,
+    "escalate": true,
+    "notes": "1. ESCALATION REQUIRED: ICD-10 conflict is clinically significant \u2014 S14.109A (spinal cord injury at C4) vs. S13.4XXA (cervical ligament sprain) are materially different diagnoses with different medical, billing, and workers' comp implications. Human review and physician clarification are strongly recommended before fulfillment. 2. The NPI for Dr. Priya Sharma is missing across all three documents and should be obtained before claim submission. 3. The medical justification references 'safe ambulation and fall prevention,' which is more consistent with a mobility aid (e.g., walker) than a cervical collar \u2014 this may indicate a boilerplate justification was used; clinical appropriateness of the stated justification should be verified. 4. The referral was submitted on 11/25/2026, the prescription is dated 11/25/2026, and the clinical notes are dated 11/23/2026, which is a consistent and logical timeline. 5. The policy number is PM-WC-2026-44345 for reference."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Timothy Scott**, under claim number **WC-2026-084457**.\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier is missing from the referral documentation.\n\nPlease note that there are currently **no hard blocks affecting routing** at this time; however, we are unable to finalize this referral until the above item is received.\n\nWe kindly ask that you provide the requested information **within 24 business hours** of receiving this email to avoid any delays in equipment fulfillment for the patient. Please reply directly to this email or contact our intake team at your earliest convenience.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "fields": {
+    "patient_name": "Dennis Reed",
+    "dob": "05/04/1978",
+    "claim_number": "WC-2026-084477",
+    "injury_date": "08/23/2026",
+    "policy_number": "PM-WC-2026-44365",
+    "auth_ref": "AUTH-134225",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "quantity": "1",
+    "delivery_address": "1247 Ocean View Blvd, Long Beach, CA 90802",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": true,
+    "icd_conflict_detail": "All three documents consistently list ICD-10 code G47.33 (Obstructive sleep apnea) as the diagnosis; however, a critical internal conflict exists in both the clinical notes and the prescription where the stated medical justification \u2014 'medically necessary to support safe ambulation and prevent falls in home environment, patient unable to safely navigate living space without assistive device' \u2014 describes a mobility/ambulation impairment, not obstructive sleep apnea. A CPAP machine (E0601) is a respiratory device used for OSA (G47.33) and is entirely inconsistent with an ambulation/fall-prevention justification, which would typically correspond to a mobility aid and a musculoskeletal or neurological ICD-10 code. This suggests the medical necessity language was likely copied from a different case or a different equipment order, and the actual clinical picture may involve a mobility diagnosis not documented here. G47.33 is retained as the coded diagnosis since it is consistent across all three documents, but the mismatch between the diagnosis, the equipment, and the justification narrative requires clinical clarification before processing.",
+    "confidence": 60,
+    "escalate": true,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis vs. Medical Necessity Justification",
+        "form_code": "G47.33",
+        "notes_code": "G47.33",
+        "rx_code": "G47.33",
+        "resolved_code": null,
+        "confidence": 60,
+        "escalate": true,
+        "reasoning": "Although G47.33 (Obstructive sleep apnea) appears consistently across all three documents, the medical necessity language in both the clinical notes and prescription describes ambulation and fall-prevention needs \u2014 which is clinically inconsistent with a CPAP machine order for OSA \u2014 suggesting possible template/copy error requiring physician clarification before the code can be confirmed with high confidence."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "Escalation is required due to a critical mismatch between the OSA diagnosis (G47.33), the CPAP equipment ordered (E0601), and the ambulation/fall-prevention medical justification, resulting in low confidence (60) and a potential documentation or patient safety error that must be resolved before equipment is dispensed.",
+    "notes": "1) The medical necessity narrative in both the clinical notes and prescription ('support safe ambulation and prevent falls') is entirely inconsistent with a CPAP machine prescription for obstructive sleep apnea \u2014 this language is typically associated with mobility aids such as walkers, canes, or wheelchairs. This may indicate a copy-paste error from a different patient file or a different equipment order within the same case. 2) The functional assessment in the clinical notes also references 'assistive equipment to maintain safe ambulation,' further reinforcing the mismatch. 3) Recommend immediate outreach to Dr. Lisa Park at (415) 555-0188 or fax (415) 555-0189 to confirm: (a) the correct equipment being ordered, (b) the correct medical justification, and (c) whether an additional or different DME item should be prescribed. 4) Do NOT dispense equipment until clinical clarification is received and documentation is corrected. 5) Adjuster Jennifer Walsh at j.walsh@icwgroup.com / (619) 555-0156 should also be notified of the hold pending clarification.",
+    "kg_validation": {
+      "status": "ESCALATED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-005",
+          "source": "ICD-10-CM Guidelines \u00a7I.B.13 \u2014 Laterality",
+          "action": "escalate",
+          "message": "Laterality conflict detected: G47.33 vs G47.33 \u2014 Laterality mismatch across documents. Per \u00a7I.B.13, the treating physician clinical notes are authoritative \u2014 but conflicting documents require clinical review before dispatch.",
+          "confidence": 71,
+          "deterministic": false
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis vs. Medical Necessity Justification",
+      "form_code": "G47.33",
+      "notes_code": "G47.33",
+      "rx_code": "G47.33",
+      "resolved_code": null,
+      "confidence": 60,
+      "escalate": true,
+      "reasoning": "Although G47.33 (Obstructive sleep apnea) appears consistently across all three documents, the medical necessity language in both the clinical notes and prescription describes ambulation and fall-prevention needs \u2014 which is clinically inconsistent with a CPAP machine order for OSA \u2014 suggesting possible template/copy error requiring physician clarification before the code can be confirmed with high confidence."
+    }
+  ]
+}

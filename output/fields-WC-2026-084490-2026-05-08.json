@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Mildred Peterson",
+    "dob": "02/19/1956",
+    "claim_number": "WC-2026-084490",
+    "auth_ref": "AUTH-768891",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "Hospital Bed",
+    "hcpcs": "E0250",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "insurance_carrier": "ICW Group",
+    "adjuster_name": "Jennifer Walsh",
+    "adjuster_email": "j.walsh@icwgroup.com",
+    "adjuster_phone": "(619) 555-0156",
+    "icd_code": "M19.011",
+    "icd_description": "Primary osteoarthritis, right shoulder",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code M19.011 with the description 'Primary osteoarthritis, right shoulder.' No conflict was found across any of the documents.",
+    "confidence": 95,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Patient presents with a chronic musculoskeletal condition (primary osteoarthritis, right shoulder) requiring a hospital bed for home safety; no acute fracture, post-surgical status, or neurological condition is documented, placing this at medium priority.",
+    "notes": "1. CLINICAL MISMATCH: The medical justification in both the clinical notes and prescription references 'safe ambulation' and 'inability to navigate living space without assistive device,' which is language typically associated with mobility aids (e.g., walkers, wheelchairs), not a hospital bed. This language does not clearly support the medical necessity of HCPCS E0250 (hospital bed) for a right shoulder osteoarthritis diagnosis \u2014 recommend clinical review and clarification from Dr. Sarah Chen. 2. NPI is missing on all three documents for Dr. Sarah Chen, MD \u2014 should be obtained before processing. 3. Preferred appointment window was not specified \u2014 follow up with adjuster or patient to schedule delivery. 4. The referral was submitted on 08/28/2026, nine days after the injury date of 08/19/2026. 5. Patient weight is 248 lbs at 5'7\" \u2014 verify that the standard hospital bed ordered under E0250 meets appropriate weight capacity requirements."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Jennifer Walsh,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Mildred Peterson** (Claim: **WC-2026-084490**), which is currently pending completion due to the following missing information:\n\n1. **Appointment Window** *(appt_window)* \u2014 **Required to release routing hold.** This item is currently blocking the referral from being processed and routed forward.\n2. **Physician NPI** *(physician_npi)* \u2014 Needed to finalize the referral record.\n\nPlease note that the missing appointment window has placed this referral on a **hard routing hold**, meaning it cannot advance until that information is received.\n\nTo avoid any delays in care for Ms. Peterson, we kindly ask that you provide the above details **within 24 business hours** of receiving this email.\n\nYou may reply directly to this message or contact our intake team with the necessary information. Please reference claim number **WC-2026-084490** in all correspondence.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

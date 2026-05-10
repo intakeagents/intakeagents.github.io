@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Pamela Kelly",
+    "dob": "01/05/1967",
+    "claim_number": "WC-2026-084496",
+    "auth_ref": "",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "delivery_address": "2198 Hillcrest Avenue, Inglewood, CA 90301",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Hartford Financial Services",
+    "adjuster_name": "Diana Cruz",
+    "adjuster_email": "d.cruz@hartford.com",
+    "adjuster_phone": "(860) 555-0143",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and the prescription (Document 3) both consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M47.22 is adopted as the correct code. Additionally, M47.22 is a more specific and clinically serious diagnosis consistent with the post-surgical rehabilitation noted in the clinical notes, whereas M54.5 appears to be a generic placeholder potentially entered in error on the referral form.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "The confirmed diagnosis of M47.22 (anterior spinal artery compression syndromes, cervical region) is a serious neurological/spinal condition with post-surgical rehabilitation in progress, representing significant clinical risk and warranting high priority despite the ICD code conflict now resolved.",
+    "notes": "1) ICD code conflict detected and resolved \u2014 referral form must be corrected to reflect M47.22 rather than M54.5. 2) Authorization reference number is missing and should be obtained from adjuster Diana Cruz before or at time of delivery. 3) There is a clinical-equipment mismatch worth flagging: the diagnosis (M47.22, cervical spinal compression) is a cervical condition, yet the prescribed DME is a Lumbar Orthosis (L0625) \u2014 this may warrant clinical clarification with Dr. Mendez to confirm the lumbar brace is appropriate for this cervical diagnosis. 4) No interpreter or transportation requirements noted. 5) Prescription is valid through 01/14/2027 (90 days from 10/16/2026)."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Diana,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for **Pamela Kelly** (Claim **WC-2026-084496**) that requires your attention before we are able to move forward with processing.\n\nUpon reviewing the referral, we have identified the following missing information:\n\n1. **Authorization/Reference Number (auth_ref)** *(Hard Block \u2014 routing is on hold pending receipt)*\n2. **Transportation arrangements/details**\n3. **Preferred language of the patient**\n\nPlease note that the **authorization/reference number is a hard block**, meaning the referral cannot be routed or processed until this item is received. We kindly ask that all outstanding items be addressed at your earliest convenience.\n\n**Please respond within 24 business hours** to avoid any further delays in care for your patient.\n\nYou may reply directly to this email or contact our intake team with the requested information. We appreciate your prompt attention to this matter and are happy to assist if you have any questions.\n\nThank you,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

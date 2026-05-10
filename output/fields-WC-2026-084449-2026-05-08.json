@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Kevin Lewis",
+    "dob": "06/08/1980",
+    "claim_number": "WC-2026-084449",
+    "auth_ref": "AUTH-878480",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "Korean",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (Document 2) and prescription (Document 3) both consistently list M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution protocol, the clinical notes and prescription take authority over the referral form. M47.22 is also clinically consistent with the documented treatment (surgical repair, post-operative protocol) and the physician's signed prescription. M54.5 from the referral form is likely a data entry error and has been overridden.",
+    "confidence": 85,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient is post-surgical with an active neurological diagnosis (M47.22 \u2014 anterior spinal artery compression, cervical region), representing a serious spinal condition with documented risk of re-injury or clinical deterioration, and there is an ICD code conflict across documents requiring clinical review.",
+    "notes": "1) Physician NPI field is blank across all three documents \u2014 must be obtained before claim submission. 2) There is a significant clinical inconsistency: the diagnosis (M47.22, cervical spinal artery compression, post-surgical) does not clearly align with the prescribed equipment (Lumbar Orthosis, L0625), which is a lumbar-region device. This warrants clarification with the prescribing physician. 3) The referral form uses a different ICD-10 code (M54.5) than the clinical notes and prescription (M47.22) \u2014 resolved in favor of clinical notes and prescription, but human review is recommended given the cervical vs. lumbar discrepancy. 4) Korean interpreter must be arranged for the delivery appointment."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Kevin Lewis**, under workers' compensation claim **WC-2026-084449**.\n\nUpon reviewing the referral documentation, we have identified the following item that must be provided before we can complete processing:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) is missing and is required to validate the referral.\n\nIn order to avoid any delays in processing and ensure timely equipment delivery for Mr. Lewis, we kindly ask that you supply the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. If you have any questions or require clarification, do not hesitate to reach out.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

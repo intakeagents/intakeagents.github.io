@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Brian Parker",
+    "dob": "10/16/1986",
+    "claim_number": "WC-2026-084469",
+    "auth_ref": "AUTH-993085",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Ankle Foot Orthosis",
+    "hcpcs": "L1906",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S82.892A",
+    "icd_description": "Other fracture of left lower leg",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code S82.001A described as 'Fracture of right patella', while both the clinical notes (document 2) and the prescription (document 3) consistently list ICD-10 code S82.892A described as 'Other fracture of left lower leg'. Additionally, the body side conflicts (right vs. left) and the anatomical site conflicts (patella vs. lower leg). Per resolution rules, the clinical notes and prescription are treated as authoritative over the referral form. S82.892A has been selected as the correct code. The referral form diagnosis also has a clinical mismatch \u2014 an Ankle Foot Orthosis (AFO) is not standard for a patellar fracture, further supporting S82.892A (lower leg fracture) as the clinically appropriate diagnosis.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Acute lower leg fracture with ongoing physical therapy and documented ambulation risk warrants medium priority; the ICD conflict has been resolved with reasonable confidence and the equipment need is an orthopedic brace rather than a power mobility or post-surgical device.",
+    "notes": "1) ICD conflict detected and resolved \u2014 referral form must be corrected to reflect S82.892A / Other fracture of left lower leg. 2) Physician NPI is missing across all three documents and should be obtained before claim submission. 3) The referral form incorrectly describes the diagnosis as 'Fracture of right patella' (S82.001A), which is clinically inconsistent with an AFO prescription; this may indicate a data entry error on the referral form. 4) Clinical notes describe an 'indefinite / chronic condition' duration, which may require additional justification for Workers Comp authorization. 5) Referral was submitted 08/15/2026, two days after the clinical visit date of 08/13/2026, which is within normal processing time."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Brian Parker**, under workers' compensation claim **WC-2026-084469**.\n\nUpon reviewing the referral documentation, we have identified the following items that are required before we can complete processing:\n\n1. **Language** \u2013 The patient's preferred language has not been specified.\n2. **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) number is missing.\n\nTo avoid any delay in care for Mr. Parker, we kindly ask that you provide the above information **within 24 business hours** of receiving this message.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your partnership.\n\nWarm regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

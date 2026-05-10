@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Evelyn Watson",
+    "dob": "06/29/1971",
+    "claim_number": "WC-2026-084494",
+    "auth_ref": "AUTH-970813",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Vietnamese",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S43.004A has been selected as the correct code. The referral form ICD code should be corrected to S43.004A.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "The ICD conflict has been resolved with high confidence using authoritative clinical documents, and the diagnosis of right shoulder dislocation with an ongoing conservative treatment plan and shoulder immobilizer order represents a moderate-severity orthopedic condition warranting MED priority.",
+    "notes": "1. ICD-10 conflict identified and resolved \u2014 referral form must be corrected from S40.011A to S43.004A. 2. The functional assessment in clinical notes references 'safe ambulation in home environment,' which is atypical language for a shoulder immobilizer order and may reflect a template error; clinical context is shoulder dislocation. 3. Patient requires a Vietnamese interpreter for all communications. 4. No preferred appointment window was provided \u2014 outreach needed to schedule delivery. 5. Prescription is valid through 12/26/2026 (90 days from 09/27/2026). 6. Duration of need is 12 months per both clinical notes and prescription."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding an active workers' compensation DME referral for your insured, **Evelyn Watson**, under claim number **WC-2026-084494**.\n\nWhile processing this referral, our intake team has identified the following required item that must be provided before we are able to move forward with routing:\n\n- **Appointment Window (appt_window):** The preferred or authorized scheduling window for the patient's DME appointment has not been provided. This field is required and is currently placing a hard block on routing for this referral.\n\nTo avoid any delay in care for Ms. Watson, we kindly ask that you provide the missing information **within 24 business hours** of receiving this notice. Please reply directly to this email or contact our intake team at your earliest convenience.\n\nShould you have any questions or require clarification regarding this request, please do not hesitate to reach out. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your time and cooperation.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME | Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

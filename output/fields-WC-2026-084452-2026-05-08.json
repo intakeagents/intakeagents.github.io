@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Betty Allen",
+    "dob": "12/04/1960",
+    "claim_number": "WC-2026-084452",
+    "auth_ref": "AUTH-125990",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Nebulizer",
+    "hcpcs": "E0570",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "J45.51",
+    "icd_description": "Severe persistent asthma with acute exacerbation",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently report ICD-10 code J45.51 with the description 'Severe persistent asthma with acute exacerbation.' No conflict was detected across any of the documents.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Respiratory equipment (nebulizer) prescribed for severe persistent asthma with acute exacerbation is a clinically significant but manageable chronic respiratory condition, placing this case in the MED priority tier.",
+    "notes": "1. SPECIALTY MISMATCH FLAG: The referring physician (Dr. Priya Sharma, MD) is affiliated with 'Pacific Neurology Associates,' which is a neurology practice. A nebulizer prescribed for severe persistent asthma (J45.51) would typically originate from a pulmonologist or primary care physician \u2014 this mismatch warrants verification. 2. The functional assessment in the clinical notes references 'safe ambulation in home environment,' which is inconsistent with the prescribed nebulizer (a respiratory device, not a mobility aid) and the asthma diagnosis \u2014 this boilerplate language appears to be a documentation quality issue and should be flagged for clinical review. 3. The medical necessity language is generic and not diagnosis-specific; it may require additional supporting documentation if the insurer requests detailed justification. 4. Prescription is valid through 08/07/2026 (90 days from 05/09/2026). 5. Policy Number: PM-WC-2026-44340. 6. Injury date: 04/28/2026; referral submitted: 05/09/2026."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Mr. Campos,\n\nI hope this message finds you well. I am reaching out regarding the DME referral for your patient, **Betty Allen** (Claim No. **WC-2026-084452**). While reviewing the referral, our intake team has identified missing information that must be resolved before we can move forward with processing.\n\nPlease note that one item below constitutes a **hard block**, which is currently preventing routing of this referral until resolved.\n\n**Information Required:**\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*\nThe preferred appointment window for the patient has not been provided. This field is required to initiate scheduling and routing cannot proceed until this is received.\n\n2. **Language Preference**\nThe patient's preferred language has not been specified. This is needed to ensure appropriate communication and service arrangements are in place prior to the appointment.\n\nTo avoid delays in care for Ms. Allen, we kindly request that the above information be submitted within **24 business hours** of receipt of this email. Please reply directly to this message or contact our intake team through your preferred method.\n\nShould you have any questions or require clarification, do not hesitate to reach out. We appreciate your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

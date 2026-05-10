@@ -1,0 +1,50 @@
+{
+  "fields": {
+    "patient_name": "Janet Cook",
+    "dob": "12/28/1972",
+    "claim_number": "WC-2026-084478",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, the clinical notes and prescription are treated as the clinical authority. S43.004A is also more consistent with the documented treatment of post-surgical rehabilitation and the severity of functional limitations described. S43.004A has been selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient is post-surgical with a shoulder dislocation diagnosis (S43.004A), active rehabilitation protocol, significant functional limitations, and an ICD code conflict across documents requiring clinical review.",
+    "notes": "1. ICD code conflict detected and resolved \u2014 referral form must be corrected to reflect S43.004A instead of S40.011A. 2. Authorization Reference Number is missing and should be obtained from adjuster Sarah Mitchell before or at time of delivery. 3. Preferred appointment window was not specified; outreach to patient or adjuster recommended to schedule delivery. 4. Clinical notes (09/15/2026) predate the prescription signing (09/17/2026) and referral submission (09/17/2026), which is consistent and appropriate. 5. Prescription is valid through 12/16/2026 (90 days from 09/17/2026). 6. Policy Number: PM-WC-2026-44366."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Sarah Mitchell,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your insured, **Janet Cook**, under claim number **WC-2026-084478**. We are unable to finalize routing on this referral until the following outstanding items are resolved.\n\n**Required to Complete the Referral:**\n\n1. **Authorization Reference Number** *(hard block \u2014 routing on hold)*\n2. **Appointment Window** *(hard block \u2014 routing on hold)*\n3. **Patient's Preferred Language**\n\nPlease note that items 1 and 2 are currently preventing us from routing this referral forward. Until both are received, scheduling cannot proceed.\n\n**We kindly ask that you provide the above information within 24 business hours of receiving this email.** Delays beyond that timeframe may impact the patient's care coordination and scheduling availability.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. If you have any questions or need clarification on any of the items listed above, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

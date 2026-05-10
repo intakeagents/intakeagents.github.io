@@ -1,0 +1,89 @@
+{
+  "fields": {
+    "patient_name": "Walter Murphy",
+    "dob": "04/21/1957",
+    "claim_number": "WC-2026-084481",
+    "injury_date": "05/22/2026",
+    "policy_number": "PM-WC-2026-44369",
+    "auth_ref": "AUTH-192337",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Transcutaneous Electrical Nerve Stimulation (TENS)",
+    "hcpcs": "E0730",
+    "quantity": "1",
+    "delivery_address": "1834 Foothill Boulevard, Monrovia, CA 91016",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M51.16",
+    "icd_description": "Intervertebral disc degeneration, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form lists ICD-10 code M54.4 (Lumbago with sciatica), while both the clinical notes and the prescription consistently list M51.16 (Intervertebral disc degeneration, lumbar region). Per resolution rules, clinical notes and prescription take authority over the referral form; M51.16 was selected as the correct code.",
+    "confidence": 85,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.4",
+        "notes_code": "M51.16",
+        "rx_code": "M51.16",
+        "resolved_code": "M51.16",
+        "confidence": 85,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both agree on M51.16 (Intervertebral disc degeneration, lumbar region), overriding the referral form's M54.4 (Lumbago with sciatica); confidence is 85 because the referral form's symptom-based code may reflect a secondary or related presentation that should be verified with the physician."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Chronic lumbar intervertebral disc degeneration with an ICD conflict resolved at 85% confidence warrants medium priority \u2014 the condition is musculoskeletal and chronic, the equipment (TENS unit) is a moderate pain-management aid, and while escalation is not required the ICD discrepancy should be clarified before billing.",
+    "notes": "1) ICD code discrepancy: referral form uses M54.4 (Lumbago with sciatica) while clinical notes and prescription both use M51.16 (Intervertebral disc degeneration, lumbar region) \u2014 recommend confirming with Dr. Sharma before submission to insurer. 2) The medical justification language ('support safe ambulation and prevent falls') is more consistent with a mobility aid than a TENS unit; this boilerplate mismatch may raise a medical necessity challenge with Liberty Mutual and should be reviewed. 3) The referral was submitted on 06/07/2026 and the prescription is valid for 90 days (expires approximately 09/05/2026). 4) No interpreter or transportation needs identified. 5) Case manager and adjuster are the same person (James Archer).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Walter Murphy**, under claim number **WC-2026-084481**.\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Transportation** \u2013 Please confirm transportation arrangements or authorization required for this patient.\n- **Language** \u2013 Please specify the patient's preferred language for communication and documentation purposes.\n\nKindly note that there are currently **no hard blocks** holding routing at this time; however, we do need the above items resolved promptly to move forward.\n\nPlease provide the requested information **within 24 business hours** of receiving this email to avoid any delays in care coordination for your insured.\n\nIf you have any questions or need clarification, do not hesitate to contact me directly.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.4",
+      "notes_code": "M51.16",
+      "rx_code": "M51.16",
+      "resolved_code": "M51.16",
+      "confidence": 85,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both agree on M51.16 (Intervertebral disc degeneration, lumbar region), overriding the referral form's M54.4 (Lumbago with sciatica); confidence is 85 because the referral form's symptom-based code may reflect a secondary or related presentation that should be verified with the physician."
+    }
+  ]
+}

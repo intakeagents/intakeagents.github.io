@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Diane Bailey",
+    "dob": "10/25/1974",
+    "claim_number": "WC-2026-084482",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "Korean",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (Document 2) and prescription (Document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription take authority over the referral form. E11.65 was selected as the correct code, as it is more clinically specific and supported by two authoritative documents signed by the treating physician.",
+    "confidence": 90,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Patient has a chronic metabolic condition (Type 2 diabetes with hyperglycemia) requiring a CGM for ongoing glucose management; ICD conflict was present but resolved with high confidence, and the equipment supports stable chronic disease management rather than an acute or post-surgical emergency.",
+    "notes": "1. ICD conflict resolved: E11.65 preferred over E11.9 per clinical notes and prescription authority. 2. Authorization reference number is missing \u2014 adjuster Linda Torres should be contacted to obtain prior authorization before fulfillment. 3. The referring practice is Southern California Spine Center, which is an atypical setting for a diabetes-related DME referral; this may warrant a clinical review to confirm the referral source is appropriate. 4. Patient height/weight (6'3\" / 243 lbs) is documented in clinical notes \u2014 relevant for equipment sizing if applicable. 5. Korean interpreter required for patient communication and delivery coordination. 6. Prescription is valid through 12/27/2026 (90 days from 09/28/2026). 7. Expected duration of need is 12 months."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Diane Bailey**, under workers' compensation claim **WC-2026-084482**.\n\nUpon reviewing the referral, we have identified the following required fields that are currently incomplete. Please note that these items represent hard blocks, and routing cannot proceed until they are resolved:\n\n1. **Authorization Reference Number (auth_ref)** \u2013 A valid authorization reference number is required to proceed with the DME order.\n2. **Appointment Window (appt_window)** \u2013 The preferred or required appointment window must be provided to schedule delivery and fulfillment.\n\nTo avoid any delays in care for Ms. Bailey, we kindly request that you provide the above information **within 24 business hours** of receiving this message. If we do not receive a response within that timeframe, the referral may be subject to further delay or escalation per our intake protocol.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. If you have any questions or require clarification, we are happy to assist.\n\nThank you for your prompt attention to this matter.\n\nWarm regards,\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

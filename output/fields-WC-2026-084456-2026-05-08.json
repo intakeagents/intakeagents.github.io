@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Sharon Wright",
+    "dob": "10/01/1958",
+    "claim_number": "WC-2026-084456",
+    "auth_ref": "AUTH-540869",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Nebulizer",
+    "hcpcs": "E0570",
+    "delivery_address": "1456 Florence Avenue, Hawthorne, CA 90250",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "J45.51",
+    "icd_description": "Severe persistent asthma with acute exacerbation",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently report ICD-10 code J45.51 with the description 'Severe persistent asthma with acute exacerbation.' No conflict was detected across any of the documents.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Respiratory equipment (nebulizer) prescribed for severe persistent asthma with acute exacerbation is a chronic respiratory condition warranting medium priority, as it is clinically significant but not an acute surgical or neurological emergency requiring immediate escalation.",
+    "notes": "1) The physician NPI field is blank across all three documents and should be obtained before finalizing the order. 2) The clinical notes mention 'surgical repair completed' and 'post-operative protocol in progress' under Treatment, which is inconsistent with the primary diagnosis of severe persistent asthma \u2014 this may indicate a template error or a secondary condition not fully documented; human review is recommended to clarify. 3) The referral was submitted on 06/24/2026 and the prescription is valid for 90 days (expires approximately 09/22/2026). 4) Occupational therapy was recommended in the clinical notes alongside DME provision, which may require separate coordination. 5) Robert Campos is listed both as Insurance Adjuster and Case Manager on the referral submission footer."
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language",
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Sharon Wright**, associated with claim **WC-2026-084456**.\n\nIn order to complete the processing of this referral, we require the following information:\n\n1. **Patient Language Preference** \u2013 Please provide the preferred language for Sharon Wright to ensure appropriate communication and documentation.\n2. **Physician NPI** \u2013 Please provide the ordering physician's National Provider Identifier (NPI) number.\n\nTo avoid any delays in fulfilling this referral, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to working with you to ensure Sharon Wright receives the necessary equipment in a timely manner.\n\nThank you for your time and cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

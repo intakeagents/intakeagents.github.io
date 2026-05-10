@@ -1,0 +1,48 @@
+{
+  "fields": {
+    "patient_name": "Judith Bell",
+    "dob": "02/03/1980",
+    "claim_number": "WC-2026-084480",
+    "auth_ref": "AUTH-713762",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "CPAP Machine",
+    "hcpcs": "E0601",
+    "delivery_address": "813 Sunset Canyon Drive, Azusa, CA 91702",
+    "physician_name": "Dr. Carlos Mendez, MD",
+    "physician_npi": "6789012345",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "G47.33",
+    "icd_description": "Obstructive sleep apnea",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents consistently report ICD-10 code G47.33 (Obstructive sleep apnea). No conflict was found across the referral form, clinical notes, and prescription.",
+    "confidence": 97,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "CPAP equipment for obstructive sleep apnea is a respiratory DME item for a chronic/ongoing condition without acute surgical or neurological urgency, placing it at medium priority.",
+    "notes": "The functional assessment in the clinical notes references a work-related injury causing mobility impairment and lists physical therapy 3x/week, but the diagnosis and prescribed DME are solely for obstructive sleep apnea (G47.33), which may not have a clear causal relationship to the reported work injury dated 09/21/2026. This potential medical necessity linkage between the workers' comp injury and the sleep apnea diagnosis warrants review by the adjuster or a clinical reviewer. The prescription is valid for 90 days from 10/07/2026, expiring approximately 01/05/2027. No interpreter or preferred appointment window was specified."
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Judith Bell**, under claim number **WC-2026-084480**.\n\nUpon reviewing the referral documentation, we have identified the following missing information that is required to complete processing:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or available appointment window for the patient has not been provided. Please note that this item is currently preventing us from routing the referral, and processing cannot move forward until it is received.\n2. **Language Preference**: The patient's preferred spoken/written language has not been indicated. This is needed to ensure appropriate communication and service coordination.\n\nTo avoid any further delays in care for Ms. Bell, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your cooperation.\n\nWarm regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

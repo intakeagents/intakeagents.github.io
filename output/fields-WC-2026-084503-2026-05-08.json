@@ -1,0 +1,39 @@
+{
+  "fields": {
+    "patient_name": "Carl Henderson",
+    "dob": "08/03/1985",
+    "claim_number": "WC-2026-084503",
+    "auth_ref": "AUTH-855855",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "arranged",
+    "language": "Korean",
+    "dme_item": "Lumbar Orthosis",
+    "hcpcs": "L0625",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M47.22",
+    "icd_description": "Anterior spinal artery compression syndromes, cervical region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "A conflict exists across the three documents. The referral form (document 1) lists ICD-10 code M54.5 (Low back pain), while the clinical notes (document 2) and the prescription (document 3) both list ICD-10 code M47.22 (Anterior spinal artery compression syndromes, cervical region). Per resolution rules, the clinical notes and prescription take authority over the referral form. M47.22 has been selected as the correct code. Notably, there is also a clinically significant mismatch: the prescribed equipment is a Lumbar Orthosis (targeting the lumbar spine), yet the diagnosis in the clinical notes and prescription is a cervical region condition (M47.22). This anatomical discrepancy \u2014 a lumbar brace for a cervical diagnosis \u2014 raises a serious clinical concern that warrants human review.",
+    "confidence": 52,
+    "escalate": true,
+    "notes": "CRITICAL FLAGS REQUIRING ESCALATION: (1) ICD-10 conflict between referral form (M54.5 - Low back pain) and clinical notes/prescription (M47.22 - Anterior spinal artery compression syndromes, cervical region). Clinical notes and prescription were used as authority, but confidence is low due to the secondary concern below. (2) Anatomical mismatch: A Lumbar Orthosis (HCPCS L0625) is a lumbar spine support device, but the diagnosis on both the clinical notes and prescription is a CERVICAL region condition (M47.22). This is a significant clinical inconsistency \u2014 it is possible the referral form's lumbar-related code (M54.5) was the intended diagnosis, or the wrong equipment was ordered, or the wrong diagnosis code was applied. This must be clarified with the prescribing physician Dr. Robert Williams before fulfillment. (3) Patient BMI is elevated (5'3\", 271 lbs \u2014 BMI ~48); confirm the ordered L0625 brace model/size accommodates this patient's measurements. (4) Korean interpreter required for delivery appointment \u2014 must be confirmed and arranged in advance."
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

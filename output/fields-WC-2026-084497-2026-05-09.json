@@ -1,0 +1,90 @@
+{
+  "fields": {
+    "patient_name": "Ralph Sanders",
+    "dob": "09/24/1975",
+    "claim_number": "WC-2026-084497",
+    "injury_date": "06/22/2026",
+    "policy_number": "PM-WC-2026-44385",
+    "auth_ref": "AUTH-878325",
+    "appt_window": "",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Knee Brace",
+    "hcpcs": "L1820",
+    "quantity": "1",
+    "delivery_address": "1247 Ocean View Blvd, Long Beach, CA 90802",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "S83.005A",
+    "icd_description": "Unspecified tear of medial meniscus, right knee",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M23.201 (Derangement of medial meniscus, right knee), while both the clinical notes (document 2) and the prescription (document 3) consistently use S83.005A (Unspecified tear of medial meniscus, right knee). Per resolution protocol, the clinical notes and prescription take authority over the referral form; S83.005A was selected as the correct code. Note that S83.005A is also a more clinically specific acute injury code appropriate for a workers' compensation claim with an injury date of 06/22/2026.",
+    "confidence": 85,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M23.201",
+        "notes_code": "S83.005A",
+        "rx_code": "S83.005A",
+        "resolved_code": "S83.005A",
+        "confidence": 85,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently use S83.005A, which takes authority over the referral form's M23.201; additionally, S83.005A is more appropriate for an acute workers' compensation injury, though adjuster verification is recommended to confirm the correct code for billing."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "This is a chronic musculoskeletal condition (medial meniscus tear) requiring an orthopedic knee brace for safe ambulation; an ICD conflict was present but resolved with high confidence, and no acute post-surgical or neurological urgency indicators are present.",
+    "notes": "1) ICD-10 code conflict detected between referral form (M23.201) and clinical notes/prescription (S83.005A) \u2014 adjuster Kevin Osei should be notified to confirm the correct billing code. 2) Clinical notes reference a 'post-operative assessment' and 'wound healing,' suggesting a prior surgical procedure, but no surgery date or operative report is included in the file \u2014 additional documentation may be warranted. 3) Patient height/weight is 6'1\" / 280 lbs \u2014 ensure selected knee brace model supports appropriate weight capacity. 4) Expected duration is indefinite (chronic condition) \u2014 flag for long-term authorization tracking. 5) Occupational therapy was recommended by Dr. Chen in conjunction with DME provision \u2014 coordinate with adjuster regarding OT authorization.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Kevin,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your insured, **Ralph Sanders**, under claim number **WC-2026-084497**.\n\nIn reviewing the referral, we have identified the following missing information that is required to move forward with processing:\n\n1. **Appointment Window** *(Hard Block \u2014 routing is currently on hold pending this information)*\n2. **Preferred Language**\n\nPlease note that the missing appointment window is preventing us from routing this referral, so we are unable to proceed until that information is received.\n\nWe kindly ask that you provide the above details **within 24 business hours** of receiving this email. If we do not hear back within that timeframe, it may result in further delays in care for Mr. Sanders.\n\nPlease feel free to reply directly to this email or reach out if you have any questions or need clarification.\n\nThank you for your prompt attention to this matter.\n\nBest regards,\nCoastal DME Intake Agent",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M23.201",
+      "notes_code": "S83.005A",
+      "rx_code": "S83.005A",
+      "resolved_code": "S83.005A",
+      "confidence": 85,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently use S83.005A, which takes authority over the referral form's M23.201; additionally, S83.005A is more appropriate for an acute workers' compensation injury, though adjuster verification is recommended to confirm the correct code for billing."
+    }
+  ]
+}

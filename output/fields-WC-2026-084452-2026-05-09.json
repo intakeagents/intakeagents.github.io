@@ -1,0 +1,66 @@
+{
+  "fields": {
+    "patient_name": "Betty Allen",
+    "dob": "12/04/1960",
+    "claim_number": "WC-2026-084452",
+    "injury_date": "04/28/2026",
+    "policy_number": "PM-WC-2026-44340",
+    "auth_ref": "AUTH-125990",
+    "appt_window": "",
+    "transportation": "no",
+    "language": "",
+    "dme_item": "Nebulizer",
+    "hcpcs": "E0570",
+    "quantity": "1",
+    "delivery_address": "2677 Rosemead Avenue, El Monte, CA 91731",
+    "physician_name": "Dr. Priya Sharma, MD",
+    "physician_npi": "3456789012",
+    "physician_practice": "Pacific Neurology Associates",
+    "physician_phone": "(310) 555-0322",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "J45.51",
+    "icd_description": "Severe persistent asthma with acute exacerbation",
+    "icd_conflict": false,
+    "icd_conflict_detail": "No ICD-10 code conflict was found. All three documents (referral form, clinical notes, and prescription) consistently document J45.51 \u2014 Severe persistent asthma with acute exacerbation.",
+    "confidence": 95,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "MED",
+    "priority_reason": "Severe persistent asthma with acute exacerbation is a significant respiratory diagnosis requiring a nebulizer, but no ICD conflict, no acute surgical or neurological emergency, and consistent documentation across all forms supports a medium priority classification.",
+    "notes": "1. SPECIALTY MISMATCH FLAG: The referring physician, Dr. Priya Sharma, MD, practices at Pacific Neurology Associates \u2014 a neurology practice \u2014 yet the diagnosis is severe persistent asthma (J45.51), a pulmonary/respiratory condition. This specialty-diagnosis mismatch warrants verification that the correct physician is listed and that a pulmonologist or appropriate specialist has reviewed the case. 2. CLINICAL NOTES INCONSISTENCY: The functional assessment in the clinical notes references 'assistive equipment to maintain safe ambulation in home environment,' which is more consistent with mobility DME (e.g., a walker or cane) rather than a nebulizer. This language appears copy-pasted and does not align with the respiratory diagnosis or the nebulizer order \u2014 recommend flagging for clinical review. 3. Treatment noted includes injection therapy and physical therapy, which are not typical treatments for asthma and may further support a concern about documentation accuracy or template reuse. 4. No preferred appointment window was specified. 5. Prescription is valid through 08/07/2026 (90 days from 05/09/2026).",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral for your patient, **Betty Allen**, under claim number **WC-2026-084452**. We are unable to complete the processing of this referral until the following information has been provided:\n\n1. **Appointment Window** *(Hard Block \u2013 Routing on Hold)*: The preferred or required appointment availability window for the patient. Please note that this item is currently preventing us from routing the referral, and processing cannot proceed until it is resolved.\n\n2. **Language**: The patient's preferred spoken language for communication and scheduling purposes.\n\nTo avoid any delays in care for Ms. Allen, we kindly ask that you supply the above information **within 24 business hours** of receiving this message. If we do not receive a response within that timeframe, the referral may be subject to further delays.\n\nPlease reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to working with you to ensure a smooth process for your patient.\n\nThank you for your time and cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

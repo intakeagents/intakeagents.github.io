@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Jeffrey Nelson",
+    "dob": "11/30/1977",
+    "claim_number": "WC-2026-084461",
+    "injury_date": "02/23/2026",
+    "policy_number": "PM-WC-2026-44349",
+    "auth_ref": "AUTH-452161",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "Patient self-transports",
+    "language": "",
+    "dme_item": "Continuous Glucose Monitor",
+    "hcpcs": "A9276",
+    "quantity": "1",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "Travelers Workers Comp",
+    "adjuster_name": "Sarah Mitchell",
+    "adjuster_email": "s.mitchell@travelers.com",
+    "adjuster_phone": "(312) 555-0177",
+    "icd_code": "E11.65",
+    "icd_description": "Type 2 diabetes mellitus with hyperglycemia",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code E11.9 (Type 2 diabetes mellitus without complications), while the clinical notes (Document 2) and prescription (Document 3) both list E11.65 (Type 2 diabetes mellitus with hyperglycemia). Per resolution protocol, the clinical notes and prescription take authority over the referral form; E11.65 is the more clinically specific and consistent code and was selected as the correct code.",
+    "confidence": 90,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "E11.9",
+        "notes_code": "E11.65",
+        "rx_code": "E11.65",
+        "resolved_code": "E11.65",
+        "confidence": 90,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the referral form's less specific E11.9 code per resolution protocol; confidence is high given two-document agreement and greater clinical specificity."
+      }
+    ],
+    "priority": "MED",
+    "priority_reason": "Patient has a stable chronic condition (Type 2 diabetes with hyperglycemia) requiring a continuous glucose monitor to support recovery from a workplace injury; the ICD conflict was resolved with high confidence and does not require escalation, placing this case at medium priority.",
+    "notes": "1) ICD-10 code on referral form (E11.9) does not match clinical notes and prescription (E11.65); referral form should be updated to reflect the correct code E11.65. 2) The functional assessment references a post-surgical rehabilitation protocol and workplace injury, but the DME ordered (CGM) is diabetes-related rather than directly injury-related \u2014 the nexus between the workers' comp injury and the diabetes DME is not explicitly documented and may require additional justification for the insurance carrier. 3) The medical justification language in both the clinical notes and prescription appears templated and generic; a more specific clinical rationale tying the CGM to the workplace injury recovery may strengthen the authorization. 4) Referral submitted 03/06/2026; prescription signed 03/06/2026 and valid for 90 days (expires 06/04/2026). 5) No interpreter or language requirement noted.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Hi Sarah,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Jeffrey Nelson**, under claim number **WC-2026-084461**.\n\nIn order to complete processing of this referral, we require the following information:\n\n- **Preferred language** of the patient (for communication and documentation purposes)\n\nTo avoid any delays in fulfilling Mr. Nelson's equipment needs, we kindly ask that you provide this information **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our intake team if you have any questions or need clarification.\n\nThank you for your prompt attention to this matter. We appreciate your partnership and look forward to your response.\n\nBest regards,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "E11.9",
+      "notes_code": "E11.65",
+      "rx_code": "E11.65",
+      "resolved_code": "E11.65",
+      "confidence": 90,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document E11.65 (Type 2 diabetes mellitus with hyperglycemia), which supersedes the referral form's less specific E11.9 code per resolution protocol; confidence is high given two-document agreement and greater clinical specificity."
+    }
+  ]
+}

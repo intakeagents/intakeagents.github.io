@@ -1,0 +1,75 @@
+{
+  "fields": {
+    "patient_name": "Teresa Ross",
+    "dob": "05/26/1958",
+    "claim_number": "WC-2026-084502",
+    "injury_date": "08/23/2026",
+    "policy_number": "PM-WC-2026-44390",
+    "auth_ref": "",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "quantity": "1",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "No conflict found. All three documents consistently document ICD-10 code G35 (Multiple sclerosis) across the referral form, clinical notes, and prescription.",
+    "confidence": 99,
+    "escalate": false,
+    "icd_conflicts": [],
+    "priority": "HIGH",
+    "priority_reason": "Multiple sclerosis (G35) is a progressive neurological condition warranting HIGH priority; physician notes that without the commode chair the patient is at significant risk of re-injury or clinical deterioration, and the authorization reference number is missing which may delay fulfillment.",
+    "notes": "1) Authorization Ref # is blank on the referral form \u2014 authorization from adjuster Linda Torres should be obtained before order processing. 2) Physician NPI is missing on all three documents; NPI must be obtained for billing and compliance purposes. 3) The clinical notes reference a 'post-operative assessment' and 'wound healing,' which is inconsistent with a primary diagnosis of Multiple sclerosis and no documented surgical procedure \u2014 clinical team should clarify whether a secondary diagnosis or recent procedure exists. 4) The referral was submitted on 09/09/2026, two days after the clinical notes visit date of 09/07/2026, and the prescription was signed 09/09/2026 \u2014 timeline is consistent. 5) Prescription is valid through 12/08/2026 (90 days from 09/09/2026). 6) Occupational therapy was recommended in conjunction with DME provision; coordination with OT referral may be warranted.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref"
+    ],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, Teresa Ross, under claim number **WC-2026-084502**.\n\nUpon reviewing the referral documentation, we have identified the following items that are required to move forward with processing:\n\n1. **Authorization Reference Number (auth_ref)** *(Hard Block \u2014 routing is on hold pending receipt)*\n2. **Prescribing Physician NPI (physician_npi)**\n\nPlease note that the missing authorization reference number is currently preventing us from routing this referral any further. We are unable to proceed until this information is received.\n\nTo avoid any delays in care for Ms. Ross, we kindly request that the above information be submitted within **24 business hours** of this notice. Please reply directly to this email or contact our intake team through your preferred channel.\n\nIf you believe this information has already been submitted or if you have any questions, please do not hesitate to reach out so we can resolve this promptly.\n\nThank you for your attention to this matter, and we appreciate your cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": []
+}

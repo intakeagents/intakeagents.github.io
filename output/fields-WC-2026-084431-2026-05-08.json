@@ -1,0 +1,97 @@
+{
+  "fields": {
+    "patient_name": "James Holloway",
+    "dob": "03/14/1968",
+    "claim_number": "WC-2026-084431",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "",
+    "language": "English",
+    "dme_item": "Rollator Walker (Bariatric, 400 lb capacity)",
+    "hcpcs": "E0143",
+    "delivery_address": "4821 Magnolia Drive, Torrance, CA 90503",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S83.209A",
+    "icd_description": "Tear of lateral meniscus, right knee, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "Referral form lists M23.611 with a handwritten note \"pre-surgical placeholder.\" Clinical notes and prescription both document S83.209A following ACL reconstruction on 01/28/2026, confirmed by operative report. Clinical notes and prescription are the authority documents. S83.209A selected.",
+    "confidence": 94,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient is post-ACL reconstruction surgery (01/28/2026) with an active ICD code conflict across documents, requiring a bariatric-rated rollator walker for safe ambulation due to significant fall risk, consistent with a high-priority post-surgical DME case.",
+    "notes": "1) Authorization reference number is missing from the referral form \u2014 adjuster Linda Torres should be contacted at (714) 555-0182 or l.torres@pacificmutual.com to obtain prior authorization before fulfillment. 2) The referral form diagnosis (M79.3 - Myalgia, pre-surgical) is outdated relative to the clinical notes and prescription (S83.209A, post-surgical); the referral form should be updated to reflect the correct post-surgical diagnosis. 3) Patient weight (285 lbs) exceeds the standard rollator weight limit (250 lbs); bariatric 400 lb capacity unit is clinically required and documented. 4) Preferred appointment window and transportation fields are blank \u2014 patient or case manager should be contacted to confirm. 5) Prescription is valid for 90 days from 02/05/2026 (expires 05/06/2026). 6) Expected duration of need is 6 months. 7) Clinical notes indicate the actual surgery was ACL reconstruction, while the ICD code S83.209A references a lateral meniscus tear \u2014 this may warrant clinical clarification with Dr. Chen, though the code and description are consistent across both the clinical notes and prescription."
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "transportation": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "transportation"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **James Holloway**, under claim **WC-2026-084431**. We are unable to advance this referral until the following outstanding items have been received:\n\n**Required to Release Routing Hold (Hard Blocks):**\n1. **Authorization Reference Number (auth_ref)** \u2013 A valid authorization reference is required before equipment processing can proceed.\n2. **Appointment Window (appt_window)** \u2013 Please provide the approved scheduling window for the patient's DME appointment.\n\n**Additional Missing Information:**\n3. **Transportation Arrangements (transportation)** \u2013 Please confirm whether transportation has been arranged or authorized for this patient, or provide the applicable details.\n\nPlease note that items 1 and 2 are currently placing a **hard block on routing**, meaning this referral cannot be assigned or fulfilled until both are resolved.\n\nWe kindly request a response within **24 business hours** of receipt of this email. Delays in providing the above information may impact the patient's care timeline. If you have any questions or require clarification, please do not hesitate to contact us directly.\n\nThank you for your prompt attention to this matter.\n\nSincerely,\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M23.611",
+      "form_desc": "Spontaneous disruption of ACL, right knee (pre-surgical placeholder)",
+      "notes_code": "S83.209A",
+      "notes_desc": "Tear of lateral meniscus, right knee, initial encounter",
+      "rx_code": "S83.209A",
+      "rx_desc": "Tear of lateral meniscus, right knee, initial encounter",
+      "resolved_code": "S83.209A",
+      "resolved_desc": "Tear of lateral meniscus, right knee, initial encounter",
+      "confidence": 94,
+      "escalate": false,
+      "reasoning": "Referral form lists M23.611 with a handwritten note \"pre-surgical placeholder.\" Clinical notes and prescription both document S83.209A following ACL reconstruction on 01/28/2026, confirmed by operative report. Clinical notes and prescription are the authority documents. S83.209A selected."
+    },
+    {
+      "conflict_id": 2,
+      "label": "Post-Procedural Pain Classification",
+      "form_code": "G89.11",
+      "form_desc": "Acute pain due to trauma",
+      "notes_code": "G89.18",
+      "notes_desc": "Other acute post-procedural pain",
+      "rx_code": "G89.18",
+      "rx_desc": "Other acute post-procedural pain",
+      "resolved_code": "G89.18",
+      "resolved_desc": "Other acute post-procedural pain",
+      "confidence": 86,
+      "escalate": false,
+      "reasoning": "Form lists G89.11 (acute pain due to trauma). Clinical notes and prescription list G89.18 (other acute post-procedural pain), which more precisely classifies pain arising from the surgical procedure itself rather than the original injury. Clinical notes and prescription take authority. G89.18 selected."
+    },
+    {
+      "conflict_id": 3,
+      "label": "Knee Stiffness \u2014 Laterality",
+      "form_code": "M25.361",
+      "form_desc": "Stiffness of right knee, not elsewhere classified",
+      "notes_code": "M25.362",
+      "notes_desc": "Stiffness of left knee, not elsewhere classified",
+      "rx_code": "M25.361",
+      "rx_desc": "Stiffness of right knee, not elsewhere classified",
+      "resolved_code": null,
+      "resolved_desc": null,
+      "confidence": 71,
+      "escalate": true,
+      "reasoning": "Form and prescription agree on M25.361 (right knee stiffness). Clinical notes document M25.362 (left knee stiffness) as a new post-surgical complaint. The laterality is genuinely disputed \u2014 the operative report covers the right knee (ACL reconstruction) but clinical notes describe new left knee stiffness as a secondary complaint. Evidence is split 2:1. Confidence 71% is below the 80% threshold. Agent cannot resolve without specialist determination of which knee the secondary stiffness complaint refers to."
+    }
+  ]
+}

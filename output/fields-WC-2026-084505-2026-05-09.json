@@ -1,0 +1,87 @@
+{
+  "fields": {
+    "patient_name": "Juan Jenkins",
+    "dob": "12/11/1973",
+    "claim_number": "WC-2026-084505",
+    "injury_date": "06/22/2026",
+    "policy_number": "PM-WC-2026-44393",
+    "auth_ref": "AUTH-797660",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Power Wheelchair",
+    "hcpcs": "K0823",
+    "quantity": "1",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "physician_practice": "Valley Spine Institute",
+    "physician_phone": "(818) 555-0167",
+    "insurance_carrier": "Liberty Mutual Workers Comp",
+    "adjuster_name": "James Archer",
+    "adjuster_email": "j.archer@libertymutual.com",
+    "adjuster_phone": "(617) 555-0211",
+    "icd_code": "M47.816",
+    "icd_description": "Spondylosis with radiculopathy, lumbar region",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M54.5 (Low back pain) with a corresponding description of 'Low back pain', while both the clinical notes (Document 2) and the prescription (Document 3) consistently list M47.816 (Spondylosis with radiculopathy, lumbar region). Per resolution rules, the clinical notes and prescription take authority over the referral form; M47.816 was selected as the correct code as it is the more clinically specific and accurate diagnosis supported by two of three documents.",
+    "confidence": 92,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M54.5",
+        "notes_code": "M47.816",
+        "rx_code": "M47.816",
+        "resolved_code": "M47.816",
+        "confidence": 92,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the referral form's less specific M54.5 (Low back pain) per resolution authority rules, and is also the more clinically specific diagnosis."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The patient has a power wheelchair order (K0823) for a neurologically significant diagnosis (spondylosis with radiculopathy) with significant functional limitations documented just 6 days post-injury, and an ICD code conflict was present on the referral form requiring resolution.",
+    "notes": "1. ICD-10 code discrepancy: Referral form uses M54.5 (Low back pain) but clinical notes and prescription both use M47.816 (Spondylosis with radiculopathy, lumbar region) \u2014 M47.816 adopted as authoritative. 2. Physician NPI is blank across all three documents and must be obtained before processing. 3. The referral form lists James Archer as both the insurance adjuster and the case manager (per page 2 submission footer). 4. Patient self-transports per referral form. 5. Prescription is valid through 09/25/2026 (90 days from 06/28/2026). 6. Physical therapy is ongoing per clinical notes, suggesting the power wheelchair need may be reassessed at the 12-month mark.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 0,
+      "confirmations": 0,
+      "fired_rules": [],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": false
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear James Archer,\n\nI hope this message finds you well. I am reaching out on behalf of Coastal DME regarding a durable medical equipment referral for your insured, **Juan Jenkins**, under claim number **WC-2026-084505**.\n\nIn order to process and complete this referral in a timely manner, we require the following information:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) is needed to validate the referral and proceed with fulfillment.\n\nTo avoid any delays in care for Mr. Jenkins, we kindly ask that you provide the requested information **within 24 business hours** of receiving this email.\n\nPlease feel free to reply directly to this message or contact our intake team if you have any questions or require assistance locating the necessary details.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M54.5",
+      "notes_code": "M47.816",
+      "rx_code": "M47.816",
+      "resolved_code": "M47.816",
+      "confidence": 92,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document M47.816 (Spondylosis with radiculopathy, lumbar region), which supersedes the referral form's less specific M54.5 (Low back pain) per resolution authority rules, and is also the more clinically specific diagnosis."
+    }
+  ]
+}

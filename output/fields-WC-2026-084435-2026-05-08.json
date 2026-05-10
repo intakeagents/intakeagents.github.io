@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "David Okafor",
+    "dob": "09/30/1971",
+    "claim_number": "WC-2026-084435",
+    "auth_ref": "AUTH-340174",
+    "appt_window": "Weekdays 8-10 AM",
+    "transportation": "arranged",
+    "language": "Vietnamese",
+    "dme_item": "Cervical Collar",
+    "hcpcs": "L0174",
+    "delivery_address": "1089 Valley View Drive, Burbank, CA 91505",
+    "physician_name": "Dr. Marcus Johnson, MD",
+    "physician_npi": "",
+    "insurance_carrier": "State Compensation Insurance Fund",
+    "adjuster_name": "Marcus Webb",
+    "adjuster_email": "m.webb@statefund.com",
+    "adjuster_phone": "(415) 555-0298",
+    "icd_code": "S13.4XXA",
+    "icd_description": "Sprain of ligaments of cervical spine",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code S14.109A (Unspecified injury at C4 level of cervical spinal cord), while both the clinical notes (document 2) and the prescription (document 3) consistently list S13.4XXA (Sprain of ligaments of cervical spine). Per resolution protocol, the clinical notes and prescription are treated as authoritative over the referral form. S13.4XXA has been selected as the correct code. Additionally, the medical justification referencing ambulation support and fall prevention is more consistent with a cervical sprain than a spinal cord injury, further supporting S13.4XXA.",
+    "confidence": 82,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "The confirmed diagnosis is a cervical ligament sprain (S13.4XXA), a moderate musculoskeletal condition requiring an orthopedic cervical collar, but the ICD conflict with a more severe spinal cord injury code (S14.109A) on the referral form warrants close review despite resolved confidence above threshold.",
+    "notes": "1) ICD conflict detected and resolved \u2014 referral form listed S14.109A (cervical spinal cord injury) but clinical notes and prescription both specify S13.4XXA (cervical sprain); recommend verification with physician or adjuster to confirm correct code before billing. 2) Physician NPI is missing across all three documents \u2014 must be obtained before claim submission. 3) Medical justification references ambulation/fall prevention, which is atypical for a cervical collar; may warrant clinical clarification. 4) Vietnamese interpreter required for delivery appointment. 5) Referral submitted 10 days after injury date (12/18/2026), submitted 12/28/2026."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Marcus Webb,\n\nI hope this message finds you well. I am reaching out regarding a durable medical equipment (DME) referral currently in process for your claimant, **David Okafor**, under claim number **WC-2026-084435**.\n\nIn order to move forward and complete this referral, we require the following information:\n\n- **Physician NPI** \u2013 The ordering physician's National Provider Identifier (NPI) number\n\nTo avoid any delay in processing and equipment fulfillment for Mr. Okafor, please provide the above information **within 24 business hours** of receiving this email.\n\nYou may reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and are happy to assist with any questions you may have.\n\nThank you for your cooperation.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

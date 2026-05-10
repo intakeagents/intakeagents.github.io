@@ -1,0 +1,101 @@
+{
+  "fields": {
+    "patient_name": "Kathleen Sanchez",
+    "dob": "11/07/1959",
+    "claim_number": "WC-2026-084474",
+    "injury_date": "01/19/2026",
+    "policy_number": "PM-WC-2026-44362",
+    "auth_ref": "",
+    "appt_window": "",
+    "transportation": "Arranged",
+    "language": "",
+    "dme_item": "Knee Brace",
+    "hcpcs": "L1820",
+    "quantity": "1",
+    "delivery_address": "3756 Cherry Blossom Court, Gardena, CA 90247",
+    "physician_name": "Dr. Sarah Chen, MD",
+    "physician_npi": "1234567890",
+    "physician_practice": "South Bay Orthopedic Group",
+    "physician_phone": "(310) 555-0244",
+    "insurance_carrier": "Pacific Mutual Workers Comp",
+    "adjuster_name": "Linda Torres",
+    "adjuster_email": "l.torres@pacificmutual.com",
+    "adjuster_phone": "(714) 555-0182",
+    "icd_code": "S83.005A",
+    "icd_description": "Unspecified tear of medial meniscus, right knee",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (document 1) lists ICD-10 code M23.201 (Derangement of medial meniscus, right knee), while both the clinical notes (document 2) and prescription (document 3) consistently use S83.005A (Unspecified tear of medial meniscus, right knee). Per resolution protocol, the clinical notes and prescription take authority over the referral form; S83.005A is selected as the correct code. Additionally, S83.005A is more clinically specific given the post-surgical rehabilitation context noted in the clinical notes.",
+    "confidence": 88,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M23.201",
+        "notes_code": "S83.005A",
+        "rx_code": "S83.005A",
+        "resolved_code": "S83.005A",
+        "confidence": 88,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently use S83.005A and carry greater clinical authority than the referral form; the post-surgical rehabilitation context further supports the acute tear code S83.005A over the chronic derangement code M23.201."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The case involves a post-surgical rehabilitation protocol following an acute meniscal tear, an ICD code conflict requiring resolution, and the clinical notes indicate the patient is unable to safely ambulate without the assistive device, creating immediate fall risk.",
+    "notes": "1) ICD-10 conflict detected: referral form uses M23.201 but clinical notes and prescription use S83.005A \u2014 resolved in favor of S83.005A. Recommend confirming correct code with Dr. Sarah Chen's office before finalizing. 2) Authorization Ref # is missing \u2014 authorization from adjuster Linda Torres at Pacific Mutual Workers Comp should be obtained prior to dispensing. 3) Patient height/weight documented as 6'3\" / 252 lbs \u2014 ensure L1820 knee brace ordered is rated for appropriate weight capacity and correct sizing is confirmed. 4) Clinical notes describe a post-surgical rehabilitation protocol, which may affect brace specifications (standard vs. post-op brace); verify with prescribing physician whether L1820 (standard knee orthosis) is the appropriate HCPCS code vs. a post-surgical alternative. 5) Preferred appointment window was not provided \u2014 outreach to patient or adjuster recommended to schedule delivery.",
+    "kg_validation": {
+      "status": "FLAGGED",
+      "rules_checked": 24,
+      "rules_fired": 1,
+      "confirmations": 0,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-015",
+          "source": "CMS DME MAC Jurisdiction D \u2014 Prior Authorization Requirements",
+          "action": "flag",
+          "message": "Workers compensation claim \u2014 authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {
+      "auth_ref": "HARD BLOCK",
+      "appt_window": "HARD BLOCK",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [
+      "auth_ref",
+      "appt_window"
+    ],
+    "required_missing": [
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Linda Torres,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your insured, **Kathleen Sanchez**, under claim number **WC-2026-084474**.\n\nIn reviewing the referral, we have identified the following missing information that is required to move forward with processing:\n\n- **Authorization Reference Number (auth_ref)** *(Hard Block \u2014 routing is on hold pending receipt)*\n- **Appointment Window (appt_window)** *(Hard Block \u2014 routing is on hold pending receipt)*\n- **Preferred Language (language)*\n\nPlease note that the first two items above are hard blocks, meaning the referral cannot be routed or scheduled until they are received. We kindly ask that you provide all outstanding information **within 24 business hours** of this notice to avoid any further delays in care for Ms. Sanchez.\n\nYou may reply directly to this email or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nSincerely,\n\n**Coastal DME Intake Agent**\nCoastal DME",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M23.201",
+      "notes_code": "S83.005A",
+      "rx_code": "S83.005A",
+      "resolved_code": "S83.005A",
+      "confidence": 88,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently use S83.005A and carry greater clinical authority than the referral form; the post-surgical rehabilitation context further supports the acute tear code S83.005A over the chronic derangement code M23.201."
+    }
+  ]
+}

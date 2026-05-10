@@ -1,0 +1,45 @@
+{
+  "fields": {
+    "patient_name": "Deborah Baker",
+    "dob": "06/19/1962",
+    "claim_number": "WC-2026-084460",
+    "auth_ref": "AUTH-970914",
+    "appt_window": "Weekdays 2-4 PM",
+    "transportation": "no",
+    "language": "English",
+    "dme_item": "Shoulder Immobilizer",
+    "hcpcs": "L3670",
+    "delivery_address": "892 Sunset Ridge Road, Pasadena, CA 91101",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "S43.004A",
+    "icd_description": "Unspecified dislocation of right shoulder joint",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code S40.011A (Contusion of right shoulder), while the clinical notes (Document 2) and prescription (Document 3) both list S43.004A (Unspecified dislocation of right shoulder joint). Per resolution protocol, the clinical notes and prescription take authority over the referral form. S43.004A has been selected as the correct code, as it is supported by two clinical documents and represents the more clinically specific and severe diagnosis documented by the treating physician.",
+    "confidence": 88,
+    "escalate": false,
+    "priority": "MED",
+    "priority_reason": "Shoulder dislocation (S43.004A) is an orthopedic injury requiring a standard immobilizer brace with ongoing physical therapy, representing a moderate musculoskeletal condition without acute surgical, neurological, or life-threatening indicators; however, the ICD conflict warrants adjuster notification.",
+    "notes": "1) ICD-10 conflict identified and resolved \u2014 adjuster Robert Campos should be notified of the discrepancy between the referral form (S40.011A) and the clinical/prescription documents (S43.004A) to ensure the authorization AUTH-970914 was issued against the correct diagnosis code. 2) Physician NPI is missing from all three documents and should be obtained before claim submission. 3) Patient height/weight recorded as 6'4\" / 239 lbs \u2014 sizing for the shoulder immobilizer should be confirmed to ensure proper fit. 4) Prescription is valid through 01/23/2027 (90 days from 10/25/2026). 5) Expected duration of need is 6 months."
+  },
+  "completeness": {
+    "gaps": {
+      "physician_npi": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "physician_npi"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a pending durable medical equipment (DME) referral for your patient, **Deborah Baker**, under claim number **WC-2026-084460**.\n\nIn order to complete the processing of this referral, we are currently missing the following required information:\n\n- **Physician NPI** \u2013 Please provide the ordering physician's National Provider Identifier (NPI) number.\n\nTo avoid any delays in fulfilling this referral, we kindly ask that you provide the above information **within 24 business hours** of receiving this email.\n\nPlease reply directly to this message or contact our intake team at your earliest convenience. We appreciate your prompt attention to this matter and look forward to your response.\n\nThank you for your cooperation.\n\nBest regards,\n**Coastal DME Intake Agent**",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

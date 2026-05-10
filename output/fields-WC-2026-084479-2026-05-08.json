@@ -1,0 +1,47 @@
+{
+  "fields": {
+    "patient_name": "Jerry Morgan",
+    "dob": "08/10/1963",
+    "claim_number": "WC-2026-084479",
+    "auth_ref": "AUTH-870214",
+    "appt_window": "Weekdays 1-3 PM",
+    "transportation": "",
+    "language": "",
+    "dme_item": "Commode Chair",
+    "hcpcs": "E0163",
+    "delivery_address": "492 Harbor Drive, Wilmington, CA 90744",
+    "physician_name": "Dr. Robert Williams, MD",
+    "physician_npi": "4567890123",
+    "insurance_carrier": "Zenith National Insurance",
+    "adjuster_name": "Robert Campos",
+    "adjuster_email": "r.campos@zenithnational.com",
+    "adjuster_phone": "(800) 555-0234",
+    "icd_code": "G35",
+    "icd_description": "Multiple sclerosis",
+    "icd_conflict": false,
+    "icd_conflict_detail": "All three documents (referral form, clinical notes, and prescription) consistently list ICD-10 code G35 (Multiple sclerosis). No conflict was found across any of the documents.",
+    "confidence": 98,
+    "escalate": false,
+    "priority": "HIGH",
+    "priority_reason": "Patient has a confirmed neurological condition (Multiple sclerosis, ICD-10 G35) with documented fall risk and inability to safely navigate the home environment, which qualifies as HIGH priority per neurological condition criteria.",
+    "notes": "1) There is a potential clinical incongruity: the claim is filed as a Workers' Compensation case (WC-2026-084479) with an injury date of 08/03/2026, but the diagnosis is Multiple sclerosis (G35), a pre-existing chronic neurological condition \u2014 not typically an occupational injury. This warrants review by the adjuster or a clinical reviewer. 2) Patient weight is 240 lbs at 5'1\"; standard commode chairs typically have a weight capacity of 250-300 lbs. Verify that the ordered E0163 unit meets the patient's weight requirements, or consider a bariatric commode if necessary. 3) The referring practice is Desert Orthopedics, which may not be the most appropriate specialty for managing Multiple sclerosis \u2014 neurology involvement should be confirmed. 4) Prescription is valid through 11/17/2026 (90 days from 08/19/2026). 5) Expected duration of need is 3 months."
+  },
+  "completeness": {
+    "gaps": {
+      "transportation": "REQUIRED",
+      "language": "REQUIRED"
+    },
+    "hard_blocks": [],
+    "required_missing": [
+      "transportation",
+      "language"
+    ],
+    "is_complete": false
+  },
+  "email_body": "Dear Robert Campos,\n\nI hope this message finds you well. I am reaching out regarding a DME referral for your patient, **Jerry Morgan**, under claim number **WC-2026-084479**. In order to move forward with processing this referral, we require the following information to complete our intake:\n\n- **Transportation** \u2013 Please provide the applicable transportation arrangements or requirements for this patient.\n- **Language** \u2013 Please indicate the patient's preferred language for communication and documentation purposes.\n\nKindly note that there are currently **no hard blocks or routing holds** associated with this claim at this time.\n\nTo avoid any delays in service for your patient, we kindly ask that you provide the requested information **within 24 business hours** of receiving this email. Please reply directly to this message or contact our intake team at your earliest convenience.\n\nThank you for your prompt attention to this matter. We appreciate your cooperation and look forward to your response.\n\nWarm regards,\n\n**Coastal DME Intake Agent**\nCoastal DME Intake Department",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ]
+}

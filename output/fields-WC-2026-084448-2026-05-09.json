@@ -1,0 +1,100 @@
+{
+  "fields": {
+    "patient_name": "Nancy Clark",
+    "dob": "09/12/1957",
+    "claim_number": "WC-2026-084448",
+    "injury_date": "04/17/2026",
+    "policy_number": "PM-WC-2026-44336",
+    "auth_ref": "AUTH-172132",
+    "appt_window": "Weekdays 9-11 AM",
+    "transportation": "Arranged",
+    "language": "English",
+    "dme_item": "Rollator Walker",
+    "hcpcs": "E0143",
+    "quantity": "1",
+    "delivery_address": "621 Westwood Boulevard, Los Angeles, CA 90024",
+    "physician_name": "Dr. Lisa Park, MD",
+    "physician_npi": "5678901234",
+    "physician_practice": "Bay Area Physical Medicine",
+    "physician_phone": "(415) 555-0188",
+    "insurance_carrier": "AmTrust Financial",
+    "adjuster_name": "Kevin Osei",
+    "adjuster_email": "k.osei@amtrust.com",
+    "adjuster_phone": "(216) 555-0189",
+    "icd_code": "S83.209A",
+    "icd_description": "Tear of meniscus, right knee, initial encounter",
+    "icd_conflict": true,
+    "icd_conflict_detail": "The referral form (Document 1) lists ICD-10 code M79.3 (Myalgia), while both the clinical notes (Document 2) and the prescription (Document 3) consistently list S83.209A (Tear of meniscus, right knee, initial encounter). Per resolution protocol, the clinical notes and prescription are treated as the authoritative sources, and S83.209A has been selected as the correct code. The M79.3 on the referral form appears to be a data entry error or placeholder.",
+    "confidence": 92,
+    "escalate": false,
+    "icd_conflicts": [
+      {
+        "conflict_id": 1,
+        "label": "Primary Diagnosis",
+        "form_code": "M79.3",
+        "notes_code": "S83.209A",
+        "rx_code": "S83.209A",
+        "resolved_code": "S83.209A",
+        "confidence": 92,
+        "escalate": false,
+        "reasoning": "Clinical notes and prescription both consistently document S83.209A (Tear of meniscus, right knee, initial encounter), which is clinically consistent with the post-surgical rehabilitation treatment described, overriding the referral form's M79.3 (Myalgia) entry."
+      }
+    ],
+    "priority": "HIGH",
+    "priority_reason": "The patient is post-surgical (meniscus tear, right knee, initial encounter) with an active post-surgical rehabilitation protocol, representing an acute orthopedic condition requiring prompt DME delivery to support safe ambulation and recovery.",
+    "notes": "1) ICD-10 code mismatch between referral form (M79.3 - Myalgia) and clinical/prescription documents (S83.209A - Tear of meniscus, right knee) should be flagged for correction on the referral form before billing. 2) Diagnosis description on the referral form ('Myalgia') does not align with the clinical picture of post-surgical knee rehabilitation, further supporting the override to S83.209A. 3) The prescription is valid for 90 days from 04/28/2026, expiring approximately 07/27/2026. 4) Duration of need is 12 months. 5) Kevin Osei is listed as both the insurance adjuster and the case manager on the referral submission.",
+    "kg_validation": {
+      "status": "VALIDATED",
+      "rules_checked": 24,
+      "rules_fired": 2,
+      "confirmations": 2,
+      "fired_rules": [
+        {
+          "rule_id": "DME-ICD-002",
+          "source": "ICD-10-CM Guidelines \u00a7I.C.19.a \u2014 Initial vs Subsequent Encounter",
+          "action": "confirm",
+          "message": "S83.209A is the correct post-surgical ACL encounter code per ICD-10-CM \u00a7I.C.19.a.",
+          "confidence": 100,
+          "deterministic": true
+        },
+        {
+          "rule_id": "DME-ICD-007",
+          "source": "CMS LCD L33803 \u2014 Walkers, Standard and Heavy Duty",
+          "action": "confirm",
+          "message": "S83.209A qualifies as a covered diagnosis for E0143 per CMS LCD L33803.",
+          "confidence": 100,
+          "deterministic": true
+        }
+      ],
+      "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+      "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+      "rule_set_date": "2026-01-01",
+      "is_post_surgical": true
+    }
+  },
+  "completeness": {
+    "gaps": {},
+    "hard_blocks": [],
+    "required_missing": [],
+    "is_complete": true
+  },
+  "email_body": "",
+  "pdf_files": [
+    "1_referral_form.pdf",
+    "2_clinical_notes.pdf",
+    "3_prescription.pdf"
+  ],
+  "icd_conflicts": [
+    {
+      "conflict_id": 1,
+      "label": "Primary Diagnosis",
+      "form_code": "M79.3",
+      "notes_code": "S83.209A",
+      "rx_code": "S83.209A",
+      "resolved_code": "S83.209A",
+      "confidence": 92,
+      "escalate": false,
+      "reasoning": "Clinical notes and prescription both consistently document S83.209A (Tear of meniscus, right knee, initial encounter), which is clinically consistent with the post-surgical rehabilitation treatment described, overriding the referral form's M79.3 (Myalgia) entry."
+    }
+  ]
+}
