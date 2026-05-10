@@ -146,9 +146,8 @@ def process_referral(folder: Path) -> dict:
         with _lock:
             _state["stats"]["pages_read"] += pages
         _log(f"{claim} — {pages} pages read across {pdf_count} documents")
-        time.sleep(5)  # hold "Reading docs..." visible for ~5s
 
-        # ── STEP 2: Extract fields via LLM (visible for ~10s) ─────────────────
+        # ── STEP 2: Extract fields via LLM ────────────────────────────────────
         _update_queue_item(claim, substep="Extracting fields...")
         _log(f"{claim} — sending to LLM for extraction")
         with _claude_semaphore:
@@ -156,9 +155,8 @@ def process_referral(folder: Path) -> dict:
         patient = fields.get("patient_name", "Unknown")
         equipment = fields.get("dme_item", "")
 
-        _update_queue_item(claim, patient=patient, equipment=equipment, substep="Running intelligence...")
+        _update_queue_item(claim, patient=patient, equipment=equipment)
         _log(f"{claim} — extracted: {patient} | {fields.get('icd_code', '—')}")
-        time.sleep(10)  # hold "Extracting fields..." visible for ~10s
 
         # ── STEP 3: Knowledge Graph validation ────────────────────────────────
         _update_queue_item(claim, substep="KG validation...")
@@ -166,7 +164,6 @@ def process_referral(folder: Path) -> dict:
         kg_report = kg_validate(fields)
         fields["kg_validation"] = kg_report
         _log(f"{claim} — KG: {kg_report['status']} · {kg_report['rules_fired']} rules · {kg_report['confirmations']} confirmed")
-        time.sleep(5)  # hold "KG validation..." visible for ~5s
 
         # ICD conflict
         if fields.get("icd_conflict"):
