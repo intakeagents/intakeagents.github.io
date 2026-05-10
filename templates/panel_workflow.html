@@ -12,69 +12,84 @@
   .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
   .nav-back { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; font-weight: 600; }
   .nav-back:hover { color: #fff; }
-  .page { max-width: 1060px; margin: 0 auto; padding: 82px 24px 48px; }
+  .page { max-width: 1000px; margin: 0 auto; padding: 82px 24px 48px; }
   .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(245,158,11,.1); color: #d97706; border: 1px solid rgba(245,158,11,.25); margin-bottom: 14px; }
   h1 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
-  .sub { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 36px; }
+  .sub { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 40px; }
 
-  /* FLOW DIAGRAM */
-  .flow { display: flex; flex-direction: column; gap: 0; }
-
-  /* CHANNELS ROW */
-  .channels-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 8px; }
-  .channel { background: #fff; border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 10px 18px; font-size: 12px; font-weight: 700; color: #475569; display: flex; align-items: center; gap: 6px; border-top: 3px solid #3b82f6; }
-
-  /* ARROW */
-  .arrow-down { text-align: center; font-size: 20px; color: #cbd5e1; line-height: 1; margin: 4px 0; }
-
-  /* STAGE */
-  .stage { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 0; overflow: hidden; margin-bottom: 4px; }
-  .stage-header { padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid #f1f5f9; }
-  .stage-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; }
-  .stage-title { font-size: 14px; font-weight: 700; color: #0f172a; }
-  .stage-tag { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 2px 8px; border-radius: 99px; }
-  .stage-body { padding: 14px 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .stage-item { font-size: 12px; color: #475569; display: flex; gap: 7px; align-items: flex-start; line-height: 1.45; }
-  .stage-item-icon { flex-shrink: 0; font-size: 13px; margin-top: 0px; }
-
-  /* Stage colors */
-  .s1 .stage-num { background: #3b82f6; }
-  .s1 .stage-tag { background: rgba(59,130,246,.1); color: #2563eb; border: 1px solid rgba(59,130,246,.2); }
-  .s2 .stage-num { background: #8b5cf6; }
-  .s2 .stage-tag { background: rgba(139,92,246,.1); color: #7c3aed; border: 1px solid rgba(139,92,246,.2); }
-  .s3 .stage-num { background: #f59e0b; }
-  .s3 .stage-tag { background: rgba(245,158,11,.1); color: #d97706; border: 1px solid rgba(245,158,11,.2); }
-  .s4 .stage-num { background: #22c55e; }
-  .s4 .stage-tag { background: rgba(34,197,94,.1); color: #16a34a; border: 1px solid rgba(34,197,94,.2); }
-  .s5 .stage-num { background: #14b8a6; }
-  .s5 .stage-tag { background: rgba(20,184,166,.1); color: #0f766e; border: 1px solid rgba(20,184,166,.2); }
-  .s6 .stage-num { background: #1e3a5f; }
-  .s6 .stage-tag { background: rgba(30,58,95,.1); color: #1e3a5f; border: 1px solid rgba(30,58,95,.2); }
+  /* STEP */
+  .step { display: grid; grid-template-columns: 48px 1fr; gap: 0; margin-bottom: 0; position: relative; }
+  .step-left { display: flex; flex-direction: column; align-items: center; }
+  .step-num { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; color: #fff; flex-shrink: 0; z-index: 1; }
+  .step-line { width: 2px; flex: 1; min-height: 20px; margin: 4px 0; }
+  .step-right { padding: 0 0 32px 20px; }
+  .step-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 2px 9px; border-radius: 99px; margin-bottom: 8px; }
+  .step-title { font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 6px; line-height: 1.3; }
+  .step-narrative { font-size: 14px; color: #1e3a5f; font-weight: 600; line-height: 1.6; margin-bottom: 12px; font-style: italic; border-left: 3px solid; padding-left: 12px; }
+  .step-details { display: flex; flex-direction: column; gap: 7px; }
+  .step-detail { font-size: 12px; color: #64748b; display: flex; gap: 8px; line-height: 1.5; }
+  .step-detail-icon { flex-shrink: 0; }
 
   /* BRANCH */
-  .branch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 4px 0; }
-  .branch-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; }
-  .branch-title { font-size: 12px; font-weight: 700; color: #0f172a; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-  .branch-item { font-size: 12px; color: #64748b; padding: 4px 0; border-bottom: 1px solid #f8fafc; display: flex; gap: 6px; }
-  .branch-item:last-child { border-bottom: none; }
+  .branch-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px; margin-left: 68px; }
+  .branch-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 18px; }
+  .branch-title { font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .branch-narrative { font-size: 12px; color: #374151; font-style: italic; font-weight: 600; margin-bottom: 8px; line-height: 1.5; border-left: 2px solid #e2e8f0; padding-left: 10px; }
+  .branch-detail { font-size: 11px; color: #64748b; padding: 4px 0; border-bottom: 1px solid #f8fafc; display: flex; gap: 6px; line-height: 1.4; }
+  .branch-detail:last-child { border-bottom: none; }
+
+  /* Step color themes */
+  .s1 .step-num { background: #3b82f6; }
+  .s1 .step-line { background: linear-gradient(to bottom, #3b82f6, #8b5cf6); }
+  .s1 .step-tag { background: rgba(59,130,246,.1); color: #2563eb; border: 1px solid rgba(59,130,246,.2); }
+  .s1 .step-narrative { border-left-color: #3b82f6; color: #1d4ed8; }
+
+  .s2 .step-num { background: #8b5cf6; }
+  .s2 .step-line { background: linear-gradient(to bottom, #8b5cf6, #f59e0b); }
+  .s2 .step-tag { background: rgba(139,92,246,.1); color: #7c3aed; border: 1px solid rgba(139,92,246,.2); }
+  .s2 .step-narrative { border-left-color: #8b5cf6; color: #6d28d9; }
+
+  .s3 .step-num { background: #f59e0b; }
+  .s3 .step-line { background: linear-gradient(to bottom, #f59e0b, #22c55e); }
+  .s3 .step-tag { background: rgba(245,158,11,.1); color: #d97706; border: 1px solid rgba(245,158,11,.2); }
+  .s3 .step-narrative { border-left-color: #f59e0b; color: #b45309; }
+
+  .s4 .step-num { background: #22c55e; }
+  .s4 .step-line { background: linear-gradient(to bottom, #22c55e, #14b8a6); }
+  .s4 .step-tag { background: rgba(34,197,94,.1); color: #16a34a; border: 1px solid rgba(34,197,94,.2); }
+  .s4 .step-narrative { border-left-color: #22c55e; color: #15803d; }
+
+  .s5 .step-num { background: #14b8a6; }
+  .s5 .step-line { background: linear-gradient(to bottom, #14b8a6, #1e3a5f); }
+  .s5 .step-tag { background: rgba(20,184,166,.1); color: #0f766e; border: 1px solid rgba(20,184,166,.2); }
+  .s5 .step-narrative { border-left-color: #14b8a6; color: #0f766e; }
+
+  .s6 .step-num { background: #1e3a5f; }
+  .s6 .step-line { background: #e2e8f0; }
+  .s6 .step-tag { background: rgba(30,58,95,.1); color: #1e3a5f; border: 1px solid rgba(30,58,95,.2); }
+  .s6 .step-narrative { border-left-color: #1e3a5f; color: #1e3a5f; }
+
+  /* CHANNELS */
+  .channels { display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap; margin-left: 68px; }
+  .channel { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 8px 16px; font-size: 12px; font-weight: 700; color: #475569; display: flex; align-items: center; gap: 6px; border-top: 3px solid #3b82f6; }
 
   /* OUTPUT */
-  .output-box { background: linear-gradient(135deg, #1e3a5f, #1e40af); color: #fff; border-radius: 14px; padding: 20px 24px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .out-item { text-align: center; }
-  .out-icon { font-size: 22px; margin-bottom: 4px; }
-  .out-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.9); }
+  .output-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-left: 68px; margin-top: -16px; }
+  .out-card { background: linear-gradient(135deg, #1e3a5f, #1e40af); border-radius: 12px; padding: 16px; text-align: center; color: #fff; }
+  .out-icon { font-size: 20px; margin-bottom: 4px; }
+  .out-label { font-size: 11px; font-weight: 700; }
   .out-desc { font-size: 10px; color: rgba(255,255,255,.6); margin-top: 2px; }
 
   /* LEGEND */
-  .legend { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px; padding: 14px 18px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 28px; padding: 12px 16px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
   .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #64748b; font-weight: 600; }
   .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
   @media (max-width: 700px) {
-    .stage-body { grid-template-columns: 1fr; }
-    .branch-row { grid-template-columns: 1fr; }
-    .output-box { grid-template-columns: 1fr 1fr; }
-    .channels-row { flex-wrap: wrap; }
+    .branch-row { grid-template-columns: 1fr; margin-left: 0; }
+    .channels { margin-left: 0; }
+    .output-row { grid-template-columns: 1fr 1fr; margin-left: 0; }
+    .step { grid-template-columns: 36px 1fr; }
   }
 </style>
 </head>
@@ -86,138 +101,153 @@
 
 <div class="page">
   <div class="tag">Architecture</div>
-  <h1>Technical Workflow — End-to-End Agent Network</h1>
-  <p class="sub">Every channel, every agent, every LLM call, every deterministic rule — from referral arrival to route-ready episode.</p>
+  <h1>How the Agent Works</h1>
+  <p class="sub">Follow the agent step by step — what it sees, what it decides, and what it does at every stage from referral arrival to route-ready episode.</p>
 
-  <div class="flow">
+  <!-- CHANNELS -->
+  <div class="channels">
+    <div class="channel">&#x1F4E0; Fax arrives</div>
+    <div class="channel">&#x1F3A4; Voice call comes in</div>
+    <div class="channel">&#x1F4BB; Portal upload received</div>
+  </div>
 
-    <!-- INTAKE CHANNELS -->
-    <div class="channels-row">
-      <div class="channel">&#x1F4E0; Fax / PDF</div>
-      <div class="channel">&#x1F3A4; Voice Call</div>
-      <div class="channel">&#x1F4BB; Portal Upload</div>
+  <!-- STEP 1 -->
+  <div class="step s1">
+    <div class="step-left">
+      <div class="step-num">1</div>
+      <div class="step-line"></div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
-
-    <!-- STAGE 1 -->
-    <div class="stage s1">
-      <div class="stage-header">
-        <div class="stage-num">1</div>
-        <div class="stage-title">Channel Intake &amp; Document Ingestion</div>
-        <div class="stage-tag">Multi-Channel</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4C4;</span>3 PDFs per fax package — referral form, clinical notes, prescription</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F3A4;</span>Voice: AI agent answers live call, extracts 14 fields in real time via Vapi</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F50D;</span>pypdf text extraction — all pages read, tokens counted, episode queued</div>
-      </div>
-    </div>
-    <div class="arrow-down">&#x2193;</div>
-
-    <!-- STAGE 2 -->
-    <div class="stage s2">
-      <div class="stage-header">
-        <div class="stage-num">2</div>
-        <div class="stage-title">AI Extraction &amp; Normalization</div>
-        <div class="stage-tag">LLM — Claude Sonnet 4.6</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F9E0;</span>25 structured fields extracted: patient, claim, ICD-10, HCPCS, physician, adjuster, delivery</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x26A0;&#xFE0F;</span>ICD conflict detection — cross-references all 3 documents, flags mismatches with reasoning</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4CA;</span>Confidence scoring — 0–100% per episode, escalation triggered below 80%</div>
+    <div class="step-right">
+      <div class="step-tag">Channel Intake</div>
+      <div class="step-title">Agent receives the referral</div>
+      <div class="step-narrative">"A fax just arrived. Three documents — referral form, clinical notes, prescription. Agent reads every page before forming any opinion. If it's a voice call, Agent answers the line directly and asks the right questions in real time."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4C4;</span>Fax: Agent ingests all 3 PDFs — referral form, clinical notes, prescription — and counts every page</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F3A4;</span>Voice: Agent answers the live intake line, conducts a structured conversation, and captures 14 fields in real time — 107 seconds average</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4CB;</span>Both channels feed the same queue automatically — same process, same output</div>
       </div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
+  </div>
 
-    <!-- STAGE 3 -->
-    <div class="stage s3">
-      <div class="stage-header">
-        <div class="stage-num">3</div>
-        <div class="stage-title">Intelligence Layer — OWL Knowledge Graph + 4-Layer Defense</div>
-        <div class="stage-tag">Deterministic + AI</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F9E9;</span>24 CMS rules — ICD-10-CM FY2026, LCD L33803, HCPCS Level II — deterministic, 100% confidence</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F6E1;&#xFE0F;</span>4-layer hallucination defense: document cross-reference → KG validation → confidence threshold → human gate</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4CB;</span>Duplicate check, priority scoring (HIGH/MED/LOW), post-surgical detection, bariatric weight flags</div>
+  <!-- STEP 2 -->
+  <div class="step s2">
+    <div class="step-left">
+      <div class="step-num">2</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-right">
+      <div class="step-tag">AI Extraction — Claude Sonnet 4.6</div>
+      <div class="step-title">Agent extracts 25 structured fields</div>
+      <div class="step-narrative">"Agent reads all three documents simultaneously and extracts every field — patient name, ICD codes, HCPCS, physician NPI, adjuster contact, delivery address. Then Agent cross-references the documents against each other. If the referral form says M23.611 but the clinical notes say S83.209A — Agent catches it and flags the conflict with its reasoning."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F9E0;</span>25 fields extracted: patient, claim, ICD-10, HCPCS, physician NPI, adjuster, delivery address, auth ref, language, transportation</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x26A0;&#xFE0F;</span>Agent compares ICD codes across all documents — mismatches flagged with document-level reasoning, not just a generic error</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4CA;</span>Agent scores its own confidence — 0 to 100%. If confidence drops below 80%, Agent does not guess</div>
       </div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
+  </div>
 
-    <!-- STAGE 4 -->
-    <div class="stage s4">
-      <div class="stage-header">
-        <div class="stage-num">4</div>
-        <div class="stage-title">Completeness Check &amp; Gap Triage</div>
-        <div class="stage-tag">Rules-Based</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F534;</span>Hard blocks: auth_ref, appt_window — episode held until resolved</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F7E1;</span>Required gaps: transportation, language — collected in parallel, no delay to routing</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x2705;</span>Clean episodes skip outreach entirely — direct to route output</div>
+  <!-- STEP 3 -->
+  <div class="step s3">
+    <div class="step-left">
+      <div class="step-num">3</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-right">
+      <div class="step-tag">Intelligence Layer — OWL Knowledge Graph</div>
+      <div class="step-title">Agent validates every code against CMS rules</div>
+      <div class="step-narrative">"Agent runs every ICD code and HCPCS through 24 deterministic rules sourced directly from CMS guidelines. These rules don't estimate — they confirm or reject with 100% confidence. If G89.11 appears on a post-surgical case, Agent rejects it and tells you exactly why: ICD-10-CM §I.C.6.b says post-surgical pain is G89.18. No ambiguity."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F9E9;</span>24 CMS rules checked: ICD-10-CM FY2026 Guidelines, LCD L33803, HCPCS Level II — every rule cites its source</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F6E1;&#xFE0F;</span>Four-layer defense: document cross-reference → KG validation → confidence threshold → human gate — Agent escalates before it guesses</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x2696;&#xFE0F;</span>Agent detects post-surgical context, bariatric weight flags, laterality conflicts, and authorization requirements automatically</div>
       </div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
+  </div>
 
-    <!-- OUTREACH BRANCH -->
-    <div class="branch-row">
-      <div class="branch-box">
-        <div class="branch-title">&#x1F4E7; Email Outreach — Claude Sonnet 4.6</div>
-        <div class="branch-item">&#x2022; Drafted per episode — claim number, specific gaps, 24hr deadline</div>
-        <div class="branch-item">&#x2022; Sent via Gmail SMTP — logged on episode record</div>
-        <div class="branch-item">&#x2022; Addressed to adjuster by name — not a template blast</div>
-      </div>
-      <div class="branch-box">
-        <div class="branch-title">&#x1F4DE; Voice Outreach — Vapi AI</div>
-        <div class="branch-item">&#x2022; Auto-triggered 24hrs after email if no response</div>
-        <div class="branch-item">&#x2022; 84-second call — handles scheduling gaps, bariatric confirmation</div>
-        <div class="branch-item">&#x2022; Transcript logged, fields updated from call response</div>
+  <!-- STEP 4 -->
+  <div class="step s4">
+    <div class="step-left">
+      <div class="step-num">4</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-right">
+      <div class="step-tag">Completeness Check</div>
+      <div class="step-title">Agent classifies every gap by criticality</div>
+      <div class="step-narrative">"Agent doesn't treat all missing fields the same. A missing auth reference number is a hard block — the episode cannot move without it. A missing transportation preference is required but doesn't hold the episode. Agent separates these instantly and acts on each differently."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F534;</span>Hard blocks: auth_ref, appt_window — Agent holds the episode until resolved, nothing dispatched</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F7E1;</span>Required gaps: transportation, language — Agent collects in parallel, no delay to routing</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x2705;</span>Clean episodes skip outreach entirely — Agent routes immediately with no human touch</div>
       </div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
+  </div>
 
-    <!-- STAGE 5 -->
-    <div class="stage s5">
-      <div class="stage-header">
-        <div class="stage-num">5</div>
-        <div class="stage-title">Human Review Gate</div>
-        <div class="stage-tag">Human In The Loop</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F6A8;</span>ICD conflicts with confidence below 80% routed to specialist queue</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4DD;</span>Specialist sees full conflict detail, reasoning, and source documents</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x2705;</span>One-click approve or override — decision logged with reviewer identity</div>
+  <!-- OUTREACH BRANCH -->
+  <div class="branch-row">
+    <div class="branch-box">
+      <div class="branch-title">&#x1F4E7; Agent sends email outreach</div>
+      <div class="branch-narrative">"Agent drafts a specific email to the adjuster by name — not a template. It lists exactly which fields are missing, references the claim number, and sets a 24-hour deadline. Sent and logged the moment it dispatches."</div>
+      <div class="branch-detail">&#x2022; Addressed to adjuster by name — Linda Torres, not "Dear Case Manager"</div>
+      <div class="branch-detail">&#x2022; Lists specific missing fields with context — not a generic checklist</div>
+      <div class="branch-detail">&#x2022; Logged on episode record the moment it sends</div>
+    </div>
+    <div class="branch-box">
+      <div class="branch-title">&#x1F4DE; Agent places outbound voice call</div>
+      <div class="branch-narrative">"No email response after 24 hours. Agent places the call itself — 84 seconds. Confirms auth reference, collects appointment window, catches the bariatric spec the prescription missed. All logged."</div>
+      <div class="branch-detail">&#x2022; Auto-triggered after 24hrs with no email response</div>
+      <div class="branch-detail">&#x2022; Agent asks only about remaining gaps — doesn't re-ask resolved fields</div>
+      <div class="branch-detail">&#x2022; Transcript logged, episode fields updated from call response</div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step s5">
+    <div class="step-left">
+      <div class="step-num">5</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-right">
+      <div class="step-tag">Human Review Gate</div>
+      <div class="step-title">Agent routes to specialist when it can't resolve</div>
+      <div class="step-narrative">"When confidence falls below 80% — Agent stops. It doesn't guess on clinical decisions. It routes the episode to a specialist with the full conflict detail, the source documents, and its own reasoning. One click to approve or override. That decision is logged with the reviewer's identity."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F6A8;</span>ICD conflicts below 80% confidence → specialist queue, episode blocked from dispatch</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4DD;</span>Specialist sees Agent's full reasoning — not just a flag, but why and what evidence Agent used</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x2705;</span>Approve or override in one click — decision logged with reviewer identity and timestamp</div>
       </div>
     </div>
-    <div class="arrow-down">&#x2193;</div>
+  </div>
 
-    <!-- STAGE 6 / OUTPUT -->
-    <div class="stage s6" style="margin-bottom:18px">
-      <div class="stage-header">
-        <div class="stage-num">6</div>
-        <div class="stage-title">Route Output — Episode Locked &amp; Dispatched</div>
-        <div class="stage-tag">Route Ready</div>
-      </div>
-      <div class="stage-body">
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4BE;</span>Sidecar JSON saved — all 25 fields, KG validation, completeness, email body, ICD conflicts</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4E4;</span>Vendor dispatch triggered — DME item, HCPCS, delivery address, auth ref confirmed</div>
-        <div class="stage-item"><span class="stage-item-icon">&#x1F4CA;</span>Episode entered into observability dashboard — full audit trail available</div>
+  <!-- STEP 6 -->
+  <div class="step s6">
+    <div class="step-left">
+      <div class="step-num">6</div>
+      <div class="step-line"></div>
+    </div>
+    <div class="step-right">
+      <div class="step-tag">Route Output</div>
+      <div class="step-title">Agent locks the episode and dispatches</div>
+      <div class="step-narrative">"Every field populated. Every gap resolved — by email, by call, or by Agent self-correcting from clinical evidence. Agent locks the episode record, saves the full audit trail, and triggers vendor dispatch. The DME item ships with the right equipment, the right code, and the right patient."</div>
+      <div class="step-details">
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4BE;</span>Episode record saved — 25 fields, KG validation results, ICD conflicts, email body, call transcript</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4E4;</span>Vendor dispatch triggered — DME item, HCPCS, delivery address, auth ref all confirmed</div>
+        <div class="step-detail"><span class="step-detail-icon">&#x1F4CA;</span>Full audit trail available — every decision, every confidence score, every rule that fired</div>
       </div>
     </div>
+  </div>
 
-    <!-- OUTPUT SUMMARY -->
-    <div class="output-box">
-      <div class="out-item"><div class="out-icon">&#x1F4CB;</div><div class="out-label">25 Fields</div><div class="out-desc">Structured episode record</div></div>
-      <div class="out-item"><div class="out-icon">&#x1F9E9;</div><div class="out-label">24 CMS Rules</div><div class="out-desc">Deterministic validation</div></div>
-      <div class="out-item"><div class="out-icon">&#x1F4DE;</div><div class="out-label">Voice + Email</div><div class="out-desc">Automated outreach</div></div>
-      <div class="out-item"><div class="out-icon">&#x1F4CA;</div><div class="out-label">Full Audit Trail</div><div class="out-desc">Every decision logged</div></div>
-    </div>
-
+  <!-- OUTPUT SUMMARY -->
+  <div class="output-row">
+    <div class="out-card"><div class="out-icon">&#x1F4CB;</div><div class="out-label">25 Fields</div><div class="out-desc">Structured episode record</div></div>
+    <div class="out-card"><div class="out-icon">&#x1F9E9;</div><div class="out-label">24 CMS Rules</div><div class="out-desc">Deterministic validation</div></div>
+    <div class="out-card"><div class="out-icon">&#x1F4DE;</div><div class="out-label">Voice + Email</div><div class="out-desc">Automated outreach</div></div>
+    <div class="out-card"><div class="out-icon">&#x1F4CA;</div><div class="out-label">Full Audit Trail</div><div class="out-desc">Every decision logged</div></div>
   </div>
 
   <div class="legend">
     <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Multi-Channel Intake</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>LLM — Claude Sonnet 4.6</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>Claude Sonnet 4.6 (AI)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>OWL Knowledge Graph (Deterministic)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Rules-Based Logic</div>
     <div class="legend-item"><div class="legend-dot" style="background:#14b8a6"></div>Human In The Loop</div>
