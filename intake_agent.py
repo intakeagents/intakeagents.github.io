@@ -17,7 +17,13 @@ import anthropic
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
-client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+_client = None
+
+def _get_client():
+    global _client
+    if _client is None:
+        _client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    return _client
 
 GMAIL_USER = os.environ.get("GMAIL_USER", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
@@ -122,7 +128,7 @@ Return ONLY valid JSON. No explanation outside the JSON."""
     import time as _time
     for _attempt in range(3):
         try:
-            response = client.messages.create(
+            response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=2000,
                 messages=[{"role": "user", "content": content}]
@@ -200,7 +206,7 @@ Return only the email body (no subject line)."""
     import time as _time
     for _attempt in range(4):
         try:
-            response = client.messages.create(
+            response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=600,
                 messages=[{"role": "user", "content": prompt}]
