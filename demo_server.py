@@ -425,7 +425,7 @@ def api_status():
         state = dict(_state)
         state["stats"] = dict(_state["stats"])
         state["queue"] = list(_state["queue"])
-        state["events"] = list(_state["events"][-30:])
+        state["events"] = list(_state["events"])
     # Add timing
     if state["start_time"] and state["status"] == "running":
         state["elapsed_sec"] = round(time.time() - state["start_time"], 1)
