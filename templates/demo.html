@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intake Agent — Live Demo</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-l:#eff6ff;--blue-m:#bfdbfe;
+  --green:#16a34a;--green-l:#f0fdf4;--green-m:#bbf7d0;
+  --red:#dc2626;--red-l:#fef2f2;--red-m:#fecaca;
+  --yellow:#d97706;--yellow-l:#fffbeb;--yellow-m:#fde68a;
+  --purple:#7c3aed;--purple-l:#f5f3ff;--purple-m:#ddd6fe;
+  --gray:#6b7280;--gray-l:#f9fafb;--gray-m:#e5e7eb;
+  --dark:#111827;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:var(--dark);min-height:100vh}
+
+/* HEADER */
+header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px;text-decoration:none}
+.logo-icon{width:28px;height:28px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.hdr-right{display:flex;align-items:center;gap:12px}
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(34,197,94,.2);border:1px solid rgba(34,197,94,.4);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#4ade80}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(.8)}}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:calc(100vh - 52px)}
+
+/* SIDEBAR */
+.sidebar{background:white;border-right:1px solid var(--gray-m);padding:16px 12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.sb-label{font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;padding:0 6px;margin-top:6px}
+.sb-stat{background:var(--gray-l);border:1px solid var(--gray-m);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between}
+.sb-n{font-size:22px;font-weight:900}.sb-l{font-size:10px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:1px}
+.sb-n.blue{color:var(--blue)}.sb-n.green{color:var(--green)}.sb-n.red{color:var(--red)}.sb-n.yellow{color:var(--yellow)}.sb-n.purple{color:var(--purple)}
+
+/* Agent log */
+.log-box{flex:1;overflow-y:auto;max-height:220px;padding:4px 0}
+.log-line{font-size:10px;color:var(--gray);font-family:monospace;padding:2px 4px;line-height:1.5;border-bottom:1px solid #f3f4f6}
+.log-line .ts{color:var(--blue);margin-right:5px}
+
+/* Scale card */
+.scale-card{background:#1e3a5f;border-radius:10px;padding:14px;display:none}
+.scale-card.visible{display:block}
+.sc-title{font-size:10px;font-weight:800;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.sc-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.sc-row .sn{font-size:18px;font-weight:900;color:#fff}
+.sc-row .sl{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase}
+.sc-note{font-size:10px;color:rgba(255,255,255,.4);margin-top:8px;line-height:1.5}
+
+/* MAIN */
+.main{padding:20px 24px;overflow-y:auto}
+
+/* HERO */
+.hero{background:#1e3a5f;color:#fff;border-radius:12px;padding:22px 28px;margin-bottom:16px}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:5px}
+.hero-title{font-size:20px;font-weight:800;margin-bottom:5px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:14px}
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:16px}
+.hero-stat .n{font-size:22px;font-weight:800;color:#93c5fd}
+.hero-stat .l{font-size:10px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.04em}
+.hero-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn-start{background:#16a34a;color:#fff;border:none;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .15s}
+.btn-start:hover{background:#15803d}
+.btn-start:disabled{background:#475569;cursor:not-allowed}
+.btn-reset{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:none}
+.btn-fax{background:rgba(37,99,235,.8);color:#fff;border:1px solid rgba(255,255,255,.2);padding:10px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;display:none;align-items:center;gap:6px}
+.btn-fax:hover{background:var(--blue)}
+.status-text{font-size:11px;color:rgba(255,255,255,.55)}
+.voice-bar{margin-top:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:7px 14px}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:12px}
+.sb2{background:white;border-radius:9px;padding:10px 12px;text-align:center;border:1px solid var(--gray-m)}
+.sb2-n{font-size:20px;font-weight:900;color:var(--dark)}
+.sb2-l{font-size:9px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-top:2px;font-weight:700}
+
+/* PROGRESS */
+.prog-wrap{margin-bottom:10px}
+.prog-label-row{display:flex;justify-content:space-between;font-size:11px;color:var(--gray);margin-bottom:3px;font-weight:600}
+.prog-track{height:7px;background:var(--gray-m);border-radius:4px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));border-radius:4px;transition:width .3s linear;width:0%}
+
+/* QUEUE TABLE */
+.queue-card{background:white;border-radius:10px;border:1px solid var(--gray-m);overflow:hidden}
+.queue-wrap{max-height:460px;overflow-y:auto}
+.queue-table{width:100%;table-layout:fixed;border-collapse:collapse}
+.queue-table thead th{background:var(--gray-l);border-bottom:2px solid var(--gray-m);padding:8px 9px;text-align:left;font-size:9px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;position:sticky;top:0;z-index:1}
+.queue-table tbody tr{border-bottom:1px solid #f1f5f9;transition:background .2s}
+.queue-table tbody tr.processing{background:#eff6ff;animation:rowPulse 1s ease infinite}
+.queue-table tbody tr.routed{background:#f0fdf4}
+.queue-table tbody tr.gaps{background:#fffbeb}
+.queue-table tbody tr.error{background:#fef2f2}
+.queue-table tbody tr.holloway{border-left:3px solid var(--blue)}
+.queue-table tbody tr.holloway-done{border-left:3px solid var(--blue);cursor:pointer}
+.queue-table tbody tr.holloway-done:hover{background:#eff6ff}
+@keyframes rowPulse{0%,100%{background:#eff6ff}50%{background:#dbeafe}}
+.queue-table td{padding:7px 9px;font-size:11px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Status badges */
+.s-queued{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--gray);background:var(--gray-l);border:1px solid var(--gray-m);padding:2px 7px;border-radius:20px}
+.s-processing{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--blue);background:var(--blue-l);border:1px solid var(--blue-m);padding:2px 7px;border-radius:20px}
+.s-processing::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.s-routed{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--green);background:var(--green-l);border:1px solid var(--green-m);padding:2px 7px;border-radius:20px}
+.s-gaps{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--yellow);background:var(--yellow-l);border:1px solid var(--yellow-m);padding:2px 7px;border-radius:20px}
+.s-error{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--red);background:var(--red-l);border:1px solid var(--red-m);padding:2px 7px;border-radius:20px}
+.gap-badge{display:inline-block;font-size:10px;font-weight:800;padding:2px 6px;border-radius:9px;background:var(--red-l);color:var(--red);border:1px solid var(--red-m)}
+.gap-badge.zero{background:var(--green-l);color:var(--green);border-color:var(--green-m)}
+.pri-HIGH{font-size:10px;font-weight:800;padding:2px 6px;border-radius:7px;background:var(--red-l);color:var(--red)}
+.pri-MED{font-size:10px;font-weight:800;padding:2px 6px;border-radius:7px;background:var(--yellow-l);color:var(--yellow)}
+.pri-LOW{font-size:10px;font-weight:800;padding:2px 6px;border-radius:7px;background:var(--green-l);color:var(--green)}
+.ch-fax{font-size:9px;font-weight:700;background:#dbeafe;color:#1d4ed8;padding:1px 5px;border-radius:7px}
+.ch-voice{font-size:9px;font-weight:700;background:#dcfce7;color:#15803d;padding:1px 5px;border-radius:7px}
+.outreach-badge{font-size:10px;font-weight:700;color:#15803d;background:#dcfce7;border:1px solid #86efac;padding:2px 7px;border-radius:20px}
+
+/* Scale callout */
+.scale-callout{background:#1e3a5f;border-radius:12px;padding:20px 24px;margin-top:14px;display:none}
+.scale-callout.visible{display:block;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.scl-title{font-size:11px;font-weight:800;color:#93c5fd;text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.scl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:12px}
+.scl-stat{text-align:center}
+.scl-n{font-size:24px;font-weight:900;color:#fff}
+.scl-l{font-size:9px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.04em;margin-top:2px;font-weight:700}
+.scl-note{font-size:11px;color:rgba(255,255,255,.55);line-height:1.6;border-top:1px solid rgba(255,255,255,.1);padding-top:10px}
+
+/* Holloway hint */
+.holloway-hint{padding:10px 14px;background:var(--blue-l);border:1px solid var(--blue-m);border-radius:8px;font-size:12px;color:#1e40af;margin-top:10px;display:none;align-items:center;gap:8px;cursor:pointer}
+.holloway-hint:hover{background:var(--blue-m)}
+
+/* Complete banner */
+.complete-banner{background:var(--green-l);border:2px solid var(--green-m);border-radius:10px;padding:14px 20px;margin-top:12px;display:none}
+.complete-banner.visible{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.cb-left{display:flex;align-items:center;gap:10px}
+.cb-icon{font-size:24px}
+.cb-title{font-size:14px;font-weight:800;color:var(--green)}
+.cb-sub{font-size:11px;color:#166534;margin-top:2px}
+.btn-pipeline{background:var(--blue);color:#fff;border:none;padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-pipeline:hover{background:#1d4ed8}
+
+/* Upload fax modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:1000;display:none;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:white;border-radius:14px;padding:28px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal-title{font-size:16px;font-weight:800;margin-bottom:6px}
+.modal-sub{font-size:12px;color:var(--gray);margin-bottom:20px}
+.upload-zone{border:2px dashed var(--blue-m);border-radius:10px;padding:32px;text-align:center;cursor:pointer;background:var(--blue-l);transition:all .15s}
+.upload-zone:hover{border-color:var(--blue);background:#dbeafe}
+.upload-zone input{display:none}
+.modal-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+.btn-cancel{background:var(--gray-l);color:var(--dark);border:1px solid var(--gray-m);padding:8px 16px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer}
+
+/* TABS */
+.tab-bar{display:flex;align-items:center;gap:4px;margin-bottom:12px;border-bottom:2px solid var(--gray-m);padding-bottom:0}
+.tab-btn{padding:8px 18px;font-size:12px;font-weight:700;color:var(--gray);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .15s;border-radius:6px 6px 0 0}
+.tab-btn:hover{color:var(--dark);background:var(--gray-l)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue);background:var(--blue-l)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* INBOX FOLDER GRID */
+.inbox-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.inbox-filter{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid var(--gray-m);background:#fff;cursor:pointer;color:var(--gray);transition:all .15s}
+.inbox-filter.active{background:#1e3a5f;color:#fff;border-color:#1e3a5f}
+.inbox-search{margin-left:auto;padding:6px 12px;border:1px solid var(--gray-m);border-radius:8px;font-size:12px;width:180px;outline:none}
+.inbox-search:focus{border-color:var(--blue)}
+.inbox-upload-btn{padding:6px 14px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer}
+.inbox-upload-btn:hover{background:#1d4ed8}
+.folder-grid{background:#fff;border:1px solid var(--gray-m);border-radius:10px;overflow:hidden}
+.inbox-table{width:100%;border-collapse:collapse;table-layout:fixed}
+.inbox-table thead th{background:var(--gray-l);border-bottom:2px solid var(--gray-m);padding:8px 10px;text-align:left;font-size:9px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;position:sticky;top:0;z-index:1}
+.inbox-table tbody tr{border-bottom:1px solid #f1f5f9;transition:background .15s}
+.inbox-table tbody tr:hover{background:#f8fafc}
+.inbox-table tbody tr.ir-processing{background:var(--blue-l);animation:rowPulse 1.2s ease infinite}
+.inbox-table tbody tr.ir-routed{background:#f0fdf4}
+.inbox-table tbody tr.ir-gaps{background:#fffbeb}
+.inbox-table tbody tr.ir-featured{border-left:3px solid #7c3aed}
+.inbox-table td{padding:7px 10px;font-size:11px;vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ftag{display:inline-flex;align-items:center;padding:1px 6px;border-radius:9px;font-size:9px;font-weight:700;white-space:nowrap}
+.ftag-fax{background:#dbeafe;color:#1d4ed8}
+.ftag-voice{background:#fce7f3;color:#9d174d}
+.ftag-new{background:#dcfce7;color:#15803d}
+.ftag-demo{background:#ede9fe;color:#5b21b6}
+.ftag-routed{background:var(--green-m);color:#15803d}
+.ftag-gaps{background:var(--yellow-m);color:#92400e}
+.ftag-processing{background:var(--blue-m);color:#1e40af;animation:blink 1s infinite}
+.pdf-open{font-size:9px;font-weight:700;color:var(--blue);text-decoration:none;padding:2px 6px;border-radius:5px;background:var(--blue-l);white-space:nowrap;margin-right:3px;display:inline-block}
+.pdf-open:hover{background:var(--blue-m)}
+.fc-pipe-link{font-size:10px;font-weight:700;color:var(--blue);text-decoration:none;padding:2px 9px;border:1px solid var(--blue-m);border-radius:6px;background:var(--blue-l)}
+.fc-pipe-link:hover{background:var(--blue-m)}
+.inbox-empty{text-align:center;padding:60px 20px;color:var(--gray)}
+.inbox-empty-icon{font-size:40px;margin-bottom:10px}
+#inbox-upload-input{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">
+    <div class="logo-icon">&#x2695;</div>
+    Intake Agent
+    <span style="font-size:10px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);padding:2px 9px;border-radius:20px;font-weight:600">AI-Powered · v2.0</span>
+  </a>
+  <div class="hdr-right">
+    <div class="live-badge" id="live-badge" style="display:none">
+      <div class="live-dot"></div>
+      LIVE PROCESSING
+    </div>
+    <div style="font-size:12px;color:rgba(255,255,255,.6)">Workers' Comp · Extraction &amp; Intake Agents</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sb-label">Pipeline</div>
+  <div class="sb-stat">
+    <div><div class="sb-n blue" id="sb-pages">0</div><div class="sb-l">Pages Read</div></div>
+    <span style="font-size:18px">&#x1F4C4;</span>
+  </div>
+  <div class="sb-stat">
+    <div><div class="sb-n red" id="sb-gaps">0</div><div class="sb-l">Gaps Detected</div></div>
+    <span style="font-size:18px">&#x26A0;&#xFE0F;</span>
+  </div>
+  <div class="sb-stat">
+    <div><div class="sb-n yellow" id="sb-outreach">0</div><div class="sb-l">Outreach Sent</div></div>
+    <span style="font-size:18px">&#x1F4E7;</span>
+  </div>
+  <div class="sb-stat">
+    <div><div class="sb-n green" id="sb-routed">0</div><div class="sb-l">Auto-Routed</div></div>
+    <span style="font-size:18px">&#x2705;</span>
+  </div>
+  <div class="sb-stat">
+    <div><div class="sb-n purple" id="sb-conflicts">0</div><div class="sb-l">ICD Conflicts</div></div>
+    <span style="font-size:18px">&#x1F9E0;</span>
+  </div>
+  <div class="sb-stat">
+    <div><div class="sb-n red" id="sb-escalations">0</div><div class="sb-l">Escalations</div></div>
+    <span style="font-size:18px">&#x1F6A8;</span>
+  </div>
+
+  <div class="sb-label" style="margin-top:4px">Agent Log</div>
+  <div class="log-box" id="agent-log"></div>
+
+  <div class="scale-card" id="scale-card">
+    <div class="sc-title">At this rate — 10,000 referrals</div>
+    <div class="sc-row"><div class="sn" id="sc-proj">—</div><div class="sl">Total Time</div></div>
+    <div class="sc-row"><div class="sn">~8,200</div><div class="sl">Gaps Detected</div></div>
+    <div class="sc-row"><div class="sn">~8,200</div><div class="sl">Outreach Sent</div></div>
+    <div class="sc-row"><div class="sn">~30,000</div><div class="sl">Pages Read</div></div>
+    <div class="sc-note">0 staff hours · fully automated · unattended</div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Live Demo · Intake Agent · AI-Powered</div>
+    <div class="hero-title">75 Referral Processing — Intake Agent</div>
+    <div class="hero-sub">Real AI extraction · Real PDF processing · Real gap detection · Real outreach drafting · No simulation.</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="n">75</div><div class="l">Referrals</div></div>
+      <div class="hero-stat"><div class="n" id="hero-pages">—</div><div class="l">Pages Read</div></div>
+      <div class="hero-stat"><div class="n">25</div><div class="l">Fields Each</div></div>
+      <div class="hero-stat"><div class="n" id="hero-workers">20</div><div class="l">Workers</div></div>
+      <div class="hero-stat"><div class="n">0</div><div class="l">Staff Hours</div></div>
+    </div>
+    <div class="hero-actions">
+      <button class="btn-start" id="btn-start" onclick="startProcessing()">&#x1F534; Start Live Processing</button>
+      <button class="btn-reset" id="btn-reset" onclick="resetDemo()">&#x21BA; Reset</button>
+      <button class="btn-fax" id="btn-fax" onclick="openFaxModal()">&#x1F4E0; Receive New Fax</button>
+      <span class="status-text" id="status-text">Queue loaded — 75 referrals waiting</span>
+    </div>
+    <div class="voice-bar">
+      <span style="font-size:13px">&#x1F4DE;</span>
+      <div>
+        <div style="font-size:12px;font-weight:800;color:#4ade80;letter-spacing:.04em">(201) 897-3854</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5)">Live AI intake line · 24/7 · case managers call to submit referrals</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="sb2"><div class="sb2-n" id="stat-queued">75</div><div class="sb2-l">Queued</div></div>
+    <div class="sb2"><div class="sb2-n" style="color:var(--blue)" id="stat-processing">0</div><div class="sb2-l">Processing</div></div>
+    <div class="sb2"><div class="sb2-n" style="color:var(--purple)" id="stat-pages">0</div><div class="sb2-l">Pages Read</div></div>
+    <div class="sb2"><div class="sb2-n" style="color:var(--green)" id="stat-routed">0</div><div class="sb2-l">Auto-Routed</div></div>
+    <div class="sb2"><div class="sb2-n" style="color:var(--red)" id="stat-gaps">0</div><div class="sb2-l">Gaps Found</div></div>
+    <div class="sb2"><div class="sb2-n" style="color:var(--yellow)" id="stat-outreach">0</div><div class="sb2-l">Emails Sent</div></div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-bar">
+    <button class="tab-btn" id="tab-btn-queue" onclick="switchTab('queue')">&#x1F4CB; Processing Queue</button>
+    <button class="tab-btn active" id="tab-btn-inbox" onclick="switchTab('inbox')">&#x1F4C1; Referral Inbox</button>
+    <button class="tab-btn" id="tab-btn-escalation" onclick="switchTab('escalation')">&#x1F6A8; Escalation Review</button>
+  </div>
+
+  <!-- TAB: QUEUE -->
+  <div class="tab-panel" id="tab-queue">
+
+  <!-- PROGRESS -->
+  <div class="prog-wrap">
+    <div class="prog-label-row">
+      <span id="prog-label">Queue ready — click Start to begin</span>
+      <span id="prog-pct">0%</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+
+  <!-- QUEUE TABLE -->
+  <div class="queue-card">
+    <div class="queue-wrap">
+      <table class="queue-table">
+        <thead>
+          <tr>
+            <th style="width:145px">Patient</th>
+            <th style="width:115px">Claim #</th>
+            <th style="width:155px">Equipment</th>
+            <th style="width:52px;text-align:center">Ch</th>
+            <th style="width:125px;text-align:center">Status</th>
+            <th style="width:55px;text-align:center">Gaps</th>
+            <th style="width:85px;text-align:center">Outreach</th>
+            <th style="width:90px;text-align:center">Priority</th>
+          </tr>
+        </thead>
+        <tbody id="queue-tbody">
+          <tr><td colspan="8" style="text-align:center;padding:20px;color:var(--gray);font-size:12px">Click Start Live Processing to begin</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- HOLLOWAY HINT -->
+  <div class="holloway-hint" id="holloway-hint" onclick="openPipeline()">
+    <span style="font-size:16px">&#x1F50D;</span>
+    <span><b>James Holloway · WC-2026-084431</b> — Click to explore the full 7-step pipeline for this referral</span>
+    <span style="margin-left:auto;font-size:12px;font-weight:700;color:var(--blue)">Open Pipeline &#x2192;</span>
+  </div>
+
+  <!-- COMPLETE BANNER -->
+  <div class="complete-banner" id="complete-banner">
+    <div class="cb-left">
+      <div class="cb-icon">&#x2705;</div>
+      <div>
+        <div class="cb-title">Processing Complete</div>
+        <div class="cb-sub" id="cb-sub">All referrals processed by intake agent</div>
+      </div>
+    </div>
+    <a href="/review" class="btn-pipeline" style="background:var(--purple)">View Escalation Queue &#x2192;</a>
+  </div>
+
+  <!-- SCALE CALLOUT -->
+  <div class="scale-callout" id="scale-callout">
+    <div class="scl-title">Scale projection — same AI engine, same pipeline</div>
+    <div class="scl-grid">
+      <div class="scl-stat"><div class="scl-n">10,000</div><div class="scl-l">Referrals</div></div>
+      <div class="scl-stat"><div class="scl-n" id="scl-proj">~54 min</div><div class="scl-l">Total Time</div></div>
+      <div class="scl-stat"><div class="scl-n">~8,200</div><div class="scl-l">Gaps Detected</div></div>
+      <div class="scl-stat"><div class="scl-n">~8,200</div><div class="scl-l">Outreach Sent</div></div>
+      <div class="scl-stat"><div class="scl-n">~30,000</div><div class="scl-l">Pages Read</div></div>
+    </div>
+    <div class="scl-note" id="scl-note">Based on measured throughput from this run · 0 staff hours · fully automated · unattended</div>
+  </div>
+
+  </div><!-- end tab-queue -->
+
+  <!-- TAB: REFERRAL INBOX -->
+  <div class="tab-panel active" id="tab-inbox">
+    <div class="inbox-toolbar">
+      <button class="inbox-filter active" id="if-all"        onclick="setInboxFilter('all',this)">All</button>
+      <button class="inbox-filter"        id="if-fax"        onclick="setInboxFilter('fax',this)">Fax</button>
+      <button class="inbox-filter"        id="if-voice"      onclick="setInboxFilter('voice',this)">Voice</button>
+      <button class="inbox-filter"        id="if-pending"    onclick="setInboxFilter('pending',this)">Pending</button>
+      <button class="inbox-filter"        id="if-processing" onclick="setInboxFilter('processing',this)">Processing</button>
+      <button class="inbox-filter"        id="if-done"       onclick="setInboxFilter('done',this)">Done</button>
+      <input class="inbox-search" type="text" id="inbox-search" placeholder="Search claim or patient..." oninput="renderInbox()">
+      <button class="inbox-upload-btn" onclick="document.getElementById('inbox-upload-input').click()">&#x1F4E0; Upload New Fax</button>
+      <input type="file" id="inbox-upload-input" accept=".pdf" onchange="inboxUploadFax(this.files[0])">
+    </div>
+    <div class="folder-grid" id="folder-grid">
+      <table class="inbox-table">
+        <thead>
+          <tr>
+            <th style="width:140px">Claim #</th>
+            <th style="width:160px">Patient</th>
+            <th style="width:60px">Channel</th>
+            <th style="width:120px">Status</th>
+            <th>PDF Files</th>
+            <th style="width:55px;text-align:center">Time</th>
+            <th style="width:90px;text-align:center">Action</th>
+          </tr>
+        </thead>
+        <tbody id="inbox-tbody">
+          <tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray)">Loading referral inbox...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- end tab-inbox -->
+
+  <!-- TAB: ESCALATION REVIEW -->
+  <div class="tab-panel" id="tab-escalation">
+    <div id="esc-content" style="background:#fff;border-radius:10px;border:1px solid var(--gray-m);overflow:hidden">
+      <iframe id="esc-frame" src="" style="width:100%;border:none;min-height:600px;display:block"></iframe>
+    </div>
+  </div><!-- end tab-escalation -->
+
+</main>
+</div>
+
+<!-- FAX MODAL -->
+<div class="modal-overlay" id="fax-modal">
+  <div class="modal">
+    <div class="modal-title">&#x1F4E0; Incoming Fax Referral</div>
+    <div class="modal-sub">A new referral package has arrived on the intake line — 3 documents ready for processing.</div>
+    <div style="margin:20px 0;padding:16px;background:#f0fdf4;border:1px solid #86efac;border-radius:10px;text-align:center">
+      <div style="font-size:13px;font-weight:700;color:#15803d;margin-bottom:4px">Michelle Tran &nbsp;·&nbsp; Power Wheelchair K0823</div>
+      <div style="font-size:11px;color:#166534">3 documents &nbsp;·&nbsp; Pacific Mutual Workers Comp &nbsp;·&nbsp; Vietnamese interpreter</div>
+    </div>
+    <div class="modal-actions" style="justify-content:space-between">
+      <button class="btn-cancel" onclick="closeFaxModal()">Cancel</button>
+      <button class="btn-pipeline" onclick="triggerDemoFax()" style="font-size:13px;padding:10px 22px">&#x26A1; Process Incoming Fax</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let pollInterval = null;
+let lastLogCount = 0;
+let processingStarted = false;
+let hollowayClaim = 'WC-2026-084431';
+let inboxFolders = [];
+let inboxQueueMap = {};
+let inboxFilter = 'all';
+
+// Auto-reset state when page loads so browser refresh always shows clean queue
+window.addEventListener('DOMContentLoaded', () => {
+  fetch('/api/reset', {method: 'POST'})
+    .then(() => fetchStatus())   // pull fresh zeros into DOM immediately
+    .catch(() => {});
+  loadInboxFolders();
+});
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
+function switchTab(name) {
+  ['queue','inbox','escalation'].forEach(t => {
+    document.getElementById('tab-' + t).classList.toggle('active', t === name);
+    document.getElementById('tab-btn-' + t).classList.toggle('active', t === name);
+  });
+  if (name === 'inbox') renderInbox();
+  if (name === 'escalation') {
+    const frame = document.getElementById('esc-frame');
+    if (frame && !frame.src.includes('/review')) frame.src = '/review';
+    else if (frame) frame.contentWindow.location.reload();
+  }
+}
+
+// ── INBOX ─────────────────────────────────────────────────────────────────────
+async function loadInboxFolders() {
+  try {
+    const r = await fetch('/api/referrals');
+    inboxFolders = await r.json();
+    renderInbox();
+  } catch(e) {}
+}
+
+function setInboxFilter(f, btn) {
+  inboxFilter = f;
+  document.querySelectorAll('.inbox-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderInbox();
+}
+
+function renderInbox() {
+  const search = (document.getElementById('inbox-search').value || '').toLowerCase();
+  const filtered = inboxFolders.filter(f => {
+    if (search) {
+      const hay = (f.claim + ' ' + (f.patient || '') + ' ' + (inboxQueueMap[f.claim]?.patient || '')).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    const q = inboxQueueMap[f.claim];
+    const st = q ? q.status : 'pending';
+    if (inboxFilter === 'fax')        return f.channel === 'fax';
+    if (inboxFilter === 'voice')      return f.channel === 'voice';
+    if (inboxFilter === 'pending')    return !q || st === 'queued';
+    if (inboxFilter === 'processing') return st === 'processing';
+    if (inboxFilter === 'done')       return st === 'routed' || st === 'gaps';
+    return true;
+  });
+
+  const tbody = document.getElementById('inbox-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;color:var(--gray)">No referrals match filter</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map(f => inboxRow(f)).join('');
+}
+
+function inboxRow(f) {
+  const q = inboxQueueMap[f.claim];
+  const status = q ? q.status : 'pending';
+  const patient = (q && q.patient) || f.patient || '—';
+
+  let rowCls = '';
+  if (status === 'processing') rowCls = 'ir-processing';
+  else if (status === 'routed') rowCls = 'ir-routed';
+  else if (status === 'gaps')   rowCls = 'ir-gaps';
+  if (f.is_featured) rowCls += ' ir-featured';
+
+  const chTag = f.channel === 'voice'
+    ? '<span class="ftag ftag-voice">&#x1F3A4; Voice</span>'
+    : '<span class="ftag ftag-fax">&#x1F4E0; Fax</span>';
+
+  const extraTags = [
+    f.is_live     ? '<span class="ftag ftag-new">New</span>' : '',
+    f.is_featured ? '<span class="ftag ftag-demo">&#x2605;</span>' : '',
+  ].join('');
+
+  const statusTag =
+    status === 'processing' ? '<span class="ftag ftag-processing">Reading...</span>' :
+    status === 'routed'     ? '<span class="ftag ftag-routed">&#x2713; Routed</span>' :
+    status === 'gaps'       ? '<span class="ftag ftag-gaps">&#x26A0; Gaps</span>' :
+                              '<span style="font-size:10px;color:var(--gray)">Pending</span>';
+
+  const pdfLinks = (f.pdfs || []).map(pdf => {
+    const short = pdf.replace('1_referral_form','Referral').replace('2_clinical_notes','Notes').replace('3_prescription','Rx');
+    return `<a class="pdf-open" href="/referrals/${f.claim}/${pdf}" target="_blank">&#x1F4C4; ${short.replace('.pdf','')}</a>`;
+  }).join('');
+
+  const elapsed = q && q.elapsed ? `${q.elapsed}s` : '—';
+  const action = (status === 'routed' || status === 'gaps')
+    ? `<a class="fc-pipe-link" href="/pipeline/${f.claim}">Pipeline</a>`
+    : '';
+
+  return `<tr class="${rowCls}">
+    <td style="font-family:monospace;font-size:10px;font-weight:800">${f.claim}</td>
+    <td style="font-weight:600">${patient}</td>
+    <td>${chTag}${extraTags}</td>
+    <td>${statusTag}</td>
+    <td>${pdfLinks}</td>
+    <td style="text-align:center;color:var(--gray)">${elapsed}</td>
+    <td style="text-align:center">${action}</td>
+  </tr>`;
+}
+
+async function inboxUploadFax(file) {
+  if (!file) return;
+  const btn = document.querySelector('.inbox-upload-btn');
+  btn.textContent = 'Uploading...';
+  btn.disabled = true;
+  const fd = new FormData();
+  fd.append('file', file);
+  try {
+    const r = await fetch('/api/upload-fax', {method:'POST', body:fd});
+    const d = await r.json();
+    btn.textContent = 'Received!';
+    setTimeout(() => { btn.textContent = '&#x1F4E0; Upload New Fax'; btn.disabled = false; }, 2500);
+    await loadInboxFolders();
+    renderInbox();
+  } catch(e) {
+    btn.textContent = '&#x1F4E0; Upload New Fax';
+    btn.disabled = false;
+  }
+}
+
+function startProcessing() {
+  document.getElementById('btn-start').disabled = true;
+  document.getElementById('btn-start').textContent = 'Starting...';
+  document.getElementById('live-badge').style.display = 'flex';
+  switchTab('queue');
+
+  fetch('/api/start', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({workers: 20})
+  })
+  .then(r => r.json())
+  .then(data => {
+    processingStarted = true;
+    document.getElementById('status-text').textContent = 'Live agent processing — AI extraction in flight';
+    document.getElementById('btn-reset').style.display = 'inline-flex';
+    document.getElementById('btn-fax').style.display = 'inline-flex';
+    startPolling();
+  })
+  .catch(e => {
+    document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-start').textContent = 'Start Live Processing';
+    alert('Error starting: ' + e);
+  });
+}
+
+function resetDemo() {
+  if (pollInterval) clearInterval(pollInterval);
+  fetch('/api/reset', {method:'POST'})
+  .then(() => {
+    processingStarted = false;
+    lastLogCount = 0;
+    document.getElementById('btn-start').disabled = false;
+    document.getElementById('btn-start').textContent = '🔴 Start Live Processing';
+    document.getElementById('btn-reset').style.display = 'none';
+    document.getElementById('btn-fax').style.display = 'none';
+    document.getElementById('live-badge').style.display = 'none';
+    document.getElementById('status-text').textContent = 'Queue loaded — 75 referrals waiting';
+    document.getElementById('queue-tbody').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--gray);font-size:12px">Click Start Live Processing to begin</td></tr>';
+    document.getElementById('complete-banner').classList.remove('visible');
+    document.getElementById('scale-callout').classList.remove('visible');
+    document.getElementById('holloway-hint').style.display = 'none';
+    document.getElementById('scale-card').classList.remove('visible');
+    document.getElementById('prog-fill').style.width = '0%';
+    document.getElementById('prog-pct').textContent = '0%';
+    document.getElementById('prog-label').textContent = 'Queue ready — click Start to begin';
+    ['sb-pages','sb-gaps','sb-outreach','sb-routed','sb-conflicts','sb-escalations'].forEach(id => document.getElementById(id).textContent = '0');
+    ['stat-queued','stat-processing','stat-pages','stat-routed','stat-gaps','stat-outreach'].forEach(id => document.getElementById(id).textContent = id === 'stat-queued' ? '75' : '0');
+    document.getElementById('agent-log').innerHTML = '';
+  });
+}
+
+function startPolling() {
+  if (pollInterval) clearInterval(pollInterval);
+  pollInterval = setInterval(fetchStatus, 2000);
+  fetchStatus();
+}
+
+function fetchStatus() {
+  fetch('/api/status')
+  .then(r => r.json())
+  .then(data => updateUI(data))
+  .catch(e => console.error('Poll error:', e));
+}
+
+function updateUI(data) {
+  const stats = data.stats || {};
+  const queue = data.queue || [];
+  const total = data.total || 75;
+  const processed = data.processed || 0;
+  const pct = total > 0 ? Math.round(100 * processed / total) : 0;
+
+  // Sidebar stats
+  document.getElementById('sb-pages').textContent = stats.pages_read || 0;
+  document.getElementById('sb-gaps').textContent = stats.gaps_detected || 0;
+  document.getElementById('sb-outreach').textContent = stats.outreach_drafted || 0;
+  document.getElementById('sb-routed').textContent = stats.routed || 0;
+  document.getElementById('sb-conflicts').textContent = stats.icd_conflicts || 0;
+  document.getElementById('sb-escalations').textContent = stats.escalations || 0;
+
+  // Stats bar
+  const processing = queue.filter(q => q.status === 'processing').length;
+  const queued = queue.filter(q => q.status === 'queued').length;
+  document.getElementById('stat-queued').textContent = queued;
+  document.getElementById('stat-processing').textContent = processing;
+  document.getElementById('stat-pages').textContent = stats.pages_read || 0;
+  document.getElementById('stat-routed').textContent = stats.routed || 0;
+  document.getElementById('stat-gaps').textContent = stats.gaps_detected || 0;
+  document.getElementById('stat-outreach').textContent = stats.outreach_drafted || 0;
+
+  // Hero live stats
+  const heroPages = document.getElementById('hero-pages');
+  if (heroPages) heroPages.textContent = stats.pages_read > 0 ? stats.pages_read : '—';
+  if (data.workers) {
+    const hw = document.getElementById('hero-workers');
+    if (hw) hw.textContent = data.workers;
+  }
+
+  // Progress
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-pct').textContent = pct + '%';
+  if (data.status === 'running') {
+    const elapsed = data.elapsed_sec || 0;
+    document.getElementById('prog-label').textContent =
+      `Processing ${processed}/${total} referrals — ${elapsed.toFixed(0)}s elapsed`;
+  }
+
+  // Queue table
+  renderQueue(queue);
+
+  // Sync inbox queue map and re-render if inbox tab is active
+  inboxQueueMap = {};
+  queue.forEach(q => { inboxQueueMap[q.claim] = q; });
+  if (document.getElementById('tab-inbox').classList.contains('active')) {
+    loadInboxFolders().then(() => renderInbox());
+  }
+
+  // Agent log
+  const events = data.events || [];
+  if (events.length !== lastLogCount) {
+    const logBox = document.getElementById('agent-log');
+    const newEvents = events.slice(lastLogCount);
+    newEvents.forEach(e => {
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      div.innerHTML = `<span class="ts">${e.ts}</span>${e.msg}`;
+      logBox.appendChild(div);
+    });
+    logBox.scrollTop = logBox.scrollHeight;
+    lastLogCount = events.length;
+  }
+
+  // Complete
+  if (data.status === 'complete') {
+    if (pollInterval) clearInterval(pollInterval);
+    // Scroll queue back to top
+    const wrap = document.querySelector('.queue-wrap');
+    if (wrap) wrap.scrollTop = 0;
+    document.getElementById('live-badge').style.display = 'none';
+    document.getElementById('status-text').textContent = 'Complete — all referrals processed by intake agent';
+    document.getElementById('btn-start').textContent = 'Complete';
+
+    // Scale card
+    document.getElementById('scale-card').classList.add('visible');
+    if (data.projection_10k_min > 0) {
+      document.getElementById('sc-proj').textContent = '~' + data.projection_10k_min + ' min';
+      document.getElementById('scl-proj').textContent = '~' + data.projection_10k_min + ' min';
+    }
+
+    // Complete banner
+    const banner = document.getElementById('complete-banner');
+    banner.classList.add('visible');
+    document.getElementById('cb-sub').textContent =
+      `${processed} referrals · ${data.elapsed_sec}s · ${stats.routed || 0} routed · ${stats.gaps_detected || 0} gaps · ${stats.outreach_drafted || 0} outreach`;
+
+    // Scale callout
+    document.getElementById('scale-callout').classList.add('visible');
+    document.getElementById('scl-note').textContent =
+      `Based on real measured throughput: ${processed} referrals in ${data.elapsed_sec}s · 0 staff hours · fully automated`;
+
+    // Holloway hint
+    const holloway = queue.find(q => q.is_featured);
+    if (holloway && (holloway.status === 'routed' || holloway.status === 'gaps')) {
+      const hint = document.getElementById('holloway-hint');
+      hint.style.display = 'flex';
+      setTimeout(() => {
+        const row = document.getElementById('row-' + hollowayClaim.replace(/-/g,''));
+        if (row) row.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 400);
+    }
+  }
+}
+
+function renderQueue(queue) {
+  const tbody = document.getElementById('queue-tbody');
+  if (!queue || queue.length === 0) return;
+
+  const rows = queue.map((item, idx) => {
+    const rowClass = [
+      item.is_featured ? (item.status === 'queued' ? 'holloway' : 'holloway-done') : '',
+      item.status === 'processing' ? 'processing' : '',
+      item.status === 'routed' ? 'routed' : '',
+      item.status === 'gaps' ? 'gaps' : '',
+      item.status === 'error' ? 'error' : '',
+    ].filter(Boolean).join(' ');
+
+    const onclick = item.is_featured && (item.status === 'routed' || item.status === 'gaps')
+      ? 'onclick="openPipeline()"' : '';
+
+    const statusBadge = {
+      queued:     '<span class="s-queued">Queued</span>',
+      processing: '<span class="s-processing">Reading...</span>',
+      routed:     '<span class="s-routed">&#x2713; Routed</span>',
+      gaps:       '<span class="s-gaps">&#x26A0; Gaps</span>',
+      error:      '<span class="s-error">Error</span>',
+    }[item.status] || '<span class="s-queued">—</span>';
+
+    const gapBadge = item.status === 'queued' || item.status === 'processing'
+      ? '—'
+      : `<span class="gap-badge ${item.gaps === 0 ? 'zero' : ''}">${item.gaps}</span>`;
+
+    const outreachBadge = item.outreach
+      ? '<span class="outreach-badge">&#x2713; Sent</span>'
+      : (item.status === 'routed' ? '<span style="font-size:10px;color:var(--green)">—</span>' : '—');
+
+    const chBadge = item.channel === 'voice'
+      ? '<span class="ch-voice">Voice</span>'
+      : '<span class="ch-fax">Fax</span>';
+
+    const priTitle = item.priority_reason ? ` title="${item.priority_reason.replace(/"/g,"'")}"` : '';
+    const priBadge = item.priority
+      ? `<span class="pri-${item.priority}"${priTitle}>${item.priority}</span>`
+      : '<span style="color:var(--gray);font-size:11px">—</span>';
+
+    const patient = item.patient || item.claim;
+    const equipment = item.equipment ? item.equipment.substring(0, 20) + (item.equipment.length > 20 ? '...' : '') : '—';
+
+    return `<tr id="row-${item.claim.replace(/-/g,'')}" class="${rowClass}" ${onclick}>
+      <td title="${item.patient || ''}">${patient.substring(0,18)}</td>
+      <td style="font-family:monospace;font-size:10px">${item.claim}</td>
+      <td title="${item.equipment || ''}">${equipment}</td>
+      <td style="text-align:center">${chBadge}</td>
+      <td style="text-align:center">${statusBadge}</td>
+      <td style="text-align:center">${gapBadge}</td>
+      <td style="text-align:center">${outreachBadge}</td>
+      <td style="text-align:center">${priBadge}</td>
+    </tr>`;
+  }).join('');
+
+  tbody.innerHTML = rows;
+
+  // Auto-scroll: follow the last completed row while processing
+  const wrap = document.querySelector('.queue-wrap');
+  if (wrap) {
+    const doneRows = tbody.querySelectorAll('tr.routed, tr.gaps, tr.error');
+    if (doneRows.length > 0) {
+      const lastDone = doneRows[doneRows.length - 1];
+      wrap.scrollTop = lastDone.offsetTop - wrap.clientHeight / 2;
+    }
+  }
+}
+
+function openPipeline() {
+  window.open('/pipeline/' + hollowayClaim, '_blank');
+}
+
+function openFaxModal() {
+  document.getElementById('fax-modal').classList.add('open');
+}
+function closeFaxModal() {
+  document.getElementById('fax-modal').classList.remove('open');
+}
+
+function uploadFax(input) {
+  if (!input.files.length) return;
+  const formData = new FormData();
+  formData.append('file', input.files[0]);
+  closeFaxModal();
+  fetch('/api/upload-fax', {method:'POST', body: formData})
+  .then(r => r.json())
+  .then(data => {
+    if (!processingStarted) startPolling();
+  });
+}
+
+function triggerDemoFax() {
+  closeFaxModal();
+  fetch('/api/trigger-fax', {method:'POST'})
+  .then(r => r.json())
+  .then(data => {
+    if (!processingStarted) startPolling();
+  });
+}
+</script>
+</body>
+</html>

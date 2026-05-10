@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referral Inbox — Coastal DME</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-l:#eff6ff;--blue-m:#bfdbfe;
+  --green:#16a34a;--green-l:#f0fdf4;--green-m:#bbf7d0;
+  --red:#dc2626;--red-l:#fef2f2;--red-m:#fecaca;
+  --yellow:#d97706;--yellow-l:#fffbeb;--yellow-m:#fde68a;
+  --purple:#7c3aed;--purple-l:#f5f3ff;--purple-m:#ddd6fe;
+  --gray:#6b7280;--gray-l:#f9fafb;--gray-m:#e5e7eb;
+  --dark:#111827;
+  --navy:#1e3a5f;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:var(--dark);min-height:100vh}
+
+header{background:var(--navy);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px;text-decoration:none}
+.logo-icon{width:28px;height:28px;background:#2563eb;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.btn{padding:7px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.btn-primary{background:#2563eb;color:#fff}.btn-primary:hover{background:#1d4ed8}
+.btn-outline{background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.hdr-link{color:rgba(255,255,255,.6);font-size:12px;text-decoration:none;padding:6px 10px;border-radius:6px}.hdr-link:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:calc(100vh - 52px)}
+
+/* SIDEBAR */
+.sidebar{background:#fff;border-right:1px solid var(--gray-m);padding:16px 12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+.sb-label{font-size:10px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.06em;padding:0 4px;margin-top:4px}
+.stat-card{background:var(--gray-l);border:1px solid var(--gray-m);border-radius:8px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between}
+.stat-n{font-size:22px;font-weight:900}.stat-l{font-size:10px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.c-blue{color:var(--blue)}.c-green{color:var(--green)}.c-yellow{color:var(--yellow)}.c-purple{color:var(--purple)}
+
+.upload-zone{border:2px dashed var(--blue-m);border-radius:10px;padding:18px;text-align:center;cursor:pointer;transition:all .2s;background:var(--blue-l)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--blue);background:#dbeafe}
+.upload-icon{font-size:26px;margin-bottom:6px}
+.upload-label{font-size:12px;font-weight:700;color:var(--blue);margin-bottom:3px}
+.upload-sub{font-size:10px;color:var(--gray)}
+#file-input{display:none}
+
+.log-box{flex:1;max-height:200px;overflow-y:auto;border:1px solid var(--gray-m);border-radius:8px;background:var(--gray-l)}
+.log-line{font-size:10px;font-family:monospace;padding:3px 8px;border-bottom:1px solid #f3f4f6;color:var(--gray);line-height:1.6}
+.log-line .ts{color:var(--blue);margin-right:4px}
+.log-line.new{color:var(--dark)}
+
+/* MAIN */
+.main{padding:20px 24px;overflow-y:auto}
+.page-hero{background:var(--navy);color:#fff;border-radius:12px;padding:20px 24px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between}
+.hero-left{}
+.hero-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:4px}
+.hero-title{font-size:18px;font-weight:800;margin-bottom:3px}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.55)}
+.hero-right{display:flex;gap:20px;text-align:center}
+.hc{}.hc-n{font-size:24px;font-weight:900;color:#fff}.hc-l{font-size:10px;color:rgba(255,255,255,.45);font-weight:600;text-transform:uppercase}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.filter-btn{padding:5px 13px;border-radius:20px;font-size:11px;font-weight:700;border:1px solid var(--gray-m);background:#fff;cursor:pointer;color:var(--gray)}
+.filter-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.search-box{margin-left:auto;padding:6px 12px;border:1px solid var(--gray-m);border-radius:8px;font-size:12px;width:200px;outline:none}
+.search-box:focus{border-color:var(--blue)}
+
+/* FOLDER GRID */
+.folder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+
+.folder-card{background:#fff;border:1px solid var(--gray-m);border-radius:10px;overflow:hidden;transition:box-shadow .15s}
+.folder-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.folder-card.fc-processing{border-color:#bfdbfe;background:#eff6ff}
+.folder-card.fc-routed{border-color:#bbf7d0}
+.folder-card.fc-gaps{border-color:#fde68a}
+.folder-card.fc-featured{border-color:#a78bfa;box-shadow:0 0 0 2px #ddd6fe}
+
+.fc-header{padding:10px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--gray-m);background:var(--gray-l)}
+.fc-header.fc-processing{background:#eff6ff;border-color:#bfdbfe}
+.fc-header.fc-routed{background:#f0fdf4;border-color:#bbf7d0}
+.fc-header.fc-gaps{background:#fffbeb;border-color:#fde68a}
+.fc-header.fc-featured{background:#f5f3ff;border-color:#ddd6fe}
+
+.folder-icon{font-size:20px;flex-shrink:0}
+.fc-meta{flex:1;min-width:0}
+.fc-claim{font-size:11px;font-weight:800;color:var(--dark);font-family:monospace}
+.fc-patient{font-size:12px;font-weight:600;color:var(--dark);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc-badges{display:flex;gap:4px;margin-top:4px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:10px;font-size:10px;font-weight:700}
+.b-fax{background:#e0e7ff;color:#3730a3}
+.b-voice{background:#fce7f3;color:#9d174d}
+.b-new{background:#dcfce7;color:#15803d}
+.b-live{background:#fef3c7;color:#92400e;animation:fadepulse 1.5s infinite}
+@keyframes fadepulse{0%,100%{opacity:1}50%{opacity:.6}}
+.b-routed{background:var(--green-m);color:#15803d}
+.b-gaps{background:var(--yellow-m);color:#92400e}
+.b-processing{background:var(--blue-m);color:#1e40af}
+.b-featured{background:#ddd6fe;color:#5b21b6}
+
+.fc-status{margin-left:auto;flex-shrink:0}
+
+/* PDF LIST */
+.pdf-list{padding:8px 14px 10px}
+.pdf-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #f8fafc}
+.pdf-row:last-child{border-bottom:none}
+.pdf-icon{font-size:13px;flex-shrink:0}
+.pdf-name{font-size:11px;color:var(--gray);flex:1;font-family:monospace}
+.pdf-link{font-size:10px;font-weight:700;color:var(--blue);text-decoration:none;padding:2px 7px;border-radius:5px;background:var(--blue-l);flex-shrink:0}
+.pdf-link:hover{background:var(--blue-m)}
+.pdf-row.reading .pdf-name{color:var(--blue);font-weight:600}
+.pdf-row.reading .pdf-icon::after{content:" 👁"}
+
+.fc-footer{padding:6px 14px 8px;display:flex;align-items:center;justify-content:space-between}
+.fc-elapsed{font-size:10px;color:var(--gray)}
+.fc-action{font-size:10px;font-weight:700;color:var(--blue);text-decoration:none;padding:3px 10px;border:1px solid var(--blue-m);border-radius:6px;background:var(--blue-l)}
+.fc-action:hover{background:var(--blue-m)}
+
+/* EMPTY STATE */
+.empty{text-align:center;padding:60px 20px;color:var(--gray)}
+.empty-icon{font-size:48px;margin-bottom:12px}
+.empty-title{font-size:16px;font-weight:700;margin-bottom:6px}
+
+/* PROCESSING SHIMMER */
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.shimmer{background:linear-gradient(90deg,#f0f4ff 25%,#dbeafe 50%,#f0f4ff 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="/">
+    <div class="logo-icon">⚡</div>
+    Coastal DME — Intake Agent
+  </a>
+  <div class="hdr-right">
+    <a class="hdr-link" href="/">Queue View</a>
+    <span class="hdr-link" style="color:rgba(255,255,255,.8);font-weight:700;background:rgba(255,255,255,.1);padding:6px 12px;border-radius:6px">Referral Inbox</span>
+    <button class="btn btn-primary" onclick="startProcessing()" id="start-btn">Start Live Processing</button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sb-label">Inbox Stats</div>
+    <div class="stat-card">
+      <div><div class="stat-n c-blue" id="stat-total">0</div><div class="stat-l">Total Referrals</div></div>
+    </div>
+    <div class="stat-card">
+      <div><div class="stat-n c-green" id="stat-processed">0</div><div class="stat-l">Processed</div></div>
+    </div>
+    <div class="stat-card">
+      <div><div class="stat-n c-yellow" id="stat-pending">0</div><div class="stat-l">Pending</div></div>
+    </div>
+    <div class="stat-card">
+      <div><div class="stat-n c-purple" id="stat-pdfs">0</div><div class="stat-l">Total PDFs</div></div>
+    </div>
+
+    <div class="sb-label" style="margin-top:8px">New Fax Upload</div>
+    <div class="upload-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="handleDrop(event)">
+      <div class="upload-icon">📠</div>
+      <div class="upload-label">Drop PDF here</div>
+      <div class="upload-sub">or click to browse</div>
+    </div>
+    <input type="file" id="file-input" accept=".pdf" onchange="uploadFax(this.files[0])">
+
+    <div class="sb-label">Agent Activity</div>
+    <div class="log-box" id="log-box">
+      <div class="log-line"><span class="ts">--:--:--</span>Waiting for processing...</div>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="page-hero">
+      <div class="hero-left">
+        <div class="hero-tag">Extraction & Intake Agents</div>
+        <div class="hero-title">Referral Inbox — 75 Packages Ready</div>
+        <div class="hero-sub">Each folder contains 3 real PDFs. Agent reads every file, extracts 25 fields, detects ICD conflicts.</div>
+      </div>
+      <div class="hero-right">
+        <div class="hc"><div class="hc-n" id="h-folders">75</div><div class="hc-l">Folders</div></div>
+        <div class="hc"><div class="hc-n" id="h-pdfs">225</div><div class="hc-l">PDFs</div></div>
+        <div class="hc"><div class="hc-n" id="h-voice">6</div><div class="hc-l">Voice</div></div>
+        <div class="hc"><div class="hc-n" id="h-fax">69</div><div class="hc-l">Fax</div></div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('fax',this)">Fax</button>
+      <button class="filter-btn" onclick="setFilter('voice',this)">Voice</button>
+      <button class="filter-btn" onclick="setFilter('pending',this)">Pending</button>
+      <button class="filter-btn" onclick="setFilter('processing',this)">Processing</button>
+      <button class="filter-btn" onclick="setFilter('done',this)">Done</button>
+      <input class="search-box" type="text" placeholder="Search claim or patient..." id="search-box" oninput="renderFolders()">
+    </div>
+
+    <div class="folder-grid" id="folder-grid">
+      <div class="empty"><div class="empty-icon">📁</div><div class="empty-title">Loading inbox...</div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let allFolders = [];
+let queueMap  = {};  // claim -> queue status
+let activeFilter = 'all';
+let pollInterval = null;
+
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+async function boot() {
+  await loadFolders();
+  await loadQueue();
+  renderFolders();
+  pollInterval = setInterval(tick, 2000);
+}
+
+async function tick() {
+  await loadQueue();
+  renderFolders();
+  updateLog();
+}
+
+// ── DATA ──────────────────────────────────────────────────────────────────────
+async function loadFolders() {
+  try {
+    const r = await fetch('/api/referrals');
+    allFolders = await r.json();
+    document.getElementById('h-folders').textContent = allFolders.length;
+    const pdfs = allFolders.reduce((s,f)=>s+f.pdfs.length,0);
+    document.getElementById('h-pdfs').textContent = pdfs;
+    document.getElementById('stat-total').textContent = allFolders.length;
+    document.getElementById('stat-pdfs').textContent = pdfs;
+    const voice = allFolders.filter(f=>f.channel==='voice').length;
+    document.getElementById('h-voice').textContent = voice;
+    document.getElementById('h-fax').textContent = allFolders.length - voice;
+  } catch(e) { console.error(e); }
+}
+
+async function loadQueue() {
+  try {
+    const r = await fetch('/api/status');
+    const data = await r.json();
+    queueMap = {};
+    (data.queue||[]).forEach(q => { queueMap[q.claim] = q; });
+    const done = Object.values(queueMap).filter(q=>q.status==='routed'||q.status==='gaps').length;
+    const processing = Object.values(queueMap).filter(q=>q.status==='processing').length;
+    document.getElementById('stat-processed').textContent = done;
+    document.getElementById('stat-pending').textContent = allFolders.length - done - processing;
+    // Reload folders in case new faxes arrived
+    await loadFolders();
+  } catch(e) {}
+}
+
+function updateLog() {
+  fetch('/api/status').then(r=>r.json()).then(data=>{
+    const box = document.getElementById('log-box');
+    const events = (data.events||[]).slice(-20).reverse();
+    box.innerHTML = events.map(e=>
+      `<div class="log-line new"><span class="ts">${e.ts}</span>${e.msg}</div>`
+    ).join('') || '<div class="log-line">No activity yet</div>';
+  }).catch(()=>{});
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function setFilter(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFolders();
+}
+
+function renderFolders() {
+  const search = (document.getElementById('search-box').value||'').toLowerCase();
+  let folders = allFolders.filter(f => {
+    if (search) {
+      const hay = (f.claim + ' ' + (f.patient||'')).toLowerCase();
+      if (!hay.includes(search)) return false;
+    }
+    const q = queueMap[f.claim];
+    const status = q ? q.status : 'pending';
+    if (activeFilter === 'fax')        return f.channel === 'fax';
+    if (activeFilter === 'voice')      return f.channel === 'voice';
+    if (activeFilter === 'pending')    return !q || status === 'queued';
+    if (activeFilter === 'processing') return status === 'processing';
+    if (activeFilter === 'done')       return status === 'routed' || status === 'gaps';
+    return true;
+  });
+
+  const grid = document.getElementById('folder-grid');
+  if (!folders.length) {
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🔍</div><div class="empty-title">No referrals match filter</div></div>`;
+    return;
+  }
+
+  grid.innerHTML = folders.map(f => folderCard(f)).join('');
+}
+
+function folderCard(f) {
+  const q = queueMap[f.claim];
+  const status = q ? q.status : 'pending';
+  const isNew = f.claim.startsWith('WC-LIVE') || f.claim.startsWith('WC-INCOMING');
+
+  // Card class
+  let cardClass = '';
+  if (status === 'processing') cardClass = 'fc-processing';
+  else if (status === 'routed') cardClass = 'fc-routed';
+  else if (status === 'gaps')   cardClass = 'fc-gaps';
+  if (f.is_featured) cardClass += ' fc-featured';
+
+  // Header class
+  let hdrClass = cardClass.replace('fc-featured','').trim();
+
+  // Status badge
+  let statusBadge = '';
+  if (status === 'processing') statusBadge = '<span class="badge b-processing">Reading...</span>';
+  else if (status === 'routed') statusBadge = '<span class="badge b-routed">&#x2713; Routed</span>';
+  else if (status === 'gaps')   statusBadge = '<span class="badge b-gaps">&#x26A0; Gaps</span>';
+
+  // Channel badge
+  const chBadge = f.channel === 'voice'
+    ? '<span class="badge b-voice">&#x1F3A4; Voice</span>'
+    : '<span class="badge b-fax">&#x1F4E0; Fax</span>';
+
+  const newBadge = isNew ? '<span class="badge b-new">New</span>' : '';
+  const liveBadge = isNew && status === 'processing' ? '<span class="badge b-live">Live</span>' : '';
+  const featBadge = f.is_featured ? '<span class="badge b-featured">&#x2605; Demo</span>' : '';
+
+  // PDF rows
+  const pdfRows = f.pdfs.map(pdf => {
+    const isReading = status === 'processing';
+    return `
+      <div class="pdf-row ${isReading ? 'reading' : ''}">
+        <span class="pdf-icon">📄</span>
+        <span class="pdf-name">${pdf}</span>
+        <a class="pdf-link" href="/referrals/${f.claim}/${pdf}" target="_blank">View</a>
+      </div>`;
+  }).join('');
+
+  // Footer
+  const elapsed = q && q.elapsed ? `${q.elapsed}s` : '';
+  const pipelineLink = (status === 'routed' || status === 'gaps')
+    ? `<a class="fc-action" href="/pipeline/${f.claim}">View Pipeline &rarr;</a>` : '';
+  const patientName = (q && q.patient) || f.patient || '—';
+
+  return `
+    <div class="folder-card ${cardClass}">
+      <div class="fc-header ${hdrClass}">
+        <span class="folder-icon">📁</span>
+        <div class="fc-meta">
+          <div class="fc-claim">${f.claim}</div>
+          <div class="fc-patient">${patientName}</div>
+          <div class="fc-badges">
+            ${chBadge}${newBadge}${liveBadge}${featBadge}${statusBadge}
+          </div>
+        </div>
+      </div>
+      <div class="pdf-list">${pdfRows}</div>
+      <div class="fc-footer">
+        <span class="fc-elapsed">${elapsed ? elapsed + ' to process' : f.pdfs.length + ' PDFs'}</span>
+        ${pipelineLink}
+      </div>
+    </div>`;
+}
+
+// ── ACTIONS ───────────────────────────────────────────────────────────────────
+async function startProcessing() {
+  const btn = document.getElementById('start-btn');
+  btn.textContent = 'Starting...';
+  btn.disabled = true;
+  try {
+    await fetch('/api/start', {method:'POST', headers:{'Content-Type':'application/json'}, body:'{}'});
+    btn.textContent = 'Processing...';
+    setTimeout(()=>{btn.textContent='Start Live Processing';btn.disabled=false;}, 5000);
+  } catch(e) {
+    btn.textContent = 'Start Live Processing';
+    btn.disabled = false;
+  }
+}
+
+async function uploadFax(file) {
+  if (!file) return;
+  const zone = document.getElementById('drop-zone');
+  zone.querySelector('.upload-label').textContent = 'Uploading...';
+  const fd = new FormData();
+  fd.append('file', file);
+  try {
+    const r = await fetch('/api/upload-fax', {method:'POST', body:fd});
+    const d = await r.json();
+    zone.querySelector('.upload-label').textContent = 'Received — processing!';
+    zone.querySelector('.upload-sub').textContent = d.claim || '';
+    setTimeout(()=>{
+      zone.querySelector('.upload-label').textContent = 'Drop PDF here';
+      zone.querySelector('.upload-sub').textContent = 'or click to browse';
+    }, 3000);
+    await loadFolders();
+    renderFolders();
+  } catch(e) {
+    zone.querySelector('.upload-label').textContent = 'Upload failed';
+  }
+}
+
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type === 'application/pdf') uploadFax(file);
+}
+
+boot();
+</script>
+</body>
+</html>

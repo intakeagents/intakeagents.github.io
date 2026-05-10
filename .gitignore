@@ -1,0 +1,28 @@
+# Secrets
+.env
+*.key
+
+# Output — episode JSON with patient data
+output/
+
+# Large PDF packages (regeneratable)
+referrals/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+
+# Logs
+*.log
+server_out.log
+server_err.log
+server.log
+
+# OS
+.DS_Store
+Thumbs.db

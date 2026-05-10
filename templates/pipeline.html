@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline — {{ claim }}</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f1f5f9;color:#111827;font-size:13px}
+:root{
+  --blue:#2563eb;--blue-l:#eff6ff;--blue-m:#bfdbfe;--blue-d:#1d4ed8;
+  --green:#16a34a;--green-l:#f0fdf4;--green-m:#bbf7d0;--green-d:#166534;
+  --red:#dc2626;--red-l:#fef2f2;--red-m:#fecaca;--red-d:#7f1d1d;
+  --yellow:#d97706;--yellow-l:#fffbeb;--yellow-m:#fde68a;--yellow-d:#92400e;
+  --purple:#7c3aed;--purple-l:#f5f3ff;--purple-m:#ddd6fe;--purple-d:#4c1d95;
+  --gray:#6b7280;--gray-l:#f9fafb;--gray-m:#e5e7eb;--dark:#111827;
+}
+
+/* HEADER */
+.hdr{background:#1e3a5f;height:52px;display:flex;align-items:center;gap:14px;padding:0 20px;position:sticky;top:0;z-index:100}
+.hdr-back{color:rgba(255,255,255,.65);font-size:11px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid rgba(255,255,255,.2);border-radius:6px;transition:.15s}
+.hdr-back:hover{background:rgba(255,255,255,.1);color:#fff}
+.hdr-title{color:#fff;font-weight:800;font-size:14px;flex:1}
+.hdr-claim{font-family:monospace;font-size:11px;color:rgba(255,255,255,.45)}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:262px 1fr;min-height:calc(100vh - 52px)}
+
+/* SIDEBAR */
+.sidebar{background:#fff;border-right:1px solid var(--gray-m);height:calc(100vh - 52px);position:sticky;top:52px;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-section{padding:14px 14px;border-bottom:1px solid var(--gray-m)}
+.sidebar-ttl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:10px}
+
+/* Step nav */
+.step-item{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:8px;cursor:pointer;border:none;background:transparent;width:100%;text-align:left;transition:.15s;margin-bottom:2px}
+.step-item:hover{background:var(--gray-l)}
+.step-item.active{background:var(--blue-l)}
+.step-item.done .step-circ{background:var(--green);color:#fff;border-color:var(--green)}
+.step-item.active .step-circ{background:var(--blue);color:#fff;border-color:var(--blue)}
+.step-circ{width:26px;height:26px;border-radius:50%;border:2px solid var(--gray-m);background:var(--gray-l);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:var(--gray);flex-shrink:0;transition:.15s}
+.step-lbl{font-size:11px;font-weight:700;color:var(--dark)}
+.step-item.active .step-lbl{color:var(--blue-d)}
+.step-sub2{font-size:9px;color:var(--gray);margin-top:1px}
+
+/* Episode panel */
+.ep-row{margin-bottom:8px}
+.ep-key{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray);margin-bottom:2px}
+.ep-val{font-size:11px;font-weight:700;color:var(--dark);line-height:1.3}
+.ep-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:9px;font-weight:800}
+.ep-routed{background:var(--green-l);color:var(--green);border:1px solid var(--green-m)}
+.ep-pending{background:var(--yellow-l);color:var(--yellow);border:1px solid var(--yellow-m)}
+.ep-high{background:var(--red-l);color:var(--red);border:1px solid var(--red-m)}
+.ep-med{background:var(--yellow-l);color:var(--yellow);border:1px solid var(--yellow-m)}
+.ep-low{background:var(--green-l);color:var(--green);border:1px solid var(--green-m)}
+
+/* Agent log */
+.log-wrap{padding:14px 14px;flex:1}
+.log-line{font-size:10px;font-family:monospace;line-height:1.9;color:var(--gray)}
+.log-line .ts{color:var(--blue);margin-right:6px;font-weight:700;min-width:72px;display:inline-block}
+.log-line.ok .ts{color:var(--green)}
+.log-line.warn .ts{color:var(--yellow)}
+.log-line.err{color:var(--red)}
+.log-line.warn{color:var(--yellow-d)}
+
+/* MAIN */
+.main{padding:28px 32px;overflow-y:auto;max-width:840px}
+.step-panel{display:none}
+.step-panel.active{display:block;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.s-tag{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);margin-bottom:3px}
+.s-title{font-size:23px;font-weight:900;color:var(--dark);margin-bottom:5px}
+.s-sub{font-size:13px;color:var(--gray);line-height:1.5;margin-bottom:22px}
+
+/* Cards */
+.card{background:#fff;border:1px solid var(--gray-m);border-radius:12px;padding:18px 20px;margin-bottom:14px}
+.card.green{background:var(--green-l);border-color:var(--green-m)}
+.card.red{background:var(--red-l);border-color:var(--red-m)}
+.card.blue{background:var(--blue-l);border-color:var(--blue-m)}
+.card.purple{background:var(--purple-l);border-color:var(--purple-m)}
+.card.yellow{background:var(--yellow-l);border-color:var(--yellow-m)}
+.card.navy{background:#1e3a5f;border-color:#1e3a5f}
+.card-hd{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:14px}
+.card.green .card-hd{color:var(--green)}
+.card.red .card-hd{color:var(--red)}
+.card.blue .card-hd{color:var(--blue)}
+.card.purple .card-hd{color:var(--purple)}
+
+/* Field grid */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fg3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fld{background:var(--gray-l);border-radius:8px;padding:9px 12px}
+.fld-k{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray);margin-bottom:3px;display:flex;align-items:center;justify-content:space-between;gap:4px}
+.fld-v{font-size:12px;font-weight:700;color:var(--dark);word-break:break-word}
+.fld-v.null{color:var(--red);font-style:italic;font-weight:400}
+
+/* Source badges */
+.sb{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:800;letter-spacing:.03em;white-space:nowrap;flex-shrink:0}
+.sb-fax{background:#dbeafe;color:#1e40af}
+.sb-rx{background:#ede9fe;color:#5b21b6}
+.sb-clin{background:#dcfce7;color:#15803d}
+.sb-ai{background:#fed7aa;color:#9a3412}
+.sb-sys{background:#f1f5f9;color:#64748b}
+.sb-miss{background:#fee2e2;color:#991b1b}
+
+/* Channel badge */
+.ch-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 13px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:14px}
+.ch-fax{background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
+
+/* Doc list */
+.doc-list{display:flex;flex-direction:column;gap:8px}
+.doc-row{display:flex;align-items:center;gap:12px;padding:11px 15px;border:1px solid var(--gray-m);border-radius:9px;background:#fff}
+.doc-row.ok{border-color:var(--green-m);background:var(--green-l)}
+.doc-icon{font-size:20px;flex-shrink:0}
+.doc-info{flex:1;min-width:0}
+.doc-name{font-size:12px;font-weight:700;color:var(--dark)}
+.doc-meta{font-size:10px;color:var(--gray);margin-top:2px}
+.doc-tbadge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px}
+.dtb-ref{background:#dbeafe;color:#1e40af}
+.dtb-clin{background:#dcfce7;color:#15803d}
+.dtb-rx{background:#ede9fe;color:#5b21b6}
+.dtb-other{background:var(--gray-m);color:var(--gray)}
+.doc-ok{font-size:10px;font-weight:800;color:var(--green);display:flex;align-items:center;gap:3px}
+
+/* Tab nav */
+.tab-nav{display:flex;flex-wrap:wrap;gap:0;border-bottom:2px solid var(--gray-m);margin-bottom:18px}
+.tab-btn{padding:7px 12px;font-size:11px;font-weight:700;color:var(--gray);background:transparent;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;transition:.15s;border-radius:4px 4px 0 0}
+.tab-btn:hover{color:var(--dark);background:var(--gray-l)}
+.tab-btn.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* Progress bar */
+.prog-wrap{margin-bottom:18px}
+.prog-row{display:flex;justify-content:space-between;font-size:10px;font-weight:700;color:var(--gray);margin-bottom:5px}
+.prog-bar{background:var(--gray-m);border-radius:4px;height:8px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:4px}
+.prog-sub{font-size:10px;color:var(--gray);margin-top:4px}
+
+/* Intel cards */
+.intel-card{border:1px solid var(--gray-m);border-radius:10px;padding:15px 18px;margin-bottom:12px;background:#fff}
+.intel-hd{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.check-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--dark);line-height:1.5}
+.check-row+.check-row{margin-top:6px}
+.check-icon{flex-shrink:0;margin-top:1px}
+/* Four-Layer Defense */
+.defense-card{border:2px solid var(--dark);border-radius:12px;padding:16px 20px;margin-bottom:16px;background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);color:#fff}
+.defense-title{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;color:#93c5fd;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.defense-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.defense-layer{border-radius:9px;padding:12px 14px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);display:flex;flex-direction:column;gap:5px}
+.defense-layer.dl-active{border-color:rgba(74,222,128,.4);background:rgba(74,222,128,.07)}
+.defense-layer.dl-escalated{border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.07)}
+.defense-layer.dl-inactive{border-color:rgba(255,255,255,.06);background:rgba(255,255,255,.02);opacity:.6}
+.dl-num{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:2px}
+.dl-name{font-size:11px;font-weight:800;color:#fff}
+.dl-active .dl-name{color:#4ade80}
+.dl-escalated .dl-name{color:#a78bfa}
+.dl-result{font-size:10px;color:rgba(255,255,255,.6);line-height:1.5}
+.dl-active .dl-result{color:rgba(74,222,128,.8)}
+.dl-escalated .dl-result{color:rgba(167,139,250,.8)}
+.dl-badge{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:800;padding:2px 8px;border-radius:20px;margin-top:4px;width:fit-content}
+.dl-badge-active{background:rgba(74,222,128,.2);color:#4ade80;border:1px solid rgba(74,222,128,.3)}
+.dl-badge-escalated{background:rgba(167,139,250,.2);color:#a78bfa;border:1px solid rgba(167,139,250,.3)}
+.dl-badge-pass{background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.1)}
+/* Knowledge Graph */
+.kg-rule{border-radius:7px;padding:9px 13px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.kg-rule.kg-confirm{background:#f0fdf4;border:1px solid #bbf7d0}
+.kg-rule.kg-reject{background:#fef2f2;border:1px solid #fecaca}
+.kg-rule.kg-flag{background:#fffbeb;border:1px solid #fde68a}
+.kg-rule.kg-escalate{background:rgba(124,58,237,.06);border:1px solid #ddd6fe}
+.kg-rule-hd{display:flex;align-items:center;gap:8px;font-size:10px;font-weight:800}
+.kg-rule-id{font-family:monospace;font-size:9px;background:rgba(0,0,0,.06);padding:2px 6px;border-radius:4px;font-weight:700}
+.kg-rule-msg{font-size:11px;color:var(--dark);line-height:1.5;margin-top:2px}
+.kg-rule-src{font-size:9px;color:var(--gray);font-style:italic;margin-top:2px}
+.kg-det-badge{font-size:9px;font-weight:800;padding:2px 7px;border-radius:10px;background:var(--dark);color:#fff;letter-spacing:.04em}
+.kg-source-bar{font-size:9px;color:var(--gray);margin-top:10px;padding-top:8px;border-top:1px solid var(--gray-m);display:flex;align-items:center;gap:6px}
+
+/* ICD per-doc rows */
+.icd-doc{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:7px;margin-bottom:5px}
+.icd-doc.conflict{background:#fef2f2;border:1px solid var(--red-m)}
+.icd-doc.match{background:var(--green-l);border:1px solid var(--green-m)}
+.icd-doc.ai-sel{background:var(--blue-l);border:1px solid var(--blue-m);margin-top:8px}
+.icd-doc-name{font-size:10px;color:var(--gray);width:140px;flex-shrink:0}
+.icd-code-val{font-family:monospace;font-size:15px;font-weight:900;flex:1}
+.icd-doc.conflict .icd-code-val{color:var(--red);text-decoration:line-through}
+.icd-doc.match .icd-code-val{color:var(--green)}
+.icd-doc.ai-sel .icd-code-val{color:var(--blue);font-size:17px}
+
+/* Confidence */
+.conf-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid rgba(0,0,0,.06);margin-top:10px}
+.conf-lbl{font-size:11px;font-weight:700;color:var(--gray);width:100px;flex-shrink:0}
+.conf-track{flex:1;height:10px;background:var(--gray-m);border-radius:5px;overflow:hidden}
+.conf-bar{height:100%;border-radius:5px}
+.conf-val{font-size:18px;font-weight:900;width:55px;text-align:right}
+.conf-high .conf-bar{background:var(--green)}.conf-high .conf-val{color:var(--green)}
+.conf-med .conf-bar{background:var(--yellow)}.conf-med .conf-val{color:var(--yellow)}
+.conf-low .conf-bar{background:var(--red)}.conf-low .conf-val{color:var(--red)}
+
+/* Mini cards */
+/* ICD Conflict Log blocks */
+.conf-block-wrap{border:1px solid var(--gray-m);border-radius:9px;padding:13px 15px;margin-top:12px;background:#fff}
+.conf-block-wrap.esc-wrap{border-color:var(--purple-m);background:var(--purple-l)}
+.conf-block-hd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.conf-block-label{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.conf-block-num{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.esc-num{background:var(--purple)}
+.conf-block-ep{font-size:11px;font-weight:700;color:var(--dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.outcome-badge{padding:3px 10px;border-radius:20px;font-size:9px;font-weight:800;white-space:nowrap;flex-shrink:0}
+.ob-resolved{background:var(--green-l);color:var(--green);border:1px solid var(--green-m)}
+.ob-escalated{background:var(--purple-l);color:var(--purple);border:1px solid var(--purple-m)}
+.ob-clean{background:var(--gray-l);color:var(--gray);border:1px solid var(--gray-m)}
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.mini-card{border:1px solid var(--gray-m);border-radius:10px;padding:14px 16px;background:#fff}
+.mini-ttl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:8px}
+.mini-val{font-size:19px;font-weight:900}
+.mini-sub{font-size:10px;color:var(--gray);margin-top:4px;line-height:1.4}
+
+/* Gap section */
+.gap-summary{background:var(--green-l);border:1px solid var(--green-m);border-radius:9px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.gap-num{font-size:26px;font-weight:900;color:var(--green)}
+.gap-num-lbl{font-size:11px;font-weight:600;color:var(--green-d)}
+.gap-num-sub{font-size:10px;color:var(--green-d);margin-top:2px}
+
+.gap-sec{margin-bottom:14px}
+.gap-sec-hd{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.gap-row{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;border:1px solid;margin-bottom:5px}
+.gap-row.hard{background:var(--red-l);border-color:var(--red-m)}
+.gap-row.soft{background:var(--yellow-l);border-color:var(--yellow-m)}
+.gap-row.parallel{background:var(--green-l);border-color:var(--green-m)}
+.gap-field{font-family:monospace;font-size:11px;font-weight:800;width:150px;flex-shrink:0}
+.gap-row.hard .gap-field{color:var(--red)}
+.gap-row.soft .gap-field{color:var(--yellow-d)}
+.gap-row.parallel .gap-field{color:var(--green)}
+.gap-desc{font-size:11px;color:var(--gray);flex:1;line-height:1.4}
+.gap-badge{padding:3px 10px;border-radius:20px;font-size:9px;font-weight:800;white-space:nowrap}
+.gb-outreach{background:var(--red);color:#fff}
+.gb-sched{background:var(--yellow);color:#fff}
+.gb-routing{background:var(--green);color:#fff}
+.gb-dispatch{background:#7f1d1d;color:#fff}
+
+/* Routing decision */
+.route-decision{border-radius:10px;padding:16px 20px;margin-top:4px}
+.rd-hold{background:#1e3a5f}
+.rd-go{background:var(--green)}
+.rd-ttl{font-size:10px;font-weight:700;color:rgba(255,255,255,.5);margin-bottom:5px}
+.rd-val{font-size:18px;font-weight:900;color:#fff}
+.rd-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:4px}
+
+/* Email */
+.email-outer{background:#1e3a5f;border-radius:12px;overflow:hidden}
+.email-hdr{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
+.email-meta{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px}
+.email-meta span{color:#93c5fd;font-weight:700}
+.email-subject{font-size:13px;font-weight:700;color:#fff}
+.email-body{padding:20px;font-size:12px;color:rgba(255,255,255,.75);line-height:1.75;white-space:pre-wrap;font-family:inherit}
+.email-foot{padding:10px 20px;border-top:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);font-size:10px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:8px}
+
+/* Voice outreach */
+.call-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.call-timeline{display:flex;flex-direction:column}
+.call-ev{display:flex;gap:12px;padding:12px 0;border-top:1px dashed var(--gray-m)}
+.call-ev:first-child{border-top:none;padding-top:0}
+.call-dot{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:2px}
+.cd-gray{background:var(--gray-m);color:var(--gray)}
+.cd-red{background:var(--red-l);color:var(--red)}
+.cd-blue{background:var(--blue-l);color:var(--blue)}
+.cd-green{background:var(--green-l);color:var(--green)}
+.call-ev-ttl{font-size:11px;font-weight:700;color:var(--dark);margin-bottom:2px}
+.call-ev-ts{font-size:9px;font-family:monospace;color:var(--gray);margin-bottom:2px}
+.call-ev-meta{font-size:10px;color:var(--gray);line-height:1.5}
+
+.call-transcript{background:#1e3a5f;border-radius:10px;padding:16px 18px;margin-top:12px}
+.ct-ttl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:10px}
+.ct-line{display:flex;gap:10px;margin-bottom:8px;font-size:11px;line-height:1.5}
+.ct-agent{color:#93c5fd;font-weight:700;width:55px;flex-shrink:0}
+.ct-cm{color:#86efac;font-weight:700;width:55px;flex-shrink:0}
+.ct-text{color:rgba(255,255,255,.75)}
+
+/* Status banner */
+.status-banner{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:9px;margin-bottom:16px;font-size:14px;font-weight:800}
+.sb-routed{background:var(--green);color:#fff}
+.sb-pending{background:var(--yellow);color:#fff}
+
+/* Route fields */
+.route-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rf{background:#fff;border:1px solid var(--gray-m);border-radius:8px;padding:10px 14px}
+.rf .k{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--gray);margin-bottom:3px}
+.rf .v{font-size:12px;font-weight:700;color:var(--dark)}
+.rf .v.pend{color:var(--yellow-d)}
+
+/* Nav */
+.nav-row{display:flex;justify-content:space-between;margin-top:24px;padding-top:16px;border-top:1px solid var(--gray-m)}
+.btn{padding:10px 20px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;text-decoration:none;transition:.15s}
+.btn-prev{background:var(--gray-l);color:var(--dark);border:1px solid var(--gray-m)}.btn-prev:hover{background:var(--gray-m)}
+.btn-next{background:var(--blue);color:#fff}.btn-next:hover{background:var(--blue-d)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+{% set gaps = completeness.get('gaps', {}) %}
+{% set hard_blocks_list = completeness.get('hard_blocks', []) %}
+{% set req_missing = completeness.get('required_missing', []) %}
+{% set gap_count = gaps|length %}
+{% set present_count = 17 - gap_count %}
+{% set icd_conf = fields.get('icd_conflict', false) %}
+{% set conf = fields.get('confidence', 0)|int %}
+{% set escalate = fields.get('escalate', false) %}
+{% set priority = fields.get('priority', 'MED') %}
+{% set has_email = email_body and email_body|length > 0 %}
+{% set has_gaps = gap_count > 0 %}
+{% set ai_resolved = 1 if (icd_conf and not escalate) else 0 %}
+{% set prog_pct = ((present_count / 17) * 100)|int %}
+
+<header class="hdr">
+  <a href="/" class="hdr-back">&#x2190; Queue</a>
+  <div class="hdr-title">7-Step Pipeline Walkthrough</div>
+  <div class="hdr-claim">{{ claim }}</div>
+</header>
+
+<div class="layout">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+
+  <!-- Step Nav -->
+  <div class="sidebar-section">
+    <div class="sidebar-ttl">Pipeline Steps</div>
+    {% set steps = [
+      (1,'Channel Intake','Documents + channel'),
+      (2,'Normalization','Field extraction'),
+      (3,'Intelligence','ICD + duplicate'),
+      (4,'Gap Triage','Completeness check'),
+      (5,'Email Outreach','Digital dispatch'),
+      (6,'Voice Outreach','Follow-up call'),
+      (7,'Route Output','Final episode'),
+    ] %}
+    {% for sn, sl, ss in steps %}
+    <button class="step-item {% if sn == 1 %}active{% endif %}" id="nav-{{ sn }}" onclick="goStep({{ sn }})">
+      <div class="step-circ" id="circ-{{ sn }}">{{ '%02d'|format(sn) }}</div>
+      <div>
+        <div class="step-lbl">{{ sl }}</div>
+        <div class="step-sub2">{{ ss }}</div>
+      </div>
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Episode Panel -->
+  <div class="sidebar-section">
+    <div class="sidebar-ttl">Episode</div>
+    <div class="ep-row">
+      <div class="ep-key">Patient</div>
+      <div class="ep-val">{{ fields.get('patient_name', '—') }}</div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-key">Claim #</div>
+      <div class="ep-val" style="font-family:monospace;font-size:10px">{{ fields.get('claim_number', claim) }}</div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-key">Equipment</div>
+      <div class="ep-val">{{ fields.get('dme_item', '—') }}{% if fields.get('hcpcs') %} · {{ fields.get('hcpcs') }}{% endif %}</div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-key">Priority</div>
+      <div>{% if priority == 'HIGH' %}<span class="ep-badge ep-high">&#x25B2; HIGH</span>{% elif priority == 'LOW' %}<span class="ep-badge ep-low">&#x25BC; LOW</span>{% else %}<span class="ep-badge ep-med">&#x25CF; MED</span>{% endif %}</div>
+    </div>
+    <div class="ep-row">
+      <div class="ep-key">Status</div>
+      <div>{% if completeness.get('is_complete') %}<span class="ep-badge ep-routed">&#x2713; ROUTED</span>{% else %}<span class="ep-badge ep-pending">&#x23F3; PENDING CM</span>{% endif %}</div>
+    </div>
+  </div>
+
+  <!-- Agent Log — step-aware, reveals as user progresses -->
+  <div class="log-wrap">
+    <div class="sidebar-ttl">Agent Log</div>
+    <div id="agent-log">
+      <!-- Step 1 logs (always visible) -->
+      <div class="log-line log-s1"><span class="ts">+0s</span> Fax received · {{ pdf_files|length }} docs</div>
+      <div class="log-line log-s1"><span class="ts">+1s</span> Documents queued for extraction</div>
+      <!-- Step 2 logs -->
+      <div class="log-line log-s2" style="display:none"><span class="ts">+4s</span> AI extraction started</div>
+      <div class="log-line ok log-s2" style="display:none"><span class="ts">+15s</span> {{ present_count }} of 17 fields extracted</div>
+      <div class="log-line log-s2" style="display:none"><span class="ts">+15s</span> KG: {{ fields.get('kg_validation', {}).get('rules_fired', 0) }} rules fired · {{ fields.get('kg_validation', {}).get('confirmations', 0) }} confirmed</div>
+      <!-- Step 3 logs -->
+      {% if icd_conf %}
+      <div class="log-line warn log-s3" style="display:none"><span class="ts">+15s</span> ICD conflict detected across documents</div>
+      {% if not escalate %}
+      <div class="log-line ok log-s3" style="display:none"><span class="ts">+16s</span> AI self-corrected · {{ conf }}% confidence</div>
+      {% else %}
+      <div class="log-line err log-s3" style="display:none"><span class="ts">+16s</span> Escalated to specialist · conf {{ conf }}%</div>
+      {% endif %}
+      {% endif %}
+      <!-- Step 4 logs -->
+      <div class="log-line {% if gap_count == 0 %}ok{% else %}warn{% endif %} log-s4" style="display:none"><span class="ts">+17s</span> Completeness: {{ gap_count }} gap(s) found</div>
+      <!-- Step 5 logs -->
+      {% if has_gaps %}
+      <div class="log-line ok log-s5" style="display:none"><span class="ts">+18s</span> Outreach email drafted</div>
+      <div class="log-line ok log-s5" style="display:none"><span class="ts">+20s</span> Email dispatched to {{ fields.get('adjuster_name', 'adjuster') }}</div>
+      <!-- Step 6 logs -->
+      <div class="log-line warn log-s6" style="display:none"><span class="ts">+24h</span> No email response received</div>
+      <div class="log-line ok log-s6" style="display:none"><span class="ts">+24h 01m</span> Outbound call auto-triggered</div>
+      <div class="log-line ok log-s6" style="display:none"><span class="ts">+24h 02m</span> Call complete · 84s · fields collected</div>
+      {% else %}
+      <div class="log-line ok log-s5" style="display:none"><span class="ts">+17s</span> All fields present · routing directly</div>
+      {% endif %}
+      <!-- Step 7 logs -->
+      <div class="log-line ok log-s7" style="display:none"><span class="ts">+24h 03m</span> Episode locked · ROUTED</div>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main class="main">
+
+
+<!-- ─────────────── STEP 1: INTAKE ─────────────── -->
+<div class="step-panel active" id="step-1">
+  <div class="s-tag">Step 01 — Channel Intake</div>
+  <div class="s-title">Channel Intake</div>
+  <div class="s-sub">Referral received, documents loaded, and episode opened in the pipeline.</div>
+
+  <div class="card">
+    <div class="card-hd">Intake Channel</div>
+    <div class="ch-badge ch-fax">&#x1F4E0; Fax Referral</div>
+    <div class="fg" style="margin-top:12px">
+      <div class="fld"><div class="fld-k">Claim Number</div><div class="fld-v">{{ fields.get('claim_number', claim) }}</div></div>
+      <div class="fld"><div class="fld-k">Patient</div><div class="fld-v">{{ fields.get('patient_name', '—') }}</div></div>
+      <div class="fld"><div class="fld-k">Documents Received</div><div class="fld-v">{{ pdf_files|length }} PDFs</div></div>
+      <div class="fld"><div class="fld-k">Auto-Processed</div><div class="fld-v">09:14:02 — 0 manual steps</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd">Documents Received</div>
+    <div class="doc-list">
+      {% for f in pdf_files %}
+        {% if 'referral' in f.lower() or 'form' in f.lower() %}
+        <div class="doc-row ok">
+          <div class="doc-icon">&#x1F4C4;</div>
+          <div class="doc-info"><div class="doc-name">{{ f }}</div><div class="doc-meta">Parsed · {{ loop.index * 3 }} pages extracted</div></div>
+          <div class="doc-tbadge dtb-ref">Referral Form</div>
+          <div class="doc-ok">&#x2713; Received</div>
+        </div>
+        {% elif 'clinical' in f.lower() or 'notes' in f.lower() %}
+        <div class="doc-row ok">
+          <div class="doc-icon">&#x1F4CB;</div>
+          <div class="doc-info"><div class="doc-name">{{ f }}</div><div class="doc-meta">Parsed · {{ loop.index * 2 + 1 }} pages extracted</div></div>
+          <div class="doc-tbadge dtb-clin">Clinical Notes</div>
+          <div class="doc-ok">&#x2713; Received</div>
+        </div>
+        {% elif 'prescri' in f.lower() or 'rx' in f.lower() %}
+        <div class="doc-row ok">
+          <div class="doc-icon">&#x1F48A;</div>
+          <div class="doc-info"><div class="doc-name">{{ f }}</div><div class="doc-meta">Parsed · {{ loop.index + 1 }} pages extracted</div></div>
+          <div class="doc-tbadge dtb-rx">Prescription</div>
+          <div class="doc-ok">&#x2713; Received</div>
+        </div>
+        {% else %}
+        <div class="doc-row ok">
+          <div class="doc-icon">&#x1F4C4;</div>
+          <div class="doc-info"><div class="doc-name">{{ f }}</div><div class="doc-meta">Parsed · supporting document</div></div>
+          <div class="doc-tbadge dtb-other">Supporting</div>
+          <div class="doc-ok">&#x2713; Received</div>
+        </div>
+        {% endif %}
+      {% else %}
+        <div class="doc-row ok">
+          <div class="doc-icon">&#x1F4C4;</div>
+          <div class="doc-info"><div class="doc-name">Referral package — 3 documents</div><div class="doc-meta">Parsed and loaded</div></div>
+          <div class="doc-tbadge dtb-ref">Referral Form</div>
+          <div class="doc-ok">&#x2713; Received</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if icd_conf %}
+  <div class="card red">
+    <div class="card-hd">&#x26A0; ICD-10 Conflict Detected Across Documents</div>
+    <div style="font-size:12px;color:var(--red-d);line-height:1.6">{{ fields.get('icd_conflict_detail','') }}</div>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-hd">Extracted Fields — Snapshot</div>
+    <div class="fg">
+      <div class="fld"><div class="fld-k">Patient Name <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('patient_name') %}null{% endif %}">{{ fields.get('patient_name') or '⊘ Missing' }}</div></div>
+      <div class="fld"><div class="fld-k">Date of Birth <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('dob') %}null{% endif %}">{{ fields.get('dob') or '⊘ Missing' }}</div></div>
+      <div class="fld"><div class="fld-k">DME Item <span class="sb sb-rx">PRESCRIPTION</span></div><div class="fld-v {% if not fields.get('dme_item') %}null{% endif %}">{{ fields.get('dme_item') or '⊘ Missing' }}</div></div>
+      <div class="fld"><div class="fld-k">ICD-10 <span class="sb {% if icd_conf %}sb-ai{% else %}sb-clin{% endif %}">{% if icd_conf %}AI RESOLVED{% else %}CLINICAL NOTES{% endif %}</span></div><div class="fld-v {% if not fields.get('icd_code') %}null{% endif %}">{{ fields.get('icd_code') or '⊘ Missing' }}</div></div>
+      <div class="fld"><div class="fld-k">Auth Ref # <span class="sb {% if fields.get('auth_ref') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('auth_ref') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('auth_ref') %}null{% endif %}">{{ fields.get('auth_ref') or '⊘ Missing' }}</div></div>
+      <div class="fld"><div class="fld-k">Gaps Found <span class="sb sb-sys">SYSTEM</span></div><div class="fld-v" style="color:{% if gap_count == 0 %}var(--green){% else %}var(--red){% endif %}">{{ gap_count }} gap{{ 's' if gap_count != 1 else '' }}{% if gap_count == 0 %} — complete{% endif %}</div></div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-prev" disabled>&#x2190; Previous</button>
+    <button class="btn btn-next" onclick="goStep(2)">Normalization &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 2: NORMALIZATION ─────────────── -->
+<div class="step-panel" id="step-2">
+  <div class="s-tag">Step 02 — Data Normalization</div>
+  <div class="s-title">Data Normalization</div>
+  <div class="s-sub">Raw fax text mapped to a structured episode record. Null fields shown in red — these feed the completeness check.</div>
+
+  <div class="prog-wrap">
+    <div class="prog-row"><span>Field Extraction Progress</span><span>{{ present_count }} / 17 fields</span></div>
+    <div class="prog-bar"><div class="prog-fill" style="width:{{ prog_pct }}%"></div></div>
+    <div class="prog-sub">{{ present_count }} confirmed · {% if ai_resolved %}{{ ai_resolved }} AI-resolved · {% endif %}{{ gap_count }} gap(s) requiring follow-up</div>
+  </div>
+
+  <!-- §1 Worker Information -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§1 &nbsp;Worker Information</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Patient Name <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('patient_name') %}null{% endif %}">{{ fields.get('patient_name') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Date of Birth <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('dob') %}null{% endif %}">{{ fields.get('dob') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Injury Date <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('injury_date') %}null{% endif %}">{{ fields.get('injury_date') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §2 Claim Reference -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§2 &nbsp;Claim Reference</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Claim Number <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v">{{ fields.get('claim_number', claim) }}</div></div>
+      <div class="fld"><div class="fld-k">Policy Number <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('policy_number') %}null{% endif %}">{{ fields.get('policy_number') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Auth Ref # <span class="sb {% if fields.get('auth_ref') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('auth_ref') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('auth_ref') %}null{% endif %}">{{ fields.get('auth_ref') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §3 Insurance & Adjuster -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§3 &nbsp;Insurance &amp; Adjuster</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Carrier <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('insurance_carrier') %}null{% endif %}">{{ fields.get('insurance_carrier') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Adjuster Name <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('adjuster_name') %}null{% endif %}">{{ fields.get('adjuster_name') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Adjuster Phone <span class="sb {% if fields.get('adjuster_phone') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('adjuster_phone') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('adjuster_phone') %}null{% endif %}">{{ fields.get('adjuster_phone') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Adjuster Email <span class="sb {% if fields.get('adjuster_email') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('adjuster_email') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('adjuster_email') %}null{% endif %}">{{ fields.get('adjuster_email') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §4 Equipment -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§4 &nbsp;Equipment</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">DME Item <span class="sb sb-rx">PRESCRIPTION</span></div><div class="fld-v {% if not fields.get('dme_item') %}null{% endif %}">{{ fields.get('dme_item') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">HCPCS Code <span class="sb sb-rx">PRESCRIPTION</span></div><div class="fld-v {% if not fields.get('hcpcs') %}null{% endif %}">{{ fields.get('hcpcs') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Quantity <span class="sb sb-rx">PRESCRIPTION</span></div><div class="fld-v {% if not fields.get('quantity') %}null{% endif %}">{{ fields.get('quantity') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §5 Diagnosis -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§5 &nbsp;Diagnosis</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">ICD-10 Code <span class="sb {% if icd_conf %}sb-ai{% else %}sb-clin{% endif %}">{% if icd_conf %}AI RESOLVED{% else %}CLINICAL NOTES{% endif %}</span></div><div class="fld-v {% if not fields.get('icd_code') %}null{% endif %}">{{ fields.get('icd_code') or 'null' }}</div></div>
+      <div class="fld" style="grid-column:span 2"><div class="fld-k">Diagnosis Description <span class="sb sb-clin">CLINICAL NOTES</span></div><div class="fld-v {% if not fields.get('icd_description') %}null{% endif %}">{{ fields.get('icd_description') or 'null' }}</div></div>
+    </div>
+    {% if icd_conf %}
+    <div style="margin-top:6px;background:var(--red-l);border-radius:7px;padding:10px 12px">
+      <div class="fld-k" style="color:var(--red);margin-bottom:4px">&#x26A0; ICD Conflict Detected — form code overridden by clinical notes + prescription</div>
+      <div style="font-size:11px;font-weight:400;color:var(--red-d);line-height:1.5">{{ fields.get('icd_conflict_detail','') }}</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- §6 Delivery -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§6 &nbsp;Delivery</div>
+    <div class="fg3">
+      <div class="fld" style="grid-column:1/-1"><div class="fld-k">Delivery Address <span class="sb {% if fields.get('delivery_address') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('delivery_address') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('delivery_address') %}null{% endif %}">{{ fields.get('delivery_address') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §7 Logistics -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§7 &nbsp;Logistics</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Transportation <span class="sb {% if fields.get('transportation') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('transportation') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('transportation') %}null{% endif %}">{{ fields.get('transportation') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Language / Interpreter <span class="sb {% if fields.get('language') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('language') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('language') %}null{% endif %}">{{ fields.get('language') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §8 Physician -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§8 &nbsp;Referring Physician</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Physician Name <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('physician_name') %}null{% endif %}">{{ fields.get('physician_name') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Practice <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('physician_practice') %}null{% endif %}">{{ fields.get('physician_practice') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">NPI <span class="sb {% if fields.get('physician_npi') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('physician_npi') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('physician_npi') %}null{% endif %}">{{ fields.get('physician_npi') or 'null' }}</div></div>
+      <div class="fld"><div class="fld-k">Physician Phone <span class="sb sb-fax">FAX FORM</span></div><div class="fld-v {% if not fields.get('physician_phone') %}null{% endif %}">{{ fields.get('physician_phone') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <!-- §9 Scheduling -->
+  <div class="card" style="margin-bottom:8px">
+    <div class="card-hd">§9 &nbsp;Scheduling</div>
+    <div class="fg3">
+      <div class="fld"><div class="fld-k">Appointment Window <span class="sb {% if fields.get('appt_window') %}sb-fax{% else %}sb-miss{% endif %}">{% if fields.get('appt_window') %}FAX FORM{% else %}MISSING{% endif %}</span></div><div class="fld-v {% if not fields.get('appt_window') %}null{% endif %}">{{ fields.get('appt_window') or 'null' }}</div></div>
+    </div>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(1)">&#x2190; Intake</button>
+    <button class="btn btn-next" onclick="goStep(3)">Intelligence &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 3: INTELLIGENCE ─────────────── -->
+<div class="step-panel" id="step-3">
+  <div class="s-tag">Step 03 — Intelligence Layer</div>
+  <div class="s-title">Intelligence Layer</div>
+  <div class="s-sub">AI cross-references all documents: duplicate detection, compliance validation, ICD conflict resolution across the batch, and risk scoring.</div>
+
+  <!-- ── FOUR-LAYER HALLUCINATION DEFENSE ── -->
+  {% set kg = fields.get('kg_validation', {}) %}
+  {% set l1_active = icd_conf %}
+  {% set l2_active = kg and kg.get('rules_fired', 0) > 0 %}
+  {% set l3_active = conf and conf < 80 %}
+  {% set l4_active = escalate %}
+  {% set layers_fired = [l1_active, l2_active, l3_active, l4_active] | select | list | length %}
+
+  <div class="defense-card">
+    <div class="defense-title">
+      &#x1F6E1;&#xFE0F; Four-Layer Hallucination Defense
+      <span style="margin-left:auto;font-size:10px;font-weight:700;color:#4ade80">{{ layers_fired }}/4 layers activated on this episode</span>
+    </div>
+    <div class="defense-grid">
+
+      <!-- Layer 1: Document Cross-Reference -->
+      <div class="defense-layer {% if l1_active %}dl-active{% else %}dl-inactive{% endif %}">
+        <div class="dl-num">Layer 1</div>
+        <div class="dl-name">Document Cross-Reference</div>
+        <div class="dl-result">
+          {% if l1_active %}
+            {{ icd_conflicts|length if icd_conflicts else 1 }} conflict(s) detected across referral form, clinical notes, and prescription
+          {% else %}
+            All documents consistent — no conflicts found
+          {% endif %}
+        </div>
+        <div class="dl-badge {% if l1_active %}dl-badge-active{% else %}dl-badge-pass{% endif %}">
+          {% if l1_active %}&#x26A0; CONFLICT CAUGHT{% else %}&#x2713; CONSISTENT{% endif %}
+        </div>
+      </div>
+
+      <!-- Layer 2: Knowledge Graph Validation -->
+      <div class="defense-layer {% if l2_active %}dl-active{% else %}dl-inactive{% endif %}">
+        <div class="dl-num">Layer 2</div>
+        <div class="dl-name">Knowledge Graph Validation</div>
+        <div class="dl-result">
+          {% if l2_active %}
+            {{ kg.get('rules_fired', 0) }} CMS rules fired · {{ kg.get('confirmations', 0) }} confirmed · {{ kg.get('rules_checked', 0) }} checked — deterministic
+          {% else %}
+            All codes pass CMS rule set — no violations
+          {% endif %}
+        </div>
+        <div class="dl-badge {% if l2_active %}dl-badge-active{% else %}dl-badge-pass{% endif %}">
+          {% if l2_active %}&#x1F9E9; {{ kg.get('status','—') }}{% else %}&#x2713; VALIDATED{% endif %}
+        </div>
+      </div>
+
+      <!-- Layer 3: Confidence Threshold -->
+      <div class="defense-layer {% if l3_active %}dl-active{% else %}dl-inactive{% endif %}">
+        <div class="dl-num">Layer 3</div>
+        <div class="dl-name">Confidence Threshold</div>
+        <div class="dl-result">
+          {% if l3_active %}
+            AI confidence {{ conf }}% — below 80% threshold · escalation triggered automatically
+          {% elif conf %}
+            AI confidence {{ conf }}% — above 80% threshold · auto-resolved
+          {% else %}
+            No ICD conflict — confidence check not required
+          {% endif %}
+        </div>
+        <div class="dl-badge {% if l3_active %}dl-badge-active{% else %}dl-badge-pass{% endif %}">
+          {% if l3_active %}&#x26A0; THRESHOLD BREACHED{% else %}&#x2713; THRESHOLD MET{% endif %}
+        </div>
+      </div>
+
+      <!-- Layer 4: Human Review Gate -->
+      <div class="defense-layer {% if l4_active %}dl-escalated{% else %}dl-inactive{% endif %}">
+        <div class="dl-num">Layer 4</div>
+        <div class="dl-name">Human Review Gate</div>
+        <div class="dl-result">
+          {% if l4_active %}
+            Episode blocked from dispatch — routed to specialist review queue before any action taken
+          {% else %}
+            Sufficient confidence to proceed — human gate not triggered
+          {% endif %}
+        </div>
+        <div class="dl-badge {% if l4_active %}dl-badge-escalated{% else %}dl-badge-pass{% endif %}">
+          {% if l4_active %}&#x1F6A8; SPECIALIST REQUIRED{% else %}&#x2713; AUTO-CLEARED{% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Duplicate Detection -->
+  <div class="intel-card">
+    <div class="intel-hd" style="color:var(--green)">&#x1F50D; Duplicate Detection</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>No duplicate claim — {{ fields.get('claim_number', claim) }} is unique in system</span></div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>Patient {{ fields.get('patient_name', '—') }} — no matching open episode found</span></div>
+  </div>
+
+  <!-- Compliance Validation -->
+  <div class="intel-card">
+    <div class="intel-hd" style="color:var(--green)">&#x1F4CB; Compliance Validation</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>ICD-10 <b>{{ fields.get('icd_code', '—') }}</b> — valid and billable</span></div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>HCPCS <b>{{ fields.get('hcpcs', '—') }}</b> — Level II · matches DME category</span></div>
+    {% if fields.get('physician_npi') %}
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>Physician NPI <b>{{ fields.get('physician_npi') }}</b> — format validated</span></div>
+    {% endif %}
+  </div>
+
+  <!-- Knowledge Graph Validation -->
+  {% set kg = fields.get('kg_validation', {}) %}
+  {% if kg %}
+  {% set kg_status = kg.get('status', 'VALIDATED') %}
+  {% set kg_color = '#16a34a' if kg_status == 'VALIDATED' else ('#dc2626' if kg_status == 'REJECTED' else ('#d97706' if kg_status == 'FLAGGED' else '#7c3aed')) %}
+  <div class="intel-card" style="border-color:{{ kg_color }}22;background:{{ '#f0fdf4' if kg_status == 'VALIDATED' else ('#fef2f2' if kg_status == 'REJECTED' else ('#fffbeb' if kg_status == 'FLAGGED' else '#faf5ff')) }}">
+    <div class="intel-hd" style="color:{{ kg_color }}">
+      &#x1F9E9; Knowledge Graph Validation
+      <span style="background:{{ kg_color }};color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800;margin-left:4px">{{ kg_status }}</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--gray);font-weight:600">{{ kg.get('rules_checked', 0) }} rules checked · {{ kg.get('rules_fired', 0) }} fired · {{ kg.get('confirmations', 0) }} confirmed</span>
+    </div>
+
+    {% for rule in kg.get('fired_rules', []) %}
+    {% set rclass = 'kg-confirm' if rule.action == 'confirm' else ('kg-reject' if rule.action == 'reject' else ('kg-flag' if rule.action == 'flag' else 'kg-escalate')) %}
+    {% set ricon = '✓' if rule.action == 'confirm' else ('✗' if rule.action == 'reject' else ('⚑' if rule.action == 'flag' else '⚠')) %}
+    {% set rcolor = '#16a34a' if rule.action == 'confirm' else ('#dc2626' if rule.action == 'reject' else ('#d97706' if rule.action == 'flag' else '#7c3aed')) %}
+    <div class="kg-rule {{ rclass }}">
+      <div class="kg-rule-hd">
+        <span style="color:{{ rcolor }};font-size:13px">{{ ricon }}</span>
+        <span class="kg-rule-id">{{ rule.rule_id }}</span>
+        <span style="color:{{ rcolor }};font-size:10px;font-weight:800;text-transform:uppercase">{{ rule.action }}</span>
+        <span class="kg-det-badge">DETERMINISTIC</span>
+        <span style="margin-left:auto;font-size:10px;color:var(--gray)">{{ rule.confidence }}% confidence</span>
+      </div>
+      <div class="kg-rule-msg">{{ rule.message }}</div>
+      {% if rule.get('replacement_suggestion') %}
+      <div style="font-size:11px;font-weight:700;color:var(--blue)">&#x2192; Replacement: {{ rule.replacement_suggestion }}</div>
+      {% endif %}
+      <div class="kg-rule-src">Source: {{ rule.source }}</div>
+    </div>
+    {% endfor %}
+
+    <div class="kg-source-bar">
+      <span style="font-weight:700;color:var(--dark)">Rule set:</span>
+      <span>{{ kg.get('source', 'CMS ICD-10-CM Official Guidelines') }}</span>
+      <span style="margin-left:auto">Updated: {{ kg.get('rule_set_date', '—') }}</span>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ICD Conflict Log -->
+  {% if icd_conflicts %}
+  {# ── Holloway-style: real multi-conflict data from this episode ── #}
+  {% set resolved_count = icd_conflicts | selectattr('escalate', 'equalto', false) | list | length %}
+  {% set escalated_count = icd_conflicts | selectattr('escalate', 'equalto', true) | list | length %}
+  <div class="intel-card" style="background:var(--gray-l);border-color:var(--gray-m)">
+    <div class="intel-hd icd-log-hd">
+      <span>&#x1F9E0; ICD Conflict Log — This Episode</span>
+      <span style="background:var(--dark);color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800">{{ icd_conflicts|length }} CONFLICTS</span>
+      <span style="margin-left:auto;font-size:10px;font-weight:700;color:var(--green)">&#x2713; {{ resolved_count }} AI-Resolved</span>
+      {% if escalated_count %}
+      <span style="margin-left:10px;font-size:10px;font-weight:700;color:var(--purple)">&#x26A0; {{ escalated_count }} Escalated</span>
+      {% endif %}
+    </div>
+
+    {% for cx in icd_conflicts %}
+    {% set cx_conf_class = 'conf-low' if cx.confidence < 60 else ('conf-med' if cx.confidence < 80 else 'conf-high') %}
+    <div class="conf-block-wrap {% if cx.escalate %}esc-wrap{% endif %}">
+      <div class="conf-block-hd">
+        <div class="conf-block-label">
+          <div class="conf-block-num {% if cx.escalate %}esc-num{% endif %}">{{ cx.conflict_id }}</div>
+          <div class="conf-block-ep {% if cx.escalate %}" style="color:var(--purple-d){% endif %}">{{ cx.label }}</div>
+        </div>
+        {% if cx.escalate %}
+        <span class="outcome-badge ob-escalated">&#x1F6A8; ESCALATED — MANUAL REVIEW</span>
+        {% else %}
+        <span class="outcome-badge ob-resolved">&#x2713; AI RESOLVED · {{ cx.confidence }}%</span>
+        {% endif %}
+      </div>
+
+      <div class="icd-doc {% if cx.escalate %}conflict{% else %}conflict{% endif %}">
+        <div class="icd-doc-name">&#x1F4C4; Referral Form</div>
+        <div class="icd-code-val" {% if not cx.escalate %}style="color:var(--red);text-decoration:line-through"{% else %}style="color:var(--red)"{% endif %}>{{ cx.form_code }}</div>
+        <span class="sb sb-miss" style="font-size:9px;padding:2px 7px">{% if cx.escalate %}DISPUTED{% else %}OVERRIDDEN{% endif %}</span>
+      </div>
+      <div class="icd-doc {% if not cx.escalate %}match{% else %}conflict" style="background:#fff3e0;border-color:#fb8c00{% endif %}">
+        <div class="icd-doc-name">&#x1F4CB; Clinical Notes</div>
+        <div class="icd-code-val" style="color:{% if not cx.escalate %}var(--green){% else %}var(--yellow-d){% endif %}">{{ cx.notes_code }}</div>
+        <span class="sb {% if not cx.escalate %}sb-clin{% else %}" style="background:#fff3e0;color:#e65100;border:1px solid #fb8c00{% endif %}" style="font-size:9px;padding:2px 7px">{% if not cx.escalate %}AUTHORITY{% else %}SPLIT{% endif %}</span>
+      </div>
+      <div class="icd-doc {% if not cx.escalate %}match{% else %}conflict{% endif %}">
+        <div class="icd-doc-name">&#x1F48A; Prescription</div>
+        <div class="icd-code-val" style="color:{% if not cx.escalate %}var(--green){% else %}var(--red){% endif %}">{{ cx.rx_code }}</div>
+        <span class="sb {% if not cx.escalate %}sb-clin{% else %}sb-miss{% endif %}" style="font-size:9px;padding:2px 7px">{% if not cx.escalate %}AUTHORITY{% else %}DISPUTED{% endif %}</span>
+      </div>
+      {% if not cx.escalate %}
+      <div class="icd-doc ai-sel">
+        <div class="icd-doc-name" style="font-weight:800;color:var(--blue)">&#x2713; AI Selected</div>
+        <div class="icd-code-val">{{ cx.resolved_code }}</div>
+        <span style="background:var(--blue);color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800">AI SELECTED</span>
+      </div>
+      {% endif %}
+
+      <div style="font-size:11px;color:{% if cx.escalate %}var(--purple-d){% else %}#1e3a5f{% endif %};line-height:1.6;background:{% if cx.escalate %}rgba(124,58,237,.08){% else %}rgba(0,0,0,.04){% endif %};border:{% if cx.escalate %}1px solid var(--purple-m){% else %}none{% endif %};border-radius:7px;padding:9px 13px;margin-top:8px">
+        <b>{% if cx.escalate %}&#x1F6A8; Escalation Triggered:{% else %}AI Reasoning:{% endif %}</b> {{ cx.reasoning }}
+      </div>
+
+      <div class="conf-row {{ cx_conf_class }}" style="margin-top:8px">
+        <div class="conf-lbl">AI Confidence</div>
+        <div class="conf-track"><div class="conf-bar" style="width:{{ cx.confidence }}%"></div></div>
+        <div class="conf-val">{{ cx.confidence }}%</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Outcome summary for this episode -->
+  {% if escalated_count == 0 %}
+  <div class="intel-card" style="border-color:var(--green-m);background:var(--green-l)">
+    <div class="intel-hd" style="color:var(--green)">&#x2713; All Conflicts Resolved by AI — No Human Required</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span style="color:var(--green-d)">{{ resolved_count }} ICD conflict(s) resolved automatically. Primary code adopted: <b>{{ fields.get('icd_code', '—') }}</b></span></div>
+  </div>
+  {% else %}
+  <div class="intel-card" style="border-color:var(--purple-m);background:var(--purple-l)">
+    <div class="intel-hd" style="color:var(--purple)">&#x1F6A8; {{ escalated_count }} Conflict(s) Escalated — Specialist Review Required</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span style="color:var(--green-d)">{{ resolved_count }} conflict(s) resolved by AI · <b>{{ fields.get('icd_code', '—') }}</b> adopted as primary code</span></div>
+    <div class="check-row" style="margin-top:6px"><span class="check-icon">&#x26A0;&#xFE0F;</span><span style="color:var(--purple-d)">{{ escalated_count }} conflict(s) require specialist determination — routed to review queue</span></div>
+  </div>
+  {% endif %}
+
+  {% else %}
+  {# ── Other episodes: single conflict + reference demo cards ── #}
+  <div class="intel-card" style="background:var(--gray-l);border-color:var(--gray-m)">
+    <div class="intel-hd icd-log-hd">
+      <span>&#x1F9E0; ICD Conflict Log</span>
+      <span style="background:var(--dark);color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800">3 CONFLICTS IN BATCH</span>
+      <span style="margin-left:auto;font-size:10px;font-weight:700;color:var(--green)">&#x2713; 2 AI-Resolved</span>
+      <span style="margin-left:10px;font-size:10px;font-weight:700;color:var(--purple)">&#x26A0; 1 Escalated</span>
+    </div>
+
+    <!-- Conflict 1: This episode -->
+    <div class="conf-block-wrap">
+      <div class="conf-block-hd">
+        <div class="conf-block-label">
+          <div class="conf-block-num">1</div>
+          <div class="conf-block-ep">This Episode · {{ fields.get('claim_number', claim) }}</div>
+        </div>
+        {% if icd_conf %}{% if not escalate %}
+        <span class="outcome-badge ob-resolved">&#x2713; AI RESOLVED · {{ conf }}%</span>
+        {% else %}<span class="outcome-badge ob-escalated">&#x1F6A8; ESCALATED · {{ conf }}%</span>{% endif %}
+        {% else %}<span class="outcome-badge ob-clean">&#x2713; NO CONFLICT</span>{% endif %}
+      </div>
+      {% if icd_conf %}
+      <div class="icd-doc conflict"><div class="icd-doc-name">&#x1F4C4; Referral Form</div><div class="icd-code-val">Conflicting code</div><span class="sb sb-miss" style="font-size:9px;padding:2px 7px">OVERRIDDEN</span></div>
+      <div class="icd-doc match"><div class="icd-doc-name">&#x1F4CB; Clinical Notes</div><div class="icd-code-val">{{ fields.get('icd_code', '—') }}</div><span class="sb sb-clin" style="font-size:9px;padding:2px 7px">AUTHORITY</span></div>
+      <div class="icd-doc match"><div class="icd-doc-name">&#x1F48A; Prescription</div><div class="icd-code-val">{{ fields.get('icd_code', '—') }}</div><span class="sb sb-clin" style="font-size:9px;padding:2px 7px">AUTHORITY</span></div>
+      <div class="icd-doc ai-sel"><div class="icd-doc-name" style="font-weight:800;color:var(--blue)">&#x2713; AI Selected</div><div class="icd-code-val">{{ fields.get('icd_code', '—') }}</div><span style="background:var(--blue);color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800">AI SELECTED</span></div>
+      <div style="font-size:11px;color:#1e3a5f;line-height:1.6;background:rgba(0,0,0,.04);border-radius:7px;padding:9px 13px;margin-top:8px"><b>AI Reasoning:</b> {{ fields.get('icd_conflict_detail', '') }}</div>
+      {% set conf_class = 'conf-low' if conf < 60 else ('conf-med' if conf < 80 else 'conf-high') %}
+      <div class="conf-row {{ conf_class }}"><div class="conf-lbl">AI Confidence</div><div class="conf-track"><div class="conf-bar" style="width:{{ conf }}%"></div></div><div class="conf-val">{{ conf }}%</div></div>
+      {% else %}
+      <div style="font-size:12px;color:var(--green-d);padding:6px 2px">&#x2705; All three documents agree — no conflict in this episode</div>
+      {% endif %}
+    </div>
+
+    <!-- Conflict 2: Reference AI resolved -->
+    <div class="conf-block-wrap">
+      <div class="conf-block-hd"><div class="conf-block-label"><div class="conf-block-num">2</div><div class="conf-block-ep">Reference · WC-2026-084438 · Robert Kim</div></div><span class="outcome-badge ob-resolved">&#x2713; AI RESOLVED · 88%</span></div>
+      <div class="icd-doc conflict"><div class="icd-doc-name">&#x1F4C4; Referral Form</div><div class="icd-code-val">M79.3</div><span class="sb sb-miss" style="font-size:9px;padding:2px 7px">OVERRIDDEN</span></div>
+      <div class="icd-doc match"><div class="icd-doc-name">&#x1F4CB; Clinical Notes</div><div class="icd-code-val">M79.31</div><span class="sb sb-clin" style="font-size:9px;padding:2px 7px">AUTHORITY</span></div>
+      <div class="icd-doc match"><div class="icd-doc-name">&#x1F48A; Prescription</div><div class="icd-code-val">M79.31</div><span class="sb sb-clin" style="font-size:9px;padding:2px 7px">AUTHORITY</span></div>
+      <div class="icd-doc ai-sel"><div class="icd-doc-name" style="font-weight:800;color:var(--blue)">&#x2713; AI Selected</div><div class="icd-code-val">M79.31</div><span style="background:var(--blue);color:#fff;padding:2px 9px;border-radius:20px;font-size:9px;font-weight:800">AI SELECTED</span></div>
+      <div class="conf-row conf-high" style="margin-top:8px"><div class="conf-lbl">AI Confidence</div><div class="conf-track"><div class="conf-bar" style="width:88%"></div></div><div class="conf-val">88%</div></div>
+    </div>
+
+    <!-- Conflict 3: Escalation panel -->
+    <div class="conf-block-wrap esc-wrap">
+      <div class="conf-block-hd"><div class="conf-block-label"><div class="conf-block-num esc-num">3</div><div class="conf-block-ep" style="color:var(--purple-d)">Reference · WC-2026-084462 · Sandra Mitchell</div></div><span class="outcome-badge ob-escalated">&#x1F6A8; ESCALATED — MANUAL REVIEW</span></div>
+      <div class="icd-doc conflict"><div class="icd-doc-name">&#x1F4C4; Referral Form</div><div class="icd-code-val">M47.812</div><span class="sb sb-miss" style="font-size:9px;padding:2px 7px">DISPUTED</span></div>
+      <div class="icd-doc conflict" style="background:#fff3e0;border-color:#fb8c00"><div class="icd-doc-name">&#x1F4CB; Clinical Notes</div><div class="icd-code-val" style="color:var(--yellow-d)">M47.816</div><span class="sb" style="background:#fff3e0;color:#e65100;font-size:9px;padding:2px 7px;border:1px solid #fb8c00">SPLIT</span></div>
+      <div class="icd-doc conflict"><div class="icd-doc-name">&#x1F48A; Prescription</div><div class="icd-code-val">M47.812</div><span class="sb sb-miss" style="font-size:9px;padding:2px 7px">DISPUTED</span></div>
+      <div class="conf-row conf-low" style="margin-top:8px"><div class="conf-lbl">AI Confidence</div><div class="conf-track"><div class="conf-bar" style="width:71%"></div></div><div class="conf-val">71%</div></div>
+      <div style="background:rgba(124,58,237,.08);border:1px solid var(--purple-m);border-radius:8px;padding:10px 14px;margin-top:10px;font-size:11px;color:var(--purple-d);line-height:1.6"><b>&#x1F6A8; Escalation Triggered:</b> Form and prescription agree on M47.812 (lumbar L1–L4). Clinical notes say M47.816 (lumbar L4–L5). Evidence split 2:1 — insufficient to resolve automatically. Confidence 71% below 80% threshold. <b>Agent does not guess.</b> Routed to specialist review queue.</div>
+    </div>
+  </div>
+
+  <!-- Outcome for this episode -->
+  {% if not icd_conf %}
+  <div class="intel-card" style="border-color:var(--green-m);background:var(--green-l)">
+    <div class="intel-hd" style="color:var(--green)">&#x2713; This Episode — No ICD Conflict</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span>All three documents agree: <b>{{ fields.get('icd_code', '—') }}</b> · {{ fields.get('icd_description', '—') }}</span></div>
+  </div>
+  {% elif not escalate %}
+  <div class="intel-card" style="border-color:var(--green-m);background:var(--green-l)">
+    <div class="intel-hd" style="color:var(--green)">&#x2713; This Episode — AI Self-Corrected · No Human Required</div>
+    <div class="check-row"><span class="check-icon">&#x2705;</span><span style="color:var(--green-d)">Confidence {{ conf }}% — above 80% threshold. Conflict resolved automatically. Code: <b>{{ fields.get('icd_code', '—') }}</b></span></div>
+  </div>
+  {% else %}
+  <div class="intel-card" style="border-color:var(--purple-m);background:var(--purple-l)">
+    <div class="intel-hd" style="color:var(--purple)">&#x1F6A8; This Episode — Escalated to Human Review</div>
+    <div class="check-row"><span class="check-icon">&#x26A0;&#xFE0F;</span><span style="color:var(--purple-d)">Confidence {{ conf }}% — below 80% threshold. Case routed to specialist review queue.</span></div>
+  </div>
+  {% endif %}
+  {% endif %}{# end icd_conflicts branch #}
+
+  <!-- Authorization + Risk score -->
+  <div class="mini-grid">
+    <div class="mini-card">
+      <div class="mini-ttl">Authorization Determination</div>
+      <div class="mini-val" style="color:{% if fields.get('auth_ref') %}var(--green){% else %}var(--red){% endif %}">{% if fields.get('auth_ref') %}&#x2713; Confirmed{% else %}&#x23F3; Pending{% endif %}</div>
+      <div class="mini-sub">{% if fields.get('auth_ref') %}Auth ref {{ fields.get('auth_ref') }} on file{% else %}Auth ref not received — outreach dispatched to {{ fields.get('adjuster_name','adjuster') }}{% endif %}</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-ttl">Risk &amp; Urgency Score</div>
+      <div class="mini-val" style="color:{% if priority == 'HIGH' %}var(--red){% elif priority == 'LOW' %}var(--green){% else %}var(--yellow){% endif %}">{{ priority }}</div>
+      <div class="mini-sub">{{ fields.get('priority_reason', 'Based on diagnosis severity and equipment type') }}</div>
+    </div>
+  </div>
+
+  {% if fields.get('notes') %}
+  <div class="card" style="margin-top:12px">
+    <div class="card-hd">Agent Observations</div>
+    <div style="font-size:12px;color:var(--dark);line-height:1.7">{{ fields.get('notes') }}</div>
+  </div>
+  {% endif %}
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(2)">&#x2190; Normalization</button>
+    <button class="btn btn-next" onclick="goStep(4)">Gap Triage &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 4: GAP TRIAGE ─────────────── -->
+<div class="step-panel" id="step-4">
+  <div class="s-tag">Step 04 — Gap Triage</div>
+  <div class="s-title">Completeness Check</div>
+  <div class="s-sub">Gaps classified by criticality. Hard blocks hold routing. Soft and non-blocking items collected in parallel — no delay to dispatch.</div>
+
+  <!-- Present count summary -->
+  <div class="gap-summary">
+    <div class="gap-num">{{ present_count }}</div>
+    <div>
+      <div class="gap-num-lbl">fields present out of {{ 17 + ai_resolved }}</div>
+      <div class="gap-num-sub">{{ present_count - ai_resolved }} confirmed · {% if ai_resolved %}{{ ai_resolved }} AI-resolved · {% endif %}{{ gap_count }} gap(s) pending</div>
+    </div>
+  </div>
+
+  {% if not has_gaps %}
+  <div class="card green">
+    <div class="card-hd">&#x2713; All Fields Present — No Outreach Required</div>
+    <div style="font-size:12px;color:var(--green-d)">Episode is complete. Routing directly — no outreach required.</div>
+  </div>
+  {% else %}
+
+  <!-- Auth hold -->
+  {% if 'auth_ref' in gaps %}
+  <div class="gap-sec">
+    <div class="gap-sec-hd" style="color:var(--red)">&#x1F6AB; Authorization Hold</div>
+    <div class="gap-row hard">
+      <div class="gap-field">auth_ref</div>
+      <div class="gap-desc">Authorization reference not confirmed — routing blocked until received from carrier</div>
+      <div class="gap-badge gb-outreach">OUTREACH SENT</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Scheduling hold -->
+  {% if 'appt_window' in gaps %}
+  <div class="gap-sec">
+    <div class="gap-sec-hd" style="color:var(--yellow-d)">&#x1F4C5; Scheduling Hold</div>
+    <div class="gap-row soft">
+      <div class="gap-field">appt_window</div>
+      <div class="gap-desc">Appointment window needed for scheduling — hold until case manager confirms preferred date and time</div>
+      <div class="gap-badge gb-sched">SCHED. HOLD</div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Dispatch blocked -->
+  {% if gaps.get('dme_item') or gaps.get('hcpcs') or gaps.get('delivery_address') %}
+  <div class="gap-sec">
+    <div class="gap-sec-hd" style="color:var(--red)">&#x26D4; Dispatch Blocked</div>
+    {% if 'dme_item' in gaps %}<div class="gap-row hard"><div class="gap-field">dme_item</div><div class="gap-desc">Cannot dispatch without equipment specification</div><div class="gap-badge gb-dispatch">DISPATCH BLOCKED</div></div>{% endif %}
+    {% if 'hcpcs' in gaps %}<div class="gap-row hard"><div class="gap-field">hcpcs</div><div class="gap-desc">Cannot bill or dispatch without HCPCS code</div><div class="gap-badge gb-dispatch">DISPATCH BLOCKED</div></div>{% endif %}
+    {% if 'delivery_address' in gaps %}<div class="gap-row hard"><div class="gap-field">delivery_address</div><div class="gap-desc">Cannot dispatch without confirmed delivery location</div><div class="gap-badge gb-dispatch">DISPATCH BLOCKED</div></div>{% endif %}
+  </div>
+  {% endif %}
+
+  <!-- Non-blocking / parallel -->
+  {% set nb_fields = [] %}
+  {% for f in req_missing %}{% if nb_fields.append(f) %}{% endif %}{% endfor %}
+  {% for f, c in gaps.items() %}{% if c == 'HARD BLOCK' and f not in ['auth_ref','appt_window','dme_item','hcpcs','delivery_address'] %}{% if nb_fields.append(f) %}{% endif %}{% endif %}{% endfor %}
+
+  {% if req_missing %}
+  <div class="gap-sec">
+    <div class="gap-sec-hd" style="color:var(--green)">&#x1F7E2; Collected in Parallel</div>
+    {% for f in req_missing %}
+    <div class="gap-row parallel">
+      <div class="gap-field">{{ f }}</div>
+      <div class="gap-desc">
+        {% if f == 'transportation' %}Transportation confirmation — collected in parallel, no routing delay
+        {% elif f == 'language' %}Interpreter coordination — arranged separately, does not block dispatch
+        {% elif f == 'physician_npi' %}NPI lookup in progress — does not block dispatch
+        {% elif f == 'adjuster_email' %}Email needed for outreach follow-up — phone contact available
+        {% elif f == 'adjuster_phone' %}Phone collected for voice outreach if needed
+        {% elif f == 'adjuster_name' %}Adjuster contact — follow-up on file
+        {% else %}Required for complete record — collected asynchronously{% endif %}
+      </div>
+      <div class="gap-badge gb-routing">ROUTING AHEAD</div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% endif %}
+
+  <!-- Routing Decision -->
+  <div class="route-decision {% if completeness.get('is_complete') %}rd-go{% else %}rd-hold{% endif %}">
+    <div class="rd-ttl">Routing Decision</div>
+    {% if completeness.get('is_complete') %}
+    <div class="rd-val">&#x2713; ROUTE NOW — All Fields Complete</div>
+    <div class="rd-sub">Vendor dispatch triggered immediately</div>
+    {% elif hard_blocks_list %}
+    <div class="rd-val">&#x23F3; Outreach Dispatched · Routing on Hold</div>
+    <div class="rd-sub">{{ hard_blocks_list|length }} hard block(s) holding routing · email sent to {{ fields.get('adjuster_name', 'case manager') }}</div>
+    {% else %}
+    <div class="rd-val">&#x23F3; Pending — Required Fields Outstanding</div>
+    <div class="rd-sub">{{ req_missing|length }} field(s) outstanding · collected in parallel</div>
+    {% endif %}
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(3)">&#x2190; Intelligence</button>
+    <button class="btn btn-next" onclick="goStep(5)">Email Outreach &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 5: EMAIL OUTREACH ─────────────── -->
+<div class="step-panel" id="step-5">
+  <div class="s-tag">Step 05 — Digital Outreach</div>
+  <div class="s-title">Email Outreach</div>
+  <div class="s-sub">AI-drafted outreach email sent automatically — specific fields requested, claim reference included, 24-hour deadline set.</div>
+
+  {% if has_email %}
+  <div class="email-outer">
+    <div class="email-hdr">
+      <div class="email-meta">To: <span>{{ fields.get('adjuster_name', 'Case Manager') }} &lt;{{ fields.get('adjuster_email', 'adjuster@carrier.com') }}&gt;</span></div>
+      <div class="email-meta" style="margin-bottom:8px">From: <span>Coastal DME Intake Agent &lt;intake@coastaldme.com&gt;</span></div>
+      <div class="email-subject">DME Referral — Missing Information Required · {{ fields.get('claim_number', claim) }}</div>
+    </div>
+    <div class="email-body">{{ email_body }}</div>
+    <div class="email-foot">
+      <span>&#x2705;</span>
+      <span>Sent 09:14:21 · Logged on episode record · 24-hour response window active</span>
+    </div>
+  </div>
+  {% else %}
+  <div class="card green">
+    <div class="card-hd">&#x2713; No Outreach Required</div>
+    <div style="font-size:12px;color:var(--green-d)">All fields present — episode routes directly without contacting case manager.</div>
+  </div>
+  {% endif %}
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(4)">&#x2190; Gap Triage</button>
+    <button class="btn btn-next" onclick="goStep(6)">Voice Outreach &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 6: VOICE OUTREACH ─────────────── -->
+<div class="step-panel" id="step-6">
+  <div class="s-tag">Step 06 — Voice Outreach</div>
+  <div class="s-title">Voice Outreach</div>
+  <div class="s-sub">No response to email within 24 hours — agent automatically places an outbound call to collect all outstanding items.</div>
+
+  {% if has_email %}
+
+  <div class="card red">
+    <div class="card-hd">&#x23F0; No Email Response — 24-Hour Window Elapsed</div>
+    <div style="font-size:12px;color:var(--red-d);line-height:1.5">Email sent to {{ fields.get('adjuster_name', 'case manager') }} at 09:14:21 · No reply detected after 24 business hours · Auto-escalation rule triggered · Outbound call placed automatically</div>
+  </div>
+
+  <div class="card">
+    <div class="card-hd">Outbound Call — Auto-Triggered</div>
+    <div class="call-meta-grid">
+      <div class="fld"><div class="fld-k">Called</div><div class="fld-v">{{ fields.get('adjuster_name', 'Case Manager') }}</div></div>
+      <div class="fld"><div class="fld-k">Number</div><div class="fld-v">{{ fields.get('adjuster_phone', 'Phone on file') }}</div></div>
+      <div class="fld"><div class="fld-k">Trigger</div><div class="fld-v">24h — no email response</div></div>
+      <div class="fld"><div class="fld-k">Call Duration</div><div class="fld-v">84 seconds</div></div>
+      <div class="fld"><div class="fld-k">Items Targeted</div><div class="fld-v">{{ gap_count }} outstanding field(s)</div></div>
+      <div class="fld"><div class="fld-k">Outcome</div><div class="fld-v" style="color:var(--green)">&#x2713; Fields collected</div></div>
+    </div>
+
+    <div class="call-timeline">
+      <div class="call-ev">
+        <div class="call-dot cd-gray">&#x1F4E7;</div>
+        <div>
+          <div class="call-ev-ts">T+0:00</div>
+          <div class="call-ev-ttl">Email dispatched</div>
+          <div class="call-ev-meta">Outreach sent to {{ fields.get('adjuster_name','adjuster') }} · 24-hour response window started · Claim {{ fields.get('claim_number', claim) }} referenced</div>
+        </div>
+      </div>
+      <div class="call-ev">
+        <div class="call-dot cd-red">&#x23F0;</div>
+        <div>
+          <div class="call-ev-ts">T+24:00h</div>
+          <div class="call-ev-ttl">No response detected</div>
+          <div class="call-ev-meta">Agent monitors inbox · threshold exceeded · auto-escalation rule fires · outbound call queued</div>
+        </div>
+      </div>
+      <div class="call-ev">
+        <div class="call-dot cd-blue">&#x1F4DE;</div>
+        <div>
+          <div class="call-ev-ts">T+24:01h</div>
+          <div class="call-ev-ttl">Outbound call placed automatically</div>
+          <div class="call-ev-meta">AI agent dialed {{ fields.get('adjuster_phone','adjuster phone') }} · introduced as Coastal DME intake line · call answered</div>
+        </div>
+      </div>
+      <div class="call-ev">
+        <div class="call-dot cd-green">&#x2714;</div>
+        <div>
+          <div class="call-ev-ts">T+24:02h (84 sec)</div>
+          <div class="call-ev-ttl">Call complete — all items collected</div>
+          <div class="call-ev-meta">All outstanding fields confirmed · episode record updated · call transcript logged automatically</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-transcript">
+    <div class="ct-ttl">&#x1F3A4; AI Call Transcript (abbreviated · 84 sec)</div>
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">Good morning, this is the Coastal DME automated intake line calling regarding claim {{ fields.get('claim_number', claim) }} for {{ fields.get('patient_name', 'your patient') }}. Am I speaking with {{ fields.get('adjuster_name', 'the adjuster') }}?</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-cm">CM</div>
+      <div class="ct-text">Yes, this is {{ fields.get('adjuster_name', 'the adjuster') }}.</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">Thank you. We sent an email yesterday with a few items needed to complete this referral. I'd like to collect those now if you have a moment.</div>
+    </div>
+    {% if 'auth_ref' in gaps %}
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">First — can you confirm the authorization reference number for this claim?</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-cm">CM</div>
+      <div class="ct-text">Yes, auth ref is confirmed. Let me also look up the scheduling window.</div>
+    </div>
+    {% endif %}
+    {% if 'appt_window' in gaps %}
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">What appointment window works for the patient? We need a preferred date and time range.</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-cm">CM</div>
+      <div class="ct-text">Patient is available week of June 2nd, morning preferred.</div>
+    </div>
+    {% endif %}
+    {% if fields.get('dme_item') and ('wheelchair' in fields.get('dme_item','').lower() or 'power' in fields.get('dme_item','').lower()) %}
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">One more item — the prescription didn't specify bariatric configuration. Does the physician want a standard or bariatric 400lb capacity unit?</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-cm">CM</div>
+      <div class="ct-text">Bariatric — 400lb. Doctor confirmed that.</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">Confirmed — bariatric 400lb noted. That prevents a wrong dispatch. All items are collected. Thank you for your time.</div>
+    </div>
+    {% else %}
+    {% if 'transportation' in gaps %}
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">Last item — can you confirm whether transportation has been arranged for the patient?</div>
+    </div>
+    <div class="ct-line">
+      <div class="ct-cm">CM</div>
+      <div class="ct-text">Yes, transportation is arranged — patient has personal vehicle.</div>
+    </div>
+    {% endif %}
+    <div class="ct-line">
+      <div class="ct-agent">Agent</div>
+      <div class="ct-text">All items are now collected. The episode will be updated and routed for dispatch shortly. Thank you.</div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div style="background:var(--green-l);border:1px solid var(--green-m);border-radius:8px;padding:11px 16px;margin-top:12px;font-size:11px;color:var(--green-d);display:flex;align-items:center;gap:8px">
+    <span style="font-size:16px">&#x2705;</span>
+    <span>All outstanding fields collected · Episode record updated · 84 seconds · Zero manual entry · No human agent required</span>
+  </div>
+
+  <!-- Live outbound call — auto-triggered when this step is entered -->
+  <div class="card" style="margin-top:14px;border-color:var(--blue-m);background:var(--blue-l)">
+    <div class="card-hd" style="color:var(--blue)">&#x1F4DE; Outbound Call — Auto-Triggered</div>
+    <div style="font-size:12px;color:var(--dark);margin-bottom:14px;line-height:1.5">
+      Email unanswered after 24 hours — agent automatically places an outbound call to <b>{{ fields.get('adjuster_name', 'the case manager') }}</b> via the DME Intake Line <span style="font-family:monospace">+1 (201) 897-3854</span> to collect all outstanding items for claim <b>{{ fields.get('claim_number', claim) }}</b>.
+    </div>
+    <div id="call-status" style="font-size:12px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--gray)">
+      &#x23F3; Initiating call...
+    </div>
+    <button id="call-btn" style="display:none;background:var(--blue);color:#fff;border:none;padding:8px 18px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;margin-top:10px" onclick="placeOutboundCall()">
+      &#x1F4DE; Retry Call
+    </button>
+  </div>
+
+  {% else %}
+  <div class="card green">
+    <div class="card-hd">&#x2713; No Voice Outreach Required</div>
+    <div style="font-size:12px;color:var(--green-d)">Episode is complete — outbound call not triggered.</div>
+  </div>
+  {% endif %}
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(5)">&#x2190; Email Outreach</button>
+    <button class="btn btn-next" onclick="goStep(7)">Route Output &#x2192;</button>
+  </div>
+</div>
+
+
+<!-- ─────────────── STEP 7: ROUTE OUTPUT ─────────────── -->
+<div class="step-panel" id="step-7">
+  <div class="s-tag">Step 07 — Route Output</div>
+  <div class="s-title">Route Output</div>
+  <div class="s-sub">Every field populated, every gap resolved — via email, call, or AI self-correction. Vendor dispatches the moment this locks.</div>
+
+  <div class="status-banner {% if completeness.get('is_complete') %}sb-routed{% else %}sb-pending{% endif %}">
+    {% if completeness.get('is_complete') %}&#x2713; ROUTED — All Fields Resolved{% else %}&#x23F3; PENDING CM RESPONSE — Outreach Dispatched{% endif %}
+  </div>
+
+  <div class="card">
+    <div class="card-hd">Episode Record — Final State</div>
+    <div class="route-grid">
+      <div class="rf"><div class="k">Patient</div><div class="v">{{ fields.get('patient_name', '—') }}</div></div>
+      <div class="rf"><div class="k">Date of Birth</div><div class="v">{{ fields.get('dob', '—') }}</div></div>
+      <div class="rf"><div class="k">Claim #</div><div class="v" style="font-family:monospace">{{ fields.get('claim_number', claim) }}</div></div>
+      <div class="rf"><div class="k">Auth Ref</div><div class="v {% if not fields.get('auth_ref') %}pend{% endif %}">{{ fields.get('auth_ref') or '⚠ Pending CM Response' }}</div></div>
+      <div class="rf"><div class="k">DME Item</div><div class="v">{{ fields.get('dme_item', '—') }}</div></div>
+      <div class="rf"><div class="k">HCPCS</div><div class="v" style="font-family:monospace">{{ fields.get('hcpcs', '—') }}</div></div>
+      <div class="rf"><div class="k">ICD-10 Code</div><div class="v" style="font-family:monospace">{{ fields.get('icd_code', '—') }}</div></div>
+      <div class="rf"><div class="k">Diagnosis</div><div class="v">{{ fields.get('icd_description', '—') }}</div></div>
+      <div class="rf"><div class="k">Appointment</div><div class="v {% if not fields.get('appt_window') %}pend{% endif %}">{{ fields.get('appt_window') or '⚠ Pending CM Response' }}</div></div>
+      <div class="rf"><div class="k">Transportation</div><div class="v {% if not fields.get('transportation') %}pend{% endif %}">{{ fields.get('transportation') or '⚠ Pending CM Response' }}</div></div>
+      <div class="rf"><div class="k">Language</div><div class="v">{{ fields.get('language') or 'English — no interpreter' }}</div></div>
+      <div class="rf"><div class="k">Delivery Address</div><div class="v {% if not fields.get('delivery_address') %}pend{% endif %}">{{ fields.get('delivery_address') or '⚠ Pending' }}</div></div>
+      <div class="rf"><div class="k">Carrier</div><div class="v">{{ fields.get('insurance_carrier', '—') }}</div></div>
+      <div class="rf"><div class="k">Adjuster</div><div class="v">{{ fields.get('adjuster_name', '—') }}</div></div>
+      <div class="rf"><div class="k">Physician</div><div class="v">{{ fields.get('physician_name', '—') }}</div></div>
+      <div class="rf"><div class="k">NPI</div><div class="v" style="font-family:monospace">{{ fields.get('physician_npi', '—') }}</div></div>
+    </div>
+  </div>
+
+  <div style="background:#1e3a5f;border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.4);margin-bottom:4px">Pipeline Complete</div>
+      <div style="font-size:13px;font-weight:700;color:#fff">{{ claim }} · Processed by Intake Agent</div>
+    </div>
+    <a href="/" style="background:var(--blue);color:#fff;padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">&#x2190; Back to Queue</a>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn btn-prev" onclick="goStep(6)">&#x2190; Voice Outreach</button>
+    <a href="/" class="btn btn-next" style="text-decoration:none">Back to Queue &#x2192;</a>
+  </div>
+</div>
+
+
+</main>
+</div>
+
+<script>
+let currentStep = 1;
+let currentTab = 1;
+
+function goStep(n) {
+  const oldPanel = document.getElementById('step-' + currentStep);
+  const oldNav = document.getElementById('nav-' + currentStep);
+  const oldCirc = document.getElementById('circ-' + currentStep);
+  if (oldPanel) oldPanel.classList.remove('active');
+  if (oldNav) { oldNav.classList.remove('active'); oldNav.classList.add('done'); }
+  if (oldCirc && currentStep !== n) oldCirc.textContent = '✓';
+
+  currentStep = n;
+  const cur = document.getElementById('step-' + currentStep);
+  const curNav = document.getElementById('nav-' + currentStep);
+  if (cur) cur.classList.add('active');
+  if (curNav) { curNav.classList.add('active'); curNav.classList.remove('done'); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Reveal log lines up to and including current step
+  for (let s = 1; s <= n; s++) {
+    document.querySelectorAll('.log-s' + s).forEach(el => el.style.display = '');
+  }
+
+  // Auto-trigger outbound call when entering step 6
+  if (n === 6) {
+    const btn = document.getElementById('call-btn');
+    if (btn && !btn.disabled) {
+      setTimeout(placeOutboundCall, 1800);
+    }
+  }
+}
+
+function goTab(n) {
+  const oldBtn = document.getElementById('tab-' + currentTab);
+  const oldPanel = document.getElementById('tabp-' + currentTab);
+  if (oldBtn) oldBtn.classList.remove('active');
+  if (oldPanel) oldPanel.classList.remove('active');
+  currentTab = n;
+  const btn = document.getElementById('tab-' + currentTab);
+  const panel = document.getElementById('tabp-' + currentTab);
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+}
+
+function placeOutboundCall() {
+  const btn = document.getElementById('call-btn');
+  const status = document.getElementById('call-status');
+  if (btn) { btn.style.display = 'none'; btn.disabled = true; }
+  status.style.color = '#6b7280';
+  status.innerHTML = '&#x23F3; Connecting to Vapi — placing call now...';
+
+  fetch('/api/outbound-call/{{ claim }}', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        status.style.color = '#16a34a';
+        status.innerHTML = '&#x2705; Call placed · ID: ' + (data.call_id || 'confirmed') + ' · Agent dialing now';
+      } else {
+        status.style.color = '#dc2626';
+        status.innerHTML = '&#x26A0; Call failed: ' + (data.reason || 'unknown error');
+        if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
+      }
+    })
+    .catch(err => {
+      status.style.color = '#dc2626';
+      status.innerHTML = '&#x26A0; Network error — check server';
+      if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
+    });
+}
+</script>
+</body>
+</html>

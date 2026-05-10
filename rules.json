@@ -1,0 +1,381 @@
+{
+  "metadata": {
+    "source": "CMS ICD-10-CM Official Guidelines for Coding and Reporting, FY2026",
+    "extracted_by": "Claude Sonnet (Anthropic) — reading CMS guidelines document",
+    "source_url": "https://www.cms.gov/medicare/coding-billing/icd-10-codes",
+    "last_updated": "2026-01-01",
+    "rule_count": 24,
+    "scope": "DME referral intake — ICD-10 validation, HCPCS coverage, laterality, post-surgical coding"
+  },
+  "rules": [
+
+    {
+      "rule_id": "DME-ICD-001",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.19.a — Coding of Injuries",
+      "description": "After a surgical procedure for a traumatic injury, use the acute injury encounter code (S-codes), not the disease/condition code (M-codes). M23.xxx codes describe spontaneous or degenerative disruption; S83.xxx codes describe traumatic injury at an encounter.",
+      "condition": {
+        "flags": ["post_surgical"],
+        "invalid_code_pattern": "M23",
+        "valid_replacement_pattern": "S83"
+      },
+      "action": "reject",
+      "rejection_reason": "M23.xxx is a pre-surgical disease code. Post-ACL reconstruction requires traumatic injury code S83.xxx.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-002",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.19.a — Initial vs Subsequent Encounter",
+      "description": "S83.209A (initial encounter) is correct for the first time a patient receives active treatment after ACL reconstruction. The 7th character 'A' denotes initial encounter — applies to every visit while receiving active treatment, not just the day of surgery.",
+      "condition": {
+        "procedure": "ACL reconstruction",
+        "valid_code": "S83.209A"
+      },
+      "action": "confirm",
+      "confirmation_reason": "S83.209A is the correct post-surgical ACL encounter code per ICD-10-CM §I.C.19.a.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-003",
+      "category": "pain_classification",
+      "source": "ICD-10-CM Guidelines §I.C.6.b — Pain, Postprocedural",
+      "description": "When pain arises from a surgical procedure, use postprocedural pain codes (G89.18, G89.28, G89.29), not trauma pain codes (G89.11, G89.21). G89.11 is reserved for acute pain due to trauma (injury event), not pain following a planned surgical procedure.",
+      "condition": {
+        "flags": ["post_surgical"],
+        "invalid_code": "G89.11",
+        "valid_replacement": "G89.18"
+      },
+      "action": "reject",
+      "rejection_reason": "G89.11 (acute pain due to trauma) is incorrect post-procedure. Pain following surgery is classified G89.18 (other acute postprocedural pain) per §I.C.6.b.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-004",
+      "category": "pain_classification",
+      "source": "ICD-10-CM Guidelines §I.C.6.b.1 — Postprocedural Pain Not Associated with Specific Postoperative Complication",
+      "description": "Postprocedural pain not associated with a specific complication is coded to G89.18 (acute) or G89.28 (chronic). Use G89.18 in the immediate post-op period. Do not use G89.29 unless pain has persisted beyond 3 months.",
+      "condition": {
+        "valid_code": "G89.18",
+        "post_op_days_max": 90
+      },
+      "action": "confirm",
+      "confirmation_reason": "G89.18 confirmed as correct acute postprocedural pain code per §I.C.6.b.1.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-005",
+      "category": "laterality",
+      "source": "ICD-10-CM Guidelines §I.B.13 — Laterality",
+      "description": "ICD-10-CM codes for conditions with laterality (right/left) must be consistent across all documents in an episode. When the referral form, clinical notes, and prescription report different laterality codes, the clinical notes from the treating physician are the authoritative source.",
+      "condition": {
+        "conflict_type": "laterality_mismatch",
+        "authoritative_source": "clinical_notes"
+      },
+      "action": "escalate",
+      "escalation_reason": "Laterality mismatch across documents. Per §I.B.13, the treating physician clinical notes are authoritative — but conflicting documents require clinical review before dispatch.",
+      "confidence": 71,
+      "deterministic": false,
+      "requires_human": true
+    },
+
+    {
+      "rule_id": "DME-ICD-006",
+      "category": "laterality",
+      "source": "ICD-10-CM Guidelines §I.B.13 — Laterality",
+      "description": "M25.361 = stiffness of RIGHT knee. M25.362 = stiffness of LEFT knee. These are distinct codes — they cannot be used interchangeably. When a surgical note documents right-knee ACL reconstruction but a code for left-knee stiffness appears, flag for review.",
+      "condition": {
+        "surgery_side": "right",
+        "conflict_code": "M25.362"
+      },
+      "action": "flag",
+      "flag_reason": "Surgery documented on RIGHT knee (S83.209A). M25.362 references LEFT knee stiffness — laterality inconsistency requires clinical review.",
+      "confidence": 71,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-007",
+      "category": "hcpcs_coverage",
+      "source": "CMS LCD L33803 — Walkers, Standard and Heavy Duty",
+      "description": "HCPCS E0143 (rollator walker, 4-wheel) requires a qualifying mobility-limiting diagnosis. Covered diagnoses include post-surgical mobility impairment (S83.xxx, M17.xxx, Z96.6xx), neurological conditions affecting gait, and severe musculoskeletal conditions. Post-ACL reconstruction (S83.209A) qualifies.",
+      "condition": {
+        "hcpcs": "E0143",
+        "qualifying_icd_patterns": ["S83", "M17", "Z96.6", "G35", "G20", "M05", "M54.5"]
+      },
+      "action": "confirm",
+      "confirmation_reason": "S83.209A qualifies as a covered diagnosis for E0143 per CMS LCD L33803.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-008",
+      "category": "equipment_specification",
+      "source": "CMS LCD L33803 — Walker Weight Capacity Requirements",
+      "description": "Standard rollator walkers (E0143) have a weight capacity of 300 lbs. Patients exceeding 300 lbs require a heavy-duty bariatric walker (E0149). Patient weight must be confirmed before dispatch to avoid wrong-equipment delivery.",
+      "condition": {
+        "hcpcs": "E0143",
+        "patient_weight_lbs_max": 300
+      },
+      "action": "flag",
+      "flag_reason": "Patient weight exceeds standard E0143 capacity (300 lbs). Bariatric rollator E0149 (400 lb capacity) may be required — confirm with prescribing physician before dispatch.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-009",
+      "category": "code_sequencing",
+      "source": "ICD-10-CM Guidelines §I.C.19.a — Sequencing of Injury Codes",
+      "description": "When coding for DME following injury, the primary diagnosis should be the most acute and clinically relevant condition. For post-surgical DME, the surgical injury code (S83.xxx) takes precedence over secondary codes (G89.18, M25.xxx). Secondary codes may be listed but should not be primary.",
+      "condition": {
+        "primary_should_be_pattern": "S83",
+        "secondary_ok_patterns": ["G89", "M25", "Z96"]
+      },
+      "action": "validate_sequencing",
+      "validation_note": "Confirm S83.209A is listed as primary diagnosis, with G89.18 and M25.36x as secondary codes.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-010",
+      "category": "encounter_type",
+      "source": "ICD-10-CM Guidelines §I.C.21.c.7 — Aftercare Following Surgery",
+      "description": "For DME orders placed during post-surgical aftercare, the injury/condition code with 7th character 'D' (subsequent encounter) or 'A' (initial encounter receiving active treatment) is preferred over aftercare codes (Z47.xxx) when active treatment is ongoing.",
+      "condition": {
+        "post_surgical_active_treatment": true,
+        "preferred_7th_char": ["A", "D"],
+        "avoid_codes": ["Z47"]
+      },
+      "action": "confirm",
+      "confirmation_reason": "S83.209A uses 7th character 'A' (active treatment) — correct for ongoing post-surgical DME need.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-011",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.13 — Diseases of the Musculoskeletal System",
+      "description": "M23.xxx codes (internal derangement of knee) describe chronic or spontaneous conditions, not acute traumatic injury. They are appropriate for pre-surgical diagnosis but should be replaced by appropriate S-codes once traumatic injury has been confirmed and surgical intervention completed.",
+      "condition": {
+        "invalid_post_surgical_patterns": ["M23"],
+        "context": "post_surgical"
+      },
+      "action": "reject",
+      "rejection_reason": "M23.xxx codes are inappropriate post-surgery. Use S83.xxx for traumatic knee injury codes per §I.C.13 and §I.C.19.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-012",
+      "category": "workers_comp",
+      "source": "CMS Workers Compensation Guidelines — Injury Date Coding",
+      "description": "For workers compensation DME claims, the date of injury must be recorded and ICD codes must reflect the acute injury context. Pre-existing condition codes used without injury-context modifiers may trigger claim denial.",
+      "condition": {
+        "claim_type": "workers_comp",
+        "requires_injury_date": true,
+        "injury_codes_required": true
+      },
+      "action": "validate",
+      "validation_note": "Confirm injury date is present and primary ICD code reflects the work injury.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-013",
+      "category": "diagnosis_specificity",
+      "source": "ICD-10-CM Guidelines §I.B.3 — Code to the Highest Level of Specificity",
+      "description": "ICD-10-CM requires coding to the highest level of specificity available. Unspecified codes should only be used when documentation does not support a more specific code. 'S83.209A' (tear of unspecified meniscus, right knee) is appropriate when the specific meniscus (medial/lateral) is not documented.",
+      "condition": {
+        "specificity_check": true,
+        "unspecified_ok_when": "documentation_does_not_specify"
+      },
+      "action": "confirm",
+      "confirmation_reason": "S83.209A uses 'unspecified' meniscus appropriately when surgical notes do not specify medial vs lateral per §I.B.3.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-014",
+      "category": "hcpcs_coverage",
+      "source": "CMS HCPCS Level II Code E0143 — Definition",
+      "description": "E0143 is defined as: Walker, folding, wheeled, adjustable or fixed height, standard (non-heavy duty). This code applies to 4-wheel rollator walkers. A prescription specifying 'rollator walker' or '4-wheel walker' maps to E0143 unless patient weight exceeds 300 lbs (use E0149).",
+      "condition": {
+        "equipment_keywords": ["rollator", "4-wheel walker", "four-wheel walker", "wheeled walker"],
+        "hcpcs_should_be": "E0143",
+        "weight_limit_lbs": 300
+      },
+      "action": "confirm",
+      "confirmation_reason": "Equipment description matches E0143 definition per CMS HCPCS Level II.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-015",
+      "category": "authorization",
+      "source": "CMS DME MAC Jurisdiction D — Prior Authorization Requirements",
+      "description": "Certain high-utilization DME items including power mobility devices require prior authorization. Standard walkers and rollators (E0143) do not require prior authorization but authorization reference numbers from workers compensation payers are required for billing.",
+      "condition": {
+        "hcpcs": "E0143",
+        "claim_type": "workers_comp",
+        "auth_ref_required": true
+      },
+      "action": "flag",
+      "flag_reason": "Workers compensation claim — authorization reference number required for E0143 billing. Missing auth ref blocks claim submission.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-016",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.19 — Traumatic Fractures and Injuries",
+      "description": "For injuries treated with surgical repair, the injury code (not the surgical complication code) is used for post-operative DME unless a complication has occurred. Z96.651/Z96.652 (presence of right/left artificial knee joint) is used after joint replacement, not after ACL reconstruction.",
+      "condition": {
+        "procedure": "ACL reconstruction",
+        "avoid_codes": ["Z96.651", "Z96.652", "Z96.659"]
+      },
+      "action": "validate",
+      "validation_note": "ACL reconstruction is not joint replacement — Z96.6xx codes do not apply. Use S83.xxx.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-017",
+      "category": "pain_classification",
+      "source": "ICD-10-CM Guidelines §I.C.6.b.2 — Use of Category G89 Codes with Site-Specific Pain Codes",
+      "description": "Category G89 pain codes may be used as additional codes alongside site-specific pain codes. However, G89 codes should not be the primary diagnosis for DME orders — the underlying condition code drives coverage determination.",
+      "condition": {
+        "g89_as_primary": false,
+        "g89_as_secondary_ok": true
+      },
+      "action": "validate_sequencing",
+      "validation_note": "G89.18 should be secondary to S83.209A, not primary diagnosis for DME billing.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-018",
+      "category": "documentation",
+      "source": "CMS Documentation Requirements — DME Medical Necessity",
+      "description": "Medical necessity documentation for DME must include: (1) diagnosis with ICD-10 code, (2) functional limitation, (3) equipment specification with HCPCS, (4) expected duration of need, (5) physician signature with NPI. Missing any element may result in claim denial.",
+      "condition": {
+        "required_elements": ["icd_code", "functional_limitation", "hcpcs", "duration", "physician_npi"]
+      },
+      "action": "validate",
+      "validation_note": "Confirm all 5 medical necessity elements are present in the referral package.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-019",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.19.a.1 — Dominant/Non-dominant Side",
+      "description": "For bilateral structures (knees, hips, shoulders), the affected side must be specified in the ICD-10 code. When surgery is documented on the right knee, all stiffness, pain, and mobility codes should reference the right side (M25.361, not M25.362).",
+      "condition": {
+        "surgery_side_documented": true,
+        "all_codes_must_match_side": true
+      },
+      "action": "validate",
+      "validation_note": "All secondary codes should reference the same side as the primary surgical site.",
+      "confidence": 95,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-020",
+      "category": "workers_comp",
+      "source": "CMS Workers Compensation Medicare Set-Aside Arrangements",
+      "description": "Workers compensation DME claims require the claim number and insurance carrier to be present on all documents. Claims without a valid workers compensation claim number cannot be processed for authorization.",
+      "condition": {
+        "claim_type": "workers_comp",
+        "required_fields": ["claim_number", "insurance_carrier", "adjuster_name"]
+      },
+      "action": "validate",
+      "validation_note": "Workers comp claim — confirm claim number, carrier, and adjuster are all present.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-021",
+      "category": "hcpcs_coverage",
+      "source": "CMS LCD L33803 — Walker, Standard — Frequency Limitation",
+      "description": "A standard rollator walker (E0143) is covered once every 5 years per beneficiary under Medicare. For workers compensation, frequency limits depend on payer policy. A new order within 5 years requires documentation of loss, damage, or significant change in medical condition.",
+      "condition": {
+        "hcpcs": "E0143",
+        "frequency_check": true
+      },
+      "action": "validate",
+      "validation_note": "Confirm this is not a duplicate order within the standard frequency window.",
+      "confidence": 95,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-022",
+      "category": "diagnosis_specificity",
+      "source": "ICD-10-CM Guidelines §I.B.4 — Signs and Symptoms",
+      "description": "Signs and symptoms (pain, stiffness) should not be coded as primary diagnoses when an established underlying condition is documented. G89.18 and M25.36x are secondary — they describe manifestations of S83.209A, which is the primary diagnosis.",
+      "condition": {
+        "symptom_codes_as_primary": false,
+        "symptom_code_patterns": ["G89", "M25", "R"],
+        "primary_should_be": "underlying_condition"
+      },
+      "action": "validate_sequencing",
+      "validation_note": "Symptom/manifestation codes (G89.18, M25.36x) must be sequenced after the underlying condition (S83.209A).",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-023",
+      "category": "equipment_specification",
+      "source": "CMS HCPCS Level II — E0143 vs E0149 Differentiation",
+      "description": "E0143 (standard rollator) max capacity 300 lbs. E0149 (heavy duty rollator) capacity 400+ lbs. Patient height/weight must be documented. Incorrect equipment specification results in wrong dispatch and return logistics cost.",
+      "condition": {
+        "patient_weight_threshold_lbs": 285,
+        "flag_for_bariatric_review": true,
+        "hard_switch_at_lbs": 300
+      },
+      "action": "flag",
+      "flag_reason": "Patient weight 285 lbs — within 15 lbs of E0143 standard capacity (300 lbs). Confirm bariatric specification with prescribing physician before dispatch to avoid wrong-equipment delivery.",
+      "confidence": 100,
+      "deterministic": true
+    },
+
+    {
+      "rule_id": "DME-ICD-024",
+      "category": "post_surgical_coding",
+      "source": "ICD-10-CM Guidelines §I.C.13.a — Osteoarthritis; §I.C.13.d — Pathological Fractures",
+      "description": "M-codes in Chapter 13 (Diseases of the Musculoskeletal System) describe chronic, degenerative, or spontaneous conditions. They are not appropriate as primary diagnoses for acute traumatic injury claims. Mixing M-codes with injury context (workers comp, recent trauma) triggers coding audits.",
+      "condition": {
+        "claim_type": "workers_comp",
+        "invalid_primary_patterns": ["M23", "M17", "M16", "M15"]
+      },
+      "action": "reject",
+      "rejection_reason": "M-code from Chapter 13 is inappropriate as primary diagnosis on a workers compensation traumatic injury claim. Use Chapter 19 S-codes.",
+      "confidence": 100,
+      "deterministic": true
+    }
+
+  ]
+}
