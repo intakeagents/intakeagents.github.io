@@ -1340,7 +1340,7 @@ function placeOutboundCall() {
   const status = document.getElementById('call-status');
   if (btn) { btn.style.display = 'none'; btn.disabled = true; }
   status.style.color = '#6b7280';
-  status.innerHTML = '&#x23F3; Connecting to Vapi — placing call now...';
+  status.innerHTML = '&#x23F3; Connecting to AI voice agent — placing call now...';
 
   fetch('/api/outbound-call/{{ claim }}', { method: 'POST' })
     .then(r => r.json())
