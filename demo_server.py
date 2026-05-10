@@ -10,7 +10,8 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from flask import Flask, jsonify, request, render_template, send_from_directory, session, redirect, url_for
 import secrets
 
-_email_semaphore = threading.Semaphore(5)  # max 5 concurrent email drafts
+_email_semaphore = threading.Semaphore(5)   # max 5 concurrent email drafts
+_claude_semaphore = threading.Semaphore(8)  # max 8 concurrent Claude API calls
 from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
@@ -147,7 +148,8 @@ def process_referral(folder: Path) -> dict:
 
         # Module 2: Extract + Intelligence (real Claude call)
         _log(f"{claim} — sending to Claude Sonnet")
-        fields = extract_fields(docs, claim)
+        with _claude_semaphore:
+            fields = extract_fields(docs, claim)
         patient = fields.get("patient_name", "Unknown")
         equipment = fields.get("dme_item", "")
 
