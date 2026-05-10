@@ -131,41 +131,6 @@ def process_referral(folder: Path) -> dict:
     try:
         _update_queue_item(claim, status="processing")
 
-        # If a pre-baked sidecar exists, load it instead of calling Claude
-        existing = sorted(OUTPUT_DIR.glob(f"fields-{claim}-*.json"), key=lambda p: p.stat().st_mtime, reverse=True)
-        if existing:
-            time.sleep(0.4)  # simulate processing delay for demo realism
-            data = json.loads(existing[0].read_text(encoding="utf-8"))
-            fields = data["fields"]
-            completeness = data["completeness"]
-            patient = fields.get("patient_name", "Unknown")
-            equipment = fields.get("dme_item", "")
-            pages = 4
-            with _lock:
-                _state["stats"]["pages_read"] += pages
-            if fields.get("icd_conflict"):
-                with _lock:
-                    _state["stats"]["icd_conflicts"] += 1
-            if fields.get("escalate"):
-                with _lock:
-                    _state["stats"]["escalations"] += 1
-            if completeness.get("is_complete"):
-                with _lock:
-                    _state["stats"]["routed"] += 1
-            gap_count = len(completeness.get("gaps", {}))
-            if gap_count:
-                with _lock:
-                    _state["stats"]["gaps_detected"] += gap_count
-            elapsed = round(time.time() - t0, 1)
-            status = "routed" if completeness.get("is_complete") else "gaps"
-            priority = _compute_priority(fields, completeness)
-            _update_queue_item(claim, patient=patient, equipment=equipment,
-                               status=status, priority=priority, gaps=gap_count, elapsed=elapsed)
-            _log(f"{claim} — loaded from cache: {patient} | {fields.get('icd_code','—')}")
-            with _lock:
-                _state["processed"] += 1
-            return {"claim": claim, "status": "ok", "elapsed": elapsed}
-
         _log(f"Reading {claim} — {len(list(folder.glob('*.pdf')))} docs")
 
         # Module 1: Load PDFs
@@ -450,7 +415,7 @@ def api_start():
     for f in folders:
         _add_queue_item(f.name)
 
-    default_workers = 5 if os.environ.get("RENDER") else 20
+    default_workers = 3 if os.environ.get("RENDER") else 20
     workers = int(request.json.get("workers", default_workers)) if request.is_json else default_workers
 
     # Run in background thread

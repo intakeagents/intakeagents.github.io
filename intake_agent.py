@@ -126,18 +126,20 @@ Return ONLY valid JSON. No explanation outside the JSON."""
 
     print("  Sending to Claude for extraction...")
     import time as _time
-    for _attempt in range(3):
+    for _attempt in range(5):
         try:
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=2000,
+                timeout=60,
                 messages=[{"role": "user", "content": content}]
             )
             break
         except Exception as _e:
-            if _attempt == 2:
+            if _attempt == 4:
                 raise
-            wait = 2 ** _attempt  # 1s, 2s
+            is_rate_limit = "rate" in str(_e).lower() or "529" in str(_e) or "overloaded" in str(_e).lower()
+            wait = (2 ** _attempt) * (5 if is_rate_limit else 1)
             print(f"  API error (attempt {_attempt+1}): {_e} — retrying in {wait}s")
             _time.sleep(wait)
 
@@ -204,18 +206,20 @@ Requirements:
 Return only the email body (no subject line)."""
 
     import time as _time
-    for _attempt in range(4):
+    for _attempt in range(5):
         try:
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=600,
+                timeout=60,
                 messages=[{"role": "user", "content": prompt}]
             )
             return response.content[0].text.strip()
         except Exception as _e:
-            if _attempt == 3:
+            if _attempt == 4:
                 raise
-            wait = 2 ** _attempt  # 1s, 2s, 4s
+            is_rate_limit = "rate" in str(_e).lower() or "529" in str(_e) or "overloaded" in str(_e).lower()
+            wait = (2 ** _attempt) * (5 if is_rate_limit else 1)
             print(f"  API error drafting email (attempt {_attempt+1}): {_e} — retrying in {wait}s")
             _time.sleep(wait)
 
