@@ -263,13 +263,6 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
     <div class="hero-tag">Live Demo · Intake Agent · AI-Powered</div>
     <div class="hero-title">40 Referral Processing — Intake Agent</div>
     <div class="hero-sub">Real AI extraction · Real PDF processing · Real gap detection · Real outreach drafting · No simulation.</div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="n">40</div><div class="l">Referrals</div></div>
-      <div class="hero-stat"><div class="n" id="hero-pages">—</div><div class="l">Pages Read</div></div>
-      <div class="hero-stat"><div class="n">25</div><div class="l">Fields Each</div></div>
-      <div class="hero-stat"><div class="n" id="hero-workers">20</div><div class="l">Workers</div></div>
-      <div class="hero-stat"><div class="n">0</div><div class="l">Staff Hours</div></div>
-    </div>
     <div class="hero-actions">
       <button class="btn-start" id="btn-start" onclick="startProcessing()">&#x1F534; Start Live Processing</button>
       <button class="btn-reset" id="btn-reset" onclick="resetDemo()">&#x21BA; Reset</button>
@@ -658,14 +651,6 @@ function updateUI(data) {
   document.getElementById('stat-routed').textContent = stats.routed || 0;
   document.getElementById('stat-gaps').textContent = stats.gaps_detected || 0;
   document.getElementById('stat-outreach').textContent = stats.outreach_drafted || 0;
-
-  // Hero live stats
-  const heroPages = document.getElementById('hero-pages');
-  if (heroPages) heroPages.textContent = stats.pages_read > 0 ? stats.pages_read : '—';
-  if (data.workers) {
-    const hw = document.getElementById('hero-workers');
-    if (hw) hw.textContent = data.workers;
-  }
 
   // Progress
   document.getElementById('prog-fill').style.width = pct + '%';
