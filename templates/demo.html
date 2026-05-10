@@ -261,10 +261,10 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
   <!-- HERO -->
   <div class="hero">
     <div class="hero-tag">Live Demo · Intake Agent · AI-Powered</div>
-    <div class="hero-title">75 Referral Processing — Intake Agent</div>
+    <div class="hero-title">40 Referral Processing — Intake Agent</div>
     <div class="hero-sub">Real AI extraction · Real PDF processing · Real gap detection · Real outreach drafting · No simulation.</div>
     <div class="hero-stats">
-      <div class="hero-stat"><div class="n">75</div><div class="l">Referrals</div></div>
+      <div class="hero-stat"><div class="n">40</div><div class="l">Referrals</div></div>
       <div class="hero-stat"><div class="n" id="hero-pages">—</div><div class="l">Pages Read</div></div>
       <div class="hero-stat"><div class="n">25</div><div class="l">Fields Each</div></div>
       <div class="hero-stat"><div class="n" id="hero-workers">20</div><div class="l">Workers</div></div>
@@ -274,7 +274,7 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
       <button class="btn-start" id="btn-start" onclick="startProcessing()">&#x1F534; Start Live Processing</button>
       <button class="btn-reset" id="btn-reset" onclick="resetDemo()">&#x21BA; Reset</button>
       <button class="btn-fax" id="btn-fax" onclick="openFaxModal()">&#x1F4E0; Receive New Fax</button>
-      <span class="status-text" id="status-text">Queue loaded — 75 referrals waiting</span>
+      <span class="status-text" id="status-text">Queue loaded — 40 referrals waiting</span>
     </div>
     <div class="voice-bar">
       <span style="font-size:13px">&#x1F4DE;</span>
@@ -287,7 +287,7 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
 
   <!-- STATS BAR -->
   <div class="stats-bar">
-    <div class="sb2"><div class="sb2-n" id="stat-queued">75</div><div class="sb2-l">Queued</div></div>
+    <div class="sb2"><div class="sb2-n" id="stat-queued">40</div><div class="sb2-l">Queued</div></div>
     <div class="sb2"><div class="sb2-n" style="color:var(--blue)" id="stat-processing">0</div><div class="sb2-l">Processing</div></div>
     <div class="sb2"><div class="sb2-n" style="color:var(--purple)" id="stat-pages">0</div><div class="sb2-l">Pages Read</div></div>
     <div class="sb2"><div class="sb2-n" style="color:var(--green)" id="stat-routed">0</div><div class="sb2-l">Auto-Routed</div></div>
@@ -606,7 +606,7 @@ function resetDemo() {
     document.getElementById('btn-reset').style.display = 'none';
     document.getElementById('btn-fax').style.display = 'none';
     document.getElementById('live-badge').style.display = 'none';
-    document.getElementById('status-text').textContent = 'Queue loaded — 75 referrals waiting';
+    document.getElementById('status-text').textContent = 'Queue loaded — 40 referrals waiting';
     document.getElementById('queue-tbody').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--gray);font-size:12px">Click Start Live Processing to begin</td></tr>';
     document.getElementById('complete-banner').classList.remove('visible');
     document.getElementById('scale-callout').classList.remove('visible');
@@ -616,7 +616,7 @@ function resetDemo() {
     document.getElementById('prog-pct').textContent = '0%';
     document.getElementById('prog-label').textContent = 'Queue ready — click Start to begin';
     ['sb-pages','sb-gaps','sb-outreach','sb-routed','sb-conflicts','sb-escalations'].forEach(id => document.getElementById(id).textContent = '0');
-    ['stat-queued','stat-processing','stat-pages','stat-routed','stat-gaps','stat-outreach'].forEach(id => document.getElementById(id).textContent = id === 'stat-queued' ? '75' : '0');
+    ['stat-queued','stat-processing','stat-pages','stat-routed','stat-gaps','stat-outreach'].forEach(id => document.getElementById(id).textContent = id === 'stat-queued' ? '40' : '0');
     document.getElementById('agent-log').innerHTML = '';
   });
 }
@@ -637,7 +637,7 @@ function fetchStatus() {
 function updateUI(data) {
   const stats = data.stats || {};
   const queue = data.queue || [];
-  const total = data.total || 75;
+  const total = data.total || 40;
   const processed = data.processed || 0;
   const pct = total > 0 ? Math.round(100 * processed / total) : 0;
 

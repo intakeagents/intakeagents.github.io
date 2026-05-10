@@ -464,7 +464,7 @@ def api_start():
     folders = sorted([
         f for f in REFERRALS_DIR.iterdir()
         if f.is_dir() and f.name.startswith("WC-2026-084")
-    ])
+    ])[:40]
 
     # Pre-populate queue
     for f in folders:
