@@ -974,6 +974,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   {% endif %}
 
+  <!-- ── INLINE ESCALATION REVIEW ─────────────────────────────────── -->
+  <div id="esc-review-panel" style="margin-top:16px;display:none">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed;margin-bottom:10px;display:flex;align-items:center;gap:8px">
+      <span style="width:8px;height:8px;border-radius:50%;background:#7c3aed;display:inline-block;animation:blink 1s infinite"></span>
+      Escalation Queue — Your Decision Required
+    </div>
+    <div id="esc-review-card" style="background:#faf5ff;border:2px solid #ddd6fe;border-radius:12px;padding:20px 18px">
+      <!-- populated by JS -->
+    </div>
+  </div>
+
   <div class="nav-row">
     <button class="btn btn-prev" onclick="goStep(2)">&#x2190; Normalization</button>
     <button class="btn btn-next" onclick="goStep(4)">Gap Triage &#x2192;</button>
@@ -1359,6 +1370,118 @@ function goStep(n) {
       setTimeout(placeOutboundCall, 1800);
     }
   }
+
+  // Load escalation review panel when entering step 3
+  if (n === 3) loadEscalationReview();
+}
+
+// ── INLINE ESCALATION REVIEW ──────────────────────────────────────────────────
+function loadEscalationReview() {
+  fetch('/api/escalations')
+    .then(r => r.json())
+    .then(queue => {
+      const pending = queue.filter(e => e.status === 'pending');
+      const panel = document.getElementById('esc-review-panel');
+      const card  = document.getElementById('esc-review-card');
+      if (!pending.length) {
+        panel.style.display = 'none';
+        return;
+      }
+      panel.style.display = 'block';
+      renderEscCard(card, pending[0]);
+    })
+    .catch(() => {});
+}
+
+function renderEscCard(card, item) {
+  const conf = parseInt(item.confidence) || 0;
+  const confColor = conf < 60 ? '#dc2626' : conf < 80 ? '#d97706' : '#16a34a';
+  card.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+      <div>
+        <div style="font-size:13px;font-weight:800;color:#0f172a">${item.patient_name} &middot; ${item.claim_number}</div>
+        <div style="font-size:11px;color:#7c3aed;font-weight:600;margin-top:2px">${item.dme_item} &middot; ${item.insurance_carrier}</div>
+      </div>
+      <span style="background:#fef9c3;color:#854d0e;border:1px solid #fde047;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800">PENDING YOUR REVIEW</span>
+    </div>
+
+    <div style="font-size:11px;color:#7c3aed;line-height:1.6;background:rgba(124,58,237,.07);border:1px solid #ddd6fe;border-radius:8px;padding:10px 13px;margin-bottom:14px">
+      <b>&#x1F6A8; Escalation Reason:</b> ${item.conflict_detail || item.reason}
+    </div>
+
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <span style="font-size:11px;font-weight:700;color:#64748b;width:80px">AI Confidence</span>
+      <div style="flex:1;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden">
+        <div style="height:100%;width:${conf}%;background:${confColor};border-radius:4px"></div>
+      </div>
+      <span style="font-size:13px;font-weight:800;color:${confColor}">${conf}%</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div style="border:2px solid #ddd6fe;border-radius:10px;padding:14px;background:#fff">
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#7c3aed;margin-bottom:6px">AI Selected Code</div>
+        <div style="font-size:20px;font-weight:900;color:#7c3aed">${item.icd_correct || '—'}</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px">${item.icd_correct_desc || ''}</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:6px">Source: Clinical Notes + Prescription</div>
+      </div>
+      <div style="border:2px solid #e2e8f0;border-radius:10px;padding:14px;background:#fff">
+        <div style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#64748b;margin-bottom:6px">Referral Form Code</div>
+        <div style="font-size:20px;font-weight:900;color:#475569">${item.icd_form || '—'}</div>
+        <div style="font-size:11px;color:#64748b;margin-top:3px">${item.icd_form_desc || ''}</div>
+        <div style="font-size:10px;color:#94a3b8;margin-top:6px">Source: Referral Form</div>
+      </div>
+    </div>
+
+    <div id="esc-action-row" style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="resolveEscalation('${item.id}','${item.claim_number}','${item.icd_correct}','${(item.icd_correct_desc||'').replace(/'/g,'&apos;')}','ai_confirmed')"
+        style="background:#7c3aed;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer">
+        &#x2713; Confirm AI Code (${item.icd_correct})
+      </button>
+      <button onclick="resolveEscalation('${item.id}','${item.claim_number}','${item.icd_form}','${(item.icd_form_desc||'').replace(/'/g,'&apos;')}','form_selected')"
+        style="background:#16a34a;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer">
+        Use Form Code (${item.icd_form})
+      </button>
+    </div>
+  `;
+}
+
+function resolveEscalation(itemId, claimNumber, code, desc, decisionType) {
+  const btn = document.querySelector('#esc-action-row button');
+  if (btn) { btn.textContent = 'Recording decision...'; btn.disabled = true; }
+
+  fetch('/review/resolve', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      item_id: itemId,
+      claim_number: claimNumber,
+      resolution_type: 'icd_conflict',
+      final_icd: code,
+      final_icd_desc: desc,
+      decision_type: decisionType,
+      resolved_by: 'Specialist'
+    })
+  })
+  .then(r => r.json())
+  .then(() => {
+    const card = document.getElementById('esc-review-card');
+    card.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0">
+        <span style="font-size:28px">&#x2705;</span>
+        <div>
+          <div style="font-size:14px;font-weight:800;color:#16a34a">Decision Recorded — Episode Updated</div>
+          <div style="font-size:12px;color:#166534;margin-top:3px">
+            ${decisionType === 'ai_confirmed' ? 'AI code confirmed' : 'Form code selected'}: <b>${code}</b> &mdash; ${desc}
+          </div>
+          <div style="font-size:11px;color:#64748b;margin-top:4px">Resolved by: Specialist &middot; ${new Date().toLocaleTimeString()}</div>
+        </div>
+      </div>
+    `;
+    document.getElementById('esc-review-panel').style.borderColor = '#bbf7d0';
+    card.style.background = '#f0fdf4';
+    card.style.border = '2px solid #86efac';
+  })
+  .catch(() => alert('Error recording decision'));
 }
 
 function goTab(n) {
