@@ -374,8 +374,6 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
       <button class="inbox-filter"        id="if-processing" onclick="setInboxFilter('processing',this)">Processing</button>
       <button class="inbox-filter"        id="if-done"       onclick="setInboxFilter('done',this)">Done</button>
       <input class="inbox-search" type="text" id="inbox-search" placeholder="Search claim or patient..." oninput="renderInbox()">
-      <button class="inbox-upload-btn" onclick="document.getElementById('inbox-upload-input').click()">&#x1F4E0; Upload New Fax</button>
-      <input type="file" id="inbox-upload-input" accept=".pdf" onchange="inboxUploadFax(this.files[0])">
     </div>
     <div class="folder-grid" id="folder-grid">
       <table class="inbox-table">
