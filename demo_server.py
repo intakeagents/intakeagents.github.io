@@ -377,13 +377,18 @@ def api_referrals():
     """Return all referral folders with their PDFs and known metadata."""
     folders = []
 
-    # All claim folders — existing 75 + any live uploads
-    claim_dirs = sorted(
+    # Demo referral folders (40) + any live uploads
+    demo_dirs = sorted(
         [d for d in REFERRALS_DIR.iterdir()
-         if d.is_dir() and not d.name.startswith(".")
-         and d.name != "incoming"],
+         if d.is_dir() and d.name.startswith("WC-2026-084")],
+        key=lambda d: d.name
+    )[:40]
+    live_dirs = sorted(
+        [d for d in REFERRALS_DIR.iterdir()
+         if d.is_dir() and (d.name.startswith("WC-LIVE") or d.name.startswith("WC-INCOMING"))],
         key=lambda d: d.name
     )
+    claim_dirs = demo_dirs + live_dirs
 
     # Build a patient map from existing sidecar JSONs
     patient_map = {}
@@ -460,7 +465,7 @@ def api_start():
         for k in _state["stats"]:
             _state["stats"][k] = 0
 
-    # Get referral folders (75 demo referrals, exclude benchmark_1000)
+    # Get referral folders (40 demo referrals)
     folders = sorted([
         f for f in REFERRALS_DIR.iterdir()
         if f.is_dir() and f.name.startswith("WC-2026-084")
