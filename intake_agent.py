@@ -126,20 +126,20 @@ Return ONLY valid JSON. No explanation outside the JSON."""
 
     print("  Sending to Claude for extraction...")
     import time as _time
-    for _attempt in range(5):
+    for _attempt in range(3):
         try:
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=2000,
-                timeout=60,
+                timeout=30,
                 messages=[{"role": "user", "content": content}]
             )
             break
         except Exception as _e:
-            if _attempt == 4:
+            if _attempt == 2:
                 raise
             is_rate_limit = "rate" in str(_e).lower() or "529" in str(_e) or "overloaded" in str(_e).lower()
-            wait = (2 ** _attempt) * (5 if is_rate_limit else 1)
+            wait = min((2 ** _attempt) * (3 if is_rate_limit else 1), 5)  # cap at 5s
             print(f"  API error (attempt {_attempt+1}): {_e} — retrying in {wait}s")
             _time.sleep(wait)
 
@@ -206,20 +206,20 @@ Requirements:
 Return only the email body (no subject line)."""
 
     import time as _time
-    for _attempt in range(5):
+    for _attempt in range(3):
         try:
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=600,
-                timeout=60,
+                timeout=30,
                 messages=[{"role": "user", "content": prompt}]
             )
             return response.content[0].text.strip()
         except Exception as _e:
-            if _attempt == 4:
+            if _attempt == 2:
                 raise
             is_rate_limit = "rate" in str(_e).lower() or "529" in str(_e) or "overloaded" in str(_e).lower()
-            wait = (2 ** _attempt) * (5 if is_rate_limit else 1)
+            wait = min((2 ** _attempt) * (3 if is_rate_limit else 1), 5)  # cap at 5s
             print(f"  API error drafting email (attempt {_attempt+1}): {_e} — retrying in {wait}s")
             _time.sleep(wait)
 

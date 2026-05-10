@@ -6,7 +6,7 @@ Open: http://localhost:5000
 """
 import os, json, time, datetime, threading, uuid
 from pathlib import Path
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as FuturesTimeout
 from flask import Flask, jsonify, request, render_template, send_from_directory, session, redirect, url_for
 import secrets
 
@@ -275,10 +275,24 @@ def run_batch(folders: list, workers: int = 20):
 
     _log(f"Starting {len(folders)} referrals — {workers} concurrent workers")
 
+    BATCH_TIMEOUT = 120  # seconds — if any referral hangs longer than this, cut it loose
+
     with ThreadPoolExecutor(max_workers=workers) as executor:
         futures = {executor.submit(process_referral, f): f for f in folders}
-        for future in as_completed(futures):
-            future.result()
+        try:
+            for future in as_completed(futures, timeout=BATCH_TIMEOUT):
+                try:
+                    future.result()
+                except Exception:
+                    pass  # errors already handled and counted inside process_referral
+        except FuturesTimeout:
+            # One or more referrals hung past BATCH_TIMEOUT — mark them done so the UI completes
+            for future, folder in futures.items():
+                if not future.done():
+                    _log(f"{folder.name} — cut after {BATCH_TIMEOUT}s timeout")
+                    _update_queue_item(folder.name, status="error", elapsed=BATCH_TIMEOUT)
+                    with _lock:
+                        _state["processed"] += 1
 
     wall = round(time.time() - _state["start_time"], 1)
     with _lock:
