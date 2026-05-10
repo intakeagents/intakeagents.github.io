@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision — Coastal DME Intake Agent</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8fafc; color: #1e293b;
+    min-height: 100vh;
+  }
+  .top-nav {
+    position: fixed; top: 0; left: 0; right: 0; height: 54px;
+    background: #1e3a5f;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 28px; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .nav-back { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .nav-back:hover { color: #fff; }
+  .page { max-width: 960px; margin: 0 auto; padding: 82px 24px 48px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(59,130,246,.1); color: #2563eb; border: 1px solid rgba(59,130,246,.25); margin-bottom: 14px; }
+  h1 { font-size: clamp(22px, 3vw, 36px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 12px; }
+  .sub { font-size: 16px; color: #64748b; line-height: 1.6; max-width: 640px; margin-bottom: 40px; }
+  /* HERO STATEMENT */
+  .hero-box {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 100%);
+    border-radius: 16px; padding: 36px 40px; margin-bottom: 36px; color: #fff;
+  }
+  .hero-box h2 { font-size: 22px; font-weight: 800; margin-bottom: 10px; letter-spacing: -.01em; }
+  .hero-box p { font-size: 15px; color: rgba(255,255,255,.8); line-height: 1.65; }
+  /* PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 36px; }
+  .pillar { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px 20px; border-top: 4px solid; }
+  .pillar.p1 { border-top-color: #3b82f6; }
+  .pillar.p2 { border-top-color: #22c55e; }
+  .pillar.p3 { border-top-color: #f59e0b; }
+  .pillar-icon { font-size: 28px; margin-bottom: 10px; }
+  .pillar-title { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+  .pillar-desc { font-size: 13px; color: #64748b; line-height: 1.55; }
+  /* PROBLEM / SOLUTION */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 36px; }
+  .box { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px 22px; }
+  .box-title { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+  .box.problem .box-title { color: #e11d48; }
+  .box.solution .box-title { color: #16a34a; }
+  .box ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .box ul li { font-size: 13px; color: #475569; line-height: 1.5; display: flex; gap: 8px; }
+  .box ul li::before { flex-shrink: 0; margin-top: 1px; }
+  .box.problem ul li::before { content: '✗'; color: #f43f5e; font-weight: 700; }
+  .box.solution ul li::before { content: '✓'; color: #22c55e; font-weight: 700; }
+  /* NUMBERS */
+  .numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
+  .num-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; }
+  .num-n { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -.03em; }
+  .num-l { font-size: 11px; color: #94a3b8; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
+  /* VISION STATEMENT */
+  .vision-stmt { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 14px; padding: 28px 32px; text-align: center; }
+  .vision-stmt h3 { font-size: 18px; font-weight: 700; color: #14532d; margin-bottom: 8px; }
+  .vision-stmt p { font-size: 14px; color: #166534; line-height: 1.6; }
+  @media (max-width: 700px) {
+    .pillars, .two-col { grid-template-columns: 1fr; }
+    .numbers { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="nav-brand" href="/hub">
+    <div class="nav-icon">&#x1F4CB;</div>
+    Coastal DME
+  </a>
+  <a class="nav-back" href="/hub">&larr; Back to Hub</a>
+</nav>
+
+<div class="page">
+  <div class="tag">Vision</div>
+  <h1>Making Intake &amp; Referral Management an Advantage</h1>
+  <p class="sub">Delivering Experience, Speed &amp; Agility &mdash; autonomous, digital, clean route-ready episodes with human in the loop.</p>
+
+  <div class="hero-box">
+    <h2>The Opportunity</h2>
+    <p>75 referrals arrive every morning by fax, voice, and portal. Each one requires 15–20 minutes of manual review, data entry, gap detection, and outreach. At scale, that's tens of millions of dollars in operational cost — for work that a purpose-built AI agent can do in seconds, with greater accuracy and a complete audit trail.</p>
+  </div>
+
+  <div class="pillars">
+    <div class="pillar p1">
+      <div class="pillar-icon">&#x26A1;</div>
+      <div class="pillar-title">Speed</div>
+      <div class="pillar-desc">60 seconds to process 75 referrals. From fax arrival to route-ready episode — fully automated, no manual touch required for clean referrals.</div>
+    </div>
+    <div class="pillar p2">
+      <div class="pillar-icon">&#x1F9E0;</div>
+      <div class="pillar-title">Intelligence</div>
+      <div class="pillar-desc">AI extraction + deterministic CMS rules. 24 OWL knowledge graph rules validate every ICD code, HCPCS, and authorization reference against real CMS guidelines.</div>
+    </div>
+    <div class="pillar p3">
+      <div class="pillar-icon">&#x1F6E1;&#xFE0F;</div>
+      <div class="pillar-title">Trust</div>
+      <div class="pillar-desc">Four-layer hallucination defense. When confidence drops below 80%, the agent routes to a specialist — it never guesses on clinical decisions.</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="box problem">
+      <div class="box-title">Today — Manual Intake</div>
+      <ul>
+        <li>15–20 min per referral for data entry and review</li>
+        <li>ICD code errors caught late or missed entirely</li>
+        <li>Missing fields cause dispatch delays and denials</li>
+        <li>Case manager outreach takes 24–48 hours per loop</li>
+        <li>No audit trail — decisions undocumented</li>
+        <li>$15–20 per referral at scale = $45–60M for 3M referrals</li>
+      </ul>
+    </div>
+    <div class="box solution">
+      <div class="box-title">Tomorrow — Agent-Powered Intake</div>
+      <ul>
+        <li>60 seconds for 75 referrals — fully automated</li>
+        <li>ICD conflicts detected and resolved across all documents</li>
+        <li>Gaps classified by criticality — hard blocks held, soft gaps collected in parallel</li>
+        <li>Outreach dispatched automatically — email + voice</li>
+        <li>Full audit trail — every decision with reasoning and confidence</li>
+        <li>$0.032 per referral = ~$96K for 3M referrals</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="numbers">
+    <div class="num-card"><div class="num-n">99.8%</div><div class="num-l">Cost Reduction</div></div>
+    <div class="num-card"><div class="num-n">60s</div><div class="num-l">75 Referrals</div></div>
+    <div class="num-card"><div class="num-n">$0.032</div><div class="num-l">Per Referral</div></div>
+    <div class="num-card"><div class="num-n">24/7</div><div class="num-l">Live Intake Line</div></div>
+  </div>
+
+  <div class="vision-stmt">
+    <h3>The Long-Term Vision</h3>
+    <p>A modular agent network spanning the full workers&rsquo; comp value chain &mdash; from first referral to final payment. Each agent auditable, deployable in your environment, and improvable with your data. Human stays in the loop on decisions that need judgment. The agent handles everything that doesn&rsquo;t.</p>
+  </div>
+</div>
+</body>
+</html>

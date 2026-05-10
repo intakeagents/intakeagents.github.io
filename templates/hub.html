@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coastal DME — Intake Agent Platform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 48px;
+  }
+  /* NAV */
+  .top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 54px;
+    background: #1e3a5f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .01em;
+    text-decoration: none;
+  }
+  .nav-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+  }
+  .nav-tag {
+    font-size: 10px;
+    background: rgba(255,255,255,.15);
+    padding: 2px 8px; border-radius: 10px;
+    font-weight: 600; letter-spacing: .04em;
+  }
+  .nav-right {
+    color: rgba(255,255,255,.6);
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  /* HERO */
+  .hero {
+    margin-top: 86px;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 36px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    color: #0369a1;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 99px;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: clamp(20px, 2.8vw, 30px);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    letter-spacing: -.02em;
+  }
+  .hero p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  /* SECTION LABEL */
+  .section-label {
+    width: 100%; max-width: 1060px;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 12px; margin-top: 8px;
+    padding-left: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: ''; flex: 1;
+    height: 1px; background: #e2e8f0;
+  }
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 1060px;
+    width: 100%;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+    max-width: 1060px;
+    width: 100%;
+    margin-top: 18px;
+  }
+  /* CARD */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px 20px 18px;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.09);
+    border-color: #cbd5e1;
+  }
+  .card.c-blue  { border-left-color: #3b82f6; }
+  .card.c-green { border-left-color: #22c55e; }
+  .card.c-amber { border-left-color: #f59e0b; }
+  .card.c-purple{ border-left-color: #8b5cf6; }
+  .card.c-teal  { border-left-color: #14b8a6; }
+  .card.c-rose  { border-left-color: #f43f5e; }
+  .card.c-navy  { border-left-color: #1e3a5f; }
+  /* DEMO CARD */
+  .card.demo-card {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1e40af 100%);
+    border: none;
+    border-left: none;
+    color: #fff;
+  }
+  .card.demo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(30,58,95,.35);
+    border-color: transparent;
+  }
+  .card.demo-card .card-title { color: #fff; }
+  .card.demo-card .card-desc  { color: rgba(255,255,255,.75); }
+  .card.demo-card .card-arrow { color: rgba(255,255,255,.8); }
+  /* TAG */
+  .tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 99px;
+    width: fit-content;
+  }
+  .tag-blue   { background: rgba(59,130,246,.1);  color: #2563eb;  border: 1px solid rgba(59,130,246,.25);  }
+  .tag-green  { background: rgba(34,197,94,.1);   color: #16a34a;  border: 1px solid rgba(34,197,94,.25);   }
+  .tag-amber  { background: rgba(245,158,11,.1);  color: #d97706;  border: 1px solid rgba(245,158,11,.25);  }
+  .tag-purple { background: rgba(139,92,246,.1);  color: #7c3aed;  border: 1px solid rgba(139,92,246,.25);  }
+  .tag-teal   { background: rgba(20,184,166,.1);  color: #0f766e;  border: 1px solid rgba(20,184,166,.25);  }
+  .tag-rose   { background: rgba(244,63,94,.1);   color: #e11d48;  border: 1px solid rgba(244,63,94,.25);   }
+  .tag-navy   { background: rgba(30,58,95,.1);    color: #1e3a5f;  border: 1px solid rgba(30,58,95,.25);    }
+  .tag-white  { background: rgba(255,255,255,.15); color: #fff;    border: 1px solid rgba(255,255,255,.3);  }
+  /* CARD CONTENT */
+  .card-icon  { font-size: 26px; line-height: 1; margin-bottom: 2px; }
+  .card-title { font-size: 15px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+  .card-desc  { font-size: 12px; color: #64748b; line-height: 1.55; flex: 1; }
+  .card-arrow { font-size: 13px; color: #94a3b8; margin-top: 4px; font-weight: 600; }
+  /* STATS ROW */
+  .stats-row {
+    display: flex; gap: 32px;
+    max-width: 1060px; width: 100%;
+    margin-top: 36px; margin-bottom: 8px;
+    padding: 18px 28px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    justify-content: space-around;
+  }
+  .stat { text-align: center; }
+  .stat-n { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -.03em; }
+  .stat-l { font-size: 11px; color: #94a3b8; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    font-size: 12px; color: #94a3b8;
+    text-align: center; letter-spacing: .03em;
+  }
+  .footer strong { color: #64748b; }
+  @media (max-width: 800px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .grid, .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a class="nav-brand" href="/hub">
+    <div class="nav-icon">&#x1F4CB;</div>
+    Coastal DME
+    <span class="nav-tag">Intake Agent Platform</span>
+  </a>
+  <div class="nav-right">Workers&rsquo; Comp &middot; DME Referral Intelligence</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Workers&rsquo; Comp &middot; AI Agent Platform</div>
+  <h1>Making Intake &amp; Referral Management an Advantage</h1>
+  <p>Delivering Experience, Speed &amp; Agility &mdash; autonomous, digital, clean route-ready episodes with human in the loop.</p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-row">
+  <div class="stat"><div class="stat-n">75</div><div class="stat-l">Referrals / Run</div></div>
+  <div class="stat"><div class="stat-n">60s</div><div class="stat-l">Processing Time</div></div>
+  <div class="stat"><div class="stat-n">24</div><div class="stat-l">CMS Rules</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Defense Layers</div></div>
+  <div class="stat"><div class="stat-n">$0.032</div><div class="stat-l">Cost / Referral</div></div>
+  <div class="stat"><div class="stat-n">99.8%</div><div class="stat-l">Cost Reduction</div></div>
+</div>
+
+<!-- PANELS -->
+<div class="section-label" style="margin-top:32px">Platform Overview</div>
+<div class="grid">
+
+  <a class="card c-blue" href="/panel/vision">
+    <div class="tag tag-blue">Vision</div>
+    <div class="card-icon">&#x1F4A1;</div>
+    <div class="card-title">Our Vision</div>
+    <div class="card-desc">Making intake &amp; referral management an operational advantage — autonomous, digital, clean route-ready episodes with human in the loop.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+  <a class="card c-amber" href="/panel/workflow">
+    <div class="tag tag-amber">Architecture</div>
+    <div class="card-icon">&#x1F9E9;</div>
+    <div class="card-title">Technical Workflow</div>
+    <div class="card-desc">End-to-end agent network — fax &amp; voice intake, AI extraction, OWL knowledge graph, completeness check, email &amp; voice outreach, route output.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+  <a class="card c-green" href="/panel/economics">
+    <div class="tag tag-green">Economics</div>
+    <div class="card-icon">&#x1F4B0;</div>
+    <div class="card-title">Token Economics</div>
+    <div class="card-desc">Real token consumption from 75 live referrals — extrapolated to 1,000 and 3M. $0.032/referral vs $15–20 manual. 99.8% cost reduction at scale.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+  <a class="card c-teal" href="/panel/observe">
+    <div class="tag tag-teal">Observability</div>
+    <div class="card-icon">&#x1F4CA;</div>
+    <div class="card-title">Observability Dashboard</div>
+    <div class="card-desc">Live data from the demo run — system health, AI quality metrics, audit trail per episode, throughput and cost. Drill into any of the 75 referrals.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+  <a class="card c-purple" href="/panel/deploy">
+    <div class="tag tag-purple">Deployment</div>
+    <div class="card-icon">&#x1F680;</div>
+    <div class="card-title">Production Deployment</div>
+    <div class="card-desc">What we built, how we deploy it in your environment, and how it gets smarter with your data — the 3-part story for your technology leader.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+  <a class="card c-rose" href="/panel/enterprise">
+    <div class="tag tag-rose">Enterprise</div>
+    <div class="card-icon">&#x1F3E2;</div>
+    <div class="card-title">Enterprise Readiness</div>
+    <div class="card-desc">Integration, HIPAA/PHI, infrastructure, 8–12 week timeline, support &amp; monitoring — every question a technology leader asks before saying yes.</div>
+    <div class="card-arrow">Explore &rarr;</div>
+  </a>
+
+</div>
+
+<!-- DEMO CTA -->
+<div class="section-label" style="margin-top:28px">Live Demo</div>
+<div class="grid-2">
+
+  <a class="card demo-card" href="/">
+    <div class="tag tag-white">&#x25B6; Launch Demo</div>
+    <div class="card-icon">&#x1F916;</div>
+    <div class="card-title">Live Intake Agent Demo</div>
+    <div class="card-desc">Watch the agent process 75 real referral PDFs — 300 pages extracted, ICD conflicts resolved, gaps detected, outreach dispatched, and episodes routed in 60 seconds.</div>
+    <div class="card-arrow">Open Demo &rarr;</div>
+  </a>
+
+  <a class="card c-navy" href="/review">
+    <div class="tag tag-navy">Escalation Queue</div>
+    <div class="card-icon">&#x1F6A8;</div>
+    <div class="card-title">Human Review Queue</div>
+    <div class="card-desc">Episodes flagged for specialist review — ICD conflicts below 80% confidence, laterality mismatches, and clinical inconsistencies requiring physician clarification.</div>
+    <div class="card-arrow">Review &rarr;</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  Live intake line &middot; <strong>(201) 897-3854</strong> &middot; AI answers 24/7 &middot; Coastal DME Intake Agent Platform
+</div>
+
+</body>
+</html>

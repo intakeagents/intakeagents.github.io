@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Readiness — Coastal DME Intake Agent</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; height: 54px; background: #1e3a5f; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .nav-back { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; font-weight: 600; }
+  .nav-back:hover { color: #fff; }
+  .page { max-width: 1000px; margin: 0 auto; padding: 82px 24px 48px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(244,63,94,.1); color: #e11d48; border: 1px solid rgba(244,63,94,.25); margin-bottom: 14px; }
+  h1 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
+  .sub { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 36px; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #94a3b8; margin-bottom: 14px; margin-top: 28px; display: flex; align-items: center; gap: 8px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+
+  /* DOMAIN GRID */
+  .domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .domain-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 22px 20px; border-left: 4px solid; }
+  .domain-card.integration  { border-left-color: #3b82f6; }
+  .domain-card.security     { border-left-color: #f43f5e; }
+  .domain-card.infra        { border-left-color: #8b5cf6; }
+  .domain-card.timeline     { border-left-color: #f59e0b; }
+  .domain-card.support      { border-left-color: #22c55e; }
+  .domain-card.people       { border-left-color: #14b8a6; }
+  .domain-icon { font-size: 22px; margin-bottom: 8px; }
+  .domain-title { font-size: 14px; font-weight: 800; color: #0f172a; margin-bottom: 12px; }
+  .qa-list { display: flex; flex-direction: column; gap: 10px; }
+  .qa-item {}
+  .qa-q { font-size: 12px; font-weight: 700; color: #374151; margin-bottom: 3px; }
+  .qa-a { font-size: 12px; color: #64748b; line-height: 1.5; }
+  .qa-a .highlight { color: #0f172a; font-weight: 600; }
+
+  /* CHECKLIST */
+  .checklist-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .checklist-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 16px; }
+  .checklist-title { font-size: 12px; font-weight: 700; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .check-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid #f8fafc; font-size: 12px; color: #475569; line-height: 1.4; }
+  .check-item:last-child { border-bottom: none; }
+  .check-icon { flex-shrink: 0; font-size: 13px; }
+
+  @media (max-width: 700px) {
+    .domain-grid { grid-template-columns: 1fr; }
+    .checklist-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="nav-brand" href="/hub"><div class="nav-icon">&#x1F4CB;</div>Coastal DME</a>
+  <a class="nav-back" href="/hub">&larr; Back to Hub</a>
+</nav>
+
+<div class="page">
+  <div class="tag">Enterprise</div>
+  <h1>Enterprise Readiness</h1>
+  <p class="sub">Every question a technology leader asks before saying yes — integration, security, compliance, infrastructure, timeline, and support.</p>
+
+  <div class="section-label">Key Considerations</div>
+  <div class="domain-grid">
+
+    <!-- INTEGRATION -->
+    <div class="domain-card integration">
+      <div class="domain-icon">&#x1F517;</div>
+      <div class="domain-title">Integration</div>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="qa-q">How does it connect to our fax system / intake portal?</div>
+          <div class="qa-a">API-based or file-drop integration — we connect to your existing fax gateway (eFax, Sfax, RightFax) via webhook or SFTP folder watch. No rip-and-replace.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Does it plug into Salesforce, Guidewire, or our case management system?</div>
+          <div class="qa-a">Yes — REST API integration with standard WC platforms. Episode records push via webhook or batch export. Custom connectors built during integration discovery (Weeks 1–2).</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">API or file-based?</div>
+          <div class="qa-a">Both supported. <span class="highlight">API-first recommended</span> for real-time routing; file-based available for legacy systems with no API exposure.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURITY & COMPLIANCE -->
+    <div class="domain-card security">
+      <div class="domain-icon">&#x1F512;</div>
+      <div class="domain-title">Security &amp; Compliance</div>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="qa-q">HIPAA/PHI — where does patient data live?</div>
+          <div class="qa-a">Patient data lives in your environment. Episode records written to your storage. <span class="highlight">PHI never persisted outside your boundary.</span></div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Is PHI passing through Anthropic's API?</div>
+          <div class="qa-a">Yes — PDF text is sent to Claude for extraction. <span class="highlight">Anthropic BAA is available</span> and required before deployment. Anthropic does not train on API data under BAA.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Data retention and audit log requirements?</div>
+          <div class="qa-a">Configurable retention policies. Every decision logged with timestamp, model version, confidence, and reasoning — immutable audit trail per episode.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFRASTRUCTURE -->
+    <div class="domain-card infra">
+      <div class="domain-icon">&#x1F5A5;&#xFE0F;</div>
+      <div class="domain-title">Infrastructure</div>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="qa-q">Cloud or on-premise?</div>
+          <div class="qa-a">Both. Containerized Python (Docker) runs on AWS, Azure, GCP, or on-premise. No cloud lock-in. Deployed to your existing Kubernetes or VM infrastructure.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">What does it run on?</div>
+          <div class="qa-a"><span class="highlight">Python + Flask</span>, containerized via Docker. Requires 2 vCPU / 4GB RAM minimum for 20-worker batch processing. Scales horizontally.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Can it handle our volume?</div>
+          <div class="qa-a">75 referrals in 60 seconds on a single instance. Horizontal scaling handles 10,000+ referrals/hour. Anthropic API rate limits are the ceiling — Tier 2 handles 1,000 RPM.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUPPORT & MONITORING -->
+    <div class="domain-card support">
+      <div class="domain-icon">&#x1F6A8;</div>
+      <div class="domain-title">Support &amp; Monitoring</div>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="qa-q">Who maintains it after go-live?</div>
+          <div class="qa-a">Your team owns the deployed instance with full source code and runbooks. We provide 90-day hypercare support post go-live. Ongoing SLA available.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">What happens when the Claude API goes down?</div>
+          <div class="qa-a"><span class="highlight">Automatic fallback to manual queue.</span> Referrals queued, staff notified, processing resumes when API recovers. Zero data loss — episode state persisted before each API call.</div>
+        </div>
+        <div class="qa-item">
+          <div class="qa-q">Observability and alerting?</div>
+          <div class="qa-a">Built-in observability dashboard (Panel 4). Integrates with your existing monitoring stack — Datadog, Grafana, CloudWatch. Alerts on error rate, latency, and escalation spikes.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- READINESS CHECKLIST -->
+  <div class="section-label">Pre-Deployment Checklist</div>
+  <div class="checklist-grid">
+    <div class="checklist-card">
+      <div class="checklist-title">&#x1F512; Security &amp; Legal</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Anthropic BAA executed</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>PHI data flow documented</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>HIPAA risk assessment complete</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Data retention policy configured</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Audit log retention defined</div>
+    </div>
+    <div class="checklist-card">
+      <div class="checklist-title">&#x1F517; Integration</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Fax gateway API credentials</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Case management webhook endpoint</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Email outreach SMTP config</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Voice outbound number provisioned</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Test referral package prepared</div>
+    </div>
+    <div class="checklist-card">
+      <div class="checklist-title">&#x1F5A5;&#xFE0F; Infrastructure</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Container runtime (Docker/K8s)</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Anthropic API key (Tier 2)</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Storage for episode records</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Monitoring stack connected</div>
+      <div class="check-item"><span class="check-icon">&#x2705;</span>Runbooks reviewed by ops team</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -310,6 +310,41 @@ def inbox():
     return render_template("inbox.html")
 
 
+@app.route("/hub")
+def hub():
+    return render_template("hub.html")
+
+
+@app.route("/panel/vision")
+def panel_vision():
+    return render_template("panel_vision.html")
+
+
+@app.route("/panel/workflow")
+def panel_workflow():
+    return render_template("panel_workflow.html")
+
+
+@app.route("/panel/economics")
+def panel_economics():
+    return render_template("panel_economics.html")
+
+
+@app.route("/panel/observe")
+def panel_observe():
+    return render_template("panel_observe.html")
+
+
+@app.route("/panel/deploy")
+def panel_deploy():
+    return render_template("panel_deploy.html")
+
+
+@app.route("/panel/enterprise")
+def panel_enterprise():
+    return render_template("panel_enterprise.html")
+
+
 @app.route("/referrals/<claim>/<filename>")
 def serve_referral_pdf(claim, filename):
     """Serve a referral PDF directly from the referrals folder."""
