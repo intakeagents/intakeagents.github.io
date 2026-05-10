@@ -105,6 +105,7 @@ def _add_queue_item(claim: str):
         "priority": "",
         "priority_reason": "",
         "status":   "queued",
+        "substep":  "",
         "gaps":     0,
         "outreach": False,
         "icd_conflict": False,
@@ -130,11 +131,11 @@ def process_referral(folder: Path) -> dict:
     t0 = time.time()
 
     try:
-        _update_queue_item(claim, status="processing")
+        # ── STEP 1: Read documents (visible for ~5s) ──────────────────────────
+        pdf_count = len(list(folder.glob('*.pdf')))
+        _update_queue_item(claim, status="processing", substep="Reading docs...")
+        _log(f"Reading {claim} — {pdf_count} docs")
 
-        _log(f"Reading {claim} — {len(list(folder.glob('*.pdf')))} docs")
-
-        # Module 1: Load PDFs
         docs = load_pdfs(str(folder))
         try:
             from pypdf import PdfReader
@@ -142,25 +143,30 @@ def process_referral(folder: Path) -> dict:
         except Exception:
             pages = len(docs) * 2
 
-        # Count pages as soon as PDFs are loaded — before Claude call
         with _lock:
             _state["stats"]["pages_read"] += pages
+        _log(f"{claim} — {pages} pages read across {pdf_count} documents")
+        time.sleep(5)  # hold "Reading docs..." visible for ~5s
 
-        # Module 2: Extract + Intelligence (real Claude call)
-        _log(f"{claim} — sending to Claude Sonnet")
+        # ── STEP 2: Extract fields via LLM (visible for ~10s) ─────────────────
+        _update_queue_item(claim, substep="Extracting fields...")
+        _log(f"{claim} — sending to LLM for extraction")
         with _claude_semaphore:
             fields = extract_fields(docs, claim)
         patient = fields.get("patient_name", "Unknown")
         equipment = fields.get("dme_item", "")
 
-        _update_queue_item(claim, patient=patient, equipment=equipment)
+        _update_queue_item(claim, patient=patient, equipment=equipment, substep="Running intelligence...")
         _log(f"{claim} — extracted: {patient} | {fields.get('icd_code', '—')}")
+        time.sleep(10)  # hold "Extracting fields..." visible for ~10s
 
-        # Module 2b: Knowledge Graph — deterministic validation
+        # ── STEP 3: Knowledge Graph validation ────────────────────────────────
+        _update_queue_item(claim, substep="KG validation...")
         from knowledge_graph import validate as kg_validate
         kg_report = kg_validate(fields)
         fields["kg_validation"] = kg_report
-        _log(f"{claim} — KG validation: {kg_report['status']} · {kg_report['rules_fired']} rules fired · {kg_report['confirmations']} confirmed")
+        _log(f"{claim} — KG: {kg_report['status']} · {kg_report['rules_fired']} rules · {kg_report['confirmations']} confirmed")
+        time.sleep(5)  # hold "KG validation..." visible for ~5s
 
         # ICD conflict
         if fields.get("icd_conflict"):
@@ -190,7 +196,8 @@ def process_referral(folder: Path) -> dict:
                 "confidence":        fields.get("confidence", 0),
             })
 
-        # Module 3: Completeness check
+        # ── STEP 4: Completeness / gap check ──────────────────────────────────
+        _update_queue_item(claim, substep="Checking gaps...")
         completeness = check_completeness(fields)
         gap_count = len(completeness["gaps"])
 

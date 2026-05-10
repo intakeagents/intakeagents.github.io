@@ -758,9 +758,10 @@ function renderQueue(queue) {
     const onclick = item.is_featured && (item.status === 'routed' || item.status === 'gaps')
       ? 'onclick="openPipeline()"' : '';
 
+    const substepLabel = item.substep || 'Processing...';
     const statusBadge = {
       queued:     '<span class="s-queued">Queued</span>',
-      processing: '<span class="s-processing">Reading...</span>',
+      processing: `<span class="s-processing">${substepLabel}</span>`,
       routed:     '<span class="s-routed">&#x2713; Routed</span>',
       gaps:       '<span class="s-gaps">&#x26A0; Gaps</span>',
       error:      '<span class="s-error">Error</span>',
