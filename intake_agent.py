@@ -131,7 +131,6 @@ Return ONLY valid JSON. No explanation outside the JSON."""
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=2000,
-                timeout=30,
                 messages=[{"role": "user", "content": content}]
             )
             break
@@ -211,7 +210,6 @@ Return only the email body (no subject line)."""
             response = _get_client().messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=600,
-                timeout=30,
                 messages=[{"role": "user", "content": prompt}]
             )
             return response.content[0].text.strip()
