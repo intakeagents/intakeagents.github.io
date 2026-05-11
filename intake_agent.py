@@ -13,17 +13,28 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from pathlib import Path
 from dotenv import load_dotenv
-import anthropic
+import requests as _requests
 
 load_dotenv(dotenv_path=Path(__file__).parent.parent / ".env")
 
-_client = None
-
-def _get_client():
-    global _client
-    if _client is None:
-        _client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], timeout=120.0)
-    return _client
+def _call_claude(content, max_tokens=2000):
+    api_key = os.environ["ANTHROPIC_API_KEY"]
+    resp = _requests.post(
+        "https://api.anthropic.com/v1/messages",
+        headers={
+            "x-api-key": api_key,
+            "anthropic-version": "2023-06-01",
+            "content-type": "application/json",
+        },
+        json={
+            "model": "claude-sonnet-4-6",
+            "max_tokens": max_tokens,
+            "messages": [{"role": "user", "content": content}],
+        },
+        timeout=120,
+    )
+    resp.raise_for_status()
+    return resp.json()["content"][0]["text"]
 
 GMAIL_USER = os.environ.get("GMAIL_USER", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
@@ -128,21 +139,17 @@ Return ONLY valid JSON. No explanation outside the JSON."""
     import time as _time
     for _attempt in range(3):
         try:
-            response = _get_client().messages.create(
-                model="claude-sonnet-4-6",
-                max_tokens=2000,
-                messages=[{"role": "user", "content": content}]
-            )
+            raw_text = _call_claude(content, max_tokens=2000)
             break
         except Exception as _e:
             if _attempt == 2:
                 raise
             is_rate_limit = "rate" in str(_e).lower() or "529" in str(_e) or "overloaded" in str(_e).lower()
-            wait = min((2 ** _attempt) * (3 if is_rate_limit else 1), 5)  # cap at 5s
-            print(f"  API error (attempt {_attempt+1}): {_e} — retrying in {wait}s")
+            wait = min((2 ** _attempt) * (3 if is_rate_limit else 1), 5)
+            print(f"  API error (attempt {_attempt+1}): {type(_e).__name__}: {_e} — retrying in {wait}s")
             _time.sleep(wait)
 
-    raw = response.content[0].text.strip()
+    raw = raw_text.strip()
     if raw.startswith("```"):
         raw = raw.split("```")[1]
         if raw.startswith("json"):
@@ -207,12 +214,7 @@ Return only the email body (no subject line)."""
     import time as _time
     for _attempt in range(3):
         try:
-            response = _get_client().messages.create(
-                model="claude-sonnet-4-6",
-                max_tokens=600,
-                messages=[{"role": "user", "content": prompt}]
-            )
-            return response.content[0].text.strip()
+            return _call_claude(prompt, max_tokens=600)
         except Exception as _e:
             if _attempt == 2:
                 raise
