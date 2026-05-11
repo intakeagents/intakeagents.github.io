@@ -237,10 +237,6 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
     <div><div class="sb-n purple" id="sb-conflicts">0</div><div class="sb-l">ICD Conflicts</div></div>
     <span style="font-size:18px">&#x1F9E0;</span>
   </div>
-  <div class="sb-stat">
-    <div><div class="sb-n red" id="sb-escalations">0</div><div class="sb-l">Escalations</div></div>
-    <span style="font-size:18px">&#x1F6A8;</span>
-  </div>
 
   <div class="sb-label" style="margin-top:4px">Agent Log</div>
   <div class="log-box" id="agent-log"></div>
@@ -292,7 +288,6 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
   <div class="tab-bar">
     <button class="tab-btn" id="tab-btn-queue" onclick="switchTab('queue')">&#x1F4CB; Processing Queue</button>
     <button class="tab-btn active" id="tab-btn-inbox" onclick="switchTab('inbox')">&#x1F4C1; Referral Inbox</button>
-    <button class="tab-btn" id="tab-btn-escalation" onclick="switchTab('escalation')">&#x1F6A8; Escalation Review</button>
   </div>
 
   <!-- TAB: QUEUE -->
@@ -395,12 +390,6 @@ header{background:#1e3a5f;padding:0 24px;display:flex;align-items:center;justify
     </div>
   </div><!-- end tab-inbox -->
 
-  <!-- TAB: ESCALATION REVIEW -->
-  <div class="tab-panel" id="tab-escalation">
-    <div id="esc-content" style="background:#fff;border-radius:10px;border:1px solid var(--gray-m);overflow:hidden">
-      <iframe id="esc-frame" src="" style="width:100%;border:none;min-height:600px;display:block"></iframe>
-    </div>
-  </div><!-- end tab-escalation -->
 
 </main>
 </div>
@@ -440,16 +429,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // ── TAB SWITCHING ─────────────────────────────────────────────────────────────
 function switchTab(name) {
-  ['queue','inbox','escalation'].forEach(t => {
+  ['queue','inbox'].forEach(t => {
     document.getElementById('tab-' + t).classList.toggle('active', t === name);
     document.getElementById('tab-btn-' + t).classList.toggle('active', t === name);
   });
   if (name === 'inbox') renderInbox();
-  if (name === 'escalation') {
-    const frame = document.getElementById('esc-frame');
-    if (frame && !frame.src.includes('/review')) frame.src = '/review';
-    else if (frame) frame.contentWindow.location.reload();
-  }
 }
 
 // ── INBOX ─────────────────────────────────────────────────────────────────────
@@ -606,7 +590,7 @@ function resetDemo() {
     document.getElementById('prog-fill').style.width = '0%';
     document.getElementById('prog-pct').textContent = '0%';
     document.getElementById('prog-label').textContent = 'Queue ready — click Start to begin';
-    ['sb-pages','sb-gaps','sb-outreach','sb-routed','sb-conflicts','sb-escalations'].forEach(id => document.getElementById(id).textContent = '0');
+    ['sb-pages','sb-gaps','sb-outreach','sb-routed','sb-conflicts'].forEach(id => document.getElementById(id).textContent = '0');
     ['stat-queued','stat-processing','stat-pages','stat-routed','stat-gaps','stat-outreach'].forEach(id => document.getElementById(id).textContent = id === 'stat-queued' ? '40' : '0');
     document.getElementById('agent-log').innerHTML = '';
   });
@@ -638,7 +622,6 @@ function updateUI(data) {
   document.getElementById('sb-outreach').textContent = stats.outreach_drafted || 0;
   document.getElementById('sb-routed').textContent = stats.routed || 0;
   document.getElementById('sb-conflicts').textContent = stats.icd_conflicts || 0;
-  document.getElementById('sb-escalations').textContent = stats.escalations || 0;
 
   // Stats bar
   const processing = queue.filter(q => q.status === 'processing').length;

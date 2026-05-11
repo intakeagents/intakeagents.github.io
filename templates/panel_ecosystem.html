@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Ecosystem — Coastal DME Intake Agent</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; height: 54px; background: #1e3a5f; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .nav-back { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; font-weight: 600; }
+  .nav-back:hover { color: #fff; }
+  .page { max-width: 1040px; margin: 0 auto; padding: 82px 24px 64px; }
+
+  /* HERO */
+  .hero-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(59,130,246,.1); color: #2563eb; border: 1px solid rgba(59,130,246,.25); margin-bottom: 14px; }
+  h1 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 8px; }
+  .hero-sub { font-size: 12px; color: #94a3b8; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+  .hero-desc { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 32px; max-width: 820px; }
+
+  /* STATS */
+  .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px; }
+  .stat-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 18px; text-align: center; }
+  .stat-n { font-size: 28px; font-weight: 800; color: #0f172a; letter-spacing: -.03em; }
+  .stat-l { font-size: 11px; color: #94a3b8; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-top: 4px; line-height: 1.4; }
+
+  /* SEC LABEL */
+  .sec-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; margin-bottom: 16px; margin-top: 40px; display: flex; align-items: center; gap: 8px; }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: #e2e8f0; }
+  .sec-label:first-of-type { margin-top: 0; }
+
+  /* DEPLOY FRAMEWORK */
+  .deploy-banner { background: #0f172a; border-radius: 14px; padding: 24px 28px; margin-bottom: 28px; }
+  .deploy-kicker { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
+  .deploy-heading { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .deploy-sub { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+
+  /* THREE PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 40px; }
+  .pillar { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 24px 20px; }
+  .pillar-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .pillar-icon { font-size: 22px; }
+  .pillar-title { font-size: 14px; font-weight: 800; color: #0f172a; }
+  .pillar-lead { font-size: 12px; color: #475569; line-height: 1.6; margin-bottom: 14px; }
+  .pillar-list { display: flex; flex-direction: column; gap: 6px; }
+  .pillar-item { font-size: 11px; color: #64748b; display: flex; gap: 7px; line-height: 1.5; }
+  .pillar-item::before { content: '→'; color: #94a3b8; flex-shrink: 0; font-weight: 700; }
+  .p1 { border-top: 3px solid #3b82f6; }
+  .p2 { border-top: 3px solid #8b5cf6; }
+  .p3 { border-top: 3px solid #22c55e; }
+
+  /* PHASE SECTIONS */
+  .phase { margin-bottom: 28px; }
+  .phase-label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 4px 12px; border-radius: 6px; display: inline-block; margin-bottom: 14px; }
+  .phase-intake  .phase-label { background: rgba(59,130,246,.08);  color: #2563eb; }
+  .phase-ops     .phase-label { background: rgba(20,184,166,.08);  color: #0f766e; }
+  .phase-rev     .phase-label { background: rgba(245,158,11,.08);  color: #b45309; }
+  .phase-fin     .phase-label { background: rgba(139,92,246,.08);  color: #7c3aed; }
+
+  /* AGENT CARDS GRID */
+  .agents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .agent-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 18px; display: flex; flex-direction: column; gap: 10px; border-left: 4px solid; }
+  .agent-card.built { border-left-color: #22c55e; }
+  .agent-card.next  { border-left-color: #e2e8f0; }
+  .agent-top { display: flex; align-items: flex-start; gap: 12px; }
+  .agent-emoji { font-size: 24px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+  .agent-meta { flex: 1; }
+  .agent-num-name { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+  .agent-num { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: .1em; }
+  .agent-name { font-size: 14px; font-weight: 800; color: #0f172a; }
+  .agent-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 99px; letter-spacing: .05em; }
+  .badge-built { background: rgba(34,197,94,.1); color: #16a34a; border: 1px solid rgba(34,197,94,.3); }
+  .badge-next  { background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; }
+  .agent-desc { font-size: 12px; color: #475569; line-height: 1.6; }
+  .agent-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; }
+
+  /* FLOW DIAGRAM */
+  .flow-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px; margin-bottom: 36px; }
+  .flow-note { font-size: 12px; color: #64748b; font-style: italic; margin-bottom: 20px; text-align: center; }
+  .flow-row { display: flex; align-items: center; gap: 0; overflow-x: auto; padding-bottom: 4px; }
+  .flow-step { display: flex; flex-direction: column; align-items: center; min-width: 90px; }
+  .flow-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 6px; }
+  .flow-step-label { font-size: 9px; font-weight: 700; text-align: center; color: #475569; line-height: 1.4; letter-spacing: .02em; }
+  .flow-step-sub { font-size: 9px; color: #94a3b8; text-align: center; margin-top: 2px; }
+  .flow-arrow { font-size: 16px; color: #cbd5e1; padding: 0 4px; flex-shrink: 0; margin-bottom: 20px; }
+  .flow-end { display: flex; flex-direction: column; align-items: center; min-width: 70px; }
+  .flow-end-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(34,197,94,.12); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 6px; }
+  .flow-end-label { font-size: 9px; font-weight: 800; color: #16a34a; text-align: center; }
+
+  /* Flow step colors */
+  .fs1 { background: rgba(59,130,246,.1); }
+  .fs2 { background: rgba(139,92,246,.1); }
+  .fs3 { background: rgba(20,184,166,.1); }
+  .fs4 { background: rgba(245,158,11,.1); }
+  .fs5 { background: rgba(239,68,68,.1); }
+  .fs6 { background: rgba(34,197,94,.1); }
+  .fs7 { background: rgba(168,85,247,.1); }
+  .fs8 { background: rgba(30,58,95,.1); }
+
+  /* HUMAN IN LOOP */
+  .hil-box { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%); border-radius: 14px; padding: 28px 32px; }
+  .hil-kicker { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #64748b; margin-bottom: 8px; }
+  .hil-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+  .hil-desc { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.75; max-width: 800px; }
+
+  @media (max-width: 700px) {
+    .stat-row { grid-template-columns: repeat(2,1fr); }
+    .pillars { grid-template-columns: 1fr; }
+    .agents-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="nav-brand" href="/hub"><div class="nav-icon">&#x2695;&#xFE0F;</div>Coastal DME</a>
+  <a class="nav-back" href="/hub">&larr; Back to Hub</a>
+</nav>
+
+<div class="page">
+
+  <div class="hero-tag">Agent Ecosystem</div>
+  <h1>WC Operations — Agent Ecosystem</h1>
+  <p class="hero-sub">Workers&rsquo; Comp &middot; Operations &middot; Agentic AI</p>
+  <p class="hero-desc">Modular, auditable, deployable in your environment — a network of agents orchestrated for end-to-end value chain from referral to payment, with human in the loop.</p>
+
+  <!-- STATS -->
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-n">8</div><div class="stat-l">Value Chain Components</div></div>
+    <div class="stat-card"><div class="stat-n">1</div><div class="stat-l">Built &amp; Live</div></div>
+    <div class="stat-card"><div class="stat-n">3</div><div class="stat-l">Architecture Pillars</div></div>
+    <div class="stat-card"><div class="stat-n">100%</div><div class="stat-l">Client-Owned &amp; Deployable</div></div>
+  </div>
+
+  <!-- FLOW DIAGRAM -->
+  <div class="sec-label">Referral-to-Payment — All 8 Components in Sequence</div>
+  <div class="flow-box">
+    <div class="flow-note">Human in the loop at every flagged exception — agents handle the straight-through path autonomously</div>
+    <div class="flow-row">
+
+      <div class="flow-step">
+        <div class="flow-icon fs1">&#x1F4E0;</div>
+        <div class="flow-step-label">Intake &amp;<br>Referral</div>
+        <div class="flow-step-sub">Multi-channel</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs2">&#x1F4C5;</div>
+        <div class="flow-step-label">Scheduling</div>
+        <div class="flow-step-sub">Coord + appt</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs3">&#x1F4C4;</div>
+        <div class="flow-step-label">Documentation</div>
+        <div class="flow-step-sub">Records + notes</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs4">&#x1F9FE;</div>
+        <div class="flow-step-label">Billing</div>
+        <div class="flow-step-sub">Finalize + submit</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs5">&#x1F4CA;</div>
+        <div class="flow-step-label">Collections</div>
+        <div class="flow-step-sub">AR follow-up</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs6">&#x1F4B3;</div>
+        <div class="flow-step-label">Cash<br>Applications</div>
+        <div class="flow-step-sub">Reconcile + post</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs7">&#x2696;&#xFE0F;</div>
+        <div class="flow-step-label">Appeals</div>
+        <div class="flow-step-sub">Denials + resolve</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-step">
+        <div class="flow-icon fs8">&#x1F3E6;</div>
+        <div class="flow-step-label">Financial<br>Shared Svcs</div>
+        <div class="flow-step-sub">AP + vendor pay</div>
+      </div>
+      <div class="flow-arrow">&#x2192;</div>
+
+      <div class="flow-end">
+        <div class="flow-end-icon">&#x2705;</div>
+        <div class="flow-end-label">Closed<br>Paid + Archived</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DEPLOY FRAMEWORK -->
+  <div class="sec-label">Client Deployment Framework</div>
+  <div class="deploy-banner">
+    <div class="deploy-kicker">Build Principles — How Agents Are Deployed in Your Environment</div>
+    <div class="deploy-heading">Every agent is built to be owned, audited, and operated by the client — not a black box</div>
+    <div class="deploy-sub">Agents run in your cloud, using your credentials, your LLM contract, and your data stores. No shared infrastructure. PHI never leaves your environment.</div>
+  </div>
+
+  <!-- THREE PILLARS -->
+  <div class="pillars">
+
+    <div class="pillar p1">
+      <div class="pillar-head">
+        <div class="pillar-icon">&#x1F9E9;</div>
+        <div class="pillar-title">Modular</div>
+      </div>
+      <div class="pillar-lead">Each agent operates as a standalone, independently deployable module with defined inputs, outputs, and handoffs. Swap, extend, or replace any module without touching the rest.</div>
+      <div class="pillar-list">
+        <div class="pillar-item">One agent per business function</div>
+        <div class="pillar-item">Standardized input / output contracts</div>
+        <div class="pillar-item">Configurable rules per carrier or state</div>
+        <div class="pillar-item">Add agents incrementally — no big bang</div>
+        <div class="pillar-item">Plug into existing workflows via API or file</div>
+      </div>
+    </div>
+
+    <div class="pillar p2">
+      <div class="pillar-head">
+        <div class="pillar-icon">&#x1F50D;</div>
+        <div class="pillar-title">Auditable</div>
+      </div>
+      <div class="pillar-lead">Every decision is logged, explainable, and traceable. Complete visibility into what the agent read, extracted, and why it acted.</div>
+      <div class="pillar-list">
+        <div class="pillar-item">Full decision log per episode</div>
+        <div class="pillar-item">Source attribution — which doc, which field</div>
+        <div class="pillar-item">Human override at every stage</div>
+        <div class="pillar-item">Immutable audit trail for regulators</div>
+        <div class="pillar-item">Confidence scores on extracted fields</div>
+      </div>
+    </div>
+
+    <div class="pillar p3">
+      <div class="pillar-head">
+        <div class="pillar-icon">&#x1F3D7;&#xFE0F;</div>
+        <div class="pillar-title">Deployable in Your Environment</div>
+      </div>
+      <div class="pillar-lead">Agents run in your cloud, using your credentials, your LLM contract, and your data stores. No shared infrastructure; PHI never leaves your environment.</div>
+      <div class="pillar-list">
+        <div class="pillar-item">Deploys to AWS, Azure, or GCP</div>
+        <div class="pillar-item">Uses your OpenAI / Azure OpenAI contract</div>
+        <div class="pillar-item">Integrates with your claims system via API</div>
+        <div class="pillar-item">HIPAA-compliant data residency</div>
+        <div class="pillar-item">Client owns all code, data, and models</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- AGENTS BY PHASE -->
+  <div class="sec-label">Full Agent Ecosystem — End-to-End WC Operations</div>
+
+  <!-- PHASE 1: INTAKE & SCHEDULING -->
+  <div class="phase phase-intake">
+    <div class="phase-label">Intake &amp; Scheduling Phase</div>
+    <div class="agents-grid">
+
+      <div class="agent-card built">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F4E0;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 01</span>
+              <span class="agent-name">Intake &amp; Referral Management</span>
+              <span class="agent-badge badge-built">&#x2713; Built &amp; Live</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Multi-channel referral receipt — fax, voice, and portal. AI extraction of 25 structured fields, ICD-10 validation against CMS knowledge graph, completeness check, gap detection and outreach to case manager, and clean route-ready episode dispatched to scheduling.</div>
+        <div class="agent-chips">
+          <span class="chip">Multi-Channel</span>
+          <span class="chip">Validation</span>
+          <span class="chip">Triage</span>
+          <span class="chip">Route to Scheduling</span>
+        </div>
+      </div>
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F4C5;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 02</span>
+              <span class="agent-name">Scheduling &amp; Care Coordination</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Confirm worker preferences, coordinate provider options, manage appointment scheduling, and ensure documentation completion before the visit. Handles rescheduling, confirmation outreach, and transport coordination.</div>
+        <div class="agent-chips">
+          <span class="chip">Preferences</span>
+          <span class="chip">Appt Mgmt</span>
+          <span class="chip">Doc Completion</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 2: OPERATIONS -->
+  <div class="phase phase-ops">
+    <div class="phase-label">Operations Phase</div>
+    <div class="agents-grid">
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F4C4;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 03</span>
+              <span class="agent-name">Documentation &amp; Record Management</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Processes incoming documents throughout the episode lifecycle — updates episode records, manages prescription changes, clinical note revisions, and maintains a complete audit trail of every document version and change event.</div>
+        <div class="agent-chips">
+          <span class="chip">Doc Intake</span>
+          <span class="chip">Record Updates</span>
+          <span class="chip">Change Mgmt</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 3: REVENUE CYCLE -->
+  <div class="phase phase-rev">
+    <div class="phase-label">Revenue Cycle Phase</div>
+    <div class="agents-grid">
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F9FE;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 04</span>
+              <span class="agent-name">Provider Billing Processing</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Finalizes billing to insurers by generating claims directly from the completed episode record. Submits to payer, tracks claim status, and flags discrepancies for review. No manual re-keying — the episode record is the claim source of truth.</div>
+        <div class="agent-chips">
+          <span class="chip">Claim Generate</span>
+          <span class="chip">Insurer Submit</span>
+          <span class="chip">Status Track</span>
+        </div>
+      </div>
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F4CA;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 05</span>
+              <span class="agent-name">Collections</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Research and follow up for payment with insurers. Tracks aging AR, identifies stalled claims, coordinates resubmission workflows, and escalates to human specialists when payer response is non-standard or contested.</div>
+        <div class="agent-chips">
+          <span class="chip">AR Tracking</span>
+          <span class="chip">Follow-Up</span>
+          <span class="chip">Resubmission</span>
+        </div>
+      </div>
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F4B3;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 06</span>
+              <span class="agent-name">Cash Applications</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Research and resolution to ensure payments are reconciled — processes Electronic Remittance Advices (ERAs) and auto-posts to accounts. Every dollar received is matched, reconciled, and posted without manual intervention.</div>
+        <div class="agent-chips">
+          <span class="chip">ERA Process</span>
+          <span class="chip">Reconciliation</span>
+          <span class="chip">Auto-Post</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PHASE 4: RESOLUTION & FINANCE -->
+  <div class="phase phase-fin">
+    <div class="phase-label">Resolution &amp; Finance Phase</div>
+    <div class="agents-grid">
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x2696;&#xFE0F;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 07</span>
+              <span class="agent-name">Appeals &amp; Denials Management</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Manages denial review, builds appeal packages with supporting documentation, tracks submission deadlines, and escalates unresolved denials that require clinical or legal judgment.</div>
+        <div class="agent-chips">
+          <span class="chip">Denial Review</span>
+          <span class="chip">Appeal Packages</span>
+          <span class="chip">Deadline Track</span>
+        </div>
+      </div>
+
+      <div class="agent-card next">
+        <div class="agent-top">
+          <div class="agent-emoji">&#x1F3E6;</div>
+          <div class="agent-meta">
+            <div class="agent-num-name">
+              <span class="agent-num">AGENT 08</span>
+              <span class="agent-name">Financial Shared Services &amp; AP</span>
+              <span class="agent-badge badge-next">Next</span>
+            </div>
+          </div>
+        </div>
+        <div class="agent-desc">Manages accounts payable, vendor payments, and shared financial operations across the revenue cycle. Ensures vendors are paid accurately and on time, and provides consolidated financial visibility across all episodes and payers.</div>
+        <div class="agent-chips">
+          <span class="chip">Vendor Payments</span>
+          <span class="chip">AP Processing</span>
+          <span class="chip">Financial Ops</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- HUMAN IN LOOP -->
+  <div class="hil-box">
+    <div class="hil-kicker">Human in the Loop</div>
+    <div class="hil-title">Agents handle the straight-through path. Humans decide at every flagged exception.</div>
+    <div class="hil-desc">Routine processing — extraction, validation, outreach, posting, reconciliation — runs autonomously. Human review is triggered at every flagged exception: ICD conflicts above a confidence threshold, denials requiring clinical judgment, appeals needing legal review, payer disputes that require negotiation. The agent escalates with full context and a recommended action. The human decides. That boundary is explicit, logged, and configurable per your clinical and compliance requirements. You set the thresholds. The agent respects them.</div>
+  </div>
+
+</div>
+</body>
+</html>

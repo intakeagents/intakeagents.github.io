@@ -320,6 +320,11 @@ def require_login():
 
 @app.route("/")
 def index():
+    return redirect(url_for("hub"))
+
+
+@app.route("/demo")
+def demo():
     return render_template("demo.html")
 
 
@@ -361,6 +366,16 @@ def panel_deploy():
 @app.route("/panel/enterprise")
 def panel_enterprise():
     return render_template("panel_enterprise.html")
+
+
+@app.route("/panel/kg")
+def panel_kg():
+    return render_template("panel_kg.html")
+
+
+@app.route("/panel/ecosystem")
+def panel_ecosystem():
+    return render_template("panel_ecosystem.html")
 
 
 @app.route("/referrals/<claim>/<filename>")
