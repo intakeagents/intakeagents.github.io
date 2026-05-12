@@ -79,6 +79,25 @@ html = html.replace(
   }, 2200);
 }"""
 )
+
+# fix PDF doc links to serve from docs/pdfs/
+html = html.replace('"1_referral_form.pdf"',  '"pdfs/1_referral_form.pdf"')
+html = html.replace('"2_clinical_notes.pdf"', '"pdfs/2_clinical_notes.pdf"')
+html = html.replace('"3_prescription.pdf"',   '"pdfs/3_prescription.pdf"')
+# fix doc-name text + add View PDF links
+html = html.replace(
+    '>1_referral_form.pdf<',
+    '><a href="pdfs/1_referral_form.pdf" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none">&#x1F4C4; Referral Form — View PDF &rarr;</a><'
+)
+html = html.replace(
+    '>2_clinical_notes.pdf<',
+    '><a href="pdfs/2_clinical_notes.pdf" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none">&#x1F4CB; Clinical Notes — View PDF &rarr;</a><'
+)
+html = html.replace(
+    '>3_prescription.pdf<',
+    '><a href="pdfs/3_prescription.pdf" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none">&#x1F48A; Prescription — View PDF &rarr;</a><'
+)
+
 (DOCS / "pipeline.html").write_text(html, encoding="utf-8")
 print("  → docs/pipeline.html")
 
@@ -127,20 +146,22 @@ for p in panels:
 print("Building static demo.html ...")
 
 REFERRALS = [
-    # voice rows (green) come in early
-    {"claim":"WC-2026-084405","patient":"Teresa Nguyen",    "equip":"TENS Unit",          "hcpcs":"E0730","ch":"voice","gaps":1,"pri":"MED", "why":"Chronic pain management — stable, non-urgent; auth ref missing"},
-    {"claim":"WC-2026-084412","patient":"Carlos Rivera",    "equip":"Knee Brace",         "hcpcs":"L1820","ch":"voice","gaps":2,"pri":"HIGH","why":"Post-op ACL repair, weight-bearing restricted; appt window and auth ref missing"},
-    {"claim":"WC-2026-084419","patient":"Sandra Mitchell",  "equip":"Lumbar Orthosis",    "hcpcs":"L0631","ch":"voice","gaps":3,"pri":"HIGH","why":"Acute lumbar fracture, pain 8/10; auth ref, appt window, and transport all missing"},
+    # HOLLOWAY first — featured, clickable
+    {"claim":"WC-2026-084431","patient":"James Holloway",   "equip":"Rollator Walker",    "hcpcs":"E0143","ch":"fax",  "gaps":3,"pri":"HIGH","why":"Post-surgical ACL reconstruction, unsafe ambulation, pain 9/10; ICD conflict + bariatric flag (285 lbs)","featured":True},
+    # voice rows — all clickable
+    {"claim":"WC-2026-084405","patient":"Teresa Nguyen",    "equip":"TENS Unit",          "hcpcs":"E0730","ch":"voice","gaps":1,"pri":"MED", "why":"Chronic pain management — stable, non-urgent; auth ref missing","clickable":True},
+    {"claim":"WC-2026-084412","patient":"Carlos Rivera",    "equip":"Knee Brace",         "hcpcs":"L1820","ch":"voice","gaps":2,"pri":"HIGH","why":"Post-op ACL repair, weight-bearing restricted; appt window and auth ref missing","clickable":True},
+    {"claim":"WC-2026-084419","patient":"Sandra Mitchell",  "equip":"Lumbar Orthosis",    "hcpcs":"L0631","ch":"voice","gaps":3,"pri":"HIGH","why":"Acute lumbar fracture, pain 8/10; auth ref, appt window, and transport all missing","clickable":True},
     # fax rows
     {"claim":"WC-2026-084420","patient":"Robert Chen",      "equip":"Wheelchair — K0001", "hcpcs":"K0001","ch":"fax",  "gaps":0,"pri":"MED", "why":"Lower limb injury, ambulatory with assistance; all fields confirmed"},
     {"claim":"WC-2026-084421","patient":"Maria Garcia",     "equip":"Hospital Bed",       "hcpcs":"E0250","ch":"fax",  "gaps":2,"pri":"MED", "why":"Post-surgical recovery at home; delivery address and auth ref pending"},
     {"claim":"WC-2026-084422","patient":"David Kim",        "equip":"CPAP Machine",       "hcpcs":"E0601","ch":"fax",  "gaps":0,"pri":"LOW", "why":"Sleep apnea — non-urgent; all fields confirmed, routine dispatch"},
-    {"claim":"WC-2026-084423","patient":"Lisa Thompson",    "equip":"Prosthetic Foot",    "hcpcs":"L5100","ch":"fax",  "gaps":1,"pri":"HIGH","why":"Below-knee amputation, mobility compromised; auth ref outstanding"},
+    {"claim":"WC-2026-084423","patient":"Lisa Thompson",    "equip":"Prosthetic Foot",    "hcpcs":"L5100","ch":"fax",  "gaps":1,"pri":"HIGH","why":"Below-knee amputation, mobility compromised; auth ref outstanding","clickable":True},
     {"claim":"WC-2026-084424","patient":"James Wilson",     "equip":"Forearm Crutches",   "hcpcs":"E0110","ch":"fax",  "gaps":0,"pri":"LOW", "why":"Ankle sprain — temporary aid; all fields confirmed"},
     {"claim":"WC-2026-084425","patient":"Patricia Moore",   "equip":"Compression Pump",   "hcpcs":"E0650","ch":"fax",  "gaps":3,"pri":"MED", "why":"Lymphedema management; auth ref, appt window, and transport missing"},
     {"claim":"WC-2026-084426","patient":"Michael Brown",    "equip":"TENS Unit",          "hcpcs":"E0730","ch":"fax",  "gaps":1,"pri":"MED", "why":"Chronic back pain — stable; transportation confirmation pending"},
     {"claim":"WC-2026-084427","patient":"Jennifer Davis",   "equip":"Ankle Orthosis",     "hcpcs":"L1902","ch":"fax",  "gaps":0,"pri":"LOW", "why":"Ankle ligament sprain; all fields confirmed, routine dispatch"},
-    {"claim":"WC-2026-084428","patient":"William Martinez", "equip":"Power Wheelchair",   "hcpcs":"K0823","ch":"fax",  "gaps":2,"pri":"HIGH","why":"Spinal cord injury, non-ambulatory; auth ref and appt window missing"},
+    {"claim":"WC-2026-084428","patient":"William Martinez", "equip":"Power Wheelchair",   "hcpcs":"K0823","ch":"fax",  "gaps":2,"pri":"HIGH","why":"Spinal cord injury, non-ambulatory; auth ref and appt window missing","clickable":True},
     {"claim":"WC-2026-084429","patient":"Barbara Anderson", "equip":"Nebulizer",          "hcpcs":"E0570","ch":"fax",  "gaps":1,"pri":"MED", "why":"Occupational asthma; delivery address needs confirmation"},
     {"claim":"WC-2026-084430","patient":"Richard Taylor",   "equip":"Hospital Bed Rail",  "hcpcs":"E0305","ch":"fax",  "gaps":0,"pri":"LOW", "why":"Fall prevention aid; all fields confirmed, routine dispatch"},
     # HOLLOWAY — featured row
@@ -373,14 +394,15 @@ function updateQueueRow(r, status) {
   if (!tr) return;
 
   const isHolloway = r.featured;
+  const isClickable = isHolloway || r.clickable;
   if (status === 'processing') {
     tr.className = 'processing' + (isHolloway ? ' holloway' : '');
   } else if (status === 'routed') {
-    tr.className = 'routed' + (isHolloway ? ' holloway-done' : '');
-    if (isHolloway) tr.setAttribute('onclick', 'location.href="pipeline.html"');
+    tr.className = 'routed' + (isClickable ? ' holloway-done' : '');
+    if (isClickable) tr.setAttribute('onclick', 'location.href="pipeline.html"');
   } else if (status === 'gaps') {
-    tr.className = 'gaps' + (isHolloway ? ' holloway-done' : '');
-    if (isHolloway) tr.setAttribute('onclick', 'location.href="pipeline.html"');
+    tr.className = 'gaps' + (isClickable ? ' holloway-done' : '');
+    if (isClickable) tr.setAttribute('onclick', 'location.href="pipeline.html"');
   }
 
   const stCell = tr.querySelector('.status-cell');
