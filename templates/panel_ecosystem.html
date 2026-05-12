@@ -451,6 +451,57 @@
   </div>
 
 
+  <!-- INTEGRATION ARCHITECTURE -->
+  <div style="margin-bottom:28px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b;margin-bottom:6px">Integration Architecture</div>
+    <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:4px">How agents connect to your systems</div>
+    <div style="font-size:13px;color:#475569;margin-bottom:20px">Agents read from and write to your existing intake, scheduling, and billing platforms — no rip-and-replace required.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
+      <!-- Intake / Case Mgmt -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:20px">📋</span>
+          <span style="font-size:13px;font-weight:800;color:#0f172a">Intake / Case Management</span>
+        </div>
+        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Brightree, WellSky, Kareo, or your internal system</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#2563eb;font-weight:700;flex-shrink:0">Read</span>Pull existing referral data — no re-keying</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#16a34a;font-weight:700;flex-shrink:0">Write</span>Push completed episode record when routed</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#d97706;font-weight:700;flex-shrink:0">Update</span>Log gaps, outreach events, status changes in real time</div>
+        </div>
+      </div>
+      <!-- Scheduling -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:20px">📅</span>
+          <span style="font-size:13px;font-weight:800;color:#0f172a">Scheduling System</span>
+        </div>
+        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Dispatch, vendor scheduling, or calendar platform</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#2563eb;font-weight:700;flex-shrink:0">Read</span>Check available windows before routing</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#16a34a;font-weight:700;flex-shrink:0">Write</span>Create appointment hold when episode is route-ready</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#d97706;font-weight:700;flex-shrink:0">Update</span>Confirm or release hold after case manager response</div>
+        </div>
+      </div>
+      <!-- Integration Method -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+          <span style="font-size:20px">🔌</span>
+          <span style="font-size:13px;font-weight:800;color:#0f172a">Integration Method</span>
+        </div>
+        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Depends on your platform's capabilities</div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">API</span>Preferred — direct integration via REST/FHIR endpoints</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">RPA</span>Fallback for legacy systems with no API layer</div>
+          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">File</span>Flat file / HL7 export for closed platforms</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 18px;font-size:12px;color:#166534">
+      <strong>Key question for your team:</strong> Does your intake system expose an API? Most modern platforms (Brightree, WellSky) do — that's a direct 2-week integration. Legacy or closed systems use RPA as a bridge. Either way, the agent architecture doesn't change — only the output destination.
+    </div>
+  </div>
+
   <!-- HUMAN IN LOOP -->
   <div class="hil-box">
     <div class="hil-kicker">Human in the Loop</div>
