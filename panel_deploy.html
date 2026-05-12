@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Production Deployment — Coastal DME Intake Agent</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+  .top-nav { position: fixed; top: 0; left: 0; right: 0; height: 54px; background: #1e3a5f; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.18); }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 15px; font-weight: 700; text-decoration: none; }
+  .nav-icon { width: 32px; height: 32px; background: rgba(255,255,255,.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+  .nav-back { color: rgba(255,255,255,.7); font-size: 13px; text-decoration: none; font-weight: 600; }
+  .nav-back:hover { color: #fff; }
+  .page { max-width: 1000px; margin: 0 auto; padding: 82px 24px 48px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; background: rgba(139,92,246,.1); color: #7c3aed; border: 1px solid rgba(139,92,246,.25); margin-bottom: 14px; }
+  h1 { font-size: clamp(20px, 2.8vw, 32px); font-weight: 800; color: #0f172a; line-height: 1.2; letter-spacing: -.02em; margin-bottom: 10px; }
+  .sub { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 36px; }
+
+  /* 3 PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 36px; border: 1px solid #e2e8f0; border-radius: 14px; overflow: hidden; }
+  .pillar { padding: 28px 24px; border-right: 1px solid #e2e8f0; background: #fff; }
+  .pillar:last-child { border-right: none; }
+  .pillar-num { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .p1 .pillar-num { color: #3b82f6; }
+  .p2 .pillar-num { color: #8b5cf6; }
+  .p3 .pillar-num { color: #22c55e; }
+  .pillar-icon { font-size: 28px; margin-bottom: 10px; }
+  .pillar-title { font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 10px; line-height: 1.3; }
+  .pillar-desc { font-size: 13px; color: #64748b; line-height: 1.6; margin-bottom: 14px; }
+  .pillar ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .pillar ul li { font-size: 12px; color: #475569; display: flex; gap: 8px; line-height: 1.45; }
+  .pillar ul li::before { content: '→'; flex-shrink: 0; font-weight: 700; }
+  .p1 ul li::before { color: #3b82f6; }
+  .p2 ul li::before { color: #8b5cf6; }
+  .p3 ul li::before { color: #22c55e; }
+
+  /* TIMELINE */
+  .timeline-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 28px 24px; margin-bottom: 28px; }
+  .timeline-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 20px; }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .timeline::before { content: ''; position: absolute; top: 20px; left: 10%; right: 10%; height: 2px; background: linear-gradient(to right, #3b82f6, #8b5cf6, #14b8a6, #22c55e); z-index: 0; }
+  .tl-item { text-align: center; position: relative; z-index: 1; }
+  .tl-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #fff; margin: 0 auto 12px; }
+  .tl-item:nth-child(1) .tl-dot { background: #3b82f6; }
+  .tl-item:nth-child(2) .tl-dot { background: #8b5cf6; }
+  .tl-item:nth-child(3) .tl-dot { background: #14b8a6; }
+  .tl-item:nth-child(4) .tl-dot { background: #22c55e; }
+  .tl-weeks { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 4px; }
+  .tl-label { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+  .tl-items { font-size: 11px; color: #64748b; line-height: 1.6; }
+
+  /* WHAT WE BUILT SUMMARY */
+  .built-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 28px; }
+  .built-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 16px; display: flex; gap: 12px; }
+  .built-icon { font-size: 22px; flex-shrink: 0; }
+  .built-title { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+  .built-desc { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(135deg, #1e3a5f, #1e40af); border-radius: 14px; padding: 28px 32px; display: flex; align-items: center; gap: 24px; color: #fff; }
+  .cta-text h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  .cta-text p { font-size: 13px; color: rgba(255,255,255,.75); line-height: 1.5; }
+  .cta-btn { flex-shrink: 0; background: #fff; color: #1e3a5f; border: none; border-radius: 10px; padding: 12px 24px; font-size: 13px; font-weight: 800; cursor: pointer; text-decoration: none; white-space: nowrap; }
+  .cta-btn:hover { background: #e0f2fe; }
+
+  @media (max-width: 700px) {
+    .pillars { grid-template-columns: 1fr; }
+    .pillar { border-right: none; border-bottom: 1px solid #e2e8f0; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .timeline::before { display: none; }
+    .built-grid { grid-template-columns: 1fr; }
+    .cta-box { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a class="nav-brand" href="index.html"><div class="nav-icon">&#x1F4CB;</div>Coastal DME</a>
+  <a class="nav-back" href="index.html">&larr; Back to Hub</a>
+</nav>
+
+<div class="page">
+  <div class="tag">Deployment</div>
+  <h1>Production Deployment</h1>
+  <p class="sub">What we built, how we deploy it in your environment, and how it gets smarter with your data — the complete story for your technology leader.</p>
+
+  <!-- 3 PILLARS -->
+  <div class="pillars">
+    <div class="pillar p1">
+      <div class="pillar-num">01 — What We Built</div>
+      <div class="pillar-icon">&#x1F9E9;</div>
+      <div class="pillar-title">A Modular Agent Network</div>
+      <div class="pillar-desc">Purpose-built for DME referral intake — every component auditable, every decision traceable.</div>
+      <ul>
+        <li>AI extraction across fax, voice, and portal channels</li>
+        <li>OWL knowledge graph — 24 deterministic CMS rules</li>
+        <li>Four-layer hallucination defense — no guessing on clinical decisions</li>
+        <li>Automated email + voice outreach via LLM + AI voice agent</li>
+        <li>Full audit trail — every decision with reasoning and confidence score</li>
+        <li>75 referrals in 60 seconds at $0.032/referral</li>
+      </ul>
+    </div>
+    <div class="pillar p2">
+      <div class="pillar-num">02 — How We Deploy It</div>
+      <div class="pillar-icon">&#x1F680;</div>
+      <div class="pillar-title">In Your Environment</div>
+      <div class="pillar-desc">Containerized Python — runs on your infrastructure, your cloud, or ours. 8–12 weeks from kickoff to go-live.</div>
+      <ul>
+        <li>Connects to your fax gateway, intake portal, or case management system</li>
+        <li>API or file-based integration — no rip-and-replace</li>
+        <li>LLM provider BAA available — PHI never leaves your boundary</li>
+        <li>HIPAA-compliant deployment — data retention policies configurable</li>
+        <li>Your team receives full source code, audit logs, and runbooks</li>
+        <li>Dedicated support through pilot and go-live</li>
+      </ul>
+    </div>
+    <div class="pillar p3">
+      <div class="pillar-num">03 — How It Gets Smarter</div>
+      <div class="pillar-icon">&#x1F4C8;</div>
+      <div class="pillar-title">With Your Data</div>
+      <div class="pillar-desc">Every processed episode is a signal. The agent learns your payers, your patterns, your edge cases.</div>
+      <ul>
+        <li>ICD patterns tuned to your most common payer combinations</li>
+        <li>Knowledge graph extended with your carrier-specific rules</li>
+        <li>Confidence thresholds calibrated to your escalation tolerance</li>
+        <li>Month 3+: accuracy improves as it learns your referral patterns</li>
+        <li>New payer rules added without code changes — KG config update only</li>
+        <li>Feedback loop from human review queue feeds next-cycle improvement</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- WHAT WE BUILT SUMMARY -->
+  <div class="built-grid">
+    <div class="built-card">
+      <div class="built-icon">&#x1F4CB;</div>
+      <div>
+        <div class="built-title">25-Field Episode Record</div>
+        <div class="built-desc">Patient, claim, ICD-10, HCPCS, physician, adjuster, delivery address, auth ref, transportation, language — structured and validated on every referral.</div>
+      </div>
+    </div>
+    <div class="built-card">
+      <div class="built-icon">&#x1F9E0;</div>
+      <div>
+        <div class="built-title">Large Language Model + OWL KG</div>
+        <div class="built-desc">AI handles extraction and clinical reasoning. Knowledge graph handles deterministic CMS compliance. Neither alone is sufficient — together they're deployable.</div>
+      </div>
+    </div>
+    <div class="built-card">
+      <div class="built-icon">&#x1F4DE;</div>
+      <div>
+        <div class="built-title">Live Voice Intake + Outreach</div>
+        <div class="built-desc">AI voice agent answers the intake line 24/7. Outbound calls auto-triggered after 24hrs with no email response. 84-second average call, full transcript logged.</div>
+      </div>
+    </div>
+    <div class="built-card">
+      <div class="built-icon">&#x1F6E1;&#xFE0F;</div>
+      <div>
+        <div class="built-title">Four-Layer Hallucination Defense</div>
+        <div class="built-desc">Document cross-reference → KG validation → confidence threshold → human gate. When confidence drops below 80%, the agent stops and routes to a specialist.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-box">
+    <div class="timeline-title">8–12 Week Deployment Timeline</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-weeks">Weeks 1–2</div>
+        <div class="tl-label">Integration Discovery</div>
+        <div class="tl-items">Fax gateway mapping<br>Case mgmt API review<br>PHI boundary design<br>Payer rule inventory</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-weeks">Weeks 3–5</div>
+        <div class="tl-label">Environment Setup</div>
+        <div class="tl-items">Infra provisioning<br>API connectivity<br>BAA + HIPAA config<br>KG rule customization</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-weeks">Weeks 6–8</div>
+        <div class="tl-label">Testing &amp; Validation</div>
+        <div class="tl-items">Real referral testing<br>ICD accuracy review<br>Escalation tuning<br>Staff training</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-weeks">Weeks 9–12</div>
+        <div class="tl-label">Pilot &amp; Go-Live</div>
+        <div class="tl-items">Shadow mode pilot<br>Live processing<br>Monitoring setup<br>Handoff + runbooks</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <div class="cta-text">
+      <h3>Ready to see it running on your referrals?</h3>
+      <p>We can run a proof-of-concept on a sample of your actual intake packages in 48 hours — no integration required, no PHI shared.</p>
+    </div>
+    <a class="cta-btn" href="/">Launch Demo &rarr;</a>
+  </div>
+</div>
+</body>
+</html>

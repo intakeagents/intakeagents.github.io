@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coastal DME — Intake Agent Platform</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8fafc;
+    color: #1e293b;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 24px 48px;
+  }
+  /* NAV */
+  .top-nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 54px;
+    background: #1e3a5f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.18);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    color: #fff; font-size: 15px; font-weight: 700; letter-spacing: .01em;
+    text-decoration: none;
+  }
+  .nav-icon {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+  }
+  .nav-tag {
+    font-size: 10px;
+    background: rgba(255,255,255,.15);
+    padding: 2px 8px; border-radius: 10px;
+    font-weight: 600; letter-spacing: .04em;
+  }
+  .nav-right {
+    color: rgba(255,255,255,.6);
+    font-size: 12px;
+    letter-spacing: .04em;
+  }
+  /* HERO */
+  .hero {
+    margin-top: 68px;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #e0f2fe;
+    border: 1px solid #bae6fd;
+    color: #0369a1;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 3px 12px; border-radius: 99px;
+    margin-bottom: 8px;
+  }
+  .hero h1 {
+    font-size: clamp(17px, 2vw, 22px);
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    letter-spacing: -.02em;
+  }
+  .hero p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+  /* SECTION LABEL */
+  .section-label {
+    width: 100%;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: #94a3b8;
+    margin-bottom: 8px; margin-top: 4px;
+    padding-left: 2px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after {
+    content: ''; flex: 1;
+    height: 1px; background: #e2e8f0;
+  }
+  /* MAIN LAYOUT */
+  .hub-layout {
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 14px;
+    max-width: 1060px;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 14px;
+  }
+  .hub-left {
+    display: flex;
+    flex-direction: column;
+  }
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+  }
+  /* CARD */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 14px 12px;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column; gap: 5px;
+    transition: transform .15s, box-shadow .15s, border-color .15s;
+    border-left: 4px solid transparent;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0,0,0,.09);
+    border-color: #cbd5e1;
+  }
+  .card.c-blue  { border-left-color: #3b82f6; }
+  .card.c-green { border-left-color: #22c55e; }
+  .card.c-amber { border-left-color: #f59e0b; }
+  .card.c-purple{ border-left-color: #8b5cf6; }
+  .card.c-teal  { border-left-color: #14b8a6; }
+  .card.c-rose  { border-left-color: #f43f5e; }
+  .card.c-navy  { border-left-color: #1e3a5f; }
+  /* DEMO CARD */
+  .card.demo-card {
+    background: linear-gradient(160deg, #1e3a5f 0%, #1e40af 100%);
+    border: none;
+    border-left: none;
+    color: #fff;
+  }
+  .card.demo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(30,58,95,.35);
+    border-color: transparent;
+  }
+  .card.demo-card .card-title { color: #fff; }
+  .card.demo-card .card-desc  { color: rgba(255,255,255,.75); }
+  .card.demo-card .card-arrow { color: rgba(255,255,255,.8); }
+  /* TALL DEMO CARD (right column) */
+  .hub-demo {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 36px 22px;
+    border-radius: 16px;
+  }
+  .hub-demo .card-icon { font-size: 40px; margin-bottom: 8px; }
+  .hub-demo .card-title { font-size: 17px; }
+  .hub-demo .card-desc { font-size: 13px; max-width: 180px; margin: 0 auto; }
+  .hub-demo .card-arrow { font-size: 15px; margin-top: 16px; }
+  /* TAG */
+  .tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 2px 9px; border-radius: 99px;
+    width: fit-content;
+  }
+  .tag-blue   { background: rgba(59,130,246,.1);  color: #2563eb;  border: 1px solid rgba(59,130,246,.25);  }
+  .tag-green  { background: rgba(34,197,94,.1);   color: #16a34a;  border: 1px solid rgba(34,197,94,.25);   }
+  .tag-amber  { background: rgba(245,158,11,.1);  color: #d97706;  border: 1px solid rgba(245,158,11,.25);  }
+  .tag-purple { background: rgba(139,92,246,.1);  color: #7c3aed;  border: 1px solid rgba(139,92,246,.25);  }
+  .tag-teal   { background: rgba(20,184,166,.1);  color: #0f766e;  border: 1px solid rgba(20,184,166,.25);  }
+  .tag-rose   { background: rgba(244,63,94,.1);   color: #e11d48;  border: 1px solid rgba(244,63,94,.25);   }
+  .tag-navy   { background: rgba(30,58,95,.1);    color: #1e3a5f;  border: 1px solid rgba(30,58,95,.25);    }
+  .tag-white  { background: rgba(255,255,255,.15); color: #fff;    border: 1px solid rgba(255,255,255,.3);  }
+  /* CARD CONTENT */
+  .card-icon  { font-size: 20px; line-height: 1; margin-bottom: 0; }
+  .card-title { font-size: 13px; font-weight: 700; color: #0f172a; line-height: 1.3; }
+  .card-desc  { font-size: 11px; color: #64748b; line-height: 1.5; flex: 1; }
+  .card-arrow { font-size: 11px; color: #94a3b8; margin-top: 2px; font-weight: 600; }
+  /* STATS ROW */
+  .stats-row {
+    display: flex; gap: 32px;
+    max-width: 1060px; width: 100%;
+    margin-top: 36px; margin-bottom: 8px;
+    padding: 18px 28px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    justify-content: space-around;
+  }
+  .stat { text-align: center; }
+  .stat-n { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -.03em; }
+  .stat-l { font-size: 11px; color: #94a3b8; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-top: 2px; }
+  /* FLOW STRIP */
+  .flow-strip { background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 18px 24px 16px; width: 100%; max-width: 1060px; margin-bottom: 0; overflow: hidden; }
+  .flow-strip-note { font-size: 11px; color: #94a3b8; font-style: italic; text-align: center; margin-bottom: 14px; }
+  .flow-strip-row { display: flex; align-items: flex-start; gap: 0; overflow-x: auto; padding-bottom: 2px; justify-content: space-between; }
+  .fs-step { display: flex; flex-direction: column; align-items: center; min-width: 80px; flex: 1; }
+  .fs-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 6px; transition: transform .15s; }
+  .fs-step.active .fs-icon { transform: scale(1.1); box-shadow: 0 4px 12px rgba(59,130,246,.25); }
+  .fs-name { font-size: 11px; font-weight: 700; text-align: center; color: #64748b; line-height: 1.3; }
+  .fs-step.active .fs-name { color: #1e3a5f; font-weight: 800; }
+  .fs-sub { font-size: 10px; color: #94a3b8; text-align: center; margin-top: 2px; line-height: 1.3; }
+  .fs-step.active .fs-sub { color: #3b82f6; font-weight: 600; }
+  .fs-badge { font-size: 9px; font-weight: 800; padding: 2px 7px; border-radius: 99px; background: rgba(34,197,94,.12); color: #16a34a; border: 1px solid rgba(34,197,94,.3); margin-top: 4px; letter-spacing: .04em; text-transform: uppercase; }
+  .fs-arrow { font-size: 14px; color: #cbd5e1; padding: 0 2px; margin-bottom: 28px; flex-shrink: 0; }
+  .fs-step.dim .fs-icon { opacity: .45; }
+  .fs-step.dim .fs-name { color: #94a3b8; font-weight: 600; }
+  .fs-step.dim .fs-sub  { color: #cbd5e1; }
+  /* FOOTER */
+  .footer {
+    margin-top: 48px;
+    font-size: 12px; color: #94a3b8;
+    text-align: center; letter-spacing: .03em;
+  }
+  .footer strong { color: #64748b; }
+  @media (max-width: 800px) {
+    .hub-layout { grid-template-columns: 1fr; }
+    .hub-demo { min-height: 180px; justify-content: flex-start; text-align: left; }
+  }
+  @media (max-width: 520px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a class="nav-brand" href="index.html">
+    <div class="nav-icon">&#x1F4CB;</div>
+    Coastal DME
+    <span class="nav-tag">Intake Agent Platform</span>
+  </a>
+  <div class="nav-right">Workers&rsquo; Comp &middot; DME Referral Intelligence</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">Workers&rsquo; Comp &middot; AI Agent Platform</div>
+  <h1>Making Intake &amp; Referral Management an Advantage</h1>
+  <p>Delivering Experience, Speed &amp; Agility &mdash; autonomous, digital, clean route-ready episodes with human in the loop.</p>
+</div>
+
+<!-- FLOW STRIP -->
+<div class="flow-strip">
+  <div class="flow-strip-note">Referral-to-Payment &mdash; All 8 Components in Sequence &middot; Human in the loop at every flagged exception</div>
+  <div class="flow-strip-row">
+
+    <div class="fs-step active">
+      <div class="fs-icon" style="background:rgba(59,130,246,.12)">&#x1F4E0;</div>
+      <div class="fs-name">Intake &amp;<br>Referral</div>
+      <div class="fs-sub">Multi-channel</div>
+      <div class="fs-badge">&#x25CF; Live</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(139,92,246,.10)">&#x1F4C5;</div>
+      <div class="fs-name">Scheduling</div>
+      <div class="fs-sub">Coord + appt</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(20,184,166,.10)">&#x1F4C4;</div>
+      <div class="fs-name">Documentation</div>
+      <div class="fs-sub">Records + notes</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(245,158,11,.10)">&#x1F9FE;</div>
+      <div class="fs-name">Billing</div>
+      <div class="fs-sub">Finalize + submit</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(239,68,68,.10)">&#x1F4CA;</div>
+      <div class="fs-name">Collections</div>
+      <div class="fs-sub">AR follow-up</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(34,197,94,.10)">&#x1F4B3;</div>
+      <div class="fs-name">Cash<br>Applications</div>
+      <div class="fs-sub">Reconcile + post</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(168,85,247,.10)">&#x2696;&#xFE0F;</div>
+      <div class="fs-name">Appeals</div>
+      <div class="fs-sub">Denials + resolve</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(30,58,95,.10)">&#x1F3E6;</div>
+      <div class="fs-name">Financial<br>Shared Svcs</div>
+      <div class="fs-sub">AP + vendor pay</div>
+    </div>
+    <div class="fs-arrow">&#x2192;</div>
+
+    <div class="fs-step dim">
+      <div class="fs-icon" style="background:rgba(34,197,94,.10)">&#x2705;</div>
+      <div class="fs-name">Closed</div>
+      <div class="fs-sub">Paid + archived</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="hub-layout">
+
+  <!-- LEFT: panel cards -->
+  <div class="hub-left">
+    <div class="section-label">Platform Overview</div>
+    <div class="grid">
+
+      <a class="card c-blue" href="panel_vision.html">
+        <div class="tag tag-blue">Vision</div>
+        <div class="card-icon">&#x1F4A1;</div>
+        <div class="card-title">Our Vision</div>
+        <div class="card-desc">Making intake &amp; referral management an operational advantage — autonomous, digital, clean route-ready episodes with human in the loop.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-blue" href="panel_ecosystem.html">
+        <div class="tag tag-blue">Agent Ecosystem</div>
+        <div class="card-icon">&#x1F517;</div>
+        <div class="card-title">8-Agent Value Chain</div>
+        <div class="card-desc">Referral to payment — 8 modular agents covering the full WC operations cycle. Agent 1 built &amp; live. Each agent independently deployable in your environment.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-blue" href="panel_integration.html">
+        <div class="tag tag-blue">Integration</div>
+        <div class="card-icon">&#x1F50C;</div>
+        <div class="card-title">Integration Architecture</div>
+        <div class="card-desc">How agents connect to intake, scheduling, billing, and EHR platforms — API, RPA, or file. Human-in-loop escalation points mapped across the chain.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-amber" href="panel_workflow.html">
+        <div class="tag tag-amber">Architecture</div>
+        <div class="card-icon">&#x1F9E9;</div>
+        <div class="card-title">Technical Workflow</div>
+        <div class="card-desc">End-to-end agent network — fax &amp; voice intake, AI extraction, OWL knowledge graph, completeness check, email &amp; voice outreach, route output.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-green" href="panel_economics.html">
+        <div class="tag tag-green">Economics</div>
+        <div class="card-icon">&#x1F4B0;</div>
+        <div class="card-title">Token Economics</div>
+        <div class="card-desc">Real token consumption from 40 live referrals — extrapolated to 1,000 and 3M. $0.032/referral at scale.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-teal" href="panel_observe.html">
+        <div class="tag tag-teal">Observability</div>
+        <div class="card-icon">&#x1F4CA;</div>
+        <div class="card-title">Observability Dashboard</div>
+        <div class="card-desc">Live data from the demo run — system health, AI quality metrics, audit trail per episode, throughput and cost. Drill into any of the 40 referrals.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-purple" href="panel_deploy.html">
+        <div class="tag tag-purple">Deployment</div>
+        <div class="card-icon">&#x1F680;</div>
+        <div class="card-title">Production Deployment</div>
+        <div class="card-desc">What we built, how we deploy it in your environment, and how it gets smarter with your data — the 3-part story for your technology leader.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-rose" href="panel_enterprise.html">
+        <div class="tag tag-rose">Enterprise</div>
+        <div class="card-icon">&#x1F3E2;</div>
+        <div class="card-title">Enterprise Readiness</div>
+        <div class="card-desc">Integration, HIPAA/PHI, infrastructure, 8–12 week timeline, support &amp; monitoring — every question a technology leader asks before saying yes.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+      <a class="card c-navy" href="panel_kg.html">
+        <div class="tag tag-navy">Knowledge Graph</div>
+        <div class="card-icon">&#x1F578;</div>
+        <div class="card-title">OWL Knowledge Graph — Rule Engine</div>
+        <div class="card-desc">24 deterministic rules extracted from CMS ICD-10-CM FY2026 guidelines and LCD/NCD documents. OWL-structured, citation-cited, 100% auditable.</div>
+        <div class="card-arrow">Explore &rarr;</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- RIGHT: tall demo card -->
+  <a class="card demo-card hub-demo" href="demo.html">
+    <div class="tag tag-white">&#x25B6; Launch Demo</div>
+    <div class="card-icon">&#x1F916;</div>
+    <div class="card-title">Live Intake Agent Demo</div>
+    <div class="card-desc">Watch the agent process 40 real referral PDFs — extraction, ICD conflict resolution, gap detection, outreach, routing.</div>
+    <div class="card-arrow">Open Demo &rarr;</div>
+  </a>
+
+</div>
+
+<div class="footer">
+  Live intake line &middot; <strong>(201) 897-3854</strong> &middot; AI answers 24/7 &middot; Coastal DME Intake Agent Platform
+</div>
+
+</body>
+</html>
