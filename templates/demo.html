@@ -697,7 +697,7 @@ function updateUI(data) {
 
     // Holloway hint
     const holloway = queue.find(q => q.is_featured);
-    if (holloway && (holloway.status === 'routed' || holloway.status === 'gaps')) {
+    if (holloway && (holloway.status === 'routed' || holloway.status === 'gaps' || holloway.status === 'error')) {
       const hint = document.getElementById('holloway-hint');
       hint.style.display = 'flex';
       setTimeout(() => {
@@ -721,7 +721,7 @@ function renderQueue(queue) {
       item.status === 'error' ? 'error' : '',
     ].filter(Boolean).join(' ');
 
-    const onclick = item.is_featured && (item.status === 'routed' || item.status === 'gaps')
+    const onclick = item.is_featured && (item.status === 'routed' || item.status === 'gaps' || item.status === 'error')
       ? 'onclick="openPipeline()"' : '';
 
     const substepLabel = item.substep || 'Processing...';
