@@ -350,6 +350,11 @@ function updateQueueRow(r, status) {
 
   const stCell = tr.querySelector('.status-cell');
   if (stCell) stCell.innerHTML = statusBadge(status);
+
+  if (status === 'gaps' && r.gaps > 0) {
+    const outCell = tr.querySelector('.outreach-cell');
+    if (outCell) outCell.innerHTML = '<span class="outreach-badge">&#x2709; Sent</span>';
+  }
 }
 
 function queueRow(r, status) {
@@ -368,7 +373,7 @@ function queueRow(r, status) {
     <td style="text-align:center">${chTag}</td>
     <td class="status-cell" style="text-align:center">${statusBadge(status)}</td>
     <td style="text-align:center">${gapBadge}</td>
-    <td style="text-align:center">—</td>
+    <td class="outreach-cell" style="text-align:center">—</td>
     <td style="text-align:center">${priTag}</td>
   </tr>`;
 }
