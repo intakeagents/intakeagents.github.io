@@ -39,10 +39,45 @@ html = tmpl.render(
 )
 # fix back link: href="/" → demo.html
 html = html.replace('href="/" class="hdr-back"', 'href="demo.html" class="hdr-back"')
-# remove any placeOutboundCall fetch calls (keep button but no trigger)
+
+# replace placeOutboundCall with clean simulation — no fetch, no error
 html = html.replace(
-    "fetch('/api/call'",
-    "console.log('static: outbound call disabled'"
+    """function placeOutboundCall() {
+  const btn = document.getElementById('call-btn');
+  const status = document.getElementById('call-status');
+  if (btn) { btn.style.display = 'none'; btn.disabled = true; }
+  status.style.color = '#6b7280';
+  status.innerHTML = '&#x23F3; Connecting to AI voice agent — placing call now...';
+
+  fetch('/api/outbound-call/{{ claim }}', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        status.style.color = '#16a34a';
+        status.innerHTML = '&#x2705; Call placed · ID: ' + (data.call_id || 'confirmed') + ' · Agent dialing now';
+      } else {
+        status.style.color = '#dc2626';
+        status.innerHTML = '&#x26A0; Call failed: ' + (data.reason || 'unknown error');
+        if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
+      }
+    })
+    .catch(err => {
+      status.style.color = '#dc2626';
+      status.innerHTML = '&#x26A0; Network error — check server';
+      if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
+    });
+}""",
+    """function placeOutboundCall() {
+  const btn = document.getElementById('call-btn');
+  const status = document.getElementById('call-status');
+  if (btn) { btn.style.display = 'none'; btn.disabled = true; }
+  status.style.color = '#6b7280';
+  status.innerHTML = '&#x23F3; Connecting to AI voice agent — placing call now...';
+  setTimeout(() => {
+    status.style.color = '#16a34a';
+    status.innerHTML = '&#x2705; Call placed &middot; 84s &middot; Linda Torres &middot; Auth ref, appt window &amp; transportation confirmed';
+  }, 2200);
+}"""
 )
 (DOCS / "pipeline.html").write_text(html, encoding="utf-8")
 print("  → docs/pipeline.html")
