@@ -613,7 +613,10 @@ function updateQueueRow(r, status) {
   }
 }
 
+const PDF_LINKS = `<a href="pdfs/1_referral_form.pdf" target="_blank" class="pdf-open" title="Referral Form">RF</a><a href="pdfs/2_clinical_notes.pdf" target="_blank" class="pdf-open" title="Clinical Notes">CN</a><a href="pdfs/3_prescription.pdf" target="_blank" class="pdf-open" title="Prescription">Rx</a>`;
+
 function queueRow(r, status) {
+  const idx = REFERRALS.indexOf(r);
   const chTag = r.ch === 'voice'
     ? '<span class="ch-voice">Voice</span>'
     : '<span class="ch-fax">Fax</span>';
@@ -622,9 +625,14 @@ function queueRow(r, status) {
   const gapBadge = r.gaps > 0
     ? `<span class="gap-badge">${r.gaps}</span>`
     : '<span class="gap-badge zero">0</span>';
+  const pdfCell = idx < 10 ? PDF_LINKS : '—';
+
+  const patientCell = idx < 10
+    ? `${r.patient}<br><span style="margin-top:3px;display:inline-flex;gap:3px">${PDF_LINKS}</span>`
+    : r.patient;
 
   return `<tr id="qr-${r.claim}">
-    <td>${r.patient}</td>
+    <td>${patientCell}</td>
     <td style="font-family:monospace;font-size:10px">${r.claim}</td>
     <td>${r.equip} · ${r.hcpcs}</td>
     <td style="text-align:center">${chTag}</td>

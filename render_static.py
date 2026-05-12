@@ -40,34 +40,33 @@ html = tmpl.render(
 # fix back link: href="/" → demo.html
 html = html.replace('href="/" class="hdr-back"', 'href="demo.html" class="hdr-back"')
 
-# replace placeOutboundCall with clean simulation — no fetch, no error
-html = html.replace(
-    """function placeOutboundCall() {
+# ── fix outbound call — match post-render string (claim already substituted) ──
+old_call = f"""function placeOutboundCall() {{
   const btn = document.getElementById('call-btn');
   const status = document.getElementById('call-status');
-  if (btn) { btn.style.display = 'none'; btn.disabled = true; }
+  if (btn) {{ btn.style.display = 'none'; btn.disabled = true; }}
   status.style.color = '#6b7280';
   status.innerHTML = '&#x23F3; Connecting to AI voice agent — placing call now...';
 
-  fetch('/api/outbound-call/{{ claim }}', { method: 'POST' })
+  fetch('/api/outbound-call/{claim}', {{ method: 'POST' }})
     .then(r => r.json())
-    .then(data => {
-      if (data.success) {
+    .then(data => {{
+      if (data.success) {{
         status.style.color = '#16a34a';
         status.innerHTML = '&#x2705; Call placed · ID: ' + (data.call_id || 'confirmed') + ' · Agent dialing now';
-      } else {
+      }} else {{
         status.style.color = '#dc2626';
         status.innerHTML = '&#x26A0; Call failed: ' + (data.reason || 'unknown error');
-        if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
-      }
-    })
-    .catch(err => {
+        if (btn) {{ btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }}
+      }}
+    }})
+    .catch(err => {{
       status.style.color = '#dc2626';
       status.innerHTML = '&#x26A0; Network error — check server';
-      if (btn) { btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }
-    });
-}""",
-    """function placeOutboundCall() {
+      if (btn) {{ btn.style.display = 'inline-flex'; btn.disabled = false; btn.innerHTML = '&#x1F4DE; Retry Call'; }}
+    }});
+}}"""
+new_call = """function placeOutboundCall() {
   const btn = document.getElementById('call-btn');
   const status = document.getElementById('call-status');
   if (btn) { btn.style.display = 'none'; btn.disabled = true; }
@@ -78,6 +77,55 @@ html = html.replace(
     status.innerHTML = '&#x2705; Call placed &middot; 84s &middot; Linda Torres &middot; Auth ref, appt window &amp; transportation confirmed';
   }, 2200);
 }"""
+html = html.replace(old_call, new_call)
+
+# ── fix escalation review — replace fetch with static Holloway data ───────────
+html = html.replace(
+    """function loadEscalationReview() {
+  fetch('/api/escalations')
+    .then(r => r.json())
+    .then(queue => {
+      const pending = queue.filter(e => e.status === 'pending');
+      const panel = document.getElementById('esc-review-panel');
+      const card  = document.getElementById('esc-review-card');
+      if (!pending.length) {
+        panel.style.display = 'none';
+        return;
+      }
+      panel.style.display = 'block';
+      renderEscCard(card, pending[0]);
+    })
+    .catch(() => {});
+}""",
+    """function loadEscalationReview() {
+  const panel = document.getElementById('esc-review-panel');
+  const card  = document.getElementById('esc-review-card');
+  if (!panel || !card) return;
+  panel.style.display = 'block';
+  renderEscCard(card, {
+    id: 'esc-001',
+    patient_name: 'James Holloway',
+    claim_number: 'WC-2026-084431',
+    dme_item: 'Rollator Walker — E0143',
+    insurance_carrier: 'Pacific Mutual Workers Comp',
+    confidence: 72,
+    icd_correct: 'S83.209A',
+    icd_correct_desc: 'Tear of unspecified meniscus, right knee, initial encounter',
+    icd_form: 'M23.611',
+    icd_form_desc: 'Spontaneous disruption of anterior cruciate ligament, right knee',
+    conflict_detail: 'Clinical notes and prescription both document S83.209A (meniscus tear) following ACL reconstruction, but referral form lists M23.611 (ACL disruption). Clinically significant difference — requires specialist confirmation before dispatch.'
+  });
+}"""
+)
+
+# ── fix resolveEscalation — remove fetch, show success directly ───────────────
+html = html.replace(
+    "  fetch('/review/resolve', {",
+    "  if(false) fetch('/review/resolve', {"
+)
+html = html.replace(
+    "  .catch(() => alert('Error recording decision'));",
+    "  setTimeout(() => { const card=document.getElementById('esc-review-card'); if(card){ card.innerHTML='<div style=\"display:flex;align-items:center;gap:12px;padding:8px 0\"><span style=\"font-size:28px\">&#x2705;</span><div><div style=\"font-size:14px;font-weight:800;color:#16a34a\">Decision Recorded — Episode Updated</div><div style=\"font-size:11px;color:#64748b;margin-top:4px\">Resolved by: Specialist · '+new Date().toLocaleTimeString()+'</div></div></div>'; card.style.background='#f0fdf4'; card.style.border='2px solid #86efac'; } }, 800);"
 )
 
 # fix PDF doc links to serve from docs/pdfs/
@@ -414,7 +462,10 @@ function updateQueueRow(r, status) {
   }
 }
 
+const PDF_LINKS = `<a href="pdfs/1_referral_form.pdf" target="_blank" class="pdf-open" title="Referral Form">RF</a><a href="pdfs/2_clinical_notes.pdf" target="_blank" class="pdf-open" title="Clinical Notes">CN</a><a href="pdfs/3_prescription.pdf" target="_blank" class="pdf-open" title="Prescription">Rx</a>`;
+
 function queueRow(r, status) {
+  const idx = REFERRALS.indexOf(r);
   const chTag = r.ch === 'voice'
     ? '<span class="ch-voice">Voice</span>'
     : '<span class="ch-fax">Fax</span>';
@@ -423,9 +474,14 @@ function queueRow(r, status) {
   const gapBadge = r.gaps > 0
     ? `<span class="gap-badge">${r.gaps}</span>`
     : '<span class="gap-badge zero">0</span>';
+  const pdfCell = idx < 10 ? PDF_LINKS : '—';
+
+  const patientCell = idx < 10
+    ? `${r.patient}<br><span style="margin-top:3px;display:inline-flex;gap:3px">${PDF_LINKS}</span>`
+    : r.patient;
 
   return `<tr id="qr-${r.claim}">
-    <td>${r.patient}</td>
+    <td>${patientCell}</td>
     <td style="font-family:monospace;font-size:10px">${r.claim}</td>
     <td>${r.equip} · ${r.hcpcs}</td>
     <td style="text-align:center">${chTag}</td>
