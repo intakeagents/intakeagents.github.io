@@ -460,6 +460,13 @@ if script_start == -1:
 demo_src = demo_src[:script_start] + static_script
 
 demo_src = fix_links(demo_src)
+
+# Make fax button visible from the start (static: no server to show/hide it)
+demo_src = demo_src.replace(
+    '<button class="btn-fax" id="btn-fax" onclick="openFaxModal()">',
+    '<button class="btn-fax" id="btn-fax" onclick="openFaxModal()" style="display:inline-flex">'
+)
+
 (DOCS / "demo.html").write_text(demo_src, encoding="utf-8")
 print("  → docs/demo.html")
 
