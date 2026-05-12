@@ -378,6 +378,11 @@ def panel_ecosystem():
     return render_template("panel_ecosystem.html")
 
 
+@app.route("/panel/integration")
+def panel_integration():
+    return render_template("panel_integration.html")
+
+
 @app.route("/referrals/<claim>/<filename>")
 def serve_referral_pdf(claim, filename):
     """Serve a referral PDF directly from the referrals folder."""

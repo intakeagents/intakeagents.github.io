@@ -455,50 +455,155 @@
   <div style="margin-bottom:28px">
     <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#64748b;margin-bottom:6px">Integration Architecture</div>
     <div style="font-size:18px;font-weight:800;color:#0f172a;margin-bottom:4px">How agents connect to your systems</div>
-    <div style="font-size:13px;color:#475569;margin-bottom:20px">Agents read from and write to your existing intake, scheduling, and billing platforms — no rip-and-replace required.</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px">
-      <!-- Intake / Case Mgmt -->
-      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-          <span style="font-size:20px">📋</span>
-          <span style="font-size:13px;font-weight:800;color:#0f172a">Intake / Case Management</span>
+    <div style="font-size:13px;color:#475569;margin-bottom:24px">No rip-and-replace. Agents read from and write to your existing platforms via API, RPA, or file — your data stays in your environment.</div>
+
+    <!-- Visual Flow Diagram -->
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:28px;margin-bottom:16px;overflow-x:auto">
+      <div style="display:grid;grid-template-columns:200px 1fr 200px;gap:0;min-width:700px;align-items:start">
+
+        <!-- INPUT COLUMN -->
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;text-align:center">Input Systems</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📠</div>
+              <div style="font-size:11px;font-weight:700;color:#1e40af">Fax / Portal</div>
+              <div style="font-size:10px;color:#3b82f6;margin-top:2px">Referral packages</div>
+            </div>
+            <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📞</div>
+              <div style="font-size:11px;font-weight:700;color:#1e40af">Voice Intake</div>
+              <div style="font-size:10px;color:#3b82f6;margin-top:2px">Live AI call line</div>
+            </div>
+            <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📋</div>
+              <div style="font-size:11px;font-weight:700;color:#1e40af">Case Mgmt System</div>
+              <div style="font-size:10px;color:#3b82f6;margin-top:2px">Brightree · WellSky · Kareo</div>
+            </div>
+            <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">🏥</div>
+              <div style="font-size:11px;font-weight:700;color:#1e40af">Payer Portal</div>
+              <div style="font-size:10px;color:#3b82f6;margin-top:2px">Auth · eligibility</div>
+            </div>
+          </div>
         </div>
-        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Brightree, WellSky, Kareo, or your internal system</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#2563eb;font-weight:700;flex-shrink:0">Read</span>Pull existing referral data — no re-keying</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#16a34a;font-weight:700;flex-shrink:0">Write</span>Push completed episode record when routed</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#d97706;font-weight:700;flex-shrink:0">Update</span>Log gaps, outreach events, status changes in real time</div>
+
+        <!-- AGENT CHAIN (CENTER) -->
+        <div style="padding:0 20px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;text-align:center">Agent Chain</div>
+          <div style="display:flex;flex-direction:column;gap:0">
+
+            <!-- Agent rows -->
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;display:flex;align-items:center;justify-content:space-between">
+                <span style="font-size:11px;font-weight:700">1 · Intake &amp; Referral</span>
+                <span style="font-size:9px;background:#22c55e;color:#fff;border-radius:4px;padding:2px 6px;font-weight:700">LIVE</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">2 · Scheduling</span>
+              </div>
+              <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:4px 8px;white-space:nowrap">
+                <span style="font-size:9px;font-weight:700;color:#92400e">👤 Appt conflict</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">3 · Documentation</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">4 · Billing</span>
+              </div>
+              <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:4px 8px;white-space:nowrap">
+                <span style="font-size:9px;font-weight:700;color:#92400e">👤 Denial review</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">5 · Collections</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">6 · Cash Applications</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">7 · Appeals</span>
+              </div>
+              <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:6px;padding:4px 8px;white-space:nowrap">
+                <span style="font-size:9px;font-weight:700;color:#92400e">👤 Legal/clinical</span>
+              </div>
+            </div>
+            <div style="text-align:center;font-size:10px;color:#94a3b8;margin:2px 0">↓</div>
+
+            <div style="display:flex;align-items:center;gap:8px">
+              <div style="background:#1e3a5f;color:#fff;border-radius:8px;padding:8px 12px;flex:1;opacity:.75">
+                <span style="font-size:11px;font-weight:700">8 · Financial Close</span>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- OUTPUT COLUMN -->
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;text-align:center">Output Systems</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📅</div>
+              <div style="font-size:11px;font-weight:700;color:#166534">Scheduling System</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">Vendor dispatch</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">🏦</div>
+              <div style="font-size:11px;font-weight:700;color:#166534">Billing Platform</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">Claims · ERA posting</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📋</div>
+              <div style="font-size:11px;font-weight:700;color:#166534">Case Mgmt System</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">Episode record updated</div>
+            </div>
+            <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;text-align:center">
+              <div style="font-size:16px;margin-bottom:3px">📊</div>
+              <div style="font-size:11px;font-weight:700;color:#166534">Reporting / BI</div>
+              <div style="font-size:10px;color:#16a34a;margin-top:2px">Audit trail · financials</div>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <!-- Scheduling -->
-      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-          <span style="font-size:20px">📅</span>
-          <span style="font-size:13px;font-weight:800;color:#0f172a">Scheduling System</span>
-        </div>
-        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Dispatch, vendor scheduling, or calendar platform</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#2563eb;font-weight:700;flex-shrink:0">Read</span>Check available windows before routing</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#16a34a;font-weight:700;flex-shrink:0">Write</span>Create appointment hold when episode is route-ready</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#d97706;font-weight:700;flex-shrink:0">Update</span>Confirm or release hold after case manager response</div>
-        </div>
-      </div>
-      <!-- Integration Method -->
-      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:20px">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-          <span style="font-size:20px">🔌</span>
-          <span style="font-size:13px;font-weight:800;color:#0f172a">Integration Method</span>
-        </div>
-        <div style="font-size:11px;color:#475569;line-height:1.6;margin-bottom:12px">Depends on your platform's capabilities</div>
-        <div style="display:flex;flex-direction:column;gap:6px">
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">API</span>Preferred — direct integration via REST/FHIR endpoints</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">RPA</span>Fallback for legacy systems with no API layer</div>
-          <div style="font-size:11px;color:#64748b;display:flex;gap:7px"><span style="color:#7c3aed;font-weight:700;flex-shrink:0">File</span>Flat file / HL7 export for closed platforms</div>
-        </div>
+
+      <!-- Legend -->
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid #f1f5f9;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em">Legend</div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#22c55e;display:inline-block"></span><span style="font-size:11px;color:#64748b">Live in production</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#1e3a5f;opacity:.4;display:inline-block"></span><span style="font-size:11px;color:#64748b">Next to deploy</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="background:#fef3c7;border:1px solid #fde68a;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:700;color:#92400e">👤</span><span style="font-size:11px;color:#64748b">Human-in-loop escalation point</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#2563eb;display:inline-block"></span><span style="font-size:11px;color:#64748b">Input integration</span></div>
+        <div style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:#16a34a;display:inline-block"></span><span style="font-size:11px;color:#64748b">Output integration</span></div>
       </div>
     </div>
+
+    <!-- Integration method callout -->
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 18px;font-size:12px;color:#166534">
-      <strong>Key question for your team:</strong> Does your intake system expose an API? Most modern platforms (Brightree, WellSky) do — that's a direct 2-week integration. Legacy or closed systems use RPA as a bridge. Either way, the agent architecture doesn't change — only the output destination.
+      <strong>Integration method:</strong> API preferred (Brightree, WellSky, Kareo all expose REST endpoints — 2-week integration). RPA bridge for legacy systems with no API. Flat file / HL7 for closed platforms. The agent architecture doesn't change — only the output destination.
     </div>
   </div>
 
