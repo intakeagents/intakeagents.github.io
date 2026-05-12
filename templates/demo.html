@@ -700,10 +700,6 @@ function updateUI(data) {
     if (holloway && (holloway.status === 'routed' || holloway.status === 'gaps' || holloway.status === 'error')) {
       const hint = document.getElementById('holloway-hint');
       hint.style.display = 'flex';
-      setTimeout(() => {
-        const row = document.getElementById('row-' + hollowayClaim.replace(/-/g,''));
-        if (row) row.scrollIntoView({behavior:'smooth', block:'center'});
-      }, 400);
     }
   }
 }
