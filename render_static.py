@@ -150,17 +150,17 @@ html = html.replace(
   if (!panel || !card) return;
   panel.style.display = 'block';
   renderEscCard(card, {
-    id: 'esc-001',
-    patient_name: 'James Holloway',
-    claim_number: 'WC-2026-084431',
-    dme_item: 'Rollator Walker — E0143',
+    id: 'esc-002',
+    patient_name: 'William Martinez',
+    claim_number: 'WC-2026-084428',
+    dme_item: 'Power Wheelchair — K0823',
     insurance_carrier: 'Pacific Mutual Workers Comp',
-    confidence: 72,
-    icd_correct: 'S83.209A',
-    icd_correct_desc: 'Tear of unspecified meniscus, right knee, initial encounter',
-    icd_form: 'M23.611',
-    icd_form_desc: 'Spontaneous disruption of anterior cruciate ligament, right knee',
-    conflict_detail: 'Clinical notes and prescription both document S83.209A (meniscus tear) following ACL reconstruction, but referral form lists M23.611 (ACL disruption). Clinically significant difference — requires specialist confirmation before dispatch.'
+    confidence: 71,
+    icd_correct: 'S14.109A',
+    icd_correct_desc: 'Unspecified injury at unspecified level of cervical spinal cord, initial encounter',
+    icd_form: 'M47.812',
+    icd_form_desc: 'Spondylosis with radiculopathy, cervical region',
+    conflict_detail: 'Clinical notes document acute traumatic spinal cord injury (S14.109A) post-accident, but referral form lists degenerative cervical spondylosis (M47.812). Traumatic vs. degenerative distinction affects coverage determination — requires specialist confirmation before dispatch.'
   });
 }"""
 )
