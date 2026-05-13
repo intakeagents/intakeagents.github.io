@@ -12,6 +12,53 @@ DOCS   = BASE / "docs"
 OUTPUT = BASE / "output"
 DOCS.mkdir(exist_ok=True)
 
+# ── Password gate — injected into every docs/ page ───────────────────────────
+PASSWORD_GATE = """
+<div id="pw-gate" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,0.97);z-index:99999;align-items:center;justify-content:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:48px 40px;max-width:380px;width:90%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.5)">
+    <div style="font-size:28px;margin-bottom:8px">&#x1F512;</div>
+    <div style="font-size:18px;font-weight:800;color:#f1f5f9;margin-bottom:4px">Coastal DME</div>
+    <div style="font-size:13px;color:#64748b;margin-bottom:28px">Intake Agent Platform · Private Demo</div>
+    <input id="pw-input" type="password" placeholder="Enter access code" autocomplete="off"
+      style="width:100%;box-sizing:border-box;padding:12px 16px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#f1f5f9;font-size:15px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px">
+    <button onclick="checkPw()"
+      style="width:100%;padding:12px;border-radius:8px;background:#2563eb;color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer">
+      Enter &#x2192;
+    </button>
+    <div id="pw-err" style="display:none;color:#f87171;font-size:13px;margin-top:12px">Incorrect access code — try again</div>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('demo_auth')==='coastal2026'){return;}
+  var g=document.getElementById('pw-gate');
+  if(g){g.style.display='flex';document.body.style.overflow='hidden';}
+})();
+function checkPw(){
+  var v=document.getElementById('pw-input').value;
+  if(v==='coastal2026'){
+    sessionStorage.setItem('demo_auth','coastal2026');
+    document.getElementById('pw-gate').style.display='none';
+    document.body.style.overflow='';
+  } else {
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var inp=document.getElementById('pw-input');
+  if(inp){inp.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});}
+  inp && inp.focus();
+});
+</script>
+"""
+
+def inject_gate(html):
+    if '</body>' in html:
+        return html.replace('</body>', PASSWORD_GATE + '\n</body>', 1)
+    return html + PASSWORD_GATE
+
 # ── Load Holloway data ────────────────────────────────────────────────────────
 with open(OUTPUT / "fields-WC-2026-084431-2026-05-10.json") as f:
     data = json.load(f)
@@ -146,7 +193,7 @@ html = html.replace(
     '><a href="pdfs/3_prescription.pdf" target="_blank" style="color:var(--blue);font-weight:700;text-decoration:none">&#x1F48A; Prescription — View PDF &rarr;</a><'
 )
 
-(DOCS / "pipeline.html").write_text(html, encoding="utf-8")
+(DOCS / "pipeline.html").write_text(inject_gate(html), encoding="utf-8")
 print("  → docs/pipeline.html")
 
 # ── helper: fix panel/hub links in a file ────────────────────────────────────
@@ -173,7 +220,7 @@ def fix_links(text):
 print("Copying hub.html → index.html ...")
 hub = (TMPL / "hub.html").read_text(encoding="utf-8")
 hub = fix_links(hub)
-(DOCS / "index.html").write_text(hub, encoding="utf-8")
+(DOCS / "index.html").write_text(inject_gate(hub), encoding="utf-8")
 print("  → docs/index.html")
 
 # ── 3. panel HTML files ───────────────────────────────────────────────────────
@@ -187,7 +234,7 @@ for p in panels:
     if src.exists():
         text = src.read_text(encoding="utf-8")
         text = fix_links(text)
-        (DOCS / f"{p}.html").write_text(text, encoding="utf-8")
+        (DOCS / f"{p}.html").write_text(inject_gate(text), encoding="utf-8")
         print(f"  → docs/{p}.html")
 
 # ── 4. demo.html — static simulation ─────────────────────────────────────────
@@ -586,7 +633,7 @@ demo_src = demo_src.replace(
     '<button class="btn-fax" id="btn-fax" onclick="openFaxModal()" style="display:inline-flex">'
 )
 
-(DOCS / "demo.html").write_text(demo_src, encoding="utf-8")
+(DOCS / "demo.html").write_text(inject_gate(demo_src), encoding="utf-8")
 print("  → docs/demo.html")
 
 print("\nDone. All files written to docs/")
